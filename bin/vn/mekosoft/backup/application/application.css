@@ -1,0 +1,35 @@
+/* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
+.root {
+    -fx-border-width: 0;
+    -fx-border-color: transparent;
+    -fx-background-color: transparent;
+}
+.border{
+    -fx-border-color: #000;
+    -fx-border-width: 0px 0px 2px 0px;
+}
+
+.border-less-up{
+	-fx-border-color: #000;
+    -fx-border-width: 0px 2px 2px 2px;
+}
+
+.border-up-right{
+	-fx-border-color: #000;
+    -fx-border-width: 2px 2px 0px 0px;
+}
+
+.border-main{
+	-fx-border-color: #000;
+    -fx-border-width: 2px 2px 2px 2px;
+}
+
+.button-1{
+	-fx-background-radius: 10px;
+}
+
+.button-1:hover{
+    -fx-background-color:  #e0e0e0;
+    -fx-text-fill: #333; 
+    -fx-font-weight: bold;
+}
