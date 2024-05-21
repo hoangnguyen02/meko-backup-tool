@@ -9,7 +9,7 @@
             "backupTasks": [
                 {
                     "backupTaskId": "1",
-                    "taskName": "Task 1",
+                    "name": "Backup Folder 1",
                     "localSchedular": "*/2 * * * *",
                     "remoteSchedular": "2 * * 8 *",
                     "localPath": "/home/ubuntu/sftp_ver2",
@@ -25,7 +25,7 @@
                 },
                 {
                     "backupTaskId": "2",
-                    "taskName": "Task 2",
+                    "name": "Backup Folder 2",
                     "localSchedular": "*/5 * * * *",
                     "remoteSchedular": "2 * * 8 *",
                     "localPath": "/home/ubuntu/sftp_ver2",
@@ -47,14 +47,14 @@
         },
         {
             "projectId": "2",
-            "projectName": "Backup Server 2v b",
+            "projectName": "Backup Server 2",
             "hostname": "pve2",
             "username": "pveuser",
             "password": "admin",
             "backupTasks": [
                 {
                     "backupTaskId": "1",
-                    "taskName": "Task 1",
+                    "name": "Backup Folder 3",
                     "localSchedular": "*/5 * * * *",
                     "remoteSchedular": "2 * * 8 *",
                     "localPath": "/home/ubuntu/sftp_ver2",
@@ -70,7 +70,7 @@
                 },
                 {
                     "backupTaskId": "2",
-                    "taskName": "Task 2",
+                    "name": "Backup Folder 4",
                     "localSchedular": "*/2 * * * *",
                     "remoteSchedular": "2 * * 8 *",
                     "localPath": "/home/ubuntu/sftp_ver2",

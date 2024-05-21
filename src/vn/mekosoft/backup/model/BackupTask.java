@@ -3,6 +3,7 @@ package vn.mekosoft.backup.model;
 import java.util.List;
 
 public class BackupTask {
+	 private static int autoIncrease = 1;
 	private long backupTaskId;
 	private long backupProjectId;
 	private String name;
@@ -20,7 +21,7 @@ public class BackupTask {
 	}
 	
 	public BackupTask(long backupTaskId, long backupProjectId, String name, String localSchedular, String localPath, long localRetention, String remoteSchedular, String remotePath, long remoteRetention, long backupTaskStatus, List<BackupFolder> backupFolders) {
-		this.backupTaskId = backupTaskId;
+		this.backupTaskId = autoIncrease++;
 		this.backupProjectId = backupProjectId;
 		this.name = name;
 		this.localSchedular = localSchedular;
@@ -33,7 +34,9 @@ public class BackupTask {
 		this.backupFolders = backupFolders;
 		
 	}
-	
+	public static void setAutoIncrease(int autoIncrease) {
+		BackupTask.autoIncrease=autoIncrease;
+	}
 
 	public List<BackupFolder> getBackupFolders() {
 		return backupFolders;

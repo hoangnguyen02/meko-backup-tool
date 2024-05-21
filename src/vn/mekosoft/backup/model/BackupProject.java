@@ -3,8 +3,8 @@ package vn.mekosoft.backup.model;
 import java.util.List;
 
 public class BackupProject {
-	private long backupProjectId;
-	private String name;
+	private long projectId;
+	private String projectName;
 	private String description;
 	private String hostname;
 	private String username;
@@ -15,11 +15,13 @@ public class BackupProject {
 	public BackupProject() {
 		// default constructor
 	}
+	
+	
 
-	public BackupProject(long backupProjectId, String name, String description, String hostname, String username,
+	public BackupProject(long projectId, String projectName, String description, String hostname, String username,
 			String password, long backupProjectStatus, List<BackupTask> backupTasks) {
-		this.backupProjectId = backupProjectId;
-		this.name = name;
+		this.projectId = projectId;
+		this.projectName = projectName;
 		this.description = description;
 		this.hostname = hostname;
 		this.username = username;
@@ -27,7 +29,7 @@ public class BackupProject {
 		this.backupProjectStatus = backupProjectStatus;
 		this.backupTasks = backupTasks;
 	}
-	
+
 
 	public List<BackupTask> getBackupTasks() {
 		return backupTasks;
@@ -37,20 +39,20 @@ public class BackupProject {
 		this.backupTasks = backupTasks;
 	}
 
-	public long getBackupProjectId() {
-		return backupProjectId;
+	public long getProjectId() {
+		return projectId;
 	}
 
-	public void setBackupProjectId(long backupProjectId) {
-		this.backupProjectId = backupProjectId;
+	public void setProjectId(long projectId) {
+		this.projectId = projectId;
 	}
 
-	public String getName() {
-		return name;
+	public String getProjectName() {
+		return projectName;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setProjectName(String name) {
+		this.projectName = projectName;
 	}
 
 	public String getDescription() {
@@ -103,7 +105,7 @@ public class BackupProject {
 
 	@Override
 	public String toString() {
-		return "BackupProject [backupProjectId=" + backupProjectId + ", name=" + name + ", description=" + description
+		return "BackupProject [backupProjectId=" + projectId + ", projectName=" + projectName + ", description=" + description
 				+ ", hostname=" + hostname + ", username=" + username + ", password=" + password
 				+ ", backupProjectStatus=" + backupProjectStatus + "]";
 	}

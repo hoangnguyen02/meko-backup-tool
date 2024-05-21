@@ -6,24 +6,24 @@ public enum BackupProjectStatus {
     KHONG_HOAT_DONG(3, "Không hoạt động");
 
     private final long id;
-    private final String description;
+    private final String descriptionStatusProject;
 
-    BackupProjectStatus(long id, String description) {
+    BackupProjectStatus(long id, String descriptionStatusProject) {
         this.id = id;
-        this.description = description;
+        this.descriptionStatusProject = descriptionStatusProject;
     }
 
     public long getId() {
         return id;
     }
 
-    public String getDescription() {
-        return description;
+    public String getDescriptionStatusProject() {
+        return descriptionStatusProject;
     }
 
     @Override
     public String toString() {
-        return description;
+        return descriptionStatusProject;
     }
 
     public static BackupProjectStatus fromId(long id) {

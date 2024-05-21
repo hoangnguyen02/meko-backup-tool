@@ -1,0 +1,108 @@
+{
+  "backupProjects": [
+    {
+      "projectId": 1,
+      "hostname": "pve1",
+      "username": "pvebackup",
+      "password": "admin",
+      "backupProjectStatus": 1,
+      "backupTasks": [
+        {
+          "backupTaskId": 1,
+          "backupProjectId": 1,
+          "name": "task1",
+          "localSchedular": "*/2 * * * *",
+          "localPath": "/home/ubuntu/sftp_ver2",
+          "localRetention": 2,
+          "remoteSchedular": "*/5 * * 8 *",
+          "remotePath": "pve/backup",
+          "remoteRetention": 3,
+          "backupTaskStatus": 2,
+          "backupFolders": [
+            {
+              "backupFolderId": 1,
+              "folderPath": "/var/lib/vz/dump/",
+              "backupTaskId": 1
+            }
+          ]
+        },
+        {
+          "backupTaskId": 2,
+          "backupProjectId": 1,
+          "name": "task 2",
+          "localSchedular": "*/2 * * * *",
+          "localPath": "/home/ubuntu/sftp_ver2",
+          "localRetention": 2,
+          "remoteSchedular": "/5 * * * *",
+          "remotePath": "pve/backup",
+          "remoteRetention": 2,
+          "backupTaskStatus": 2,
+          "backupFolders": [
+            {
+              "backupFolderId": 1,
+              "folderPath": "/folder1",
+              "backupTaskId": 2
+            },
+            {
+              "backupFolderId": 2,
+              "folderPath": "/folder4",
+              "backupTaskId": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "projectId": 2,
+      "hostname": "pve2",
+      "username": "pveuser",
+      "password": "admin",
+      "backupProjectStatus": 1,
+      "backupTasks": [
+        {
+          "backupTaskId": 1,
+          "backupProjectId": 2,
+          "name": "task1",
+          "localSchedular": "*/5 * * * *",
+          "localPath": "/home/ubuntu/sftp_ver2",
+          "localRetention": 2,
+          "remoteSchedular": "2 * * 8 *",
+          "remotePath": "pve/backup",
+          "remoteRetention": 3,
+          "backupTaskStatus": 2,
+          "backupFolders": [
+            {
+              "backupFolderId": 1,
+              "folderPath": "/var/lib/vz/dump",
+              "backupTaskId": 1
+            }
+          ]
+        },
+        {
+          "backupTaskId": 2,
+          "backupProjectId": 2,
+          "name": "task 2",
+          "localSchedular": "*/2 * * * *",
+          "localPath": "/home/ubuntu/sftp_ver2",
+          "localRetention": 2,
+          "remoteSchedular": "2 * * 8 *",
+          "remotePath": "pve/backup",
+          "remoteRetention": 3,
+          "backupTaskStatus": 2,
+          "backupFolders": [
+            {
+              "backupFolderId": 1,
+              "folderPath": "/folder1_pve2",
+              "backupTaskId": 2
+            },
+            {
+              "backupFolderId": 2,
+              "folderPath": "/folder2_pve2",
+              "backupTaskId": 2
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

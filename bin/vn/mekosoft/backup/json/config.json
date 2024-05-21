@@ -10,7 +10,7 @@
                     "backupTaskId": "1",
                     "localSchedular": "*/2 * * * *",
                     "remoteSchedular": "2 * * 8 *",
-                    "localPath":"/home/ubuntu/sftp_ver2",
+                    "localPath":"/home/ubuntu/sftp_ver2",	
                     "remotePath":"pve/backup",
                     "localRetention": 2,
                     "remoteRetention": 3,
@@ -83,7 +83,6 @@
                         }
                     ]
                 }
-                
             ]  
         }
     ]
