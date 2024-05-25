@@ -51,7 +51,7 @@ public class BackupProject {
 		return projectName;
 	}
 
-	public void setProjectName(String name) {
+	public void setProjectName(String projectName) {
 		this.projectName = projectName;
 	}
 

@@ -18,53 +18,81 @@ import javafx.stage.Stage;
 import vn.mekosoft.backup.impl.BackupServiceImpl;
 import vn.mekosoft.backup.model.BackupProject;
 import vn.mekosoft.backup.model.BackupTask;
+import vn.mekosoft.backup.model.BackupTaskStatus;
 import vn.mekosoft.backup.service.BackupService;
 
-public class ManagementTask implements Initializable{
-    @FXML
-    private Button button_details;
+public class ManagementTask implements Initializable {
+	@FXML
+	private Button button_details;
 
-    @FXML
-    private Button button_status;
+	@FXML
+	private Button button_status;
 
-    @FXML
-    private AnchorPane infor_task;
+	@FXML
+	private AnchorPane infor_task;
 
-    @FXML
-    private Label name_task;
-    private BackupProject currentProject;
+	@FXML
+	private Label task_name;
+	@FXML
+	private Label task_status;
 
-    private BackupTask currentTask;
-    
-    public void status_action(ActionEvent event) {
-    	String currentText = button_status.getText();
-		if (currentText.equals("Hoạt động")) {
-			button_status.setText("Tạm dừng");
-		} else {
-			button_status.setText("Hoạt động");
-		}
-    }
-    
-    public void details_action(ActionEvent event) throws IOException {
-    	FXMLLoader loader = new FXMLLoader(getClass().getResource("/vn/mekosoft/backup/view/detailsTask.fxml"));
+	@FXML
+	private Button button_log;
+	private BackupProject currentProject;
+
+	private BackupTask currentTask;
+	private Dashboard dashboard;
+
+	public void clickStatus(ActionEvent event) {
+
+	}
+
+	public void setDashboard(Dashboard dashboard) {
+		this.dashboard = dashboard;
+	}
+
+	public void details_action(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/vn/mekosoft/backup/view/detailsTask.fxml"));
         Parent root = loader.load();
         
         DetailsTask details = loader.getController();
-        details.taskDetails(currentTask,currentProject); 
+        details.setProject(currentProject);
+        details.taskDetails(currentTask);
         
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
         stage.show();
-    }
-	
-	@Override
-	public void initialize(URL url, ResourceBundle resources) {
 		
 	}
+	public void log_action(ActionEvent event) throws IOException {
+	    FXMLLoader loader = new FXMLLoader(getClass().getResource("/vn/mekosoft/backup/view/showLog.fxml"));
+	    Parent root = loader.load();
+	    
 	
-	 public void taskData(BackupTask task, BackupProject project) {
-	        this.currentTask = task;
-	        this.currentProject = project;
-	        name_task.setText(task.getName());
-	    }
+	    Log logController = loader.getController();
+	  
+	    
+	    Stage stage = new Stage();
+	    stage.setScene(new Scene(root));
+	    stage.show();
+	}
+
+
+	@Override
+	public void initialize(URL url, ResourceBundle resources) {
+
+	}
+
+	public void taskData(BackupTask task, BackupProject project) {
+		this.currentTask = task;
+		this.currentProject = project;
+		task_name.setText(task.getName());
+
+		  BackupTaskStatus status = task.getBackupTaskStatusEnum();
+	        if (status == null) {
+	            status = BackupTaskStatus.DANG_BIEN_SOAN;
+	        }
+	        task_status.setText(status.getDescription());
+
+	}
 }

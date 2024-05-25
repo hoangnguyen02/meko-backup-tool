@@ -5,28 +5,35 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="infor_task" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="70.0" prefWidth="983.0" styleClass="border-less-up" stylesheets="@../application/application.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vn.mekosoft.backup.controller.ManagementTask">
+<AnchorPane fx:id="infor_task" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="70.0" prefWidth="983.0" styleClass="border-less-up" stylesheets="@../application/application.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vn.mekosoft.backup.controller.ManagementTask">
    <children>
       <HBox prefHeight="69.0" prefWidth="983.0">
          <children>
             <VBox fx:id="vbox_taskContainer" prefHeight="69.0" prefWidth="982.0">
                <children>
-                  <AnchorPane prefHeight="69.0" prefWidth="984.0">
+                  <AnchorPane prefHeight="75.0" prefWidth="982.0">
                      <children>
                         <Label layoutX="42.0" layoutY="22.0" prefHeight="23.0" prefWidth="46.0" text="Task:">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>
                         </Label>
-                        <Button fx:id="button_status" layoutX="717.0" layoutY="22.0" mnemonicParsing="false" onAction="#status_action" text="Hoạt động" />
-                        <Button fx:id="button_details" layoutX="820.0" layoutY="21.0" mnemonicParsing="false" onAction="#details_action" text="Chi tiết" />
-                        <Label fx:id="name_task" layoutX="108.0" layoutY="22.0" prefHeight="23.0" prefWidth="219.0" text="label">
+                        <Button fx:id="button_details" layoutX="763.0" layoutY="17.0" mnemonicParsing="false" onAction="#details_action" prefHeight="34.0" prefWidth="92.0" text="Chi tiết" />
+                        <Label fx:id="task_name" layoutX="108.0" layoutY="22.0" prefHeight="23.0" prefWidth="219.0" text="label">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>
                         </Label>
+                        <Label fx:id="task_status" layoutX="635.0" layoutY="24.0" onMouseClicked="#clickStatus" text="Label">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <Circle fill="#28cf81" layoutX="609.0" layoutY="34.0" radius="8.0" stroke="BLACK" strokeType="INSIDE" />
+                        <Button fx:id="button_log" layoutX="880.0" layoutY="17.0" mnemonicParsing="false" onAction="#log_action" prefHeight="34.0" prefWidth="46.0" text="LOG" />
                      </children>
                   </AnchorPane>
                </children>

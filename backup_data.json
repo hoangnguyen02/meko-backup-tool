@@ -1,0 +1,27 @@
+{
+  "backupProjects": [
+    {
+      "projectId": 4,
+      "projectName": "ưe",
+      "hostname": "qưeqew",
+      "username": "étýe",
+      "password": "qưeqưe",
+      "backupProjectStatus": 2,
+      "backupTasks": [
+        {
+          "backupTaskId": 1,
+          "projectId": 4,
+          "name": "qưeqe",
+          "localSchedular": "1",
+          "localPath": "qư",
+          "localRetention": 1,
+          "remoteSchedular": "1",
+          "remotePath": "qeweqư",
+          "remoteRetention": 1,
+          "backupTaskStatus": 1,
+          "backupFolders": []
+        }
+      ]
+    }
+  ]
+}

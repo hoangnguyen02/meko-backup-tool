@@ -40,7 +40,7 @@ public class ManagementProject implements Initializable {
 
     private BackupProject project;
 
-    @FXML
+    
     public void addTask_action(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/vn/mekosoft/backup/view/detailsTask.fxml"));
         Parent root = loader.load();
@@ -48,12 +48,19 @@ public class ManagementProject implements Initializable {
         DetailsTask controller = loader.getController();
 
         BackupTask newTask = new BackupTask();
-        controller.setProject(project); 
-        controller.taskDetails(newTask, project);
+        controller.setProject(project);
+        controller.taskDetails(newTask);
+        controller.inforClear();
+        
+        // Add the newly created task to the project
+        project.getBackupTasks().add(newTask);
+        Dashboard dashboard = new Dashboard();
+      //  dashboard.addTask_Layout(newTask, project);
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
         stage.show();
     }
+
 
     @Override
     public void initialize(URL url, ResourceBundle resources) {
@@ -61,10 +68,10 @@ public class ManagementProject implements Initializable {
     }
 
     public void projectData(BackupProject project) {
-        this.project = project; // Lưu trữ dữ liệu của project
+        this.project = project;
         project_name_main.setText(project.getProjectName());
         project_hostname.setText(project.getHostname());
         project_username.setText(project.getUsername());
-        // project_activity.setText(BackupProjectStatus.fromId(project.getBackupProjectStatus()).getDescriptionStatusProject());
+        project_activity.setText(BackupProjectStatus.fromId(project.getBackupProjectStatus()).getDescriptionStatusProject());
     }
 }

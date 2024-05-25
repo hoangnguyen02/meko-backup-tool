@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="log_view" prefHeight="696.0" prefWidth="1027.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vn.mekosoft.backup.controller.Log">
+   <children>
+      <AnchorPane layoutX="36.0" layoutY="14.0" prefHeight="78.0" prefWidth="939.0" style="-fx-background-color: #9ebcc6;">
+         <children>
+            <Label fx:id="projectName_log" layoutX="70.0" layoutY="21.0" text="Project">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="taskName_log" layoutX="162.0" layoutY="21.0" text="/Task">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <TextArea fx:id="content_log" layoutX="36.0" layoutY="197.0" prefHeight="473.0" prefWidth="939.0" stylesheets="@../application/application.css">
+         <styleClass>
+            <String fx:value="root" />
+            <String fx:value="border-less-up" />
+         </styleClass>
+      </TextArea>
+      <AnchorPane layoutX="36.0" layoutY="126.0" prefHeight="70.0" prefWidth="939.0" styleClass="border-main" stylesheets="@../application/application.css">
+         <children>
+            <ImageView fitHeight="35.0" fitWidth="45.0" layoutX="33.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@img/462743.png" />
+               </image>
+            </ImageView>
+            <Label fx:id="folderPath_log" layoutX="100.0" layoutY="25.0" text="Folder path of task">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

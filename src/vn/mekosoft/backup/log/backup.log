@@ -1,0 +1,84 @@
+[2024-05-22 14:10:58] [START] Start Backup Task ID 1 in Project ID 1 to Local Storage
+[2024-05-22 14:10:58] [INFO] Begin backup folder /var/lib/vz/dump/ to Local Storage
+Connected to pve1.
+sftp> mget -R /var/lib/vz/dump/ /home/ubuntu/sftp_ver2/pve1/dump/2024-05-22_14:10:58
+Fetching /var/lib/vz/dump/ to /home/ubuntu/sftp_ver2/pve1/dump/2024-05-22_14:10:58/dump
+Retrieving /var/lib/vz/dump
+sftp> bye
+[2024-05-22 14:10:59] [INFO] End backup folder /var/lib/vz/dump/ to Local Storage
+[2024-05-22 14:10:59] [END] Finish Backup Task ID 1 in Project ID 1 to Local Storage
+
+[2024-05-22 14:10:59] [START] Start Cleanup Task ID 1 with Project ID 1 in Local Storage
+[2024-05-22 14:10:59] [INFO] Begin cleanup directory /home/ubuntu/sftp_ver2/pve1/dump with 2 retention
+[2024-05-22 14:10:59] [INFO] There are no folders in dump to delete
+[2024-05-22 14:10:59] [INFO] End cleanup directory /home/ubuntu/sftp_ver2/pve1/dump with 2 retention
+[2024-05-22 14:10:59] [END ] Finish Cleanup Task ID 1 with Project ID 1 in Local Storage
+
+[2024-05-22 14:10:59] [START] Start Backup Task ID 2 in Project ID 1 to Local Storage
+[2024-05-22 14:11:00] [INFO] Begin backup folder /folder1 to Local Storage
+Connected to pve1.
+sftp> mget -R /folder1 /home/ubuntu/sftp_ver2/pve1/folder1/2024-05-22_14:11:00
+Fetching /folder1/ to /home/ubuntu/sftp_ver2/pve1/folder1/2024-05-22_14:11:00/folder1
+Retrieving /folder1
+Retrieving /folder1/folder1_123
+sftp> bye
+[2024-05-22 14:11:00] [INFO] End backup folder /folder1 to Local Storage
+[2024-05-22 14:11:00] [INFO] Begin backup folder /folder2 to Local Storage
+Connected to pve1.
+sftp> mget -R /folder2 /home/ubuntu/sftp_ver2/pve1/folder2/2024-05-22_14:11:00
+Fetching /folder2/ to /home/ubuntu/sftp_ver2/pve1/folder2/2024-05-22_14:11:00/folder2
+Retrieving /folder2
+sftp> bye
+[2024-05-22 14:11:00] [INFO] End backup folder /folder2 to Local Storage
+[2024-05-22 14:11:01] [WARNING] Remote folder /folder5 does not exist on pve1. Skipping backup for this folder.
+[2024-05-22 14:11:01] [END] Finish Backup Task ID 2 in Project ID 1 to Local Storage
+
+[2024-05-22 14:11:01] [START] Start Cleanup Task ID 2 with Project ID 1 in Local Storage
+[2024-05-22 14:11:01] [INFO] Begin cleanup directory /home/ubuntu/sftp_ver2/pve1/folder1 with 2 retention
+[2024-05-22 14:11:01] [INFO] There are no folders in folder1 to delete
+[2024-05-22 14:11:01] [INFO] End cleanup directory /home/ubuntu/sftp_ver2/pve1/folder1 with 2 retention
+[2024-05-22 14:11:01] [INFO] Begin cleanup directory /home/ubuntu/sftp_ver2/pve1/folder2 with 2 retention
+[2024-05-22 14:11:01] [INFO] There are no folders in folder2 to delete
+[2024-05-22 14:11:01] [INFO] End cleanup directory /home/ubuntu/sftp_ver2/pve1/folder2 with 2 retention
+[2024-05-22 14:11:01] [ERROR] Folder /home/ubuntu/sftp_ver2/pve1/folder5 does not exists.
+[2024-05-22 14:11:01] [END ] Finish Cleanup Task ID 2 with Project ID 1 in Local Storage
+
+2024/05/22 14:13:17 [START] : Start Backup Task ID 2 in Project ID 1 to Local Storage
+2024/05/22 14:13:17 [INFO] : Begin backup folder /folder1 to Local Storage
+Connected to pve1.
+sftp> mget -R /folder1 /home/ubuntu/sftp_ver2/pve1/folder1/2024-05-22_14:13:17
+Fetching /folder1/ to /home/ubuntu/sftp_ver2/pve1/folder1/2024-05-22_14:13:17/folder1
+Retrieving /folder1
+Retrieving /folder1/folder1_123
+sftp> bye
+2024/05/22 14:13:18 [INFO] : End backup folder /folder1 to Local Storage
+2024/05/22 14:13:18 [INFO] : Begin backup folder /folder2 to Local Storage
+Connected to pve1.
+sftp> mget -R /folder2 /home/ubuntu/sftp_ver2/pve1/folder2/2024-05-22_14:13:18
+Fetching /folder2/ to /home/ubuntu/sftp_ver2/pve1/folder2/2024-05-22_14:13:18/folder2
+Retrieving /folder2
+sftp> bye
+2024/05/22 14:13:18 [INFO] : End backup folder /folder2 to Local Storage
+2024/05/22 14:13:18 [WARNING] : Remote folder /folder5 does not exist on pve1. Skipping backup for this folder.
+2024/05/22 14:13:18 [END] : Finish Backup Task ID 2 in Project ID 1 to Local Storage
+
+2024/05/22 14:17:06 [START] : Start Backup Task ID 2 in Project ID 1 to Local Storage
+2024/05/22 14:17:06 [INFO] : Begin backup folder /folder1 to Local Storage
+Connected to pve1.
+sftp> mget -R /folder1 /home/ubuntu/sftp_ver2/pve1/folder1/2024-05-22_14:17:06
+Fetching /folder1/ to /home/ubuntu/sftp_ver2/pve1/folder1/2024-05-22_14:17:06/folder1
+Retrieving /folder1
+Retrieving /folder1/folder1_123
+sftp> bye
+2024/05/22 14:17:07 [INFO] : End backup folder /folder1 to Local Storage
+2024/05/22 14:17:07 [INFO] : Begin backup folder /folder2 to Local Storage
+Connected to pve1.
+sftp> mget -R /folder2 /home/ubuntu/sftp_ver2/pve1/folder2/2024-05-22_14:17:07
+Fetching /folder2/ to /home/ubuntu/sftp_ver2/pve1/folder2/2024-05-22_14:17:07/folder2
+Retrieving /folder2
+sftp> bye
+2024/05/22 14:17:07 [INFO] : End backup folder /folder2 to Local Storage
+2024/05/22 14:17:07 [WARNING] : Remote folder /folder5 does not exist on pve1. Skipping backup for this folder.
+2024/05/22 14:17:07 [END] : Finish Backup Task ID 2 in Project ID 1 to Local Storage
+
+

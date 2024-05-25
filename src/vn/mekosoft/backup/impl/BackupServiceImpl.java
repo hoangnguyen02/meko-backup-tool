@@ -1,118 +1,91 @@
 package vn.mekosoft.backup.impl;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
-import com.google.gson.*;
-import com.google.gson.reflect.TypeToken;
-import com.google.gson.stream.JsonReader;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 
+import vn.mekosoft.backup.config.Config;
 import vn.mekosoft.backup.model.BackupFolder;
 import vn.mekosoft.backup.model.BackupProject;
-import vn.mekosoft.backup.model.BackupProjectStatus;
 import vn.mekosoft.backup.model.BackupTask;
-import vn.mekosoft.backup.model.BackupTaskStatus;
 import vn.mekosoft.backup.service.BackupService;
 
 public class BackupServiceImpl implements BackupService {
-	// String JSON_FILE_PATH = "C:\\Users\\Hoang Nguyen\\eclipse-workspace\\meko-backup-tool\\src\\vn\\mekosoft\\backup\\json\\backup_data.json";
-	String JSON_FILE_PATH = "C:\\Users\\Hoang Nguyen\\eclipse-workspace\\meko-backup-tool\\new_project.json";
-	 @Override
-	    public List<BackupProject> loadData() {
-	        List<BackupProject> backupProjects = new ArrayList<>();
-	        try {
-	            File file = new File(JSON_FILE_PATH);
-	            if (!file.exists() || file.length() == 0) {
-	                return backupProjects;
-	            }
 
-	            JsonReader jsonReader = new JsonReader(new FileReader(JSON_FILE_PATH));
-	            JsonObject jsonObject = JsonParser.parseReader(jsonReader).getAsJsonObject();
-	            JsonArray jsonArray = jsonObject.getAsJsonArray("backupProjects");
+  
+    private Config config_Json = new Config();
+   //private String CONFIG_JSON = config_Json. getConfigJson();
+    private String CONFIG_FOLDER_PATH = config_Json.getConfigFolderPath();
+    @Override
+    public List<BackupProject> loadData() {
+        Gson gson = new Gson();
+        List<BackupProject> backupProjects = new ArrayList<>();
 
-	            for (JsonElement projectElement : jsonArray) {
-	                BackupProject backupProject = parseProject(projectElement.getAsJsonObject());
-	                backupProjects.add(backupProject);
-	            }
-	        } catch (FileNotFoundException e) {
-	            e.printStackTrace();
-	        }
+        try (FileReader reader = new FileReader(CONFIG_FOLDER_PATH)) {
+            JsonObject jsonObject = gson.fromJson(reader, JsonObject.class);
+            if (jsonObject != null) {
+                JsonArray backupProjectsArray = jsonObject.getAsJsonArray("backupProjects");
 
-	        return backupProjects;
-	    }
+                for (JsonElement projectElement : backupProjectsArray) {
+                    JsonObject projectObject = projectElement.getAsJsonObject();
+                    BackupProject project = gson.fromJson(projectObject, BackupProject.class);
 
-	    private BackupProject parseProject(JsonObject projectObject) {
-	        int projectId = projectObject.get("projectId").getAsInt();
-	        //String projectName = projectObject.get("projectName").getAsString();
-	        String hostname = projectObject.get("hostname").getAsString();
-	        String username = projectObject.get("username").getAsString();
-	        String password = projectObject.get("password").getAsString();
+                    JsonArray tasksArray = projectObject.getAsJsonArray("backupTasks");
+                    List<BackupTask> tasks = new ArrayList<>();
+                    for (JsonElement taskElement : tasksArray) {
+                        JsonObject taskObject = taskElement.getAsJsonObject();
+                        BackupTask task = gson.fromJson(taskObject, BackupTask.class);
 
-	        List<BackupTask> backupTasks = new ArrayList<>();
-	        JsonArray tasksArray = projectObject.getAsJsonArray("backupTasks");
-	        if (tasksArray != null) {
-	            for (JsonElement taskElement : tasksArray) {
-	                BackupTask backupTask = parseTask(taskElement.getAsJsonObject(), projectId);
-	                backupTasks.add(backupTask);
-	            }
-	        }
+                        JsonArray foldersArray = taskObject.getAsJsonArray("backupFolders");
+                        List<BackupFolder> folders = new ArrayList<>();
+                        if (foldersArray != null) {
+                            for (JsonElement folderElement : foldersArray) {
+                                BackupFolder folder = gson.fromJson(folderElement, BackupFolder.class);
+                                folders.add(folder);
+                            }
+                        } else {
+                            System.out.println("No folders");
+                        }
+                        task.setBackupFolders(folders);
 
-	        return new BackupProject(projectId, null, null, hostname, username,
-	                password, BackupProjectStatus.DANG_BIEN_SOAN.getId(), backupTasks);
-	    }
+                        tasks.add(task);
+                    }
+                    project.setBackupTasks(tasks);
 
-	    private BackupTask parseTask(JsonObject taskObject, int projectId) {
-	        int backupTaskId = taskObject.get("backupTaskId").getAsInt();
-	        String name = taskObject.get("name").getAsString();
-	        String localSchedular = taskObject.get("localSchedular").getAsString();
-	        String remoteSchedular = taskObject.get("remoteSchedular").getAsString();
-	        String localPath = taskObject.get("localPath").getAsString();
-	        String remotePath = taskObject.get("remotePath").getAsString();
-	        int localRetention = taskObject.get("localRetention").getAsInt();
-	        int remoteRetention = taskObject.get("remoteRetention").getAsInt();
+                    backupProjects.add(project);
+                }
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
-	        List<BackupFolder> backupFolders = new ArrayList<>();
-	        JsonArray foldersArray = taskObject.getAsJsonArray("backupfolders");
-	        if (foldersArray != null) {
-	            for (JsonElement folderElement : foldersArray) {
-	                BackupFolder backupFolder = parseFolder(folderElement.getAsJsonObject(), backupTaskId);
-	                backupFolders.add(backupFolder);
-	            }
-	        }
+        return backupProjects;
+    }
 
-	        return new BackupTask(backupTaskId, projectId, name, localSchedular, localPath,
-	                localRetention, remoteSchedular, remotePath, remoteRetention,
-	                BackupTaskStatus.HOAT_DONG.getId(), backupFolders);
-	    }
+    @Override
+    public void saveData(List<BackupProject> backupProjects) {
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        JsonObject jsonObject = new JsonObject();
+        JsonArray jsonArray = gson.toJsonTree(backupProjects).getAsJsonArray();
+        jsonObject.add("backupProjects", jsonArray);
 
-	    private BackupFolder parseFolder(JsonObject folderObject, int backupTaskId) {
-	        int folderId = folderObject.get("folderId").getAsInt();
-	        String folderPath = folderObject.get("folderPath").getAsString();
-	        return new BackupFolder(folderId, folderPath, backupTaskId);
-	    }
-	    
-	    public List<BackupTask> getTasksForProject(int projectId) {
-	        List<BackupTask> tasksForProject = new ArrayList<>();
-	        List<BackupProject> backupProjects = loadData();
-
-	        // Tìm dự án tương ứng với projectId
-	        for (BackupProject project : backupProjects) {
-	            if (project.getProjectId() == projectId) {
-	                tasksForProject.addAll(project.getBackupTasks());
-	                break;
-	            }
-	        }
-
-	        return tasksForProject;
-	    }
-
+        try (FileWriter writer = new FileWriter(CONFIG_FOLDER_PATH)) {
+            gson.toJson(jsonObject, writer);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
 }
+

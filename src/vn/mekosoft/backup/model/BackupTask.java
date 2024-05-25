@@ -3,9 +3,8 @@ package vn.mekosoft.backup.model;
 import java.util.List;
 
 public class BackupTask {
-	 private static int autoIncrease = 1;
 	private long backupTaskId;
-	private long backupProjectId;
+	private long projectId;
 	private String name;
 	private String localSchedular;
 	private String localPath;
@@ -15,14 +14,16 @@ public class BackupTask {
 	private long remoteRetention;
 	private long backupTaskStatus;
 	private List<BackupFolder> backupFolders;
+
 	
 	public BackupTask() {
-		// default constructor
+	
 	}
 	
-	public BackupTask(long backupTaskId, long backupProjectId, String name, String localSchedular, String localPath, long localRetention, String remoteSchedular, String remotePath, long remoteRetention, long backupTaskStatus, List<BackupFolder> backupFolders) {
-		this.backupTaskId = autoIncrease++;
-		this.backupProjectId = backupProjectId;
+	public BackupTask(long backupTaskId, long projectId, String name, String localSchedular, String localPath, long localRetention, String remoteSchedular, String remotePath, long remoteRetention, long backupTaskStatus, List<BackupFolder> backupFolders) {
+		this.backupTaskId = backupTaskId;
+		
+		this.projectId = projectId;
 		this.name = name;
 		this.localSchedular = localSchedular;
 		this.localPath = localPath;
@@ -34,9 +35,7 @@ public class BackupTask {
 		this.backupFolders = backupFolders;
 		
 	}
-	public static void setAutoIncrease(int autoIncrease) {
-		BackupTask.autoIncrease=autoIncrease;
-	}
+
 
 	public List<BackupFolder> getBackupFolders() {
 		return backupFolders;
@@ -54,12 +53,12 @@ public class BackupTask {
 		this.backupTaskId = backupTaskId;
 	}
 
-	public long getBackupProjectId() {
-		return backupProjectId;
+	public long getProjectId() {
+		return projectId;
 	}
 
-	public void setBackupProjectId(long backupProjectId) {
-		this.backupProjectId = backupProjectId;
+	public void setProjectId(long projectId) {
+		this.projectId = projectId;
 	}
 
 	public String getName() {
@@ -135,7 +134,7 @@ public class BackupTask {
 
 	@Override
 	public String toString() {
-		return "BackupTask [backupTaskId=" + backupTaskId + ", backupProjectId=" + backupProjectId + ", name=" + name
+		return "BackupTask [backupTaskId=" + backupTaskId + ", backupProjectId=" + projectId + ", name=" + name
 				+ ", localSchedular=" + localSchedular + ", localPath=" + localPath + ", localRetention="
 				+ localRetention + ", remoteSchedular=" + remoteSchedular + ", remotePath=" + remotePath
 				+ ", remoteRetention=" + remoteRetention + ", backupTaskStatus=" + backupTaskStatus + "]";

@@ -1,222 +1,281 @@
 package vn.mekosoft.backup.controller;
 
-import java.io.FileWriter;
+import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
-
+import javafx.scene.Node;
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
+import com.google.gson.reflect.TypeToken;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 import vn.mekosoft.backup.impl.BackupServiceImpl;
 import vn.mekosoft.backup.model.BackupFolder;
 import vn.mekosoft.backup.model.BackupProject;
 import vn.mekosoft.backup.model.BackupTask;
+import vn.mekosoft.backup.model.BackupTaskStatus;
 
 public class DetailsTask implements Initializable {
+	@FXML
+	private AnchorPane addTask_view;
 
-    @FXML
-    private AnchorPane addTask_view;
+	@FXML
+	private Button button_saveFolder;
 
-    @FXML
-    private TextField folder_path;
+	@FXML
+	private Button button_save_inforTask;
 
-    @FXML
-    private TextField folder_path1;
+	@FXML
+	private AnchorPane folderPath_view;
 
-    @FXML
-    private TextField folder_path2;
+	@FXML
+	private TextField folder_id;
 
-    @FXML
-    private TextField local_cronTab;
+	@FXML
+	private TextField folder_path;
 
-    @FXML
-    private TextField local_path;
+	@FXML
+	private AnchorPane listFolder;
 
-    @FXML
-    private TextField local_retention;
+	@FXML
+	private VBox vbox_folder;
 
-    @FXML
-    private Label project_name_BP;
+	@FXML
+	private TextField local_cronTab;
 
-    @FXML
-    private TextField remote_cronTab;
+	@FXML
+	private TextField local_path;
 
-    @FXML
-    private TextField remote_path;
+	@FXML
+	private TextField local_retention;
 
-    @FXML
-    private TextField remote_retention;
+	@FXML
+	private Label project_name_BP;
 
-    @FXML
-    private TextField task_name;
+	@FXML
+	private TextField remote_cronTab;
 
-    @FXML
-    private Button button_save_folderPath;
+	@FXML
+	private TextField remote_path;
 
-    @FXML
-    private Button button_save_inforTask;
+	@FXML
+	private TextField remote_retention;
 
-    private BackupTask task;
-    private BackupProject project;
+	@FXML
+	private TextField task_id;
 
-    public void setProject(BackupProject project) {
-        this.project = project;
-        System.out.println("đẹp: " + project);
+	@FXML
+	private TextField task_name;
+	@FXML
+	private TextField config_textField;
+
+	@FXML
+	private Button save_config;
+	@FXML
+	private TextField get_FolderId;
+
+	@FXML
+	private TextField get_FolderPath;
+	@FXML
+	private AnchorPane content_folder;
+
+	private BackupProject project;
+	private BackupTask task;
+    private Dashboard dashboardController;
+
+    public void setDashboardController(Dashboard dashboardController) {
+        this.dashboardController = dashboardController;
     }
+	public void setProject(BackupProject project) {
+		this.project = project;
 
-    public void inforClear() {
-        task_name.clear();
-        local_path.clear();
-        local_cronTab.clear();
-        local_retention.clear();
-        remote_path.clear();
-        remote_cronTab.clear();
-        remote_retention.clear();
-        folder_path.setText("");
-        folder_path1.setText("");
-        folder_path2.setText("");
-    }
+	}
 
-    public void taskDetails(BackupTask task, BackupProject project) {
-        this.task = task;
-        this.project = project;
-        if (task.getName() != null) {
-            task_name.setText(task.getName());
-            local_cronTab.setText(task.getLocalSchedular());
-            remote_cronTab.setText(task.getRemoteSchedular());
-            local_path.setText(task.getLocalPath());
-            remote_path.setText(task.getRemotePath());
-            local_retention.setText(String.valueOf(task.getLocalRetention()));
-            remote_retention.setText(String.valueOf(task.getRemoteRetention()));
+	private void refreshView() {
+	    vbox_folder.getChildren().clear();
+	    taskDetails(task);
+	}
 
-            List<BackupFolder> folders = task.getBackupFolders();
-            if (folders.size() > 0) {
-                folder_path.setText(folders.get(0).getFolderPath());
-            }
-            if (folders.size() > 1) {
-                folder_path1.setText(folders.get(1).getFolderPath());
-            }
-            if (folders.size() > 2) {
-                folder_path2.setText(folders.get(2).getFolderPath());
-            }
-        }
-    }
+	public void saveFolder_action() {
+		long backupFolderId;
+		try {
+			backupFolderId = Long.parseLong(folder_id.getText());
+		} catch (NumberFormatException e) {
+			return;
+		}
+		String folderPath = folder_path.getText();
 
-    public void saveInforTask_action(ActionEvent event) throws IOException {
-        System.out.println("lấy rồi: " + project);
-        if (project != null) {
-            BackupServiceImpl backupService = new BackupServiceImpl();
-            List<BackupProject> backupProjects = backupService.loadData();
-            boolean projectExists = false;
+		if (task != null && task.getBackupFolders() != null) {
+			boolean folderFound = false;
+			for (BackupFolder folder : task.getBackupFolders()) {
+				if (folder.getBackupFolderId() == backupFolderId) {
+					folder.setFolderPath(folderPath);
+					folderFound = true;
+					break;
+				}
+			}
 
-            for (BackupProject proj : backupProjects) {
-                if (proj.getProjectId() == project.getProjectId()) {
-                    projectExists = true;
-                    proj.getBackupTasks().add(createBackupTask());
-                    break;
-                }
-            }
+			if (!folderFound) {
+				BackupFolder newFolder = new BackupFolder(backupFolderId, folderPath, task.getBackupTaskId());
+				task.getBackupFolders().add(newFolder);
+				addFolderLayout(newFolder);
+			}
 
-            if (!projectExists) {
-                project.getBackupTasks().add(createBackupTask());
-                backupProjects.add(project);
-            }
+			saveTaskFolders(task);
 
-            saveBackupProjects(backupProjects);
-        } else {
-            System.out.println("null.");
-        }
-    }
+			folder_id.clear();
+			folder_path.clear();
+		}
+		refreshView();
+	}
 
-    private BackupTask createBackupTask() {
-        BackupTask newTask = new BackupTask();
-        newTask.setName(task_name.getText());
-        newTask.setLocalSchedular(local_cronTab.getText());
-        newTask.setRemoteSchedular(remote_cronTab.getText());
-        newTask.setLocalPath(local_path.getText());
-        newTask.setRemotePath(remote_path.getText());
-        newTask.setLocalRetention(Integer.parseInt(local_retention.getText()));
-        newTask.setRemoteRetention(Integer.parseInt(remote_retention.getText()));
+	private void saveTaskFolders(BackupTask task) {
+		BackupServiceImpl backupService = new BackupServiceImpl();
+		List<BackupProject> backupProjects = backupService.loadData();
 
-        List<BackupFolder> folders = new ArrayList<>();
-        if (!folder_path.getText().isEmpty()) {
-            folders.add(new BackupFolder(1, folder_path.getText(), newTask.getBackupTaskId()));
-        }
-        if (!folder_path1.getText().isEmpty()) {
-            folders.add(new BackupFolder(2, folder_path1.getText(), newTask.getBackupTaskId()));
-        }
-        if (!folder_path2.getText().isEmpty()) {
-            folders.add(new BackupFolder(3, folder_path2.getText(), newTask.getBackupTaskId()));
-        }
-        newTask.setBackupFolders(folders);
+		for (BackupProject proj : backupProjects) {
+			if (proj.getProjectId() == project.getProjectId()) {
+				for (BackupTask t : proj.getBackupTasks()) {
+					if (t.getBackupTaskId() == task.getBackupTaskId()) {
+						t.setBackupFolders(task.getBackupFolders());
+						break;
+					}
+				}
+				break;
+			}
+		}
+		backupService.saveData(backupProjects);
+	}
 
-        return newTask;
-    }
+	public void taskDetails(BackupTask task) {
+		this.task = task;
 
-    private void saveBackupProjects(List<BackupProject> backupProjects) {
-        JsonObject jsonObject = new JsonObject();
-        JsonArray backupProjectsArray = new JsonArray();
+		if (task != null) {
+			task_id.setText(String.valueOf(task.getBackupTaskId()));
+			task_name.setText(task.getName());
+			local_cronTab.setText(task.getLocalSchedular());
+			remote_cronTab.setText(task.getRemoteSchedular());
+			local_path.setText(task.getLocalPath());
+			remote_path.setText(task.getRemotePath());
+			local_retention.setText(String.valueOf(task.getLocalRetention()));
+			remote_retention.setText(String.valueOf(task.getRemoteRetention()));
+			if (task.getBackupFolders() != null && !task.getBackupFolders().isEmpty()) {
+				for (BackupFolder folder : task.getBackupFolders()) {
+					addFolderLayout(folder);
+				}
+			}
+		}
 
-        for (BackupProject proj : backupProjects) {
-            JsonObject projectJson = new JsonObject();
-            projectJson.addProperty("projectId", proj.getProjectId());
-            projectJson.addProperty("hostname", proj.getHostname());
-            projectJson.addProperty("username", proj.getUsername());
-            projectJson.addProperty("password", proj.getPassword());
+		if (project != null) {
+			project_name_BP.setText(project.getProjectName());
+		}
+	}
 
-            JsonArray backupTasksArray = new JsonArray();
+	public void saveInforTask_action(ActionEvent event) throws IOException {
+		if (project != null && task != null) {
+			task.setBackupTaskId(Long.parseLong(task_id.getText()));
+			task.setProjectId(project.getProjectId());
+			task.setName(task_name.getText());
+			task.setLocalSchedular(local_cronTab.getText());
+			task.setRemoteSchedular(remote_cronTab.getText());
+			task.setLocalPath(local_path.getText());
+			task.setRemotePath(remote_path.getText());
+			task.setLocalRetention(Long.parseLong(local_retention.getText()));
+			task.setRemoteRetention(Long.parseLong(remote_retention.getText()));
+			task.setBackupTaskStatus(BackupTaskStatus.DANG_BIEN_SOAN.getId());
 
-            for (BackupTask tsk : proj.getBackupTasks()) {
-                JsonObject taskJson = new JsonObject();
-                taskJson.addProperty("backupTaskId", tsk.getBackupTaskId());
-                taskJson.addProperty("name", tsk.getName());
-                taskJson.addProperty("localSchedular", tsk.getLocalSchedular());
-                taskJson.addProperty("remoteSchedular", tsk.getRemoteSchedular());
-                taskJson.addProperty("localPath", tsk.getLocalPath());
-                taskJson.addProperty("remotePath", tsk.getRemotePath());
-                taskJson.addProperty("localRetention", tsk.getLocalRetention());
-                taskJson.addProperty("remoteRetention", tsk.getRemoteRetention());
+			BackupServiceImpl backupService = new BackupServiceImpl();
+			List<BackupProject> backupProjects = backupService.loadData();
 
-                JsonArray backupFoldersArray = new JsonArray();
-                for (BackupFolder folder : tsk.getBackupFolders()) {
-                    JsonObject folderJson = new JsonObject();
-                    folderJson.addProperty("folderId", folder.getBackupFolderId());
-                    folderJson.addProperty("folderPath", folder.getFolderPath());
-                    backupFoldersArray.add(folderJson);
-                }
-                taskJson.add("backupfolders", backupFoldersArray);
-                backupTasksArray.add(taskJson);
-            }
+			boolean projectFound = false;
+			for (BackupProject proj : backupProjects) {
+				if (proj.getProjectId() == project.getProjectId()) {
+					List<BackupTask> projectTasks = proj.getBackupTasks();
+					if (projectTasks == null) {
+						projectTasks = new ArrayList<>();
+						proj.setBackupTasks(projectTasks);
+					}
 
-            projectJson.add("backupTasks", backupTasksArray);
-            backupProjectsArray.add(projectJson);
-        }
+					boolean taskFound = false;
+					for (BackupTask existingTask : projectTasks) {
+						if (existingTask.getBackupTaskId() == task.getBackupTaskId()) {
+							existingTask.setName(task.getName());
+							existingTask.setLocalSchedular(task.getLocalSchedular());
+							existingTask.setRemoteSchedular(task.getRemoteSchedular());
+							existingTask.setLocalPath(task.getLocalPath());
+							existingTask.setRemotePath(task.getRemotePath());
+							existingTask.setLocalRetention(task.getLocalRetention());
+							existingTask.setRemoteRetention(task.getRemoteRetention());
+							existingTask.setBackupTaskStatus(task.getBackupTaskStatus());
+							existingTask.setBackupFolders(task.getBackupFolders());
+							taskFound = true;
+							break;
+						}
+					}
 
-        jsonObject.add("backupProjects", backupProjectsArray);
+					if (!taskFound) {
+						projectTasks.add(task);
+					}
+					projectFound = true;
+					break;
+				}
+			}
 
-        try (FileWriter writer = new FileWriter("new_project.json")) {
-            Gson gson = new GsonBuilder().setPrettyPrinting().create();
-            gson.toJson(jsonObject, writer);
-            System.out.println("Ngon.");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+			if (!projectFound) {
+				project.setBackupTasks(new ArrayList<>(List.of(task)));
+				backupProjects.add(project);
+			}
+			backupService.saveData(backupProjects);
 
-    @Override
-    public void initialize(URL url, ResourceBundle resources) {
-        inforClear();
-    }
+
+			refreshView();
+		
+			((Node) (event.getSource())).getScene().getWindow().hide();
+		}
+		   
+	}
+
+	@Override
+	public void initialize(URL url, ResourceBundle resources) {
+		inforClear();
+
+	}
+
+	public void addFolderLayout(BackupFolder folder) {
+		try {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/vn/mekosoft/backup/view/folder.fxml"));
+			content_folder = loader.load();
+			Folder folderController = loader.getController();
+			System.out.print("load");
+			folderController.folderData(folder);
+
+			vbox_folder.getChildren().add(content_folder);
+			content_folder.setMaxHeight(Double.MAX_VALUE);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void inforClear() {
+		task_id.setText("");
+		task_name.clear();
+		local_path.clear();
+		local_cronTab.clear();
+		local_retention.clear();
+		remote_path.clear();
+		remote_cronTab.clear();
+		remote_retention.clear();
+	}
 }

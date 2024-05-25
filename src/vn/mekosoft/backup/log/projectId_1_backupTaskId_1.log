@@ -1,0 +1,81 @@
+2024/05/24 17:35:01 [START] : Start Backup Remote Storage
+2024/05/24 17:35:01 [INFO] : SFTP connect to host pve1 successful.
+2024/05/24 17:35:01 [START] : Start Backup Local Storage
+2024/05/24 17:35:01 [INFO] : Begin backup folder /var/lib/vz/dump/ to Local Storage
+Connected to pve1.
+sftp> mget -R /var/lib/vz/dump/ /home/ubuntu/sftp_ver2/pve1/dump/2024-05-24_17:35:01
+Fetching /var/lib/vz/dump/ to /home/ubuntu/sftp_ver2/pve1/dump/2024-05-24_17:35:01/dump
+Retrieving /var/lib/vz/dump
+sftp> bye
+2024/05/24 17:35:03 [INFO] : End backup folder /var/lib/vz/dump/ to Local Storage
+2024/05/24 17:35:03 [END] : Finish Backup Local Storage
+
+2024/05/24 17:35:03 [START] : Start Cleanup Local Storage
+2024/05/24 17:35:03 [INFO] : Begin cleanup directory /home/ubuntu/sftp_ver2/pve1/dump with 2 retention
+2024/05/24 17:35:03 [INFO] : There are no folders in dump to delete
+2024/05/24 17:35:03 [INFO] : End cleanup directory /home/ubuntu/sftp_ver2/pve1/dump with 2 retention
+2024/05/24 17:35:03 [END ] : Finish Cleanup Local Storage
+
+2024/05/24 17:35:21 INFO  : 2024-05-24_17:35:01/dump/vzdump-lxc-101-2024_05_08-08_48_53.tar.zst.notes: Copied (new)
+2024/05/24 17:35:22 INFO  : 2024-05-24_17:35:01/dump/vzdump-lxc-101-2024_05_08-08_48_53.log: Copied (new)
+2024/05/24 17:35:41 INFO  : 2024-05-24_17:35:01/dump/vzdump-lxc-101-2024_05_08-08_48_53.tar.zst: Copied (new)
+2024/05/24 17:35:41 INFO  : 
+Transferred:   	  182.345M / 182.345 MBytes, 100%, 4.836 MBytes/s, ETA 0s
+Transferred:            3 / 3, 100%
+Elapsed time:        40.0s
+
+2024/05/24 17:35:41 [END] : Finish Backup Remote Storage
+
+2024/05/24 17:35:41 [START] : Start Cleanup Remote Storage
+2024/05/24 17:35:43 [INFO] : Begin cleanup directory pve:backup/pve1/dump with 3 retention
+2024/05/24 17:35:43 [INFO] : There are no folder need to delete
+2024/05/24 17:35:43 [INFO] : End cleanup directory pve:backup/pve1/dump with 3 retention
+2024/05/24 17:35:43 [END] : Finish Cleanup Remote Storage
+
+2024/05/24 17:35:44 [START] : Start Cleanup Remote Storage
+2024/05/24 17:35:46 [INFO] : Begin cleanup directory pve:backup/pve1/dump with 3 retention
+2024/05/24 17:35:46 [INFO] : There are no folder need to delete
+2024/05/24 17:35:46 [INFO] : End cleanup directory pve:backup/pve1/dump with 3 retention
+2024/05/24 17:35:46 [END] : Finish Cleanup Remote Storage
+
+2024/05/24 17:40:01 [START] : Start Backup Remote Storage
+2024/05/24 17:40:02 [INFO] : SFTP connect to host pve1 successful.
+2024/05/24 17:40:02 [START] : Start Backup Local Storage
+2024/05/24 17:40:02 [INFO] : Begin backup folder /var/lib/vz/dump/ to Local Storage
+Connected to pve1.
+sftp> mget -R /var/lib/vz/dump/ /home/ubuntu/sftp_ver2/pve1/dump/2024-05-24_17:40:02
+Fetching /var/lib/vz/dump/ to /home/ubuntu/sftp_ver2/pve1/dump/2024-05-24_17:40:02/dump
+Retrieving /var/lib/vz/dump
+sftp> bye
+2024/05/24 17:40:03 [INFO] : End backup folder /var/lib/vz/dump/ to Local Storage
+2024/05/24 17:40:03 [END] : Finish Backup Local Storage
+
+2024/05/24 17:40:03 [START] : Start Cleanup Local Storage
+2024/05/24 17:40:03 [INFO] : Begin cleanup directory /home/ubuntu/sftp_ver2/pve1/dump with 2 retention
+2024/05/24 17:40:03 [INFO] : There are no folders in dump to delete
+2024/05/24 17:40:03 [INFO] : End cleanup directory /home/ubuntu/sftp_ver2/pve1/dump with 2 retention
+2024/05/24 17:40:03 [END ] : Finish Cleanup Local Storage
+
+2024/05/24 17:40:09 INFO  : 2024-05-24_17:40:02/dump/vzdump-lxc-101-2024_05_08-08_48_53.log: Copied (new)
+2024/05/24 17:40:09 INFO  : 2024-05-24_17:40:02/dump/vzdump-lxc-101-2024_05_08-08_48_53.tar.zst.notes: Copied (new)
+2024/05/24 17:40:29 INFO  : 2024-05-24_17:40:02/dump/vzdump-lxc-101-2024_05_08-08_48_53.tar.zst: Copied (new)
+2024/05/24 17:40:29 INFO  : 
+Transferred:   	  182.345M / 182.345 MBytes, 100%, 7.386 MBytes/s, ETA 0s
+Checks:                 3 / 3, 100%
+Transferred:            3 / 3, 100%
+Elapsed time:        27.1s
+
+2024/05/24 17:40:29 [END] : Finish Backup Remote Storage
+
+2024/05/24 17:40:29 [START] : Start Cleanup Remote Storage
+2024/05/24 17:40:31 [INFO] : Begin cleanup directory pve:backup/pve1/dump with 3 retention
+2024/05/24 17:40:31 [INFO] : There are no folder need to delete
+2024/05/24 17:40:31 [INFO] : End cleanup directory pve:backup/pve1/dump with 3 retention
+2024/05/24 17:40:31 [END] : Finish Cleanup Remote Storage
+
+2024/05/24 17:40:31 [START] : Start Cleanup Remote Storage
+2024/05/24 17:40:34 [INFO] : Begin cleanup directory pve:backup/pve1/dump with 3 retention
+2024/05/24 17:40:34 [INFO] : There are no folder need to delete
+2024/05/24 17:40:34 [INFO] : End cleanup directory pve:backup/pve1/dump with 3 retention
+2024/05/24 17:40:34 [END] : Finish Cleanup Remote Storage
+
