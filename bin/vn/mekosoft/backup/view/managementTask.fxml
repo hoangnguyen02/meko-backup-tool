@@ -27,7 +27,7 @@
                               <Font name="System Bold" size="14.0" />
                            </font>
                         </Label>
-                        <Label fx:id="task_status" layoutX="635.0" layoutY="24.0" onMouseClicked="#clickStatus" text="Label">
+                        <Label fx:id="task_status" layoutX="635.0" layoutY="24.0" text="Label">
                            <font>
                               <Font size="14.0" />
                            </font>

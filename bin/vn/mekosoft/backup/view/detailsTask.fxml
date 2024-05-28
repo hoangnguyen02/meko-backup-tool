@@ -11,7 +11,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="addTask_view" prefHeight="696.0" prefWidth="1027.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vn.mekosoft.backup.controller.DetailsTask">
+<AnchorPane fx:id="addTask_view" prefHeight="696.0" prefWidth="1027.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vn.mekosoft.backup.controller.DetailsTask">
    <children>
       <AnchorPane layoutX="13.0" layoutY="21.0" prefHeight="39.0" prefWidth="988.0" style="-fx-background-color: #9ebcc6;" styleClass="border-main" stylesheets="@../application/application.css">
          <children>
@@ -34,7 +34,7 @@
                   <Font name="System Bold" size="14.0" />
                </font>
             </Text>
-            <ScrollPane layoutX="17.0" layoutY="96.0" prefHeight="174.0" prefWidth="894.0" styleClass="root" stylesheets="@../application/application.css">
+            <ScrollPane layoutX="17.0" layoutY="96.0" prefHeight="174.0" prefWidth="866.0" styleClass="root" stylesheets="@../application/application.css">
                <content>
                   <AnchorPane fx:id="content_folder">
                      <children>
@@ -43,10 +43,9 @@
                   </AnchorPane>
                </content>
             </ScrollPane>
-            <Button fx:id="button_saveFolder" layoutX="918.0" layoutY="241.0" mnemonicParsing="false" onAction="#saveFolder_action" prefHeight="34.0" prefWidth="51.0" text="Save" />
-            <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="67.0" prefWidth="946.0">
+            <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="98.0" prefWidth="874.0">
                <children>
-                  <AnchorPane fx:id="folderPath_view" layoutX="6.0" layoutY="7.0" prefHeight="90.0" prefWidth="938.0">
+                  <AnchorPane fx:id="folderPath_view" layoutX="6.0" layoutY="7.0" prefHeight="90.0" prefWidth="866.0">
                      <children>
                         <ImageView fitHeight="40.0" fitWidth="32.0" layoutX="14.0" layoutY="33.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -63,16 +62,17 @@
                               </Label>
                            </children>
                         </AnchorPane>
-                        <TextField fx:id="folder_id" layoutX="787.0" layoutY="32.0" prefHeight="34.0" prefWidth="66.0" />
+                        <TextField fx:id="folder_id" layoutX="787.0" layoutY="32.0" prefHeight="34.0" prefWidth="51.0" />
                      </children>
                   </AnchorPane>
                </children>
             </AnchorPane>
+            <Button fx:id="button_saveFolder" layoutX="898.0" layoutY="49.0" mnemonicParsing="false" onAction="#saveFolder_action" prefHeight="34.0" prefWidth="58.0" text="Save" />
          </children>
       </AnchorPane>
       <AnchorPane layoutX="13.0" layoutY="85.0" prefHeight="239.0" prefWidth="988.0" styleClass="border-main" stylesheets="@../application/application.css">
          <children>
-            <Button fx:id="button_save_inforTask" layoutX="913.0" layoutY="193.0" mnemonicParsing="false" onAction="#saveInforTask_action" prefHeight="34.0" prefWidth="51.0" text="Save" />
+            <Button fx:id="button_save_inforTask" layoutX="897.0" layoutY="179.0" mnemonicParsing="false" onAction="#saveInforTask_action" prefHeight="34.0" prefWidth="58.0" text="Save" />
             <TextField fx:id="task_name" layoutX="125.0" layoutY="14.0" prefHeight="33.0" prefWidth="677.0" />
             <AnchorPane layoutX="25.0" layoutY="180.0" prefHeight="33.0" prefWidth="73.0" styleClass="border-main" stylesheets="@../application/application.css">
                <children>
@@ -131,7 +131,7 @@
                   </Label>
                </children>
             </AnchorPane>
-            <TextField fx:id="task_id" layoutX="890.0" layoutY="13.0" prefHeight="34.0" prefWidth="66.0" />
+            <TextField fx:id="task_id" layoutX="897.0" layoutY="14.0" prefHeight="34.0" prefWidth="58.0" />
          </children>
       </AnchorPane>
    </children>

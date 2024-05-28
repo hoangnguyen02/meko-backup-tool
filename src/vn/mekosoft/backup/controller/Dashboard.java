@@ -1,6 +1,9 @@
 package vn.mekosoft.backup.controller;
 
 import java.io.FileNotFoundException;
+import vn.mekosoft.backup.service.CoreScriptService;
+import vn.mekosoft.backup.impl.CoreScriptServiceImpl;
+
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -35,6 +38,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import vn.mekosoft.backup.action.BackupActionUtil;
 import vn.mekosoft.backup.config.Config;
 import vn.mekosoft.backup.impl.BackupServiceImpl;
 import vn.mekosoft.backup.model.BackupFolder;
@@ -186,28 +190,24 @@ public class Dashboard implements Initializable {
 	private Button save_config;
 	@FXML
 	private Button button_start;
+	@FXML
+	private Button button_refresh;
+
+	public void refresh_action(ActionEvent event) {
+		vbox_container.getChildren().clear();
+		loadData();
+	}
 
 	public void startBackupTool_action(ActionEvent event) {
-	    System.out.println("Starting backup tool...");
+		System.out.println("Starting backup tool...");
+		CoreScriptService coreScriptService = new CoreScriptServiceImpl();
 
-	    List<String> command = new ArrayList<>();
-	    command.add("/home/ubuntu/sftp_ver2/backup.sh");
-	    command.add("--execute_all");
-
-
-	    ProcessBuilder processBuilder = new ProcessBuilder(command);
-
-	    try {
-	        // Bắt đầu quá trình thực thi
-	        Process process = processBuilder.start();
-
-	       
-	       
-	        
-	        System.out.println("Backup tool started successfully.");
-	    } catch (IOException e) {
-	        System.err.println("Error starting backup tool: " + e.getMessage());
-	    }
+		try {
+			String command = "/home/ubuntu/sftp_ver2/backup.sh --execute_all";
+			coreScriptService.execute(command);
+		} catch (IOException | InterruptedException e) {
+			System.err.println("Error executing backup tool: " + e.getMessage());
+		}
 	}
 
 	public void showLog() {
@@ -224,105 +224,37 @@ public class Dashboard implements Initializable {
 	}
 
 	public void generate_action(ActionEvent event) {
-		System.out.println("Generate");
-
-		BackupService backupService = new BackupServiceImpl();
-		List<BackupProject> projects = backupService.loadData();
-
-		Gson gson = new GsonBuilder().setPrettyPrinting().create();
-
-		JsonObject jObject = new JsonObject();
-		JsonArray jsonArray = gson.toJsonTree(projects).getAsJsonArray();
-		jObject.add("backupProjects", jsonArray);
-
-		String jsonData = gson.toJson(jObject);
-		// home/ubuntu/sftp_ver2/config.json
-		try {
-			FileWriter fileWriter = new FileWriter("/home/ubuntu/sftp_ver2/config.json");
-			fileWriter.write(jsonData);
-			fileWriter.close();
-
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+//		System.out.println("Generate");
+//
+//		BackupService backupService = new BackupServiceImpl();
+//		List<BackupProject> projects = backupService.loadData();
+//
+//		Gson gson = new GsonBuilder().setPrettyPrinting().create();
+//
+//		JsonObject jObject = new JsonObject();
+//		JsonArray jsonArray = gson.toJsonTree(projects).getAsJsonArray();
+//		jObject.add("backupProjects", jsonArray);
+//
+//		String jsonData = gson.toJson(jObject);
+//		// /home/ubuntu/sftp_ver2/config.json
+//		try {
+//			FileWriter fileWriter = new FileWriter("config.json");
+//			fileWriter.write(jsonData);
+//			fileWriter.close();
+//
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
 	}
 
-	public void addProject_save_action(ActionEvent event) throws IOException {
-
-		long projectId = Long.parseLong(create_backupProjectId_textField.getText());
-		String projectName = create_projectName_TextField.getText();
-		String description = create_description_textField.getText();
-		String hostname = create_hostname_textField.getText();
-		String username = create_username_textField.getText();
-		String password = create_password_textField.getText();
-		BackupProjectStatus projectStatus = create_status_backupProject.getValue();
-
-		BackupProject newProject = new BackupProject();
-		newProject.setProjectId(projectId);
-		newProject.setProjectName(projectName);
-		newProject.setDescription(description);
-		newProject.setHostname(hostname);
-		newProject.setUsername(username);
-		newProject.setPassword(password);
-		newProject.setBackupProjectStatusFromEnum(projectStatus);
-		newProject.setBackupTasks(new ArrayList<>());
-
-		List<BackupProject> backupProjects = new BackupServiceImpl().loadData();
-		backupProjects.add(newProject);
-////home/ubuntu/sftp_ver2/config.json
-		try (FileWriter writer = new FileWriter("/home/ubuntu/sftp_ver2/config.json")) {
-			JsonArray backupProjectsArray = new JsonArray();
-			for (BackupProject project : backupProjects) {
-				JsonObject projectJson = new JsonObject();
-				projectJson.addProperty("projectId", project.getProjectId());
-				projectJson.addProperty("projectName", project.getProjectName());
-				projectJson.addProperty("hostname", project.getHostname());
-				projectJson.addProperty("username", project.getUsername());
-				projectJson.addProperty("password", project.getPassword());
-				projectJson.addProperty("backupProjectStatus", project.getBackupProjectStatus());
-
-				JsonArray backupTasksArray = new JsonArray();
-				for (BackupTask task : project.getBackupTasks()) {
-					JsonObject taskJson = new JsonObject();
-					taskJson.addProperty("backupTaskId", task.getBackupTaskId());
-					taskJson.addProperty("name", task.getName());
-					taskJson.addProperty("localSchedular", task.getLocalSchedular());
-					taskJson.addProperty("remoteSchedular", task.getRemoteSchedular());
-					taskJson.addProperty("localPath", task.getLocalPath());
-					taskJson.addProperty("remotePath", task.getRemotePath());
-					taskJson.addProperty("localRetention", task.getLocalRetention());
-					taskJson.addProperty("remoteRetention", task.getRemoteRetention());
-					task.setBackupTaskStatus(BackupTaskStatus.HOAT_DONG.getId());
-
-					JsonArray backupFoldersArray = new JsonArray();
-					for (BackupFolder folder : task.getBackupFolders()) {
-						JsonObject folderJson = new JsonObject();
-						folderJson.addProperty("folderId", folder.getBackupFolderId());
-						folderJson.addProperty("folderPath", folder.getFolderPath());
-						backupFoldersArray.add(folderJson);
-					}
-					taskJson.add("backupfolders", backupFoldersArray);
-
-					backupTasksArray.add(taskJson);
-				}
-				projectJson.add("backupTasks", backupTasksArray);
-
-				backupProjectsArray.add(projectJson);
-			}
-
-			JsonObject jsonObject = new JsonObject();
-			jsonObject.add("backupProjects", backupProjectsArray);
-
-			Gson gson = new GsonBuilder().setPrettyPrinting().create();
-			gson.toJson(jsonObject, writer);
-			System.out.println("Save ok");
-
-			addProject_Layout(newProject);
-			createProject_view.setVisible(false);
-			backupProject_view.setVisible(true);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+	public void addProject_save_action(ActionEvent event) {
+		BackupActionUtil.addProject(create_backupProjectId_textField.getText(), create_projectName_TextField.getText(),
+				create_description_textField.getText(), create_hostname_textField.getText(),
+				create_username_textField.getText(), create_password_textField.getText(),
+				create_status_backupProject.getValue());
+		loadData(); // Refresh UI after saving the project
+		createProject_view.setVisible(false);
+		backupProject_view.setVisible(true);
 	}
 
 	public void addTask_Layout(BackupTask task, BackupProject project) {

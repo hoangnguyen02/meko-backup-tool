@@ -20,58 +20,56 @@ import vn.mekosoft.backup.model.BackupProjectStatus;
 import vn.mekosoft.backup.model.BackupTask;
 
 public class ManagementProject implements Initializable {
-    @FXML
-    private Button button_addTask;
+	@FXML
+	private Button button_addTask;
 
-    @FXML
-    private AnchorPane infor_project;
+	@FXML
+	private AnchorPane infor_project;
 
-    @FXML
-    private Label project_activity;
+	@FXML
+	private Label project_activity;
 
-    @FXML
-    private Label project_hostname;
+	@FXML
+	private Label project_hostname;
 
-    @FXML
-    private Label project_name_main;
+	@FXML
+	private Label project_name_main;
 
-    @FXML
-    private Label project_username;
+	@FXML
+	private Label project_username;
 
-    private BackupProject project;
+	private BackupProject project;
 
-    
-    public void addTask_action(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/vn/mekosoft/backup/view/detailsTask.fxml"));
-        Parent root = loader.load();
+	public void addTask_action(ActionEvent event) throws IOException {
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/vn/mekosoft/backup/view/detailsTask.fxml"));
+		Parent root = loader.load();
 
-        DetailsTask controller = loader.getController();
+		DetailsTask controller = loader.getController();
 
-        BackupTask newTask = new BackupTask();
-        controller.setProject(project);
-        controller.taskDetails(newTask);
-        controller.inforClear();
-        
-        // Add the newly created task to the project
-        project.getBackupTasks().add(newTask);
-        Dashboard dashboard = new Dashboard();
-      //  dashboard.addTask_Layout(newTask, project);
-        Stage stage = new Stage();
-        stage.setScene(new Scene(root));
-        stage.show();
-    }
+		BackupTask newTask = new BackupTask();
+		controller.setProject(project);
+		controller.taskDetails(newTask);
+		controller.inforClear();
 
+		project.getBackupTasks().add(newTask);
+		Dashboard dashboard = new Dashboard();
+		// dashboard.addTask_Layout(newTask, project);
+		Stage stage = new Stage();
+		stage.setScene(new Scene(root));
+		stage.show();
+	}
 
-    @Override
-    public void initialize(URL url, ResourceBundle resources) {
+	@Override
+	public void initialize(URL url, ResourceBundle resources) {
+ 
+	}
 
-    }
-
-    public void projectData(BackupProject project) {
-        this.project = project;
-        project_name_main.setText(project.getProjectName());
-        project_hostname.setText(project.getHostname());
-        project_username.setText(project.getUsername());
-        project_activity.setText(BackupProjectStatus.fromId(project.getBackupProjectStatus()).getDescriptionStatusProject());
-    }
+	public void projectData(BackupProject project) {
+		this.project = project;
+		project_name_main.setText(project.getProjectName());
+		project_hostname.setText(project.getHostname());
+		project_username.setText(project.getUsername());
+		project_activity
+				.setText(BackupProjectStatus.fromId(project.getBackupProjectStatus()).getDescriptionStatusProject());
+	}
 }

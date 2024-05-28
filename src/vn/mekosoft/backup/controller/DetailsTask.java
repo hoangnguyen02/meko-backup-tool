@@ -1,26 +1,22 @@
 package vn.mekosoft.backup.controller;
 
-import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
-import javafx.scene.Node;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
+
 import vn.mekosoft.backup.impl.BackupServiceImpl;
 import vn.mekosoft.backup.model.BackupFolder;
 import vn.mekosoft.backup.model.BackupProject;
@@ -78,62 +74,49 @@ public class DetailsTask implements Initializable {
 
 	@FXML
 	private TextField task_name;
+
 	@FXML
 	private TextField config_textField;
 
 	@FXML
 	private Button save_config;
+
 	@FXML
 	private TextField get_FolderId;
 
 	@FXML
 	private TextField get_FolderPath;
+
 	@FXML
 	private AnchorPane content_folder;
 
 	private BackupProject project;
 	private BackupTask task;
-    private Dashboard dashboardController;
+	private Dashboard dashboardController;
 
-    public void setDashboardController(Dashboard dashboardController) {
-        this.dashboardController = dashboardController;
-    }
+	public void setDashboardController(Dashboard dashboardController) {
+		this.dashboardController = dashboardController;
+	}
+
 	public void setProject(BackupProject project) {
 		this.project = project;
-
 	}
 
 	private void refreshView() {
-	    vbox_folder.getChildren().clear();
-	    taskDetails(task);
+		vbox_folder.getChildren().clear();
+		taskDetails(task);
 	}
 
 	public void saveFolder_action() {
-		long backupFolderId;
-		try {
-			backupFolderId = Long.parseLong(folder_id.getText());
-		} catch (NumberFormatException e) {
-			return;
-		}
+		long backupFolderId = Long.parseLong(folder_id.getText());
 		String folderPath = folder_path.getText();
 
-		if (task != null && task.getBackupFolders() != null) {
-			boolean folderFound = false;
-			for (BackupFolder folder : task.getBackupFolders()) {
-				if (folder.getBackupFolderId() == backupFolderId) {
-					folder.setFolderPath(folderPath);
-					folderFound = true;
-					break;
-				}
-			}
+		if (task != null) {
+			BackupFolder newFolder = new BackupFolder(backupFolderId, folderPath, task.getBackupTaskId());
+			task.getBackupFolders().add(newFolder);
+			addFolderLayout(newFolder);
 
-			if (!folderFound) {
-				BackupFolder newFolder = new BackupFolder(backupFolderId, folderPath, task.getBackupTaskId());
-				task.getBackupFolders().add(newFolder);
-				addFolderLayout(newFolder);
-			}
-
-			saveTaskFolders(task);
+			saveTaskFolders();
 
 			folder_id.clear();
 			folder_path.clear();
@@ -141,7 +124,7 @@ public class DetailsTask implements Initializable {
 		refreshView();
 	}
 
-	private void saveTaskFolders(BackupTask task) {
+	private void saveTaskFolders() {
 		BackupServiceImpl backupService = new BackupServiceImpl();
 		List<BackupProject> backupProjects = backupService.loadData();
 
@@ -149,6 +132,7 @@ public class DetailsTask implements Initializable {
 			if (proj.getProjectId() == project.getProjectId()) {
 				for (BackupTask t : proj.getBackupTasks()) {
 					if (t.getBackupTaskId() == task.getBackupTaskId()) {
+
 						t.setBackupFolders(task.getBackupFolders());
 						break;
 					}
@@ -195,11 +179,13 @@ public class DetailsTask implements Initializable {
 			task.setLocalRetention(Long.parseLong(local_retention.getText()));
 			task.setRemoteRetention(Long.parseLong(remote_retention.getText()));
 			task.setBackupTaskStatus(BackupTaskStatus.DANG_BIEN_SOAN.getId());
+			task.setBackupFolders(new ArrayList<>());
 
+			// Lấy dữ liệu từ service
 			BackupServiceImpl backupService = new BackupServiceImpl();
 			List<BackupProject> backupProjects = backupService.loadData();
 
-			boolean projectFound = false;
+			// Tìm dự án hiện tại và thêm nhiệm vụ mới vào danh sách nhiệm vụ của dự án
 			for (BackupProject proj : backupProjects) {
 				if (proj.getProjectId() == project.getProjectId()) {
 					List<BackupTask> projectTasks = proj.getBackupTasks();
@@ -207,49 +193,46 @@ public class DetailsTask implements Initializable {
 						projectTasks = new ArrayList<>();
 						proj.setBackupTasks(projectTasks);
 					}
-
-					boolean taskFound = false;
-					for (BackupTask existingTask : projectTasks) {
-						if (existingTask.getBackupTaskId() == task.getBackupTaskId()) {
-							existingTask.setName(task.getName());
-							existingTask.setLocalSchedular(task.getLocalSchedular());
-							existingTask.setRemoteSchedular(task.getRemoteSchedular());
-							existingTask.setLocalPath(task.getLocalPath());
-							existingTask.setRemotePath(task.getRemotePath());
-							existingTask.setLocalRetention(task.getLocalRetention());
-							existingTask.setRemoteRetention(task.getRemoteRetention());
-							existingTask.setBackupTaskStatus(task.getBackupTaskStatus());
-							existingTask.setBackupFolders(task.getBackupFolders());
-							taskFound = true;
-							break;
-						}
-					}
-
-					if (!taskFound) {
-						projectTasks.add(task);
-					}
-					projectFound = true;
-					break;
+					// Thêm nhiệm vụ mới vào danh sách nhiệm vụ của dự án
+					projectTasks.add(task);
+					proj.setBackupTasks(projectTasks); // Cập nhật danh sách nhiệm vụ cho dự án
+					break; // Thoát khỏi vòng lặp khi tìm thấy dự án
 				}
 			}
 
-			if (!projectFound) {
-				project.setBackupTasks(new ArrayList<>(List.of(task)));
-				backupProjects.add(project);
-			}
+			// Lưu lại dữ liệu đã cập nhật
 			backupService.saveData(backupProjects);
 
-
+			// Làm mới giao diện
 			refreshView();
-		
+
+			// Đóng cửa sổ hiện tại
 			((Node) (event.getSource())).getScene().getWindow().hide();
 		}
-		   
 	}
 
 	@Override
 	public void initialize(URL url, ResourceBundle resources) {
+
 		inforClear();
+
+	}
+
+	public void onlyView() {
+		task_id.setEditable(false);
+		task_name.setEditable(false);
+		local_cronTab.setEditable(false);
+		remote_cronTab.setEditable(false);
+		local_path.setEditable(false);
+		remote_path.setEditable(false);
+		local_retention.setEditable(false);
+		remote_retention.setEditable(false);
+
+		// Hide or disable save button
+		button_save_inforTask.setVisible(false);
+		folder_path.setEditable(false);
+		folder_id.setEditable(false);
+		button_saveFolder.setVisible(false);
 
 	}
 
@@ -258,7 +241,6 @@ public class DetailsTask implements Initializable {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/vn/mekosoft/backup/view/folder.fxml"));
 			content_folder = loader.load();
 			Folder folderController = loader.getController();
-			System.out.print("load");
 			folderController.folderData(folder);
 
 			vbox_folder.getChildren().add(content_folder);

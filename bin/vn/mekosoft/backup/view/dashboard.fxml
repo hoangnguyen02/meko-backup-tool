@@ -30,27 +30,27 @@
          <children>
             <AnchorPane fx:id="list_menu" layoutX="3.0" layoutY="13.0" prefHeight="679.0" prefWidth="263.0" styleClass="border-main" stylesheets="@../application/application.css">
                <children>
-                  <Button fx:id="button_dashboard" layoutX="52.0" layoutY="38.0" mnemonicParsing="false" onAction="#switch_form" prefHeight="53.0" prefWidth="162.0" styleClass="button-1" stylesheets="@../application/application.css" text="Dashboard">
+                  <Button fx:id="button_dashboard" layoutX="52.0" layoutY="483.0" mnemonicParsing="false" onAction="#switch_form" prefHeight="53.0" prefWidth="162.0" styleClass="button-1" stylesheets="@../application/application.css" text="Dashboard" visible="false">
                      <font>
                         <Font size="16.0" />
                      </font>
                   </Button>
-                  <Button fx:id="button_backupProject" layoutX="52.0" layoutY="119.0" mnemonicParsing="false" onAction="#switch_form" prefHeight="53.0" prefWidth="162.0" styleClass="button-1" stylesheets="@../application/application.css" text="Backup Project">
+                  <Button fx:id="button_backupProject" layoutX="52.0" layoutY="25.0" mnemonicParsing="false" onAction="#switch_form" prefHeight="53.0" prefWidth="162.0" styleClass="button-1" stylesheets="@../application/application.css" text="Backup Project">
                      <font>
                         <Font size="16.0" />
                      </font>
                   </Button>
-                  <Button fx:id="button_backupTask" layoutX="52.0" layoutY="199.0" mnemonicParsing="false" onAction="#switch_form" prefHeight="53.0" prefWidth="162.0" styleClass="button-1" stylesheets="@../application/application.css" text="Backup Task">
+                  <Button fx:id="button_backupTask" layoutX="52.0" layoutY="544.0" mnemonicParsing="false" onAction="#switch_form" prefHeight="53.0" prefWidth="162.0" styleClass="button-1" stylesheets="@../application/application.css" text="Backup Task" visible="false">
                      <font>
                         <Font size="16.0" />
                      </font>
                   </Button>
-                  <Button fx:id="button_scheduler" layoutX="52.0" layoutY="280.0" mnemonicParsing="false" onAction="#switch_form" prefHeight="53.0" prefWidth="162.0" styleClass="button-1" stylesheets="@../application/application.css" text="Scheduler">
+                  <Button fx:id="button_scheduler" layoutX="50.0" layoutY="604.0" mnemonicParsing="false" onAction="#switch_form" prefHeight="53.0" prefWidth="162.0" styleClass="button-1" stylesheets="@../application/application.css" text="Scheduler" visible="false">
                      <font>
                         <Font size="16.0" />
                      </font>
                   </Button>
-                  <Button fx:id="button_config" layoutX="52.0" layoutY="361.0" mnemonicParsing="false" onAction="#switch_form" prefHeight="53.0" prefWidth="162.0" styleClass="button-1" stylesheets="@../application/application.css" text="Config">
+                  <Button fx:id="button_config" layoutX="50.0" layoutY="121.0" mnemonicParsing="false" onAction="#switch_form" prefHeight="53.0" prefWidth="162.0" styleClass="button-1" stylesheets="@../application/application.css" text="Config">
                      <font>
                         <Font size="16.0" />
                      </font>
@@ -59,11 +59,11 @@
             </AnchorPane>
             <AnchorPane fx:id="content_view" layoutX="266.0" prefHeight="696.0" prefWidth="1027.0">
                <children>
-                  <AnchorPane fx:id="backupProject_view" prefHeight="696.0" prefWidth="1027.0" stylesheets="@../application/application.css" visible="false">
+                  <AnchorPane fx:id="backupProject_view" prefHeight="696.0" prefWidth="1027.0" stylesheets="@../application/application.css">
                      <children>
                         <Label layoutX="170.0" layoutY="99.0" />
                         <Button fx:id="button_addProject" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#addProject_action" prefHeight="33.0" prefWidth="105.0" text="+ Project" />
-                        <Button fx:id="button_generate" layoutX="138.0" layoutY="14.0" mnemonicParsing="false" onAction="#generate_action" prefHeight="33.0" prefWidth="149.0" text="Generate" />
+                        <Button fx:id="button_generate" layoutX="456.0" layoutY="14.0" mnemonicParsing="false" onAction="#generate_action" prefHeight="33.0" prefWidth="149.0" text="Generate" visible="false" />
                         <AnchorPane fx:id="list_backupProject" layoutX="14.0" layoutY="57.0" prefHeight="636.0" prefWidth="1009.0">
                            <children>
                               <ScrollPane prefHeight="636.0" prefWidth="1009.0" style="-fx-background-color: transparent;">
@@ -77,10 +77,11 @@
                               </ScrollPane>
                            </children>
                         </AnchorPane>
-                        <Button fx:id="button_start" layoutX="320.0" layoutY="14.0" mnemonicParsing="false" onAction="#startBackupTool_action" prefHeight="34.0" prefWidth="106.0" text="Start" />
+                        <Button fx:id="button_start" layoutX="145.0" layoutY="13.0" mnemonicParsing="false" onAction="#startBackupTool_action" prefHeight="34.0" prefWidth="106.0" text="Start" />
+                        <Button fx:id="button_refresh" layoutX="918.0" layoutY="14.0" mnemonicParsing="false" onAction="#refresh_action" prefHeight="34.0" prefWidth="71.0" text="Refresh" />
                      </children>
                   </AnchorPane>
-                  <AnchorPane fx:id="dashboard_view" prefHeight="696.0" prefWidth="1027.0">
+                  <AnchorPane fx:id="dashboard_view" prefHeight="696.0" prefWidth="1027.0" visible="false">
                      <children>
                         <Label layoutX="225.0" layoutY="213.0" text="Dashboard">
                            <font>
