@@ -13,16 +13,11 @@
 
 <AnchorPane fx:id="addTask_view" prefHeight="696.0" prefWidth="1027.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vn.mekosoft.backup.controller.DetailsTask">
    <children>
-      <AnchorPane layoutX="13.0" layoutY="21.0" prefHeight="39.0" prefWidth="988.0" style="-fx-background-color: #9ebcc6;" styleClass="border-main" stylesheets="@../application/application.css">
+      <AnchorPane layoutX="13.0" layoutY="21.0" prefHeight="42.0" prefWidth="988.0" styleClass="heading" stylesheets="@../application/application.css">
          <children>
-            <Label layoutX="31.0" layoutY="8.0" text="Project:">
+            <Label fx:id="project_name_BP" layoutX="43.0" layoutY="7.0" prefHeight="27.0" prefWidth="662.0" text="Label">
                <font>
                   <Font name="System Bold" size="18.0" />
-               </font>
-            </Label>
-            <Label fx:id="project_name_BP" layoutX="107.0" layoutY="8.0" text="Label">
-               <font>
-                  <Font size="18.0" />
                </font>
             </Label>
          </children>
@@ -34,11 +29,11 @@
                   <Font name="System Bold" size="14.0" />
                </font>
             </Text>
-            <ScrollPane layoutX="17.0" layoutY="96.0" prefHeight="174.0" prefWidth="866.0" styleClass="root" stylesheets="@../application/application.css">
+            <ScrollPane layoutX="23.0" layoutY="92.0" prefHeight="166.0" prefWidth="798.0" style="-fx-background-color: transparent;" stylesheets="@../application/application.css">
                <content>
-                  <AnchorPane fx:id="content_folder">
+                  <AnchorPane fx:id="content_folder" style="-fx-background-color: transparent;">
                      <children>
-                        <VBox fx:id="vbox_folder" styleClass="root" stylesheets="@../application/application.css" />
+                        <VBox fx:id="vbox_folder" prefHeight="0.0" prefWidth="0.0" style="-fx-background-color: transparent;" styleClass="root" stylesheets="@../application/application.css" />
                      </children>
                   </AnchorPane>
                </content>
@@ -47,13 +42,13 @@
                <children>
                   <AnchorPane fx:id="folderPath_view" layoutX="6.0" layoutY="7.0" prefHeight="90.0" prefWidth="866.0">
                      <children>
-                        <ImageView fitHeight="40.0" fitWidth="32.0" layoutX="14.0" layoutY="33.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="40.0" fitWidth="32.0" layoutX="25.0" layoutY="33.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@img/folder.png" />
                            </image>
                         </ImageView>
-                        <TextField fx:id="folder_path" layoutX="76.0" layoutY="32.0" prefHeight="34.0" prefWidth="599.0" />
-                        <AnchorPane layoutX="710.0" layoutY="32.0" prefHeight="34.0" prefWidth="41.0" styleClass="border-main" stylesheets="@../application/application.css">
+                        <TextField fx:id="folder_path" layoutX="109.0" layoutY="32.0" prefHeight="34.0" prefWidth="546.0" />
+                        <AnchorPane layoutX="676.0" layoutY="32.0" prefHeight="34.0" prefWidth="41.0" styleClass="border-add-task" stylesheets="@../application/application.css" visible="false">
                            <children>
                               <Label layoutX="12.0" layoutY="7.0" text="ID:">
                                  <font>
@@ -62,23 +57,29 @@
                               </Label>
                            </children>
                         </AnchorPane>
-                        <TextField fx:id="folder_id" layoutX="787.0" layoutY="32.0" prefHeight="34.0" prefWidth="51.0" />
+                        <TextField fx:id="folder_id" layoutX="730.0" layoutY="32.0" prefHeight="34.0" prefWidth="51.0" visible="false" />
                      </children>
                   </AnchorPane>
                </children>
             </AnchorPane>
-            <Button fx:id="button_saveFolder" layoutX="898.0" layoutY="49.0" mnemonicParsing="false" onAction="#saveFolder_action" prefHeight="34.0" prefWidth="58.0" text="Save" />
+            <Button fx:id="button_saveFolder" layoutX="898.0" layoutY="49.0" mnemonicParsing="false" onAction="#saveFolder_action" prefHeight="34.0" prefWidth="58.0" styleClass="button-2" stylesheets="@../application/application.css" text="Add" textFill="WHITE">
+               <font>
+                  <Font size="14.0" />
+               </font></Button>
          </children>
       </AnchorPane>
       <AnchorPane layoutX="13.0" layoutY="85.0" prefHeight="239.0" prefWidth="988.0" styleClass="border-main" stylesheets="@../application/application.css">
          <children>
-            <Button fx:id="button_save_inforTask" layoutX="897.0" layoutY="179.0" mnemonicParsing="false" onAction="#saveInforTask_action" prefHeight="34.0" prefWidth="58.0" text="Save" />
-            <TextField fx:id="task_name" layoutX="125.0" layoutY="14.0" prefHeight="33.0" prefWidth="677.0" />
-            <AnchorPane layoutX="25.0" layoutY="180.0" prefHeight="33.0" prefWidth="73.0" styleClass="border-main" stylesheets="@../application/application.css">
+            <Button fx:id="button_save_inforTask" layoutX="897.0" layoutY="179.0" mnemonicParsing="false" onAction="#saveInforTask_action" prefHeight="34.0" prefWidth="58.0" styleClass="button-2" stylesheets="@../application/application.css" text="Save" textFill="WHITE">
+               <font>
+                  <Font size="14.0" />
+               </font></Button>
+            <TextField fx:id="task_name" layoutX="125.0" layoutY="14.0" prefHeight="34.0" prefWidth="678.0" />
+            <AnchorPane layoutX="25.0" layoutY="180.0" prefHeight="33.0" prefWidth="73.0" style="-fx-background-color: #e1d2e6;" styleClass="border-add-task" stylesheets="@../application/application.css">
                <children>
                   <Label layoutX="12.0" layoutY="7.0" text="Remote:">
                      <font>
-                        <Font size="14.0" />
+                        <Font name="System Bold" size="14.0" />
                      </font>
                   </Label>
                </children>
@@ -101,37 +102,37 @@
                   <Font name="System Bold" size="15.0" />
                </font>
             </Text>
-            <TextField fx:id="remote_path" layoutX="125.0" layoutY="180.0" prefHeight="33.0" prefWidth="322.0" />
+            <TextField fx:id="remote_path" layoutX="125.0" layoutY="180.0" prefHeight="34.0" prefWidth="322.0" />
             <TextField fx:id="remote_cronTab" layoutX="484.0" layoutY="180.0" prefHeight="33.0" prefWidth="144.0" />
             <TextField fx:id="remote_retention" layoutX="668.0" layoutY="180.0" prefHeight="33.0" prefWidth="133.0" />
-            <AnchorPane layoutX="25.0" layoutY="120.0" prefHeight="33.0" prefWidth="73.0" styleClass="border-main" stylesheets="@../application/application.css">
+            <AnchorPane layoutX="25.0" layoutY="120.0" prefHeight="33.0" prefWidth="73.0" style="-fx-background-color: #e1d2e6;" styleClass="border-add-task" stylesheets="@../application/application.css">
                <children>
                   <Label layoutX="12.0" layoutY="7.0" text="Local:">
                      <font>
-                        <Font size="14.0" />
+                        <Font name="System Bold" size="14.0" />
                      </font>
                   </Label>
                </children>
             </AnchorPane>
-            <AnchorPane layoutX="25.0" layoutY="14.0" prefHeight="33.0" prefWidth="73.0" styleClass="border-main" stylesheets="@../application/application.css">
+            <AnchorPane layoutX="25.0" layoutY="14.0" prefHeight="33.0" prefWidth="73.0" styleClass="border-add-task" stylesheets="@../application/application.css">
                <children>
                   <Label layoutX="12.0" layoutY="7.0" text="Name:">
                      <font>
-                        <Font size="14.0" />
+                        <Font name="System Bold" size="14.0" />
                      </font>
                   </Label>
                </children>
             </AnchorPane>
-            <AnchorPane layoutX="833.0" layoutY="14.0" prefHeight="34.0" prefWidth="41.0" styleClass="border-main" stylesheets="@../application/application.css">
+            <AnchorPane layoutX="843.0" layoutY="14.0" prefHeight="34.0" prefWidth="41.0" styleClass="border-add-task" stylesheets="@../application/application.css" visible="false">
                <children>
                   <Label layoutX="12.0" layoutY="7.0" text="ID:">
                      <font>
-                        <Font size="14.0" />
+                        <Font name="System Bold" size="14.0" />
                      </font>
                   </Label>
                </children>
             </AnchorPane>
-            <TextField fx:id="task_id" layoutX="897.0" layoutY="14.0" prefHeight="34.0" prefWidth="58.0" />
+            <TextField fx:id="task_id" layoutX="897.0" layoutY="14.0" prefHeight="34.0" prefWidth="51.0" visible="false" />
          </children>
       </AnchorPane>
    </children>

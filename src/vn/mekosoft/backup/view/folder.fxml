@@ -7,16 +7,16 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="infor_folder" prefHeight="59.0" prefWidth="866.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vn.mekosoft.backup.controller.Folder">
+<AnchorPane fx:id="infor_folder" prefHeight="59.0" prefWidth="840.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vn.mekosoft.backup.controller.Folder">
    <children>
-      <ImageView fitHeight="40.0" fitWidth="32.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="40.0" fitWidth="32.0" layoutX="20.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@img/folder.png" />
          </image>
       </ImageView>
-      <TextField fx:id="get_FolderPath" layoutX="76.0" layoutY="12.0" prefHeight="34.0" prefWidth="599.0" />
-      <TextField fx:id="get_FolderId" layoutX="786.0" layoutY="12.0" prefHeight="34.0" prefWidth="51.0" />
-      <AnchorPane layoutX="708.0" layoutY="12.0" prefHeight="34.0" prefWidth="41.0" styleClass="border-main" stylesheets="@../application/application.css">
+      <TextField fx:id="get_FolderPath" layoutX="104.0" layoutY="14.0" prefHeight="34.0" prefWidth="546.0" />
+      <TextField fx:id="get_FolderId" layoutX="724.0" layoutY="14.0" prefHeight="34.0" prefWidth="49.0" visible="false" />
+      <AnchorPane layoutX="670.0" layoutY="14.0" prefHeight="34.0" prefWidth="41.0" styleClass="border-main" stylesheets="@../application/application.css" visible="false">
          <children>
             <Label layoutX="12.0" layoutY="7.0" text="ID:">
                <font>

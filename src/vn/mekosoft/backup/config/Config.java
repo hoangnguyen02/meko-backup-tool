@@ -3,6 +3,7 @@ package vn.mekosoft.backup.config;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import java.io.FileReader;
+import java.io.IOException;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
@@ -19,6 +20,8 @@ public class Config {
 
 //	private String LOG_FOLDER_PATH = "/home/ubuntu/sftp_ver2/log";
 //	private String CONFIG_FOLDER_PATH = "/home/ubuntu/sftp_ver2/config.json";
+
+	
 
 	public void setLogFolderPath(String logFolderPath) {
 		this.LOG_FOLDER_PATH = logFolderPath;

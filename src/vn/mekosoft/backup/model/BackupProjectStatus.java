@@ -1,37 +1,47 @@
 package vn.mekosoft.backup.model;
 
 public enum BackupProjectStatus {
-	DANG_BIEN_SOAN(1, "Đang biên soạn"),
-    HOAT_DONG(2, "Hoạt động"),
-    KHONG_HOAT_DONG(3, "Không hoạt động");
+	DANG_BIEN_SOAN(1, "Đang biên soạn", "#ffff00"), 
+	HOAT_DONG(2, "Hoạt động", "#00ff00"),
+	KHONG_HOAT_DONG(3, "Không hoạt động", "#ff0000");
 
-    private final long id;
-    private final String descriptionStatusProject;
+	private final long id;
+	private final String descriptionStatusProject;
+	private String colorProject; 
 
-    BackupProjectStatus(long id, String descriptionStatusProject) {
-        this.id = id;
-        this.descriptionStatusProject = descriptionStatusProject;
-    }
+	private BackupProjectStatus(long id, String descriptionStatusProject, String colorProject) {
+		this.id = id;
+		this.descriptionStatusProject = descriptionStatusProject;
+		this.colorProject = colorProject;
+	}
 
-    public long getId() {
-        return id;
-    }
+	public String getColorProject() {
+		return colorProject;
+	}
 
-    public String getDescriptionStatusProject() {
-        return descriptionStatusProject;
-    }
+	public void setColorProject(String colorProject) {
+		this.colorProject = colorProject;
+	}
 
-    @Override
-    public String toString() {
-        return descriptionStatusProject;
-    }
+	public long getId() {
+		return id;
+	}
 
-    public static BackupProjectStatus fromId(long id) {
+	public String getDescriptionStatusProject() {
+		return descriptionStatusProject;
+	}
+
+	@Override
+	public String toString() {
+		return descriptionStatusProject;
+	}
+
+	public static BackupProjectStatus fromId(long id) {
         for (BackupProjectStatus status : values()) {
             if (status.getId() == id) {
                 return status;
             }
         }
-		return null;
+        return null;
     }
 }

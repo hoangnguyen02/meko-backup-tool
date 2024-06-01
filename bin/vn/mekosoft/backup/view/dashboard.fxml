@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
@@ -11,9 +13,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="771.0" prefWidth="1295.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vn.mekosoft.backup.controller.Dashboard">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="771.0" prefWidth="1295.0" style="-fx-background-color: #fbfcfe;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vn.mekosoft.backup.controller.Dashboard">
    <children>
-      <AnchorPane layoutY="-3.0" prefHeight="77.0" prefWidth="1295.0" styleClass="border" stylesheets="@../application/application.css">
+      <AnchorPane layoutY="-3.0" prefHeight="77.0" prefWidth="1295.0" style="-fx-background-color: #fbfcfe;" styleClass="border" stylesheets="@../application/application.css">
          <children>
             <Label layoutX="133.0" layoutY="14.0" text="Meko Backup Tool" textFill="#154e78">
                <font>
@@ -26,19 +28,27 @@
             </ImageView>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="over_form" layoutY="74.0" prefHeight="696.0" prefWidth="1295.0">
+      <AnchorPane fx:id="over_form" layoutY="74.0" prefHeight="696.0" prefWidth="1295.0" style="-fx-background-color: #fbfcfe;">
          <children>
-            <AnchorPane fx:id="list_menu" layoutX="3.0" layoutY="13.0" prefHeight="679.0" prefWidth="263.0" styleClass="border-main" stylesheets="@../application/application.css">
+            <AnchorPane fx:id="list_menu" layoutX="-4.0" layoutY="13.0" prefHeight="694.0" prefWidth="270.0" style="-fx-background-color: #FFFFFF;" styleClass="border-main" stylesheets="@../application/application.css">
                <children>
-                  <Button fx:id="button_dashboard" layoutX="52.0" layoutY="483.0" mnemonicParsing="false" onAction="#switch_form" prefHeight="53.0" prefWidth="162.0" styleClass="button-1" stylesheets="@../application/application.css" text="Dashboard" visible="false">
+                  <Button fx:id="button_dashboard" layoutX="24.0" layoutY="69.0" mnemonicParsing="false" onAction="#switch_form" prefHeight="54.0" prefWidth="222.0" stylesheets="@../application/application.css" text="Dashboard">
                      <font>
-                        <Font size="16.0" />
+                        <Font size="18.0" />
                      </font>
+                     <styleClass>
+                        <String fx:value="button-1" />
+                        <String fx:value="button-menu" />
+                     </styleClass>
                   </Button>
-                  <Button fx:id="button_backupProject" layoutX="52.0" layoutY="25.0" mnemonicParsing="false" onAction="#switch_form" prefHeight="53.0" prefWidth="162.0" styleClass="button-1" stylesheets="@../application/application.css" text="Backup Project">
+                  <Button fx:id="button_backupProject" alignment="CENTER" contentDisplay="CENTER" layoutX="22.0" layoutY="156.0" mnemonicParsing="false" onAction="#switch_form" prefHeight="54.0" prefWidth="222.0" stylesheets="@../application/application.css" text="Backup Project">
                      <font>
-                        <Font size="16.0" />
+                        <Font size="18.0" />
                      </font>
+                     <styleClass>
+                        <String fx:value="button-menu" />
+                        <String fx:value="button-1" />
+                     </styleClass>
                   </Button>
                   <Button fx:id="button_backupTask" layoutX="52.0" layoutY="544.0" mnemonicParsing="false" onAction="#switch_form" prefHeight="53.0" prefWidth="162.0" styleClass="button-1" stylesheets="@../application/application.css" text="Backup Task" visible="false">
                      <font>
@@ -50,38 +60,58 @@
                         <Font size="16.0" />
                      </font>
                   </Button>
-                  <Button fx:id="button_config" layoutX="50.0" layoutY="121.0" mnemonicParsing="false" onAction="#switch_form" prefHeight="53.0" prefWidth="162.0" styleClass="button-1" stylesheets="@../application/application.css" text="Config">
+                  <Button fx:id="button_config" alignment="CENTER" layoutX="24.0" layoutY="245.0" mnemonicParsing="false" onAction="#switch_form" prefHeight="54.0" prefWidth="222.0" stylesheets="@../application/application.css" text="Config">
                      <font>
-                        <Font size="16.0" />
+                        <Font size="18.0" />
                      </font>
+                     <styleClass>
+                        <String fx:value="button-menu" />
+                        <String fx:value="button-1" />
+                     </styleClass>
                   </Button>
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="content_view" layoutX="266.0" prefHeight="696.0" prefWidth="1027.0">
+            <AnchorPane fx:id="content_view" layoutX="266.0" prefHeight="696.0" prefWidth="1027.0" style="-fx-background-color: #fbfcfe;">
                <children>
-                  <AnchorPane fx:id="backupProject_view" prefHeight="696.0" prefWidth="1027.0" stylesheets="@../application/application.css">
+                  <AnchorPane fx:id="backupProject_view" prefHeight="696.0" prefWidth="1027.0" style="-fx-background-color: #fbfcfe;" stylesheets="@../application/application.css" visible="false">
                      <children>
                         <Label layoutX="170.0" layoutY="99.0" />
-                        <Button fx:id="button_addProject" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#addProject_action" prefHeight="33.0" prefWidth="105.0" text="+ Project" />
+                        <Button fx:id="button_addProject" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#addProject_action" prefHeight="33.0" prefWidth="105.0" styleClass="add-folder-button" stylesheets="@../application/application.css" text="+ Project" textFill="WHITE">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Button>
                         <Button fx:id="button_generate" layoutX="456.0" layoutY="14.0" mnemonicParsing="false" onAction="#generate_action" prefHeight="33.0" prefWidth="149.0" text="Generate" visible="false" />
-                        <AnchorPane fx:id="list_backupProject" layoutX="14.0" layoutY="57.0" prefHeight="636.0" prefWidth="1009.0">
+                        <AnchorPane fx:id="list_backupProject" layoutX="14.0" layoutY="57.0" prefHeight="636.0" prefWidth="857.0" style="-fx-background-color: #fbfcfe;">
                            <children>
-                              <ScrollPane prefHeight="636.0" prefWidth="1009.0" style="-fx-background-color: transparent;">
+                              <ScrollPane prefHeight="628.0" prefWidth="1009.0" style="-fx-background-color: #fbfcfe;">
                                 <content>
-                                  <AnchorPane fx:id="content_layout" minHeight="0.0" minWidth="0.0" prefWidth="992.0">
+                                  <AnchorPane fx:id="content_layout" minHeight="0.0" minWidth="0.0" prefWidth="994.0">
                                        <children>
-                                          <VBox fx:id="vbox_container" prefHeight="636.0" prefWidth="996.0" spacing="10.0" />
+                                          <VBox fx:id="vbox_container" prefHeight="622.0" prefWidth="1009.0" style="-fx-background-color: #fbfcfe;" stylesheets="@../application/application.css">
+                                             <padding>
+                                                <Insets bottom="1.0" />
+                                             </padding>
+                                          </VBox>
                                        </children>
                                     </AnchorPane>
                                 </content>
                               </ScrollPane>
                            </children>
                         </AnchorPane>
-                        <Button fx:id="button_start" layoutX="145.0" layoutY="13.0" mnemonicParsing="false" onAction="#startBackupTool_action" prefHeight="34.0" prefWidth="106.0" text="Start" />
-                        <Button fx:id="button_refresh" layoutX="918.0" layoutY="14.0" mnemonicParsing="false" onAction="#refresh_action" prefHeight="34.0" prefWidth="71.0" text="Refresh" />
+                        <Button fx:id="button_start" layoutX="145.0" layoutY="13.0" mnemonicParsing="false" onAction="#startBackupTool_action" prefHeight="34.0" prefWidth="100.0" text="Run All">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="button_refresh" layoutX="272.0" layoutY="12.0" mnemonicParsing="false" onAction="#refresh_action" prefHeight="35.0" prefWidth="100.0" text="Refresh" visible="false">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Button>
                      </children>
                   </AnchorPane>
-                  <AnchorPane fx:id="dashboard_view" prefHeight="696.0" prefWidth="1027.0" visible="false">
+                  <AnchorPane fx:id="dashboard_view" prefHeight="696.0" prefWidth="1027.0">
                      <children>
                         <Label layoutX="225.0" layoutY="213.0" text="Dashboard">
                            <font>
@@ -112,55 +142,55 @@
                      <children>
                         <AnchorPane fx:id="addProject_view" layoutX="1.0" prefHeight="693.0" prefWidth="1027.0">
                            <children>
-                              <AnchorPane layoutX="14.0" layoutY="14.0" prefHeight="53.0" prefWidth="354.0" style="-fx-background-color: #9ebcc6;">
+                              <AnchorPane layoutX="14.0" layoutY="14.0" prefHeight="39.0" prefWidth="988.0" style="-fx-background-color: #9ebcc6;" styleClass="border-main" stylesheets="@../application/application.css">
                                  <children>
-                                    <Label layoutX="33.0" layoutY="14.0" text="Create New Backup Project">
+                                    <Label alignment="TOP_LEFT" layoutX="26.0" layoutY="6.0" text="Create New Backup Project">
                                        <font>
-                                          <Font size="18.0" />
+                                          <Font name="System Bold" size="18.0" />
                                        </font>
                                     </Label>
                                  </children>
                               </AnchorPane>
-                              <AnchorPane layoutX="14.0" layoutY="74.0" prefHeight="515.0" prefWidth="988.0" styleClass="border-main" stylesheets="@../application/application.css">
+                              <AnchorPane layoutX="14.0" layoutY="74.0" prefHeight="521.0" prefWidth="988.0" styleClass="border-main" stylesheets="@../application/application.css">
                                  <children>
-                                    <TextField fx:id="create_backupProjectId_textField" layoutX="148.0" layoutY="27.0" prefHeight="33.0" prefWidth="194.0" promptText="Backup Project ID" />
-                                    <TextField fx:id="create_projectName_TextField" layoutX="148.0" layoutY="95.0" prefHeight="39.0" prefWidth="194.0" promptText="Name" />
-                                    <TextField fx:id="create_description_textField" layoutX="148.0" layoutY="167.0" prefHeight="39.0" prefWidth="194.0" promptText="Description" />
-                                    <TextField fx:id="create_username_textField" layoutX="148.0" layoutY="311.0" prefHeight="39.0" prefWidth="194.0" promptText="username" />
-                                    <ComboBox fx:id="create_status_backupProject" layoutX="148.0" layoutY="461.0" prefHeight="27.0" prefWidth="194.0" promptText="Status" />
-                                    <TextField fx:id="create_password_textField" layoutX="148.0" layoutY="380.0" prefHeight="39.0" prefWidth="194.0" promptText="password" />
-                                    <TextField fx:id="create_hostname_textField" layoutX="148.0" layoutY="245.0" prefHeight="39.0" prefWidth="194.0" promptText="Hostname" />
-                                    <Label layoutX="32.0" layoutY="34.0" text="Project Id:">
+                                    <TextField fx:id="create_backupProjectId_textField" layoutX="683.0" layoutY="228.0" prefHeight="33.0" prefWidth="194.0" promptText="Backup Project ID" visible="false" />
+                                    <TextField fx:id="create_projectName_TextField" layoutX="147.0" layoutY="40.0" prefHeight="39.0" prefWidth="194.0" promptText="Name" />
+                                    <TextField fx:id="create_description_textField" layoutX="148.0" layoutY="112.0" prefHeight="39.0" prefWidth="194.0" promptText="Description" />
+                                    <TextField fx:id="create_username_textField" layoutX="147.0" layoutY="262.0" prefHeight="39.0" prefWidth="194.0" promptText="username" />
+                                    <ComboBox fx:id="create_status_backupProject" layoutX="148.0" layoutY="423.0" prefHeight="27.0" prefWidth="194.0" />
+                                    <TextField fx:id="create_password_textField" layoutX="148.0" layoutY="340.0" prefHeight="39.0" prefWidth="194.0" promptText="password" />
+                                    <TextField fx:id="create_hostname_textField" layoutX="147.0" layoutY="186.0" prefHeight="39.0" prefWidth="194.0" promptText="Hostname" />
+                                    <Label layoutX="702.0" layoutY="196.0" text="Project Id:" visible="false">
                                        <font>
                                           <Font name="System Bold" size="14.0" />
                                        </font>
                                     </Label>
-                                    <Label layoutX="32.0" layoutY="105.0" text="Project Name:">
+                                    <Label layoutX="32.0" layoutY="50.0" text="Project Name:">
                                        <font>
                                           <Font name="System Bold" size="14.0" />
                                        </font>
                                     </Label>
-                                    <Label layoutX="39.0" layoutY="187.0" text="Description:">
+                                    <Label layoutX="38.0" layoutY="122.0" text="Description:">
                                        <font>
                                           <Font name="System Bold" size="14.0" />
                                        </font>
                                     </Label>
-                                    <Label layoutX="43.0" layoutY="255.0" text="Hostname:">
+                                    <Label layoutX="42.0" layoutY="196.0" text="Hostname:">
                                        <font>
                                           <Font name="System Bold" size="14.0" />
                                        </font>
                                     </Label>
-                                    <Label layoutX="43.0" layoutY="331.0" text="Username:">
+                                    <Label layoutX="42.0" layoutY="272.0" text="Username:">
                                        <font>
                                           <Font name="System Bold" size="14.0" />
                                        </font>
                                     </Label>
-                                    <Label layoutX="45.0" layoutY="400.0" text="Password:">
+                                    <Label layoutX="44.0" layoutY="350.0" text="Password:">
                                        <font>
                                           <Font name="System Bold" size="14.0" />
                                        </font>
                                     </Label>
-                                    <Label layoutX="44.0" layoutY="465.0" text="Status:">
+                                    <Label layoutX="44.0" layoutY="427.0" text="Status:">
                                        <font>
                                           <Font name="System Bold" size="14.0" />
                                        </font>
@@ -174,18 +204,18 @@
                   </AnchorPane>
                   <AnchorPane fx:id="config_view" prefHeight="696.0" prefWidth="1027.0" visible="false">
                      <children>
-                        <TextField fx:id="log_textField" layoutX="303.0" layoutY="73.0" prefHeight="46.0" prefWidth="543.0" />
-                        <Label layoutX="96.0" layoutY="96.0" text="Log_Folder_Path:">
+                        <TextField fx:id="log_textField" layoutX="242.0" layoutY="88.0" prefHeight="35.0" prefWidth="543.0" />
+                        <Label layoutX="96.0" layoutY="96.0" text="Log Folder Path:">
                            <font>
-                              <Font name="System Bold" size="18.0" />
+                              <Font name="System Bold" size="14.0" />
                            </font>
                         </Label>
-                        <Label layoutX="96.0" layoutY="213.0" text="Config_Folder_Path:">
+                        <Label layoutX="96.0" layoutY="213.0" text="Config Folder Path:">
                            <font>
-                              <Font name="System Bold" size="18.0" />
+                              <Font name="System Bold" size="14.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="config_textField" layoutX="303.0" layoutY="190.0" prefHeight="46.0" prefWidth="543.0" />
+                        <TextField fx:id="config_textField" layoutX="242.0" layoutY="200.0" prefHeight="35.0" prefWidth="543.0" />
                         <Button fx:id="save_config" layoutX="779.0" layoutY="607.0" mnemonicParsing="false" onAction="#saveConfig_action" prefHeight="46.0" prefWidth="66.0" text="Save" />
                      </children>
                   </AnchorPane>

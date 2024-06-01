@@ -21,10 +21,9 @@ import vn.mekosoft.backup.service.BackupService;
 
 public class BackupServiceImpl implements BackupService {
 
-  
-    private Config config_Json = new Config();
-   //private String CONFIG_JSON = config_Json. getConfigJson();
-    private String CONFIG_FOLDER_PATH = config_Json.getConfigFolderPath();
+    private Config config = new Config();
+    private String CONFIG_FOLDER_PATH = config.getConfigFolderPath();
+
     @Override
     public List<BackupProject> loadData() {
         Gson gson = new Gson();
@@ -32,41 +31,42 @@ public class BackupServiceImpl implements BackupService {
 
         try (FileReader reader = new FileReader(CONFIG_FOLDER_PATH)) {
             JsonObject jsonObject = gson.fromJson(reader, JsonObject.class);
-            if (jsonObject != null) {
+            if (jsonObject != null && jsonObject.has("backupProjects")) {
                 JsonArray backupProjectsArray = jsonObject.getAsJsonArray("backupProjects");
-
                 for (JsonElement projectElement : backupProjectsArray) {
                     JsonObject projectObject = projectElement.getAsJsonObject();
                     BackupProject project = gson.fromJson(projectObject, BackupProject.class);
 
                     JsonArray tasksArray = projectObject.getAsJsonArray("backupTasks");
                     List<BackupTask> tasks = new ArrayList<>();
-                    for (JsonElement taskElement : tasksArray) {
-                        JsonObject taskObject = taskElement.getAsJsonObject();
-                        BackupTask task = gson.fromJson(taskObject, BackupTask.class);
+                    if (tasksArray != null) {
+                        for (JsonElement taskElement : tasksArray) {
+                            JsonObject taskObject = taskElement.getAsJsonObject();
+                            BackupTask task = gson.fromJson(taskObject, BackupTask.class);
 
-                        JsonArray foldersArray = taskObject.getAsJsonArray("backupFolders");
-                        List<BackupFolder> folders = new ArrayList<>();
-                        if (foldersArray != null) {
-                            for (JsonElement folderElement : foldersArray) {
-                                BackupFolder folder = gson.fromJson(folderElement, BackupFolder.class);
-                                folders.add(folder);
+                            JsonArray foldersArray = taskObject.getAsJsonArray("backupFolders");
+                            List<BackupFolder> folders = new ArrayList<>();
+                            if (foldersArray != null) {
+                                for (JsonElement folderElement : foldersArray) {
+                                    BackupFolder folder = gson.fromJson(folderElement, BackupFolder.class);
+                                    folders.add(folder);
+                                }
+                            } else {
+                                System.out.println("No folders");
                             }
-                        } else {
-                            System.out.println("No folders");
+                            task.setBackupFolders(folders);
+                            tasks.add(task);
                         }
-                        task.setBackupFolders(folders);
-
-                        tasks.add(task);
                     }
                     project.setBackupTasks(tasks);
-
                     backupProjects.add(project);
                 }
             }
         } catch (FileNotFoundException e) {
+            System.err.println("Config file not found: " + CONFIG_FOLDER_PATH);
             e.printStackTrace();
         } catch (IOException e) {
+            System.err.println("Error reading config file: " + CONFIG_FOLDER_PATH);
             e.printStackTrace();
         }
 
@@ -83,9 +83,8 @@ public class BackupServiceImpl implements BackupService {
         try (FileWriter writer = new FileWriter(CONFIG_FOLDER_PATH)) {
             gson.toJson(jsonObject, writer);
         } catch (IOException e) {
+            System.err.println("Error writing to config file: " + CONFIG_FOLDER_PATH);
             e.printStackTrace();
         }
     }
-
 }
-

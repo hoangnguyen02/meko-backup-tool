@@ -1,16 +1,30 @@
 package vn.mekosoft.backup.model;
 
 public enum BackupTaskStatus {
-	DANG_BIEN_SOAN(1, "Đang biên soạn"),
-	HOAT_DONG(2, "Hoạt động");
+	DANG_BIEN_SOAN(1, "Đang biên soạn", "#ffff00"),
+	HOAT_DONG(2, "Hoạt động", "#00ff00");
 
 	private final long id;
 	private final String description;
+	private String colorTask;
 
-	BackupTaskStatus(long id, String description) {
+	
+
+	private BackupTaskStatus(long id, String description, String colorTask) {
 		this.id = id;
 		this.description = description;
+		this.colorTask = colorTask;
 	}
+	
+
+	public String getColorTask() {
+		return colorTask;
+	}
+
+	public void setColorTask(String colorTask) {
+		this.colorTask = colorTask;
+	}
+
 
 	public long getId() {
 		return id;

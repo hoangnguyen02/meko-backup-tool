@@ -8,36 +8,31 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="log_view" prefHeight="696.0" prefWidth="1027.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vn.mekosoft.backup.controller.Log">
+<AnchorPane fx:id="log_view" prefHeight="696.0" prefWidth="1041.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vn.mekosoft.backup.controller.Log">
    <children>
-      <AnchorPane layoutX="36.0" layoutY="14.0" prefHeight="78.0" prefWidth="939.0" style="-fx-background-color: #9ebcc6;">
+      <AnchorPane layoutX="36.0" layoutY="21.0" prefHeight="41.0" prefWidth="988.0" style="-fx-background-color: #9ebcc6;" styleClass="border-main" stylesheets="@../application/application.css">
          <children>
-            <Label fx:id="projectName_log" layoutX="70.0" layoutY="21.0" text="Project">
+            <Label fx:id="infor_log" layoutX="74.0" layoutY="7.0" text="Task">
                <font>
-                  <Font size="24.0" />
-               </font>
-            </Label>
-            <Label fx:id="taskName_log" layoutX="258.0" layoutY="21.0" text="/Task">
-               <font>
-                  <Font size="24.0" />
+                  <Font name="System Bold" size="18.0" />
                </font>
             </Label>
          </children>
       </AnchorPane>
-      <TextArea fx:id="content_log" layoutX="36.0" layoutY="197.0" prefHeight="473.0" prefWidth="939.0" stylesheets="@../application/application.css">
+      <TextArea fx:id="content_log" layoutX="36.0" layoutY="133.0" prefHeight="538.0" prefWidth="988.0" stylesheets="@../application/application.css">
          <styleClass>
             <String fx:value="root" />
             <String fx:value="border-less-up" />
          </styleClass>
       </TextArea>
-      <AnchorPane layoutX="36.0" layoutY="126.0" prefHeight="70.0" prefWidth="939.0" styleClass="border-main" stylesheets="@../application/application.css">
+      <AnchorPane layoutX="36.0" layoutY="73.0" prefHeight="62.0" prefWidth="988.0" styleClass="border-main" stylesheets="@../application/application.css">
          <children>
-            <ImageView fitHeight="35.0" fitWidth="45.0" layoutX="33.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="35.0" fitWidth="45.0" layoutX="37.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@img/462743.png" />
                </image>
             </ImageView>
-            <Label fx:id="folderPath_log" layoutX="100.0" layoutY="25.0" text="Folder path of task">
+            <Label fx:id="folderPath_log" layoutX="99.0" layoutY="17.0" text="Folder path of task">
                <font>
                   <Font size="18.0" />
                </font>

@@ -1,35 +1,59 @@
-	/* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
+/* JavaFX CSS - Leave this comment until you have at least created one rule which uses -fx-Property */
 .root {
-    -fx-border-width: 0;
+    -fx-border-width: 0.0;
     -fx-border-color: transparent;
     -fx-background-color: transparent;
 }
-.border{
-    -fx-border-color: #000;
-    -fx-border-width: 0px 0px 2px 0px;
-}
 
-.border-less-up{
-	-fx-border-color: #000;
-    -fx-border-width: 0px 2px 2px 2px;
+.border {
+    -fx-border-color: #babbbb;
+    -fx-border-width: 0.0px 0.0px 2.0px 0.0px;
 }
-
-.border-up-right{
-	-fx-border-color: #000;
-    -fx-border-width: 2px 2px 0px 0px;
+.border-less-up {
+    -fx-border-color: #babbbb;
+    -fx-border-width: 0.0px 2.0px 2.0px 2.0px;
 }
-
-.border-main{
-	-fx-border-color: #000;
-    -fx-border-width: 2px 2px 2px 2px;
+.border-up-right {
+    -fx-border-color: #babbbb;
+    -fx-border-width: 2.0px 2.0px 0.0px 0.0px;
 }
-
-.button-1{
-	-fx-background-radius: 10px;
+.border-main {
+    -fx-border-color: #babbbb;
+    -fx-border-width: 2.0px 2.0px 2.0px 2.0px;
 }
-
-.button-1:hover{
-    -fx-background-color:  #e0e0e0;
-    -fx-text-fill: #333; 
+.heading {
+    -fx-background-color: #b9c8d2;
+    -fx-border-color: #b9c8d2;
+    -fx-border-width: 2.0px 2.0px 2.0px 2.0px;
+}
+.button-menu {
+    -fx-border-radius: 10.0px;
+    -fx-background-color: #ebebeb;
+    -fx-border-color: #babbbb;
+    -fx-background-radius: 10.0px;
+}
+.button-1:hover {
+    -fx-background-color: #ebf0f5;
     -fx-font-weight: bold;
+}
+.button-2 {
+    -fx-background-color: #647387;
+}
+.border-add-task {
+    -fx-background-color: transparent;
+    -fx-border-color: #ab8eb7;
+    -fx-border-width: 2.0px 2.0px 2.0px 2.0px;
+}
+.margin {
+    -fx-padding: 10.0px;
+    -fx-border-insets: 10.0px;
+    -fx-background-insets: 10.0px;
+}
+.border-task {
+    -fx-background-color: #ebebeb;
+    -fx-background-radius: 10.0px;
+}
+.add-folder-button {
+    -fx-text-fill: #FFFFFF; 
+    -fx-background-color: linear-gradient(to bottom right, #4f4f4f, #306090);
 }

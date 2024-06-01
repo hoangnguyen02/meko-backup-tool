@@ -1,6 +1,10 @@
 package vn.mekosoft.backup.controller;
 
 import java.io.FileNotFoundException;
+import javafx.geometry.Insets;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
+import javafx.scene.layout.Priority;
 import vn.mekosoft.backup.service.CoreScriptService;
 import vn.mekosoft.backup.impl.CoreScriptServiceImpl;
 
@@ -193,20 +197,23 @@ public class Dashboard implements Initializable {
 	@FXML
 	private Button button_refresh;
 
-	public void refresh_action(ActionEvent event) {
+	public void rf() {
+		vbox_container.getChildren().clear();
+	}
+
+	public void refresh_action() {
 		vbox_container.getChildren().clear();
 		loadData();
 	}
 
 	public void startBackupTool_action(ActionEvent event) {
-		System.out.println("Starting backup tool...");
 		CoreScriptService coreScriptService = new CoreScriptServiceImpl();
 
 		try {
 			String command = "/home/ubuntu/sftp_ver2/backup.sh --execute_all";
-			coreScriptService.execute(command);
+			coreScriptService.executeAll(command);
 		} catch (IOException | InterruptedException e) {
-			System.err.println("Error executing backup tool: " + e.getMessage());
+			e.printStackTrace();
 		}
 	}
 
@@ -220,44 +227,23 @@ public class Dashboard implements Initializable {
 		create_hostname_textField.clear();
 		create_username_textField.clear();
 		create_password_textField.clear();
-		create_status_backupProject.setValue(null);
-	}
-
-	public void generate_action(ActionEvent event) {
-//		System.out.println("Generate");
-//
-//		BackupService backupService = new BackupServiceImpl();
-//		List<BackupProject> projects = backupService.loadData();
-//
-//		Gson gson = new GsonBuilder().setPrettyPrinting().create();
-//
-//		JsonObject jObject = new JsonObject();
-//		JsonArray jsonArray = gson.toJsonTree(projects).getAsJsonArray();
-//		jObject.add("backupProjects", jsonArray);
-//
-//		String jsonData = gson.toJson(jObject);
-//		// /home/ubuntu/sftp_ver2/config.json
-//		try {
-//			FileWriter fileWriter = new FileWriter("config.json");
-//			fileWriter.write(jsonData);
-//			fileWriter.close();
-//
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
+		create_status_backupProject.setValue(BackupProjectStatus.DANG_BIEN_SOAN);
 	}
 
 	public void addProject_save_action(ActionEvent event) {
-		BackupActionUtil.addProject(create_backupProjectId_textField.getText(), create_projectName_TextField.getText(),
-				create_description_textField.getText(), create_hostname_textField.getText(),
-				create_username_textField.getText(), create_password_textField.getText(),
-				create_status_backupProject.getValue());
-		loadData(); // Refresh UI after saving the project
+		vbox_container.getChildren().clear();
+
+		BackupActionUtil.addProject(create_projectName_TextField.getText(), create_description_textField.getText(),
+				create_hostname_textField.getText(), create_username_textField.getText(),
+				create_password_textField.getText(), create_status_backupProject.getValue());
+		loadData();
 		createProject_view.setVisible(false);
 		backupProject_view.setVisible(true);
+		clear();
 	}
 
 	public void addTask_Layout(BackupTask task, BackupProject project) {
+
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/vn/mekosoft/backup/view/managementTask.fxml"));
 			content_layout = loader.load();
@@ -268,7 +254,6 @@ public class Dashboard implements Initializable {
 			vbox_container.getChildren().add(content_layout);
 			vbox_container.setMaxHeight(Double.MAX_VALUE);
 			content_layout.setMaxHeight(Double.MAX_VALUE);
-
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -280,10 +265,11 @@ public class Dashboard implements Initializable {
 					getClass().getResource("/vn/mekosoft/backup/view/managementProject.fxml"));
 			content_layout = loader.load();
 			ManagementProject controller = loader.getController();
+			controller.setDashboardController(this);
 			controller.projectData(project);
 			vbox_container.getChildren().add(content_layout);
 			content_layout.setMaxHeight(Double.MAX_VALUE);
-
+//			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -302,6 +288,9 @@ public class Dashboard implements Initializable {
 		}
 	}
 
+	public void show_projectView() {
+		backupProject_view.setVisible(true);
+	}
 	public void switch_form(ActionEvent event) {
 		if (event.getSource() == button_dashboard) {
 			dashboard_view.setVisible(true);
@@ -318,6 +307,7 @@ public class Dashboard implements Initializable {
 			scheduler_view.setVisible(false);
 			config_view.setVisible(false);
 			createProject_view.setVisible(false);
+			
 
 		} else if (event.getSource() == button_backupTask) {
 			dashboard_view.setVisible(false);
@@ -326,6 +316,7 @@ public class Dashboard implements Initializable {
 			scheduler_view.setVisible(false);
 			config_view.setVisible(false);
 			createProject_view.setVisible(false);
+			
 
 		} else if (event.getSource() == button_scheduler) {
 			dashboard_view.setVisible(false);
@@ -353,6 +344,7 @@ public class Dashboard implements Initializable {
 			config_view.setVisible(true);
 		}
 	}
+	
 
 	public void addProject_action(ActionEvent event) {
 		if (event.getSource() == button_addProject) {
@@ -362,33 +354,83 @@ public class Dashboard implements Initializable {
 
 	}
 
-	public void addTaskLayout() {
-		addTask_view.setVisible(true);
-	}
+
 
 	@Override
 	public void initialize(URL url, ResourceBundle resources) {
-		Config config = new Config();
 
+		Config config = new Config();
 		log_textField.setText(config.getLogFolderPath());
+		log_textField.setEditable(false);
 		config_textField.setText(config.getConfigFolderPath());
+		config_textField.setEditable(false);
+		save_config.setVisible(false);
 
-		saveConfig_action();
+		create_status_backupProject.setValue(BackupProjectStatus.DANG_BIEN_SOAN);
 		create_status_backupProject.setItems(FXCollections.observableArrayList(BackupProjectStatus.values()));
-		loadData();
+		refresh_action();
 	}
 
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	public void saveConfig_action() {
-
-		String logFolderPath = log_textField.getText();
-		String configFolderPath = config_textField.getText();
-
-		Config config = new Config();
-
-		config.setLogFolderPath(logFolderPath);
-		config.setConfigFolderPath(configFolderPath);
-
-		System.out.println("Cấu hình đã được lưu.");
+//
+//		String logFolderPath = log_textField.getText();
+//		String configFolderPath = config_textField.getText();
+//
+//		Config config = new Config();
+//
+//		config.setLogFolderPath(logFolderPath);
+//		config.setConfigFolderPath(configFolderPath);
+//
+//		System.out.println("Cấu hình đã được lưu.");
 	}
 
+	public void generate_action(ActionEvent event) {
+//		System.out.println("Generate");
+//
+//		BackupService backupService = new BackupServiceImpl();
+//		List<BackupProject> projects = backupService.loadData();
+//
+//		Gson gson = new GsonBuilder().setPrettyPrinting().create();
+//
+//		JsonObject jObject = new JsonObject();
+//		JsonArray jsonArray = gson.toJsonTree(projects).getAsJsonArray();
+//		jObject.add("backupProjects", jsonArray);
+//
+//		String jsonData = gson.toJson(jObject);
+//		// /home/ubuntu/sftp_ver2/config.json
+//		try {
+//			FileWriter fileWriter = new FileWriter("config.json");
+//			fileWriter.write(jsonData);
+//			fileWriter.close();
+//
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+	}
 }

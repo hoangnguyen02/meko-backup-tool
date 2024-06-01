@@ -1,0 +1,59 @@
+{
+  "backupProjects": [
+    {
+      "projectId": 1,
+      "projectName": "1",
+      "hostname": "1",
+      "username": "1",
+      "password": "qưe",
+      "backupProjectStatus": 1,
+      "backupTasks": [
+        {
+          "backupTaskId": 1,
+          "projectId": 1,
+          "name": "1111111",
+          "localSchedular": "1",
+          "localPath": "1111",
+          "localRetention": 1,
+          "remoteSchedular": "1",
+          "remotePath": "1",
+          "remoteRetention": 1,
+          "backupTaskStatus": 1,
+          "backupFolders": []
+        },
+        {
+          "backupTaskId": 2,
+          "projectId": 1,
+          "name": "11111112",
+          "localSchedular": "12",
+          "localPath": "1111",
+          "localRetention": 1,
+          "remoteSchedular": "1",
+          "remotePath": "1",
+          "remoteRetention": 1,
+          "backupTaskStatus": 1,
+          "backupFolders": []
+        },
+        {
+          "backupTaskId": 3,
+          "projectId": 1,
+          "name": "sdf",
+          "localSchedular": "1",
+          "localPath": "sd",
+          "localRetention": 1,
+          "remoteSchedular": "1",
+          "remotePath": "1",
+          "remoteRetention": 1,
+          "backupTaskStatus": 1,
+          "backupFolders": [
+            {
+              "backupFolderId": 1,
+              "folderPath": "ưẻ",
+              "backupTaskId": 3
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

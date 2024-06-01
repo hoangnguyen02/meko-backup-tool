@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="5025cbed-756f-4938-a466-fe37318436aa" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/bin/vn/mekosoft/backup/action/BackupActionUtil.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/vn/mekosoft/backup/action/BackupActionUtil.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/vn/mekosoft/backup/application/application.css" beforeDir="false" afterPath="$PROJECT_DIR$/bin/vn/mekosoft/backup/application/application.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/vn/mekosoft/backup/controller/Dashboard.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/vn/mekosoft/backup/controller/Dashboard.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/vn/mekosoft/backup/controller/DetailsTask.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/vn/mekosoft/backup/controller/DetailsTask.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/vn/mekosoft/backup/controller/Log.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/vn/mekosoft/backup/controller/Log.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/vn/mekosoft/backup/controller/ManagementProject.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/vn/mekosoft/backup/controller/ManagementProject.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/vn/mekosoft/backup/controller/ManagementTask.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/vn/mekosoft/backup/controller/ManagementTask.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/vn/mekosoft/backup/model/BackupProjectStatus.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/vn/mekosoft/backup/model/BackupProjectStatus.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/vn/mekosoft/backup/model/BackupTaskStatus.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/vn/mekosoft/backup/model/BackupTaskStatus.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/vn/mekosoft/backup/view/dashboard.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/bin/vn/mekosoft/backup/view/dashboard.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/vn/mekosoft/backup/view/detailsTask.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/bin/vn/mekosoft/backup/view/detailsTask.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/vn/mekosoft/backup/view/folder.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/bin/vn/mekosoft/backup/view/folder.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/vn/mekosoft/backup/view/managementProject.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/bin/vn/mekosoft/backup/view/managementProject.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/vn/mekosoft/backup/view/managementTask.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/bin/vn/mekosoft/backup/view/managementTask.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/vn/mekosoft/backup/view/showlog.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/bin/vn/mekosoft/backup/view/showlog.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config.json" beforeDir="false" afterPath="$PROJECT_DIR$/config.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/vn/mekosoft/backup/action/BackupActionUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/vn/mekosoft/backup/action/BackupActionUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/vn/mekosoft/backup/application/application.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/vn/mekosoft/backup/application/application.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/vn/mekosoft/backup/controller/Dashboard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/vn/mekosoft/backup/controller/Dashboard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/vn/mekosoft/backup/controller/DetailsTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/vn/mekosoft/backup/controller/DetailsTask.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/vn/mekosoft/backup/controller/Log.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/vn/mekosoft/backup/controller/Log.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/vn/mekosoft/backup/controller/ManagementProject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/vn/mekosoft/backup/controller/ManagementProject.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/vn/mekosoft/backup/controller/ManagementTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/vn/mekosoft/backup/controller/ManagementTask.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/vn/mekosoft/backup/model/BackupProjectStatus.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/vn/mekosoft/backup/model/BackupProjectStatus.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/vn/mekosoft/backup/model/BackupTaskStatus.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/vn/mekosoft/backup/model/BackupTaskStatus.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/vn/mekosoft/backup/view/dashboard.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/vn/mekosoft/backup/view/dashboard.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/vn/mekosoft/backup/view/detailsTask.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/vn/mekosoft/backup/view/detailsTask.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/vn/mekosoft/backup/view/folder.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/vn/mekosoft/backup/view/folder.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/vn/mekosoft/backup/view/managementProject.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/vn/mekosoft/backup/view/managementProject.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/vn/mekosoft/backup/view/managementTask.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/vn/mekosoft/backup/view/managementTask.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/vn/mekosoft/backup/view/showlog.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/vn/mekosoft/backup/view/showlog.fxml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "customColor": "",
+  "associatedIndex": 5
+}]]></component>
+  <component name="ProjectId" id="2h8GJi7IF5G9ckJFyRoqSQGoBDH" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="5025cbed-756f-4938-a466-fe37318436aa" name="Changes" comment="" />
+      <created>1716968222016</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1716968222016</updated>
+      <workItem from="1716968223672" duration="6000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>

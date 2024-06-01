@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -8,42 +9,47 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="infor_project" prefHeight="111.0" prefWidth="982.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vn.mekosoft.backup.controller.ManagementProject">
+<AnchorPane fx:id="infor_project" prefHeight="126.0" prefWidth="970.0" style="-fx-background-color: #fbfcfe;" stylesheets="@../application/application.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vn.mekosoft.backup.controller.ManagementProject">
    <children>
-      <HBox prefHeight="111.0" prefWidth="985.0">
+      <HBox prefHeight="126.0" prefWidth="970.0" style="-fx-background-color: #fbfcfe;">
          <children>
-            <VBox prefHeight="111.0" prefWidth="985.0">
+            <VBox prefHeight="106.0" prefWidth="999.0" style="-fx-background-color: white;">
                <children>
-                  <AnchorPane prefHeight="146.0" prefWidth="985.0" styleClass="border-main" stylesheets="@../application/application.css">
+                  <AnchorPane prefHeight="106.0" prefWidth="998.0" style="-fx-background-color: #FFFFFF;" styleClass="border-main" stylesheets="@../application/application.css">
                      <children>
-                        <Label layoutX="22.0" layoutY="6.0" text="Project:">
-                           <font>
-                              <Font name="System Bold" size="16.0" />
-                           </font>
-                        </Label>
-                        <Label layoutX="48.0" layoutY="39.0" text="Hostname:">
+                        <Circle fx:id="circle_project_status" fill="#3cdda0" layoutX="493.0" layoutY="39.0" radius="7.0" stroke="BLACK" strokeType="INSIDE" />
+                        <Label fx:id="project_activity" layoutX="513.0" layoutY="29.0" text="Hoạt động">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <Label layoutX="48.0" layoutY="59.0" text="Username:">
+                        <Button fx:id="button_addTask" layoutX="636.0" layoutY="23.0" mnemonicParsing="false" onAction="#addTask_action" prefHeight="34.0" prefWidth="100.0" styleClass="button-2" stylesheets="@../application/application.css" text="+ Task" textFill="WHITE">
                            <font>
                               <Font size="14.0" />
-                           </font>
-                        </Label>
-                        <Circle fill="#3cdda0" layoutX="649.0" layoutY="40.0" radius="7.0" stroke="BLACK" strokeType="INSIDE" />
-                        <Label fx:id="project_activity" layoutX="667.0" layoutY="30.0" text="Hoạt động">
+                           </font></Button>
+                        <Label fx:id="project_name_main" layoutX="30.0" layoutY="13.0" text="Label">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font></Label>
+                        <Label fx:id="project_hostname" layoutX="65.0" layoutY="43.0" text="Label">
                            <font>
                               <Font size="14.0" />
-                           </font>
-                        </Label>
-                        <Button fx:id="button_addTask" layoutX="807.0" layoutY="24.0" mnemonicParsing="false" onAction="#addTask_action" prefHeight="33.0" prefWidth="105.0" text="+ Task" />
-                        <Label fx:id="project_name_main" layoutX="94.0" layoutY="10.0" text="Label" />
-                        <Label fx:id="project_hostname" layoutX="122.0" layoutY="42.0" text="Label" />
-                        <Label fx:id="project_username" layoutX="122.0" layoutY="61.0" text="Label" />
+                           </font></Label>
+                        <Label fx:id="project_username" layoutX="65.0" layoutY="72.0" text="Label">
+                           <font>
+                              <Font size="14.0" />
+                           </font></Label>
+                        <Button fx:id="button_EditProject" layoutX="775.0" layoutY="22.0" mnemonicParsing="false" onAction="#editProject_action" prefHeight="34.0" prefWidth="67.0" text="Edit" />
+                        <Button fx:id="button_DeleteProject" layoutX="857.0" layoutY="22.0" mnemonicParsing="false" onAction="#deleteProject_action" prefHeight="34.0" prefWidth="67.0" text="Delete" />
                      </children>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
                   </AnchorPane>
                </children>
+               <HBox.margin>
+                  <Insets top="20.0" />
+               </HBox.margin>
             </VBox>
          </children>
       </HBox>
