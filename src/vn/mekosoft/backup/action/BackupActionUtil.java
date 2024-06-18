@@ -28,7 +28,6 @@ public class BackupActionUtil {
 
         List<BackupProject> backupProjects = new BackupServiceImpl().loadData();
         
-        // Tìm projectId lớn nhất
         for (BackupProject project : backupProjects) {
             if (project.getProjectId() > currentMaxProjectId) {
                 currentMaxProjectId = project.getProjectId();
@@ -37,7 +36,6 @@ public class BackupActionUtil {
         
         long projectId = currentMaxProjectId + 1;
 
-        // Kiểm tra xem projectId đã tồn tại hay chưa
         for (BackupProject project : backupProjects) {
             if (project.getProjectId() == projectId) {
                 currentMaxProjectId++;
@@ -62,6 +60,7 @@ public class BackupActionUtil {
                 JsonObject projectJson = new JsonObject();
                 projectJson.addProperty("projectId", project.getProjectId());
                 projectJson.addProperty("projectName", project.getProjectName());
+                projectJson.addProperty("description", project.getDescription());
                 projectJson.addProperty("hostname", project.getHostname());
                 projectJson.addProperty("username", project.getUsername());
                 projectJson.addProperty("password", project.getPassword());

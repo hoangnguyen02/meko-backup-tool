@@ -1,8 +1,6 @@
 package vn.mekosoft.backup.impl;
 
 import java.io.IOException;
-import java.util.List;
-
 import vn.mekosoft.backup.service.CoreScriptService;
 
 public class CoreScriptServiceImpl implements CoreScriptService {

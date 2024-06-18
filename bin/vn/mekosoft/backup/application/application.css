@@ -57,3 +57,20 @@
     -fx-text-fill: #FFFFFF; 
     -fx-background-color: linear-gradient(to bottom right, #4f4f4f, #306090);
 }
+.border-down {
+    -fx-border-color: #babbbb;
+    -fx-border-width: 0.0px 0.0px 2.0px 0.0px;
+}
+
+*.table-view *.table-column {
+    -fx-alignment: top-left;
+}
+.table-view .column-header .label {
+    -fx-alignment: top-left;
+}
+
+.main_pane {
+    
+}
+
+/* Responsive CSS */

@@ -3,6 +3,8 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
@@ -10,26 +12,20 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="infor_task" cache="true" depthTest="DISABLE" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="70.0" prefWidth="970.0" style="-fx-background-color: #FFFFFF;" styleClass="border-less-up" stylesheets="@../application/application.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vn.mekosoft.backup.controller.ManagementTask">
+<AnchorPane fx:id="infor_task" cache="true" depthTest="DISABLE" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="70.0" prefWidth="1100.0" style="-fx-background-color: #FFFFFF;" styleClass="border-less-up" stylesheets="@../application/application.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vn.mekosoft.backup.controller.ManagementTask">
    <children>
-      <HBox prefHeight="70.0" prefWidth="970.0">
+      <HBox fx:id="hbox_task" prefHeight="70.0" prefWidth="1100.0">
          <children>
-            <VBox fx:id="vbox_taskList" alignment="CENTER" prefHeight="70.0" prefWidth="986.0">
+            <VBox fx:id="vbox_taskList" alignment="CENTER" prefHeight="70.0" prefWidth="1100.0">
                <children>
-                  <AnchorPane prefHeight="71.0" prefWidth="994.0" stylesheets="@../application/application.css">
+                  <AnchorPane fx:id="infor_v2" prefHeight="71.0" prefWidth="1124.0" stylesheets="@../application/application.css">
                      <children>
-                        <Button fx:id="button_details" layoutX="638.0" layoutY="16.0" mnemonicParsing="false" onAction="#details_action" prefHeight="34.0" prefWidth="100.0" styleClass="add-folder-button" stylesheets="@../application/application.css" text="+ Folder" textFill="WHITE">
-                           <font>
-                              <Font size="14.0" />
-                           </font></Button>
                         <Label fx:id="task_status" layoutX="513.0" layoutY="23.0" text="Label">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </Label>
                         <Circle fx:id="cricle_task_status" fill="#28cf81" layoutX="492.0" layoutY="33.0" radius="7.0" stroke="BLACK" strokeType="INSIDE" />
-                        <Button fx:id="button_log" layoutX="765.0" layoutY="16.0" mnemonicParsing="false" onAction="#log_action" prefHeight="34.0" prefWidth="55.0" text="LOG" />
-                        <Button fx:id="button_run" layoutX="828.0" layoutY="16.0" mnemonicParsing="false" onAction="#run_action" prefHeight="34.0" prefWidth="55.0" text="schedular" />
                         <Pane layoutX="33.0" layoutY="12.0" prefHeight="47.0" prefWidth="434.0" styleClass="border-task" stylesheets="@../application/application.css">
                            <children>
                               <Label fx:id="task_name" layoutX="25.0" layoutY="12.0" prefHeight="23.0" prefWidth="392.0" text="label">
@@ -39,7 +35,36 @@
                               </Label>
                            </children>
                         </Pane>
-                        <Button fx:id="button_stop" layoutX="891.0" layoutY="16.0" mnemonicParsing="false" onAction="#stop_action" prefHeight="34.0" prefWidth="55.0" text="STOP" />
+                        <MenuButton alignment="CENTER" contentDisplay="CENTER" layoutX="781.0" layoutY="16.0" lineSpacing="10.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="140.0" stylesheets="@../application/application.css" text="Action" textAlignment="CENTER" AnchorPane.bottomAnchor="20.799999999999997" AnchorPane.leftAnchor="781.0" AnchorPane.rightAnchor="179.0" AnchorPane.topAnchor="16.0">
+                          <items>
+                            <MenuItem mnemonicParsing="false">
+                                 <graphic>
+                                    <Button fx:id="button_log" mnemonicParsing="false" onAction="#log_action" prefHeight="34.0" prefWidth="120.0" text="Log" />
+                                 </graphic>
+                              </MenuItem>
+                              <MenuItem mnemonicParsing="false">
+                                 <graphic>
+                                    <Button fx:id="button_delete" mnemonicParsing="false" onAction="#delete_action" prefHeight="34.0" prefWidth="120.0" text="Delete" />
+                                 </graphic>
+                              </MenuItem>
+                          </items>
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                        </MenuButton>
+                        <Button fx:id="button_stop" layoutX="945.0" layoutY="17.0" mnemonicParsing="false" onAction="#stop_action" prefHeight="34.0" prefWidth="120.0" text="Stop" />
+                        <Button fx:id="button_run" layoutX="945.0" layoutY="16.0" mnemonicParsing="false" onAction="#scheduler_action" prefHeight="34.0" prefWidth="120.0" text="Schedular" AnchorPane.bottomAnchor="20.799999999999997" AnchorPane.leftAnchor="945.0" AnchorPane.rightAnchor="35.799999999999955" AnchorPane.topAnchor="16.0">
+                           <font>
+                              <Font size="14.0" />
+                           </font></Button>
+                        <Button fx:id="button_details" alignment="CENTER" contentDisplay="RIGHT" layoutX="637.0" layoutY="16.0" mnemonicParsing="false" onAction="#details_action" prefHeight="34.0" prefWidth="120.0" styleClass="add-folder-button" stylesheets="@../application/application.css" text="Edit Task" AnchorPane.bottomAnchor="20.800000000000004" AnchorPane.leftAnchor="637.0" AnchorPane.rightAnchor="343.20000000000005" AnchorPane.topAnchor="16.0">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Button>
                      </children>
                   </AnchorPane>
                </children>

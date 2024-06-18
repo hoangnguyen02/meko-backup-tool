@@ -1,28 +1,31 @@
-		package vn.mekosoft.backup.controller;
+package vn.mekosoft.backup.controller;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import javafx.scene.Node;
+import javafx.stage.Stage;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import vn.mekosoft.backup.action.AlertMaker;
+import vn.mekosoft.backup.impl.BackupFolderServiceImpl;
 import vn.mekosoft.backup.impl.BackupServiceImpl;
+import vn.mekosoft.backup.impl.BackupTaskServiceImpl;
 import vn.mekosoft.backup.model.BackupFolder;
 import vn.mekosoft.backup.model.BackupProject;
 import vn.mekosoft.backup.model.BackupTask;
 import vn.mekosoft.backup.model.BackupTaskStatus;
-import vn.mekosoft.backup.service.BackupService;
+import vn.mekosoft.backup.service.BackupFolderService;
 
 public class DetailsTask implements Initializable {
 	@FXML
@@ -36,6 +39,8 @@ public class DetailsTask implements Initializable {
 
 	@FXML
 	private AnchorPane folderPath_view;
+	@FXML
+	private AnchorPane folder_pane;
 
 	@FXML
 	private TextField folder_id;
@@ -91,139 +96,193 @@ public class DetailsTask implements Initializable {
 	@FXML
 	private AnchorPane content_folder;
 
+	@FXML
+	private Button button_delete;
+
 	private BackupProject project;
 	private BackupTask task;
-	private Dashboard dashboardController;
+	private BackupFolder folder;
 	private static long currentMaxTaskId = 0;
 	private static long currentMaxFolderId = 0;
+	private Dashboard dashboardController;
+	private BackupFolderService folderService = new BackupFolderServiceImpl();
+	private Folder folderController;
 
 	public void setDashboardController(Dashboard dashboardController) {
 		this.dashboardController = dashboardController;
+		this.folderService = new BackupFolderServiceImpl();
 	}
 
 	public void setProject(BackupProject project) {
 		this.project = project;
 	}
 
-	private void refreshView() {
+	public void setFolderController(Folder folderController) {
+		this.folderController = folderController;
+	}
+
+	public void refreshView() {
 		vbox_folder.getChildren().clear();
 		taskDetails(task);
 		if (dashboardController != null) {
 			dashboardController.loadData();
 			dashboardController.refresh_action();
-		}
 
-	} 
+		}
+	}
+
+	public void loadFolderDataForTask() {
+		if (project != null && task != null) {
+			List<BackupFolder> folders = folderService.loadFolderData(project.getProjectId(), task.getBackupTaskId());
+			vbox_folder.getChildren().clear();
+
+			for (BackupFolder folder : folders) {
+				addFolderLayout(folder);
+			}
+		}
+	}
+
+	public void refreshFolder() {
+		vbox_folder.getChildren().clear();
+		loadFolderDataForTask();
+
+	}
+
+	public long getProjectId() {
+		return project.getProjectId();
+	}
+
+	public long getTaskId() {
+		return task.getBackupTaskId();
+	}
 
 	public void saveFolder_action() {
 		try {
 			if (task != null) {
-				long maxBackupFolderId = 0;
+				long maxBackupFolderId = task.getBackupFolders().stream().mapToLong(BackupFolder::getBackupFolderId)
+						.max().orElse(0);
 
-				// Tìm chỉ số backupFolderId lớn nhất hiện có trong các thư mục của nhiệm vụ
-				List<BackupFolder> backupFolders = task.getBackupFolders();
-				for (BackupFolder folder : backupFolders) {
-					if (folder.getBackupFolderId() > maxBackupFolderId) {
-						maxBackupFolderId = folder.getBackupFolderId();
+				long newBackupFolderId = maxBackupFolderId + 1;
+				String folderPath = folder_path.getText();
+				BackupFolder newFolder = new BackupFolder(newBackupFolderId, folderPath, task.getBackupTaskId());
+
+				boolean isEditing = false;
+				if (folder != null) {
+					isEditing = true;
+					task.getBackupFolders().removeIf(f -> f.getBackupFolderId() == folder.getBackupFolderId());
+				}
+
+				task.getBackupFolders().add(newFolder);
+
+				BackupServiceImpl backupService = new BackupServiceImpl();
+				List<BackupProject> backupProjects = backupService.loadData();
+				for (BackupProject proj : backupProjects) {
+					if (proj.getProjectId() == project.getProjectId()) {
+						for (BackupTask t : proj.getBackupTasks()) {
+							if (t.getBackupTaskId() == task.getBackupTaskId()) {
+								t.setBackupFolders(new ArrayList<>(task.getBackupFolders()));
+								break;
+							}
+						}
+						break;
 					}
 				}
 
-				// Tăng chỉ số lên một
-				long newBackupFolderId = maxBackupFolderId + 1;
-				String folderPath = folder_path.getText();
+				backupService.saveData(backupProjects);
 
-				BackupFolder newFolder = new BackupFolder(newBackupFolderId, folderPath, task.getBackupTaskId());
-				task.getBackupFolders().add(newFolder);
-				saveTaskFolders();
-				addFolderLayout(newFolder);
-				folder_id.setText(String.valueOf(newBackupFolderId));
-				folder_path.clear();
 				refreshView();
-				AlertMaker.successfulAlert("Success", "Folder added successfully!");
+
+				if (!isEditing) {
+					addFolderLayout(newFolder);
+					folder_id.setText(String.valueOf(newBackupFolderId));
+					folder_path.clear();
+				}
+
+				refreshView();
 			}
-		}catch (Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
-			AlertMaker.errorAlert("Erorr", "Failed to add Folder!");
+			AlertMaker.errorAlert("Error", "Failed to save Folder!");
 		}
 	}
 
-	private void saveTaskFolders() {
-		BackupServiceImpl backupService = new BackupServiceImpl();
-		List<BackupProject> backupProjects = backupService.loadData();
+	public void hideFolderPane() {
+		folder_pane.setVisible(false);
+
+	}
+
+	public void saveInforTask_action(ActionEvent event) {
+		try {
+			BackupTaskServiceImpl backupTaskService = new BackupTaskServiceImpl();
+			List<BackupProject> backupProjects = backupTaskService.loadProjectData();
+
+			if (task.getBackupTaskId() != 0) {
+				updateTaskInformation(backupTaskService, backupProjects);
+			} else {
+				createNewTask(backupTaskService, backupProjects);
+				Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+				currentStage.close();
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			AlertMaker.errorAlert("Error", "Failed to save Task!");
+		}
+		refreshView();
+	}
+
+	private void updateTaskInformation(BackupTaskServiceImpl backupTaskService, List<BackupProject> backupProjects) {
+		task.setName(task_name.getText());
+		task.setLocalSchedular(local_cronTab.getText());
+		task.setRemoteSchedular(remote_cronTab.getText());
+		task.setLocalPath(local_path.getText());
+		task.setRemotePath(remote_path.getText());
+		task.setLocalRetention(Long.parseLong(local_retention.getText()));
+		task.setRemoteRetention(Long.parseLong(remote_retention.getText()));
 
 		for (BackupProject proj : backupProjects) {
 			if (proj.getProjectId() == project.getProjectId()) {
-				for (BackupTask t : proj.getBackupTasks()) {
-					if (t.getBackupTaskId() == task.getBackupTaskId()) {
-						t.setBackupFolders(task.getBackupFolders());
+				List<BackupTask> tasks = proj.getBackupTasks();
+				for (int i = 0; i < tasks.size(); i++) {
+					if (tasks.get(i).getBackupTaskId() == task.getBackupTaskId()) {
+						tasks.set(i, task);
 						break;
 					}
 				}
 				break;
 			}
 		}
-		backupService.saveData(backupProjects);
+
+		backupTaskService.saveProjectsToFile(backupProjects);
 	}
 
-	public void saveInforTask_action(ActionEvent event) throws IOException {
-		try {
-			if (project != null && task != null) {
-				long maxTaskId = 0;
+	private void createNewTask(BackupTaskServiceImpl backupTaskService, List<BackupProject> backupProjects) {
+		long maxTaskId = backupProjects.stream().flatMap(proj -> proj.getBackupTasks().stream())
+				.mapToLong(BackupTask::getBackupTaskId).max().orElse(0) + 1;
 
-				// Tìm backupTaskId lớn nhất trong các nhiệm vụ của dự án
-				List<BackupTask> projectTasks = project.getBackupTasks();
-				if (projectTasks != null && !projectTasks.isEmpty()) {
-					for (BackupTask t : projectTasks) {
-						if (t.getBackupTaskId() > maxTaskId) {
-							maxTaskId = t.getBackupTaskId();
-						}
-					}
-					// Tăng backupTaskId lên một đơn vị để sử dụng cho nhiệm vụ mới
-					maxTaskId++;
-				} else {
-					maxTaskId = 1;
+		task.setBackupTaskId(maxTaskId);
+		task.setProjectId(project.getProjectId());
+		task.setName(task_name.getText());
+		task.setLocalSchedular(local_cronTab.getText());
+		task.setRemoteSchedular(remote_cronTab.getText());
+		task.setLocalPath(local_path.getText());
+		task.setRemotePath(remote_path.getText());
+		task.setLocalRetention(Long.parseLong(local_retention.getText()));
+		task.setRemoteRetention(Long.parseLong(remote_retention.getText()));
+		task.setBackupTaskStatus(BackupTaskStatus.DANG_BIEN_SOAN.getId());
+		task.setBackupFolders(new ArrayList<>());
+		for (BackupProject proj : backupProjects) {
+			if (proj.getProjectId() == project.getProjectId()) {
+				List<BackupTask> tasks = proj.getBackupTasks();
+				if (tasks == null) {
+					tasks = new ArrayList<>();
+					proj.setBackupTasks(tasks);
 				}
-
-				task.setBackupTaskId(maxTaskId);
-				task.setProjectId(project.getProjectId());
-				task.setName(task_name.getText());
-				task.setLocalSchedular(local_cronTab.getText());
-				task.setRemoteSchedular(remote_cronTab.getText());
-				task.setLocalPath(local_path.getText());
-				task.setRemotePath(remote_path.getText());
-				task.setLocalRetention(Long.parseLong(local_retention.getText()));
-				task.setRemoteRetention(Long.parseLong(remote_retention.getText()));
-				task.setBackupTaskStatus(BackupTaskStatus.DANG_BIEN_SOAN.getId());
-				task.setBackupFolders(new ArrayList<>());
-
-				BackupServiceImpl backupService = new BackupServiceImpl();
-				List<BackupProject> backupProjects = backupService.loadData();
-				for (BackupProject proj : backupProjects) {
-					if (proj.getProjectId() == project.getProjectId()) {
-						List<BackupTask> tasks = proj.getBackupTasks();
-						if (tasks == null) {
-							tasks = new ArrayList<>();
-							proj.setBackupTasks(tasks);
-						}
-						tasks.add(task);
-						proj.setBackupTasks(tasks);
-						break;
-					}
-				}
-				backupService.saveData(backupProjects);
-
-				// gọi chung stage
-//				addTask_view.setVisible(false);
-//				
-				// dashboardController.show_projectView();
-				((Node) (event.getSource())).getScene().getWindow().hide();
-				refreshView();
-				AlertMaker.successfulAlert("Success", "Task added successfully!");
+				tasks.add(task);
+				break;
 			}
-		} catch (Exception e) {
-			e.printStackTrace();
-			AlertMaker.errorAlert("Error", "Failed to add Task!");
 		}
+		backupTaskService.saveProjectsToFile(backupProjects);
 	}
 
 	public void taskDetails(BackupTask task) {
@@ -238,16 +297,13 @@ public class DetailsTask implements Initializable {
 			remote_path.setText(task.getRemotePath());
 			local_retention.setText(String.valueOf(task.getLocalRetention()));
 			remote_retention.setText(String.valueOf(task.getRemoteRetention()));
-			if (task.getBackupFolders() != null && !task.getBackupFolders().isEmpty()) {
-				for (BackupFolder folder : task.getBackupFolders()) {
-					addFolderLayout(folder);
-				}
-			}
+			refreshFolder();
 		}
 
 		if (project != null) {
 			project_name_BP.setText("Project: " + " " + project.getProjectName());
 		}
+
 	}
 
 	@Override
@@ -255,32 +311,21 @@ public class DetailsTask implements Initializable {
 		task_id.setText(String.valueOf(++currentMaxTaskId));
 		folder_id.setText(String.valueOf(++currentMaxFolderId));
 		inforClear();
-
+		// loadFolders();
 	}
-
-//	public void onlyView() {
-//		task_id.setEditable(false);
-//		task_name.setEditable(false);
-//		local_cronTab.setEditable(false);
-//		remote_cronTab.setEditable(false);
-//		local_path.setEditable(false);
-//		remote_path.setEditable(false);
-//		local_retention.setEditable(false);
-//		remote_retention.setEditable(false);
-//
-//		button_save_inforTask.setVisible(false);
-//		folder_id.setEditable(false);
-//	}
 
 	public void addFolderLayout(BackupFolder folder) {
 		try {
+
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/vn/mekosoft/backup/view/folder.fxml"));
 			content_folder = loader.load();
 			Folder folderController = loader.getController();
 			folderController.folderData(folder);
-
+			folderController.setDetailsTaskController(this);
+			folderController.setDashboardController(dashboardController);
 			vbox_folder.getChildren().add(content_folder);
 			content_folder.setMaxHeight(Double.MAX_VALUE);
+
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

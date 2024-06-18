@@ -11,7 +11,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="addTask_view" prefHeight="696.0" prefWidth="1027.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vn.mekosoft.backup.controller.DetailsTask">
+<AnchorPane fx:id="addTask_view" prefHeight="696.0" prefWidth="1027.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vn.mekosoft.backup.controller.DetailsTask">
    <children>
       <AnchorPane layoutX="13.0" layoutY="21.0" prefHeight="42.0" prefWidth="988.0" styleClass="heading" stylesheets="@../application/application.css">
          <children>
@@ -22,7 +22,7 @@
             </Label>
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="13.0" layoutY="360.0" prefHeight="286.0" prefWidth="988.0" styleClass="border-main" stylesheets="@../application/application.css">
+      <AnchorPane fx:id="folder_pane" layoutX="13.0" layoutY="360.0" prefHeight="286.0" prefWidth="988.0" styleClass="border-main" stylesheets="@../application/application.css">
          <children>
             <Text layoutX="37.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="List of backup folder:">
                <font>
@@ -33,7 +33,7 @@
                <content>
                   <AnchorPane fx:id="content_folder" style="-fx-background-color: transparent;">
                      <children>
-                        <VBox fx:id="vbox_folder" prefHeight="0.0" prefWidth="0.0" style="-fx-background-color: transparent;" styleClass="root" stylesheets="@../application/application.css" />
+                        <VBox fx:id="vbox_folder" prefHeight="154.0" prefWidth="780.0" style="-fx-background-color: transparent;" styleClass="root" stylesheets="@../application/application.css" />
                      </children>
                   </AnchorPane>
                </content>

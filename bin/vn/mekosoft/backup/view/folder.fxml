@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="infor_folder" prefHeight="59.0" prefWidth="840.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vn.mekosoft.backup.controller.Folder">
+<AnchorPane fx:id="infor_folder" prefHeight="59.0" prefWidth="840.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vn.mekosoft.backup.controller.Folder">
    <children>
       <ImageView fitHeight="40.0" fitWidth="32.0" layoutX="20.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -15,15 +17,22 @@
          </image>
       </ImageView>
       <TextField fx:id="get_FolderPath" layoutX="104.0" layoutY="14.0" prefHeight="34.0" prefWidth="546.0" />
-      <TextField fx:id="get_FolderId" layoutX="724.0" layoutY="14.0" prefHeight="34.0" prefWidth="49.0" visible="false" />
-      <AnchorPane layoutX="670.0" layoutY="14.0" prefHeight="34.0" prefWidth="41.0" styleClass="border-main" stylesheets="@../application/application.css" visible="false">
-         <children>
-            <Label layoutX="12.0" layoutY="7.0" text="ID:">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Label>
-         </children>
-      </AnchorPane>
+      <MenuButton alignment="CENTER" layoutX="676.0" layoutY="14.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="110.0" text="Action">
+        <items>
+          <MenuItem mnemonicParsing="false">
+               <graphic>
+                  <Button fx:id="button_edit" mnemonicParsing="false" onAction="#edit_action" prefHeight="26.0" prefWidth="100.0" text="Save Edit" />
+               </graphic>
+            </MenuItem>
+          <MenuItem mnemonicParsing="false">
+               <graphic>
+                  <Button fx:id="button_delete" mnemonicParsing="false" onAction="#delete_action" prefHeight="25.0" prefWidth="100.0" text="Delete" />
+               </graphic>
+            </MenuItem>
+        </items>
+         <font>
+            <Font size="14.0" />
+         </font>
+      </MenuButton>
    </children>
 </AnchorPane>

@@ -1,13 +1,10 @@
 package vn.mekosoft.backup.service;
 
+import vn.mekosoft.backup.model.BackupFolder;
 import java.util.List;
 
-import vn.mekosoft.backup.model.BackupFolder;
-
 public interface BackupFolderService {
-	List<BackupFolder> loadFolderData();
-
-	void updateBackupFolder(long folderId, BackupFolder updatedFolder);
-
-	void deleteBackupFolder(long folderId);
+    List<BackupFolder> loadFolderData(long projectId, long taskId);
+    void updateBackupFolder(long projectId, long taskId, long folderId, BackupFolder updatedFolder);
+    void deleteBackupFolder(long projectId, long taskId, long folderId);
 }

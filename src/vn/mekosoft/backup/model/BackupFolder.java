@@ -4,11 +4,11 @@ public class BackupFolder {
 	private long backupFolderId;
 	private String folderPath;
 	private long backupTaskId;
-	
+
 	public BackupFolder() {
-		//default constructor
+		// default constructor
 	}
-	
+
 	public BackupFolder(long backupFolderId, String folderPath, long backupTaskId) {
 		this.backupFolderId = backupFolderId;
 		this.folderPath = folderPath;
@@ -44,7 +44,5 @@ public class BackupFolder {
 		return "BackupFolder [backupFolderId=" + backupFolderId + ", folderPath=" + folderPath + ", backupTaskId="
 				+ backupTaskId + "]";
 	}
-	
-	
 
 }

@@ -2,7 +2,7 @@ package vn.mekosoft.backup.controller;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
@@ -12,15 +12,19 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import vn.mekosoft.backup.action.AlertMaker;
 import vn.mekosoft.backup.model.BackupProject;
 import vn.mekosoft.backup.model.BackupProjectStatus;
 import vn.mekosoft.backup.model.BackupTask;
+import vn.mekosoft.backup.service.BackupProjectService;
+import vn.mekosoft.backup.impl.BackupProjectServiceImpl;
 
 public class ManagementProject implements Initializable {
 	@FXML
@@ -51,39 +55,67 @@ public class ManagementProject implements Initializable {
 	private Button button_EditProject;
 	private BackupProject project;
 	private Dashboard dashboardController;
-	private BackupTask task;
 
 	public void setDashboardController(Dashboard dashboardController) {
 		this.dashboardController = dashboardController;
 	}
 
+
+
 	public void deleteProject_action(ActionEvent event) {
+		Optional<ButtonType> response = AlertMaker.showConfirmAlert("Delete Project",
+				"Are you sure you want to delete this project?");
+		if (response.isPresent() && response.get() == ButtonType.OK) {
+			BackupProjectService projectService = new BackupProjectServiceImpl();
+			projectService.deleteProject(project.getProjectId());
+			AlertMaker.successfulAlert("Success", "Project deleted successfully!");
+			dashboardController.rf();
+			dashboardController.refresh_action();
+		}
+	}
 
-    }
-	
-	public void editProject_action(ActionEvent event) {
 
+    public void editProject_action(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/vn/mekosoft/backup/view/editProject.fxml"));
+            Parent root = loader.load();
+
+            EditProject editProjectController = loader.getController();
+            editProjectController.setProject(project);
+
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.initModality(Modality.APPLICATION_MODAL); 
+            stage.showAndWait(); 
+
+            projectData(project); 
+    		
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
-	
+
+
 	public void addTask_action(ActionEvent event) throws IOException {
 		BackupTask task = new BackupTask();
 		project.getBackupTasks().add(task);
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/vn/mekosoft/backup/view/detailsTask.fxml"));
 		Parent root = loader.load();
 		DetailsTask controller = loader.getController();
-		// Thiết lập project cho controller
 		controller.setProject(project);
 		controller.setDashboardController(dashboardController);
 		controller.taskDetails(task);
 		controller.inforClear();
-
+		controller.hideFolderPane();
 		Stage stage = new Stage();
 		stage.setScene(new Scene(root));
 		stage.show();
 
-		dashboardController.rf();
-		dashboardController.refresh_action();
-
+		
+	    stage.setOnHidden(e -> {
+	        dashboardController.rf();
+	        dashboardController.refresh_action();
+	    });
 	}
 
 	@Override

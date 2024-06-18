@@ -6,6 +6,14 @@ import vn.mekosoft.backup.model.BackupTask;
 
 public interface BackupTaskService {
 	List<BackupTask> loadTaskData();
-	  void updateBackupTask(long taskId, BackupTask updatedTask);
-	  void deleteBackupTask(long taskId);
+
+
+
+
+	void updateBackupTask(long projectId, long taskId, BackupTask updatedTask);
+
+	void deleteBackupTask(long projectId, long taskId);
+
+
+
 }
