@@ -143,10 +143,18 @@ public class DetailsTask implements Initializable {
 	}
 
 	public void refreshFolder() {
-		vbox_folder.getChildren().clear();
-		loadFolderDataForTask();
-
+	    List<BackupFolder> newFolders = folderService.loadFolderData(project.getProjectId(), task.getBackupTaskId());
+	    
+	    newFolders.removeIf(f -> task.getBackupFolders().stream()
+	        .noneMatch(existingFolder -> existingFolder.getBackupFolderId() == f.getBackupFolderId()));
+	    
+	    task.setBackupFolders(newFolders);
+	    vbox_folder.getChildren().clear();
+	    for (BackupFolder folder : newFolders) {
+	        addFolderLayout(folder);
+	    }
 	}
+
 
 	public long getProjectId() {
 		return project.getProjectId();
@@ -311,12 +319,11 @@ public class DetailsTask implements Initializable {
 		task_id.setText(String.valueOf(++currentMaxTaskId));
 		folder_id.setText(String.valueOf(++currentMaxFolderId));
 		inforClear();
-		// loadFolders();
 	}
 
 	public void addFolderLayout(BackupFolder folder) {
 		try {
-
+ 
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/vn/mekosoft/backup/view/folder.fxml"));
 			content_folder = loader.load();
 			Folder folderController = loader.getController();

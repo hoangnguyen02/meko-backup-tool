@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="52.0" prefWidth="277.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vn.mekosoft.backup.controller.FolderTable">
+   <children>
+      <ImageView fitHeight="41.0" fitWidth="35.0" layoutX="20.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@img/folder.png" />
+         </image>
+      </ImageView>
+      <TextField fx:id="folder_path" editable="false" layoutX="82.0" layoutY="8.0" prefHeight="35.0" prefWidth="153.0" />
+   </children>
+</AnchorPane>

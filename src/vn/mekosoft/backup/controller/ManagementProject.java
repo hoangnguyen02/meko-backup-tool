@@ -126,8 +126,8 @@ public class ManagementProject implements Initializable {
 	public void projectData(BackupProject project) {
 		this.project = project;
 		project_name_main.setText("Project: " + " " + project.getProjectName());
-		project_hostname.setText("● Hostname: " + " " + project.getHostname());
-		project_username.setText("● Username: " + " " + project.getUsername());
+		project_hostname.setText(" ● Hostname: " + " " + project.getHostname());
+		project_username.setText(" ● Username: " + " " + project.getUsername());
 		project_activity
 				.setText(BackupProjectStatus.fromId(project.getBackupProjectStatus()).getDescriptionStatusProject());
 		String colorCode = BackupProjectStatus.fromId(project.getBackupProjectStatus()).getColorProject();

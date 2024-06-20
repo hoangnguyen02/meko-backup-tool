@@ -3,12 +3,17 @@ package vn.mekosoft.backup.controller;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
@@ -17,6 +22,12 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 
 import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
@@ -30,6 +41,8 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Bounds;
 import javafx.scene.Group;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
@@ -51,24 +64,29 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import javafx.util.StringConverter;
 import vn.mekosoft.backup.action.BackupActionUtil;
 import vn.mekosoft.backup.config.Config;
+import vn.mekosoft.backup.impl.BackupProjectServiceImpl;
 import vn.mekosoft.backup.impl.BackupServiceImpl;
 import vn.mekosoft.backup.impl.CoreScriptServiceImpl;
 import vn.mekosoft.backup.model.BackupFolder;
 import vn.mekosoft.backup.model.BackupProject;
 import vn.mekosoft.backup.model.BackupProjectStatus;
 import vn.mekosoft.backup.model.BackupTask;
+import vn.mekosoft.backup.model.BackupTaskStatus;
 import vn.mekosoft.backup.model.TableModel;
 import vn.mekosoft.backup.model.Time;
 import vn.mekosoft.backup.service.BackupService;
 import vn.mekosoft.backup.service.CoreScriptService;
+import vn.mekosoft.backup.service.BackupProjectService;
 
 public class Dashboard implements Initializable {
 	@FXML
 	private AnchorPane addProject_view, addTask_view, backupProject_view, backupTask_view, content_layout, content_view,
-			createProject_view, dashboard_view, scheduler_view, tableDashboard_action,dataProtection_view;
+			createProject_view, dashboard_view, scheduler_view, tableDashboard_action, dataProtection_view;
 
 	@FXML
 	private Button button_addProject, button_back_addProject, button_backupProject, button_backupTask, button_dashboard,
@@ -102,8 +120,7 @@ public class Dashboard implements Initializable {
 	private Button button_start;
 	@FXML
 	private Button button_refresh;
-	@FXML
-	private Folder folderController;
+	
 	@FXML
 	private DetailsTask detailsTaskController;
 	@FXML
@@ -112,7 +129,7 @@ public class Dashboard implements Initializable {
 	@FXML
 	private BarChart<String, Integer> barChartDaily;
 	@FXML
-	private StackedBarChart<String, Integer> stackBarChartStatus;
+	private BarChart<String, Integer> stackBarChartStatus;
 	@FXML
 	private NumberAxis yStatus;
 	@FXML
@@ -131,35 +148,37 @@ public class Dashboard implements Initializable {
 	private TableView<TableModel> table_dashboard;
 
 	@FXML
-	private Label totalLocal, detail_barChart;
+	private Label totalLocal, detail_barChart, numberOfTotal, numberOfStop, numberOfRunning;
 
 	@FXML
 	private Label totalRemote;
 
 	@FXML
-	private TableColumn<TableModel, Long> backupProject_col;
+	private TableColumn<TableModel, String> projectName_col;
 
 	@FXML
-	private TableColumn<TableModel, String> backupTask_col;
+	private TableColumn<TableModel, String> taskName_col;
 
 	@FXML
-	private TableColumn<TableModel, String> folder_col;
-
-	@FXML
-	private TableColumn<TableModel, String> remoteStorage_col;
+	private TableColumn<TableModel, Integer> folder_col;
 
 	@FXML
 	private TableColumn<TableModel, String> status_col;
 
 	@FXML
-	private TableColumn<TableModel, String> localStorage_col;
+	private TableColumn<TableModel, String> crontabLocal_col;
 
 	@FXML
-	public void action_table(MouseEvent event) {
-		System.out.print("Click");
-		tableDashboard_action.setVisible(true);
-		dashboard_view.setVisible(false);
-	}
+	private TableColumn<TableModel, String> crontabRemote_col;
+
+	@FXML
+	private TableColumn<TableModel, String> successful_col;
+
+	@FXML
+	private TableColumn<TableModel, String> failed_col;
+
+	@FXML
+	private TableColumn<TableModel, String> countBackup_col;
 
 	@FXML
 	private MenuButton menuDataRanges;
@@ -189,12 +208,16 @@ public class Dashboard implements Initializable {
 	private final Object lock = new Object();
 	private final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
+	private final Map<String, Integer> successLocalCount = new HashMap<>();
+	private final Map<String, Integer> failLocalCount = new HashMap<>();
+	private final Map<String, Integer> successRemoteCount = new HashMap<>();
+	private final Map<String, Integer> failRemoteCount = new HashMap<>();
+
 	@Override
 	public void initialize(URL url, ResourceBundle resources) {
 
 		logo.setVisible(true);
-		Folder folder = new Folder();
-		setFolderController(folder);
+//		
 		loadData();
 		Config config = new Config();
 		log_textField.setText(config.getLogFolderPath());
@@ -209,10 +232,10 @@ public class Dashboard implements Initializable {
 		// refresh_action();
 
 		dataChartDaily();
-//		dataChartStatus();
-//		localPie();
-		// remotePie();
-		tableDashboard();
+		dataChartStatus();
+		localPie();
+		remotePie();
+		// tableDashboard();
 		comboBox_RefreshEvery.setValue(Time.SECOND);
 		comboBox_RefreshEvery.setItems(FXCollections.observableArrayList(Time.values()));
 
@@ -236,71 +259,6 @@ public class Dashboard implements Initializable {
 
 	}
 
-	public void sumary_action(ActionEvent event) {
-		if(event.getSource() == button_sumary) {
-			dashboard_view.setVisible(true);
-			dataProtection_view.setVisible(false);
-		}
-	}
-	public void dataProtection_action(ActionEvent event) {
-		
-		if(event.getSource() == button_dataProtection) {
-			dashboard_view.setVisible(false);
-			dataProtection_view.setVisible(true);
-		}
-	}
-	public void applyDateRange_action() {
-		startDate = startRange_date.getValue();
-		System.out.println("start date: " + startDate);
-		endDate = endRange_date.getValue();
-		System.out.println("end date: " + endDate);
-
-		if (startDate != null && endDate != null) {
-			if (endDate.isBefore(startDate)) {
-				return;
-			}
-
-			filterDataByDateRange(startDate, endDate);
-		}
-	}
-
-	private void filterDataByDateRange(LocalDate startDate, LocalDate endDate) {
-		Map<String, Integer> filteredBackupLocalCount = backupLocalCount.entrySet().stream()
-				.filter(entry -> isWithinDateRange(entry.getKey(), startDate, endDate))
-				.collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
-
-		Map<String, Integer> filteredCleanupLocalCount = cleanupLocalCount.entrySet().stream()
-				.filter(entry -> isWithinDateRange(entry.getKey(), startDate, endDate))
-				.collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
-
-		Map<String, Integer> filteredBackupRemoteCount = backupRemoteCount.entrySet().stream()
-				.filter(entry -> isWithinDateRange(entry.getKey(), startDate, endDate))
-				.collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
-
-		Map<String, Integer> filteredCleanupRemoteCount = cleanupRemoteCount.entrySet().stream()
-				.filter(entry -> isWithinDateRange(entry.getKey(), startDate, endDate))
-				.collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
-
-		updateBarChart(filteredBackupLocalCount, filteredCleanupLocalCount, filteredBackupRemoteCount,
-				filteredCleanupRemoteCount);
-	}
-
-	private void updateBarChart() {
-		updateBarChart(backupLocalCount, cleanupLocalCount, backupRemoteCount, cleanupRemoteCount);
-	}
-
-	public boolean isWithinDateRange(String date, LocalDate startDate, LocalDate endDate) {
-
-		try {
-			LocalDate logDate = LocalDate.parse(date, DateTimeFormatter.ofPattern("yyyy/MM/dd"));
-			return (logDate.isEqual(startDate) || logDate.isAfter(startDate))
-					&& (logDate.isEqual(endDate) || logDate.isBefore(endDate));
-		} catch (DateTimeParseException e) {
-			System.err.println("Unable to parse date: " + date);
-			return false;
-		}
-	}
-
 	private void startRefreshEvery() {
 		Time selectedTimeUnit = (Time) comboBox_RefreshEvery.getValue();
 
@@ -313,7 +271,6 @@ public class Dashboard implements Initializable {
 		}
 
 		int intervalInSeconds = interval * selectedTimeUnit.toSeconds();
-		System.out.println("Refreshing every " + intervalInSeconds + " seconds");
 
 		stopAutoRefresh();
 		setupAutoRefresh(intervalInSeconds, java.util.concurrent.TimeUnit.SECONDS);
@@ -358,6 +315,8 @@ public class Dashboard implements Initializable {
 	private void refreshDashboard() {
 		synchronized (lock) {
 			dataChartDaily();
+			dataChartStatus();
+			// tableDashboard();
 		}
 	}
 
@@ -369,312 +328,15 @@ public class Dashboard implements Initializable {
 		return content_view;
 	}
 
-	public void setFolderController(Folder folderController) {
-		this.folderController = folderController;
-	}
-
-	public void refreshFolder() {
-		if (folderController != null) {
-			folderController.refresh();
-		}
-	}
-
-	public Map<LocalDate, Integer> getBackupCountByDate() {
-		return getBackupCountByDate();
-	}
-
-	private String extractTask(String line) {
-		String[] tasks = { "BACKUPLOCAL", "CLEANUPLOCAL", "BACKUPREMOTE", "CLEANUPREMOTE" };
-		for (String task : tasks) {
-			if (line.contains("[" + task + "]")) {
-				return task;
-			}
-		}
-		return null;
-	}
-
-	private void processLogLine(String line, Map<String, Integer> backupLocalCount,
-			Map<String, Integer> cleanupLocalCount, Map<String, Integer> backupRemoteCount,
-			Map<String, Integer> cleanupRemoteCount) {
-		String[] parts = line.split(" ");
-		if (parts.length >= 3) {
-			String date = parts[0];
-			String task = extractTask(line);
-
-			if (task != null) {
-				Integer count = line.contains("[START]") ? 1 : 0;
-				switch (task) {
-				case "BACKUPLOCAL":
-					backupLocalCount.merge(date, count, Integer::sum);
-					break;
-				case "CLEANUPLOCAL":
-					cleanupLocalCount.merge(date, count, Integer::sum);
-					break;
-				case "BACKUPREMOTE":
-					backupRemoteCount.merge(date, count, Integer::sum);
-					break;
-				case "CLEANUPREMOTE":
-					cleanupRemoteCount.merge(date, count, Integer::sum);
-					break;
-				}
-			}
-		}
-	}
-
-	public void dataChartDaily() {
-		synchronized (lock) {
-			Config config = new Config();
-			String logDirPath = config.getLogFolderPath();
-			String separator = File.separator;
-			logDirPath = logDirPath.replace("\\", separator).replace("/", separator);
-			logDir = new File(logDirPath);
-
-			if (!logDir.exists() || !logDir.isDirectory()) {
-				System.out.println("Invalid log directory: " + logDirPath);
-				clearDashboard();
-				return;
-			}
-
-			File[] logFiles = logDir.listFiles((dir, name) -> name.endsWith(".log"));
-			if (logFiles == null || logFiles.length == 0) {
-				System.out.println("No log files found.");
-				clearDashboard();
-				return;
-			}
-
-			backupLocalCount.clear();
-			cleanupLocalCount.clear();
-			backupRemoteCount.clear();
-			cleanupRemoteCount.clear();
-
-			for (File logFile : logFiles) {
-				try (BufferedReader reader = new BufferedReader(new FileReader(logFile))) {
-					String line;
-					while ((line = reader.readLine()) != null) {
-						processLogLine(line, backupLocalCount, cleanupLocalCount, backupRemoteCount,
-								cleanupRemoteCount);
-					}
-				} catch (IOException e) {
-					System.err.println("Error reading file: " + logFile.getName());
-					e.printStackTrace();
-				}
-			}
-
-			if (startDate != null && endDate != null) {
-				filterDataByDateRange(startDate, endDate);
-			} else {
-				updateBarChart();
-			}
-		}
-	}
-
-//	private void updateBarChart(Map<String, Integer> backupLocalCount, Map<String, Integer> cleanupLocalCount,
-//			Map<String, Integer> backupRemoteCount, Map<String, Integer> cleanupRemoteCount) {
-//		Platform.runLater(() -> {
-//			barChartDaily.getData().clear();
-//			DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
-//			DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-//
-//			XYChart.Series<String, Integer> series1 = new XYChart.Series<>();
-//			series1.setName("Backup Local");
-//			backupLocalCount.entrySet().stream().sorted(Map.Entry.comparingByKey()).forEach(entry -> {
-//				String formattedDate = LocalDate.parse(entry.getKey(), inputFormatter).format(outputFormatter);
-//				series1.getData().add(new XYChart.Data<>(formattedDate, entry.getValue()));
-//			});
-//
-//			XYChart.Series<String, Integer> series2 = new XYChart.Series<>();
-//			series2.setName("Cleanup Local");
-//			cleanupLocalCount.entrySet().stream().sorted(Map.Entry.comparingByKey()).forEach(entry -> {
-//				String formattedDate = LocalDate.parse(entry.getKey(), inputFormatter).format(outputFormatter);
-//				series2.getData().add(new XYChart.Data<>(formattedDate, entry.getValue()));
-//			});
-//
-//			XYChart.Series<String, Integer> series3 = new XYChart.Series<>();
-//			series3.setName("Backup Remote");
-//			backupRemoteCount.entrySet().stream().sorted(Map.Entry.comparingByKey()).forEach(entry -> {
-//				String formattedDate = LocalDate.parse(entry.getKey(), inputFormatter).format(outputFormatter);
-//				series3.getData().add(new XYChart.Data<>(formattedDate, entry.getValue()));
-//			});
-//
-//			XYChart.Series<String, Integer> series4 = new XYChart.Series<>();
-//			series4.setName("Cleanup Remote");
-//			cleanupRemoteCount.entrySet().stream().sorted(Map.Entry.comparingByKey()).forEach(entry -> {
-//				String formattedDate = LocalDate.parse(entry.getKey(), inputFormatter).format(outputFormatter);
-//				series4.getData().add(new XYChart.Data<>(formattedDate, entry.getValue()));
-//			});
-//
-//			barChartDaily.getData().addAll(series1, series2, series3, series4);
-//		
-//		});
-//	}
-	private void updateBarChart(Map<String, Integer> backupLocalCount, Map<String, Integer> cleanupLocalCount,
-			Map<String, Integer> backupRemoteCount, Map<String, Integer> cleanupRemoteCount) {
-		Platform.runLater(() -> {
-			barChartDaily.getData().clear();
-			DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
-			DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-
-			XYChart.Series<String, Integer> series1 = new XYChart.Series<>();
-			series1.setName("Backup Local");
-			backupLocalCount.entrySet().stream().sorted(Map.Entry.comparingByKey()).forEach(entry -> {
-				String formattedDate = LocalDate.parse(entry.getKey(), inputFormatter).format(outputFormatter);
-				XYChart.Data<String, Integer> data = new XYChart.Data<>(formattedDate, entry.getValue());
-				series1.getData().add(data);
-				data.nodeProperty().addListener((obs, oldNode, newNode) -> {
-					if (newNode != null) {
-						displayLabelForData(data);
-					}
-				});
-			});
-
-			XYChart.Series<String, Integer> series2 = new XYChart.Series<>();
-			series2.setName("Cleanup Local");
-			cleanupLocalCount.entrySet().stream().sorted(Map.Entry.comparingByKey()).forEach(entry -> {
-				String formattedDate = LocalDate.parse(entry.getKey(), inputFormatter).format(outputFormatter);
-				XYChart.Data<String, Integer> data = new XYChart.Data<>(formattedDate, entry.getValue());
-				series2.getData().add(data);
-				data.nodeProperty().addListener((obs, oldNode, newNode) -> {
-					if (newNode != null) {
-						displayLabelForData(data);
-					}
-				});
-			});
-
-			XYChart.Series<String, Integer> series3 = new XYChart.Series<>();
-			series3.setName("Backup Remote");
-			backupRemoteCount.entrySet().stream().sorted(Map.Entry.comparingByKey()).forEach(entry -> {
-				String formattedDate = LocalDate.parse(entry.getKey(), inputFormatter).format(outputFormatter);
-				XYChart.Data<String, Integer> data = new XYChart.Data<>(formattedDate, entry.getValue());
-				series3.getData().add(data);
-				data.nodeProperty().addListener((obs, oldNode, newNode) -> {
-					if (newNode != null) {
-						displayLabelForData(data);
-					}
-				});
-			});
-
-			XYChart.Series<String, Integer> series4 = new XYChart.Series<>();
-			series4.setName("Cleanup Remote");
-			cleanupRemoteCount.entrySet().stream().sorted(Map.Entry.comparingByKey()).forEach(entry -> {
-				String formattedDate = LocalDate.parse(entry.getKey(), inputFormatter).format(outputFormatter);
-				XYChart.Data<String, Integer> data = new XYChart.Data<>(formattedDate, entry.getValue());
-				series4.getData().add(data);
-				data.nodeProperty().addListener((obs, oldNode, newNode) -> {
-					if (newNode != null) {
-						displayLabelForData(data);
-					}
-				});
-			});
-
-			barChartDaily.getData().addAll(series1, series2, series3, series4);
-		});
-	}
-
-//	private void displayLabelForData(XYChart.Data<String, Integer> data) {
-//	    final Text text = new Text();  // Text không hiển thị ngay từ đầu
-//	    final Node node = data.getNode();
-//
-//	    if (node != null) {
-//	        // Thêm listener cho parentProperty
-//	        node.parentProperty().addListener((obs, oldParent, newParent) -> {
-//	            if (newParent != null) {
-//	                ((Group) newParent).getChildren().add(text);
-//	                updateTextPosition(node, text);  // Đặt vị trí của nhãn ngay từ đầu
-//
-//	                // Thêm listener khi node được update lại
-//	                node.boundsInParentProperty().addListener((obs2, oldBounds, bounds) -> {
-//	                    if (text.isVisible()) {
-//	                        updateTextPosition(node, text);  // Đặt lại vị trí khi kích thước cột thay đổi
-//	                    }
-//	                });
-//
-//	                node.addEventHandler(MouseEvent.MOUSE_ENTERED, event -> {
-//	                    text.setText(data.getYValue().toString());  // Hiển thị số
-//	                    updateTextPosition(node, text);
-//	                    text.setVisible(true);  // Hiện text khi mouse entered
-//	                });
-//
-//	                node.addEventHandler(MouseEvent.MOUSE_EXITED, event -> {
-//	                    text.setVisible(false);  // Ẩn text khi mouse exited
-//	                });
-//	            }
-//	        });
-//	    }
+//	public void setFolderController(Folder folderController) {
+//		this.folderController = folderController;
 //	}
 //
-//	private void updateTextPosition(Node node, Text text) {
-//	    // Chuyển đổi tọa độ của text để hiển thị bên trong cột của biểu đồ
-//	    node.boundsInParentProperty().addListener((ChangeListener<Bounds>) (ov, oldBounds, bounds) -> {
-//	        if (text.isVisible()) {
-//	            double centerX = Math.round(bounds.getMinX() + bounds.getWidth() / 2);
-//	            double yPosition = Math.round(bounds.getMinY()   + bounds.getHeight() / 2);  
-//	            text.setLayoutX(centerX - text.prefWidth(-1) / 2);
-//	            text.setLayoutY(yPosition - text.prefHeight(-1));
-//	        }
-//	    });
+//	public void refreshFolder() {
+//		if (folderController != null) {
+//			folderController.refresh();
+//		}
 //	}
-	private void displayLabelForData(Object data) {
-	    if (data instanceof XYChart.Data) {
-	        XYChart.Data<String, Integer> chartData = (XYChart.Data<String, Integer>) data;
-	        final Node node = chartData.getNode();
-
-	        if (node != null) {
-	            node.parentProperty().addListener((obs, oldParent, newParent) -> {
-	                if (newParent != null) {
-	                    updateLabel(chartData);
-	                //    updateLabelPosition(chartData); // Đặt vị trí của label ngay từ đầu
-
-	                    node.boundsInParentProperty().addListener((ChangeListener<Bounds>) (ov, oldBounds, bounds) -> {
-	                        if (detail_barChart.isVisible()) {
-	                           // updateLabelPosition(chartData); // Đặt lại vị trí khi kích thước cột thay đổi
-	                        }
-	                    });
-
-	                    node.addEventHandler(MouseEvent.MOUSE_ENTERED, event -> {
-	                        String info = formatInformation(chartData); // Tạo thông tin định dạng
-	                        detail_barChart.setText(info); // Cập nhật nội dung của label
-	                        detail_barChart.setVisible(true); // Hiện label khi mouse entered
-	                    });
-
-	                    node.addEventHandler(MouseEvent.MOUSE_EXITED, event -> {
-	                        detail_barChart.setVisible(false); // Ẩn label khi mouse exited
-	                    });
-	                }
-	            });
-	        }
-	    }
-	}
-
-	private void updateLabel(XYChart.Data<String, Integer> chartData) {
-	    String info = formatInformation(chartData); // Format the information for label
-	    detail_barChart.setText(info); // Set formatted text to the label
-	}
-
-//	private void updateLabelPosition(XYChart.Data<String, Integer> chartData) {
-//	    Node node = chartData.getNode();
-//	    if (node != null) {
-//	        node.boundsInParentProperty().addListener((ChangeListener<Bounds>) (ov, oldBounds, bounds) -> {
-//	            if (detail_barChart.isVisible()) {
-//	                double centerX = Math.round(bounds.getMinX() + bounds.getWidth() / 2);
-//	                double yPosition = Math.round(bounds.getMinY() + bounds.getHeight() / 2);
-//	                detail_barChart.setLayoutX(centerX - detail_barChart.prefWidth(-1) / 2);
-//	                detail_barChart.setLayoutY(yPosition - detail_barChart.prefHeight(-1));
-//	            }
-//	        });
-//	    }
-//	}
-
-	private String formatInformation(XYChart.Data<String, Integer> chartData) {
-	    return String.format("Information: %s Backup... %d", chartData.getXValue(), chartData.getYValue());
-	}
-
-
-
-
-
-	private void clearDashboard() {
-		Platform.runLater(() -> barChartDaily.getData().clear());
-	}
 
 	public void rf() {
 		vbox_container.getChildren().clear();
@@ -699,7 +361,6 @@ public class Dashboard implements Initializable {
 			scheduler_view.setVisible(false);
 			config_view.setVisible(false);
 			createProject_view.setVisible(false);
-			tableDashboard_action.setVisible(false);
 
 		} else if (event.getSource() == button_backupProject) {
 			dashboard_view.setVisible(false);
@@ -708,7 +369,6 @@ public class Dashboard implements Initializable {
 			scheduler_view.setVisible(false);
 			config_view.setVisible(false);
 			createProject_view.setVisible(false);
-			tableDashboard_action.setVisible(false);
 
 		} else if (event.getSource() == button_backupTask) {
 			dashboard_view.setVisible(false);
@@ -717,7 +377,6 @@ public class Dashboard implements Initializable {
 			scheduler_view.setVisible(false);
 			config_view.setVisible(false);
 			createProject_view.setVisible(false);
-			tableDashboard_action.setVisible(false);
 
 		} else if (event.getSource() == button_scheduler) {
 			dashboard_view.setVisible(false);
@@ -726,7 +385,6 @@ public class Dashboard implements Initializable {
 			scheduler_view.setVisible(true);
 			config_view.setVisible(false);
 			createProject_view.setVisible(false);
-			tableDashboard_action.setVisible(false);
 
 		} else if (event.getSource() == button_addProject) {
 			dashboard_view.setVisible(false);
@@ -734,7 +392,6 @@ public class Dashboard implements Initializable {
 			backupTask_view.setVisible(false);
 			scheduler_view.setVisible(false);
 			config_view.setVisible(false);
-			tableDashboard_action.setVisible(false);
 
 			createProject_view.setVisible(true);
 		} else if (event.getSource() == button_config) {
@@ -742,7 +399,6 @@ public class Dashboard implements Initializable {
 			backupProject_view.setVisible(false);
 			backupTask_view.setVisible(false);
 			scheduler_view.setVisible(false);
-			tableDashboard_action.setVisible(false);
 
 			createProject_view.setVisible(false);
 			config_view.setVisible(true);
@@ -758,7 +414,6 @@ public class Dashboard implements Initializable {
 				String command = "/home/ubuntu/sftp_ver2/backup.sh --execute_all";
 				coreScriptService.executeAll(command);
 			} catch (IOException | InterruptedException e) {
-				System.out.print(isBackupStarted);
 			}
 		}
 	}
@@ -823,20 +478,44 @@ public class Dashboard implements Initializable {
 
 	public void loadData() {
 		if (vbox_container != null) {
-			vbox_container.getChildren().clear();
-			{
-				BackupService backupService = new BackupServiceImpl();
-				List<BackupProject> projects = backupService.loadData();
 
-				for (BackupProject project : projects) {
-					addProject_Layout(project);
-					List<BackupTask> tasks = project.getBackupTasks();
-					for (BackupTask task : tasks) {
-						addTask_Layout(task, project);
+			vbox_container.getChildren().clear();
+			tableDashboard();
+			BackupProjectService backupService = new BackupProjectServiceImpl();
+			List<BackupProject> projects = backupService.loadProjectData();
+
+			int totalTasks = 0;
+			int runningTasks = 0;
+			int stoppedTasks = 0;
+
+			for (BackupProject project : projects) {
+				addProject_Layout(project);
+				List<BackupTask> tasks = project.getBackupTasks();
+				totalTasks += tasks.size();
+
+				for (BackupTask task : tasks) {
+					addTask_Layout(task, project);
+					switch (BackupTaskStatus.fromId(task.getBackupTaskStatus())) {
+					case KHONG_HOAT_DONG:
+						stoppedTasks++;
+						break;
+					case DA_DAT_LICH:
+						runningTasks++;
+						break;
+					default:
+						break;
 					}
 				}
 			}
+
+			updateLabels(totalTasks, runningTasks, stoppedTasks);
 		}
+	}
+
+	private void updateLabels(int totalTasks, int runningTasks, int stoppedTasks) {
+		numberOfTotal.setText(String.valueOf(totalTasks));
+		numberOfStop.setText(String.valueOf(stoppedTasks));
+		numberOfRunning.setText(String.valueOf(runningTasks));
 	}
 
 	public void show_projectView() {
@@ -849,32 +528,6 @@ public class Dashboard implements Initializable {
 			createProject_view.setVisible(true);
 		}
 
-	}
-
-	public void dataChartStatus() {
-		XYChart.Series<String, Integer> series2 = new XYChart.Series<>();
-		series2.setName("Failed");
-		series2.getData().add(new XYChart.Data<>("2024/05/29", 7));
-		series2.getData().add(new XYChart.Data<>("2024/05/30", 4));
-		series2.getData().add(new XYChart.Data<>("2024/05/31", 0));
-		series2.getData().add(new XYChart.Data<>("2024/06/01", 0));
-		series2.getData().add(new XYChart.Data<>("2024/06/02", 5));
-		series2.getData().add(new XYChart.Data<>("2024/06/03", 1));
-		// series2.getData().add(new XYChart.Data<>("2024/06/07", 5.0));
-
-		stackBarChartStatus.getData().add(series2);
-
-		XYChart.Series<String, Integer> series3 = new XYChart.Series<>();
-		series3.setName("Success");
-		series3.getData().add(new XYChart.Data<>("2024/05/29", 5));
-		series3.getData().add(new XYChart.Data<>("2024/05/30", 1));
-		series3.getData().add(new XYChart.Data<>("2024/05/31", 3));
-		series3.getData().add(new XYChart.Data<>("2024/06/01", 12));
-		series3.getData().add(new XYChart.Data<>("2024/06/02", 0));
-		series3.getData().add(new XYChart.Data<>("2024/06/03", 4));
-		// series3.getData().add(new XYChart.Data<>("2024/06/07", 2.0));
-
-		stackBarChartStatus.getData().add(series3);
 	}
 
 //	private String getRemoteStorageInfo() throws IOException, InterruptedException {
@@ -934,12 +587,16 @@ public class Dashboard implements Initializable {
 	}
 
 	private double parseAndConvertValue(String str) {
-		String numericValue = str.replaceAll("[^\\d.]", "");
+		String numericValue = str.replaceAll("[^\\d.,]", "").replace(',', '.');
 		double value = Double.parseDouble(numericValue);
 		if (str.contains("T")) {
 			return value * 1024 * 1024;
 		} else if (str.contains("G")) {
 			return value * 1024;
+		} else if (str.contains("M")) {
+			return value;
+		} else if (str.contains("K")) {
+			return value / 1024;
 		} else {
 			return value;
 		}
@@ -1017,38 +674,6 @@ public class Dashboard implements Initializable {
 		}
 	}
 
-	public void tableDashboard() {
-		BackupService backupService = new BackupServiceImpl();
-		ObservableList<TableModel> data = FXCollections.observableArrayList();
-
-		List<BackupProject> backupProjects = backupService.loadData();
-		for (BackupProject project : backupProjects) {
-			long projectId = project.getProjectId();
-			for (BackupTask task : project.getBackupTasks()) {
-				String backupTaskName = task.getName();
-				String localPath = task.getLocalPath();
-				String remotePath = task.getRemotePath();
-				String backupTaskStatus = task.getBackupTaskStatusEnum().getDescription();
-				for (BackupFolder folder : task.getBackupFolders()) {
-					String folderPath = folder.getFolderPath();
-
-					TableModel row = new TableModel(projectId, backupTaskName, folderPath, localPath, remotePath,
-							backupTaskStatus);
-					data.add(row);
-				}
-			}
-		}
-
-		backupProject_col.setCellValueFactory(new PropertyValueFactory<>("projectId"));
-		backupTask_col.setCellValueFactory(new PropertyValueFactory<>("backupTaskName"));
-		folder_col.setCellValueFactory(new PropertyValueFactory<>("folderPath"));
-		localStorage_col.setCellValueFactory(new PropertyValueFactory<>("localPath"));
-		remoteStorage_col.setCellValueFactory(new PropertyValueFactory<>("remotePath"));
-		status_col.setCellValueFactory(new PropertyValueFactory<>("backupTaskStatus"));
-
-		table_dashboard.setItems(data);
-	}
-
 	public void saveConfig_action() {
 //
 //		String logFolderPath = log_textField.getText();
@@ -1059,11 +684,9 @@ public class Dashboard implements Initializable {
 //		config.setLogFolderPath(logFolderPath);
 //		config.setConfigFolderPath(configFolderPath);
 //
-//		System.out.println("Cấu hình đã được lưu.");
 	}
 
 	public void generate_action(ActionEvent event) {
-//		System.out.println("Generate");
 //
 //		BackupService backupService = new BackupServiceImpl();
 //		List<BackupProject> projects = backupService.loadData();
@@ -1084,6 +707,587 @@ public class Dashboard implements Initializable {
 //		} catch (IOException e) {
 //			e.printStackTrace();
 //		}
+	}
+
+	/* ==================== HANDLE CHART ==================== */
+
+	public void applyDateRange_action() {
+		startDate = startRange_date.getValue();
+		endDate = endRange_date.getValue();
+
+		if (startDate != null && endDate != null) {
+			if (endDate.isBefore(startDate)) {
+				return;
+			}
+
+			filterDataByDateRange(startDate, endDate);
+		}
+	}
+
+	public Map<LocalDate, Integer> getBackupCountByDate() {
+		return getBackupCountByDate();
+	}
+
+	private void displayLabelForData(Object data) {
+//		if (data instanceof XYChart.Data) {
+//			XYChart.Data<String, Integer> chartData = (XYChart.Data<String, Integer>) data;
+//			final Node node = chartData.getNode();
+//
+//			if (node != null) {
+//				node.parentProperty().addListener((obs, oldParent, newParent) -> {
+//					if (newParent != null) {
+//						updateLabel(chartData);
+//
+//						node.boundsInParentProperty().addListener((ChangeListener<Bounds>) (ov, oldBounds, bounds) -> {
+//							if (detail_barChart.isVisible()) {
+//							}
+//						});
+//
+//						node.addEventHandler(MouseEvent.MOUSE_ENTERED, event -> {
+//							String info = formatInformation(chartData);
+//							detail_barChart.setText(info);
+//							detail_barChart.setVisible(true);
+//						});
+//
+//						node.addEventHandler(MouseEvent.MOUSE_EXITED, event -> {
+//							detail_barChart.setVisible(false);
+//						});
+//					}
+//				});
+//			}
+//		}
+	}
+
+//	private void updateLabel(XYChart.Data<String, Integer> chartData) {
+//		String info = formatInformation(chartData);
+//		detail_barChart.setText(info);
+//	}
+
+//	private String formatInformation(XYChart.Data<String, Integer> chartData) {
+//		return String.format("Information: %s Backup... %d", chartData.getXValue(), chartData.getYValue());
+//	}
+
+	private void clearDashboard() {
+		Platform.runLater(() -> barChartDaily.getData().clear());
+	}
+
+	private void filterDataByDateRange(LocalDate startDate, LocalDate endDate) {
+		Map<String, Integer> filteredBackupLocalCount = backupLocalCount.entrySet().stream()
+				.filter(entry -> isWithinDateRange(entry.getKey(), startDate, endDate))
+				.collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+
+		Map<String, Integer> filteredCleanupLocalCount = cleanupLocalCount.entrySet().stream()
+				.filter(entry -> isWithinDateRange(entry.getKey(), startDate, endDate))
+				.collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+
+		Map<String, Integer> filteredBackupRemoteCount = backupRemoteCount.entrySet().stream()
+				.filter(entry -> isWithinDateRange(entry.getKey(), startDate, endDate))
+				.collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+
+		Map<String, Integer> filteredCleanupRemoteCount = cleanupRemoteCount.entrySet().stream()
+				.filter(entry -> isWithinDateRange(entry.getKey(), startDate, endDate))
+				.collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+
+		updateBarChart(filteredBackupLocalCount, filteredCleanupLocalCount, filteredBackupRemoteCount,
+				filteredCleanupRemoteCount);
+	}
+
+	private void updateBarChart() {
+		updateBarChart(backupLocalCount, cleanupLocalCount, backupRemoteCount, cleanupRemoteCount);
+	}
+
+	private String extractTask(String line) {
+		String[] tasks = { "BACKUPLOCAL", "CLEANUPLOCAL", "BACKUPREMOTE", "CLEANUPREMOTE" };
+		for (String task : tasks) {
+			if (line.contains("[" + task + "]")) {
+				return task;
+			}
+		}
+		return null;
+	}
+
+	private void processLogLine(String line, Map<String, Integer> backupLocalCount,
+			Map<String, Integer> cleanupLocalCount, Map<String, Integer> backupRemoteCount,
+			Map<String, Integer> cleanupRemoteCount) {
+		String[] parts = line.split(" ");
+		if (parts.length >= 3) {
+			String date = parts[0];
+			String task = extractTask(line);
+
+			if (task != null) {
+				Integer count = line.contains("[START]") ? 1 : 0;
+				switch (task) {
+				case "BACKUPLOCAL":
+					backupLocalCount.merge(date, count, Integer::sum);
+					break;
+				case "CLEANUPLOCAL":
+					cleanupLocalCount.merge(date, count, Integer::sum);
+					break;
+				case "BACKUPREMOTE":
+					backupRemoteCount.merge(date, count, Integer::sum);
+					break;
+				case "CLEANUPREMOTE":
+					cleanupRemoteCount.merge(date, count, Integer::sum);
+					break;
+				}
+			}
+		}
+	}
+
+	public void dataChartDaily() {
+		synchronized (lock) {
+			Config config = new Config();
+			String logDirPath = config.getLogFolderPath();
+			String separator = File.separator;
+			logDirPath = logDirPath.replace("\\", separator).replace("/", separator);
+			logDir = new File(logDirPath);
+
+			if (!logDir.exists() || !logDir.isDirectory()) {
+				clearDashboard();
+				return;
+			}
+
+			File[] logFiles = logDir.listFiles((dir, name) -> name.endsWith(".log"));
+			if (logFiles == null || logFiles.length == 0) {
+				clearDashboard();
+				return;
+			}
+
+			backupLocalCount.clear();
+			cleanupLocalCount.clear();
+			backupRemoteCount.clear();
+			cleanupRemoteCount.clear();
+
+			for (File logFile : logFiles) {
+				try (BufferedReader reader = new BufferedReader(new FileReader(logFile))) {
+					String line;
+					while ((line = reader.readLine()) != null) {
+						processLogLine(line, backupLocalCount, cleanupLocalCount, backupRemoteCount,
+								cleanupRemoteCount);
+					}
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+
+			if (startDate != null && endDate != null) {
+				filterDataByDateRange(startDate, endDate);
+			} else {
+				updateBarChart();
+			}
+		}
+	}
+
+	private void updateBarChart(Map<String, Integer> backupLocalCount, Map<String, Integer> cleanupLocalCount,
+			Map<String, Integer> backupRemoteCount, Map<String, Integer> cleanupRemoteCount) {
+		Platform.runLater(() -> {
+			barChartDaily.getData().clear();
+			DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+			DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+			XYChart.Series<String, Integer> series1 = new XYChart.Series<>();
+			series1.setName("Backup Local");
+			backupLocalCount.entrySet().stream().filter(entry -> isValidDate(entry.getKey(), inputFormatter))
+					.sorted(Map.Entry.comparingByKey()).forEach(entry -> {
+						String formattedDate = LocalDate.parse(entry.getKey(), inputFormatter).format(outputFormatter);
+						XYChart.Data<String, Integer> data = new XYChart.Data<>(formattedDate, entry.getValue());
+						series1.getData().add(data);
+						data.nodeProperty().addListener((obs, oldNode, newNode) -> {
+							if (newNode != null) {
+								displayLabelForData(data);
+							}
+						});
+					});
+
+			XYChart.Series<String, Integer> series2 = new XYChart.Series<>();
+			series2.setName("Cleanup Local");
+			cleanupLocalCount.entrySet().stream().filter(entry -> isValidDate(entry.getKey(), inputFormatter))
+					.sorted(Map.Entry.comparingByKey()).forEach(entry -> {
+						String formattedDate = LocalDate.parse(entry.getKey(), inputFormatter).format(outputFormatter);
+						XYChart.Data<String, Integer> data = new XYChart.Data<>(formattedDate, entry.getValue());
+						series2.getData().add(data);
+						data.nodeProperty().addListener((obs, oldNode, newNode) -> {
+							if (newNode != null) {
+								displayLabelForData(data);
+							}
+						});
+					});
+
+			XYChart.Series<String, Integer> series3 = new XYChart.Series<>();
+			series3.setName("Backup Remote");
+			backupRemoteCount.entrySet().stream().filter(entry -> isValidDate(entry.getKey(), inputFormatter))
+					.sorted(Map.Entry.comparingByKey()).forEach(entry -> {
+						String formattedDate = LocalDate.parse(entry.getKey(), inputFormatter).format(outputFormatter);
+						XYChart.Data<String, Integer> data = new XYChart.Data<>(formattedDate, entry.getValue());
+						series3.getData().add(data);
+						data.nodeProperty().addListener((obs, oldNode, newNode) -> {
+							if (newNode != null) {
+								displayLabelForData(data);
+							}
+						});
+					});
+
+			XYChart.Series<String, Integer> series4 = new XYChart.Series<>();
+			series4.setName("Cleanup Remote");
+			cleanupRemoteCount.entrySet().stream().filter(entry -> isValidDate(entry.getKey(), inputFormatter))
+					.sorted(Map.Entry.comparingByKey()).forEach(entry -> {
+						String formattedDate = LocalDate.parse(entry.getKey(), inputFormatter).format(outputFormatter);
+						XYChart.Data<String, Integer> data = new XYChart.Data<>(formattedDate, entry.getValue());
+						series4.getData().add(data);
+						data.nodeProperty().addListener((obs, oldNode, newNode) -> {
+							if (newNode != null) {
+								displayLabelForData(data);
+							}
+						});
+					});
+
+			barChartDaily.getData().addAll(series1, series2, series3, series4);
+		});
+	}
+
+	private boolean isValidDate(String dateStr, DateTimeFormatter formatter) {
+		try {
+			LocalDate.parse(dateStr, formatter);
+			return true;
+		} catch (DateTimeParseException e) {
+			return false;
+		}
+	}
+
+	public boolean isWithinDateRange(String date, LocalDate startDate, LocalDate endDate) {
+
+		try {
+			LocalDate logDate = LocalDate.parse(date, DateTimeFormatter.ofPattern("yyyy/MM/dd"));
+			return (logDate.isEqual(startDate) || logDate.isAfter(startDate))
+					&& (logDate.isEqual(endDate) || logDate.isBefore(endDate));
+		} catch (DateTimeParseException e) {
+			return false;
+		}
+	}
+
+	private void processLogLineStatus(String line, Map<String, Integer> successLocalCount,
+			Map<String, Integer> failLocalCount, Map<String, Integer> successRemoteCount,
+			Map<String, Integer> failRemoteCount) {
+		String[] parts = line.split(" ");
+		if (parts.length >= 3) {
+			String date = parts[0];
+			if (line.contains("[SUCCESSFUL] [BACKUPLOCAL]")) {
+				successLocalCount.merge(date, 1, Integer::sum);
+			} else if (line.contains("[FAILED] [BACKUPLOCAL]")) {
+				failLocalCount.merge(date, 1, Integer::sum);
+			} else if (line.contains("[SUCCESS] [BACKUPREMOTE]")) {
+				successRemoteCount.merge(date, 1, Integer::sum);
+			} else if (line.contains("[FAILED] [BACKUPREMOTE]")) {
+				failRemoteCount.merge(date, 1, Integer::sum);
+			}
+		}
+	}
+
+	public void dataChartStatus() {
+		synchronized (lock) {
+			parseLogs();
+
+			Platform.runLater(() -> {
+				stackBarChartStatus.getData().clear();
+				DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+				DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+				Map<LocalDate, Integer> filteredSuccessLocal = filterDataByDateRange(successLocalCount);
+				Map<LocalDate, Integer> filteredFailLocal = filterDataByDateRange(failLocalCount);
+				Map<LocalDate, Integer> filteredSuccessRemote = filterDataByDateRange(successRemoteCount);
+				Map<LocalDate, Integer> filteredFailRemote = filterDataByDateRange(failRemoteCount);
+
+				XYChart.Series<String, Integer> seriesSuccessLocal = new XYChart.Series<>();
+				seriesSuccessLocal.setName("Success Local");
+				filteredSuccessLocal.entrySet().stream().sorted(Map.Entry.comparingByKey()).forEach(entry -> {
+					String formattedDate = entry.getKey().format(outputFormatter);
+					XYChart.Data<String, Integer> data = new XYChart.Data<>(formattedDate, entry.getValue());
+					seriesSuccessLocal.getData().add(data);
+					data.nodeProperty().addListener((obs, oldNode, newNode) -> {
+						if (newNode != null) {
+							displayLabelForData(data);
+						}
+					});
+				});
+
+				XYChart.Series<String, Integer> seriesFailLocal = new XYChart.Series<>();
+				seriesFailLocal.setName("Fail Local");
+				filteredFailLocal.entrySet().stream().sorted(Map.Entry.comparingByKey()).forEach(entry -> {
+					String formattedDate = entry.getKey().format(outputFormatter);
+					XYChart.Data<String, Integer> data = new XYChart.Data<>(formattedDate, entry.getValue());
+					seriesFailLocal.getData().add(data);
+					data.nodeProperty().addListener((obs, oldNode, newNode) -> {
+						if (newNode != null) {
+							displayLabelForData(data);
+						}
+					});
+				});
+
+				XYChart.Series<String, Integer> seriesSuccessRemote = new XYChart.Series<>();
+				seriesSuccessRemote.setName("Success Remote");
+				filteredSuccessRemote.entrySet().stream().sorted(Map.Entry.comparingByKey()).forEach(entry -> {
+					String formattedDate = entry.getKey().format(outputFormatter);
+					XYChart.Data<String, Integer> data = new XYChart.Data<>(formattedDate, entry.getValue());
+					seriesSuccessRemote.getData().add(data);
+					data.nodeProperty().addListener((obs, oldNode, newNode) -> {
+						if (newNode != null) {
+							displayLabelForData(data);
+						}
+					});
+				});
+
+				XYChart.Series<String, Integer> seriesFailRemote = new XYChart.Series<>();
+				seriesFailRemote.setName("Fail Remote");
+				filteredFailRemote.entrySet().stream().sorted(Map.Entry.comparingByKey()).forEach(entry -> {
+					String formattedDate = entry.getKey().format(outputFormatter);
+					XYChart.Data<String, Integer> data = new XYChart.Data<>(formattedDate, entry.getValue());
+					seriesFailRemote.getData().add(data);
+					data.nodeProperty().addListener((obs, oldNode, newNode) -> {
+						if (newNode != null) {
+							displayLabelForData(data);
+						}
+					});
+				});
+
+				stackBarChartStatus.getData().addAll(seriesSuccessLocal, seriesFailLocal, seriesSuccessRemote,
+						seriesFailRemote);
+			});
+		}
+	}
+
+	private Map<LocalDate, Integer> filterDataByDateRange(Map<String, Integer> logData) {
+		if (startDate == null || endDate == null) {
+			DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+			return logData.entrySet().stream()
+					.map(entry -> Map.entry(LocalDate.parse(entry.getKey(), inputFormatter), entry.getValue()))
+					.collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+		}
+
+		return logData.entrySet().stream()
+				.map(entry -> Map.entry(LocalDate.parse(entry.getKey(), DateTimeFormatter.ofPattern("yyyy/MM/dd")),
+						entry.getValue()))
+				.filter(entry -> isWithinDateRange(entry.getKey(), startDate, endDate))
+				.collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+	}
+
+	private boolean isWithinDateRange(LocalDate date, LocalDate startDate, LocalDate endDate) {
+		return (date.isEqual(startDate) || date.isAfter(startDate))
+				&& (date.isEqual(endDate) || date.isBefore(endDate));
+	}
+
+	private void parseLogs() {
+		successLocalCount.clear();
+		failLocalCount.clear();
+		successRemoteCount.clear();
+		failRemoteCount.clear();
+
+		Config config = new Config();
+		String logDirPath = config.getLogFolderPath();
+		String separator = File.separator;
+		logDirPath = logDirPath.replace("\\", separator).replace("/", separator);
+		File logDir = new File(logDirPath);
+
+		if (!logDir.exists() || !logDir.isDirectory()) {
+			return;
+		}
+
+		File[] logFiles = logDir.listFiles((dir, name) -> name.endsWith(".log"));
+		if (logFiles == null || logFiles.length == 0) {
+			return;
+		}
+
+		for (File logFile : logFiles) {
+			try (BufferedReader reader = new BufferedReader(new FileReader(logFile))) {
+				String line;
+				while ((line = reader.readLine()) != null) {
+					processLogLineStatus(line, successLocalCount, failLocalCount, successRemoteCount, failRemoteCount);
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	/* ==================== HANDLE TABLE ==================== */
+
+	private List<BackupProject> projects;
+
+	private Map<String, Integer> localCount = new HashMap<>();
+	private Map<String, Integer> remoteCount = new HashMap<>();
+
+	private BackupTask convertToBackupTask(TableModel selectedTask, BackupProject selectedProject) {
+		if (selectedProject == null) {
+			return null;
+		}
+
+		for (BackupTask task : selectedProject.getBackupTasks()) {
+			if (task.getName().equals(selectedTask.getBackupTaskName())) {
+				return task;
+			}
+		}
+
+		return null;
+	}
+
+	private BackupProject getSelectedProject(TableModel selectedTask) {
+		for (BackupProject project : projects) {
+			for (BackupTask task : project.getBackupTasks()) {
+				if (task.getName().equals(selectedTask.getBackupTaskName())) {
+					return project;
+				}
+			}
+		}
+		return null;
+	}
+
+	private TableModel getSelectedTaskFromEvent(MouseEvent event) {
+		TableView<TableModel> tableView = (TableView<TableModel>) event.getSource();
+		return tableView.getSelectionModel().getSelectedItem();
+	}
+
+	@FXML
+	public void action_table(MouseEvent event) {
+		if (event.getClickCount() == 2) {
+			TableModel selectedTask = getSelectedTaskFromEvent(event);
+			BackupProject selectedProject = getSelectedProject(selectedTask);
+			System.out.println(selectedProject);
+			if (selectedTask != null && selectedProject != null) {
+				try {
+					FXMLLoader loader = new FXMLLoader(
+							getClass().getResource("/vn/mekosoft/backup/view/detailsTableInfor.fxml"));
+					Parent root = loader.load();
+
+					DetailsTableInfor controller = loader.getController();
+					controller.setDashboardController(this);
+					BackupTask task = convertToBackupTask(selectedTask, selectedProject);
+					controller.taskDetails(task, selectedProject);
+
+					Stage stage = new Stage();
+					stage.setScene(new Scene(root));
+					stage.showAndWait();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		} else if (event.getClickCount() == 5) {
+			try {
+				FXMLLoader loader = new FXMLLoader(getClass().getResource("/vn/mekosoft/backup/view/test.fxml"));
+				Parent rParent = loader.load();
+				Stage stage = new Stage();
+				stage.setScene(new Scene(rParent));
+				stage.showAndWait();
+			} catch (Exception e) {
+			}
+		}
+	}
+
+	public void loadDataTable() {
+		BackupService backupService = new BackupServiceImpl();
+		projects = backupService.loadData();
+		countBackupTasks();
+	}
+
+	public void tableDashboard() {
+		table_dashboard.getItems().clear();
+		ObservableList<TableModel> data = FXCollections.observableArrayList();
+		loadDataTable();
+		for (BackupProject project : projects) {
+			String projectName = project.getProjectName();
+			long projectId = project.getProjectId();
+
+			for (BackupTask task : project.getBackupTasks()) {
+				String backupTaskName = task.getName();
+				long taskId = task.getBackupTaskId();
+				int folderCount = task.getBackupFolders().size();
+				String crontabLocal = task.getLocalSchedular();
+				String crontabRemote = task.getRemoteSchedular();
+				String backupTaskStatus = task.getBackupTaskStatusEnum().getDescription();
+
+				String projectIdTaskName = projectId + "_" + taskId;
+				int countBackupLocal = backupLocalCount.getOrDefault(projectIdTaskName + "_BACKUPLOCAL", 0);
+				int countBackupRemote = backupRemoteCount.getOrDefault(projectIdTaskName + "_BACKUPREMOTE", 0);
+				int countBackup = countBackupLocal + countBackupRemote;
+
+				int successful = successfulCount.getOrDefault(projectIdTaskName, 0);
+				int failed = failedCount.getOrDefault(projectIdTaskName, 0);
+
+				if (task.getBackupTaskStatusEnum() == BackupTaskStatus.DA_DAT_LICH) {
+					backupTaskStatus = "Running";
+				} else if (task.getBackupTaskStatusEnum() == BackupTaskStatus.KHONG_HOAT_DONG
+						|| task.getBackupTaskStatusEnum() == BackupTaskStatus.DANG_BIEN_SOAN) {
+					backupTaskStatus = "Stop";
+				}
+
+				TableModel row = new TableModel(projectName, backupTaskName, String.valueOf(folderCount), countBackup,
+						crontabLocal, crontabRemote, backupTaskStatus, successful, failed);
+
+				data.add(row);
+			}
+		}
+
+		projectName_col.setCellValueFactory(new PropertyValueFactory<>("projectName"));
+		taskName_col.setCellValueFactory(new PropertyValueFactory<>("backupTaskName"));
+		folder_col.setCellValueFactory(new PropertyValueFactory<>("folderCount"));
+		countBackup_col.setCellValueFactory(new PropertyValueFactory<>("countBackup"));
+		crontabLocal_col.setCellValueFactory(new PropertyValueFactory<>("crontabLocal"));
+		crontabRemote_col.setCellValueFactory(new PropertyValueFactory<>("crontabRemote"));
+		status_col.setCellValueFactory(new PropertyValueFactory<>("backupTaskStatus"));
+		successful_col.setCellValueFactory(new PropertyValueFactory<>("successful"));
+		failed_col.setCellValueFactory(new PropertyValueFactory<>("failed"));
+
+		table_dashboard.setItems(data);
+
+	}
+
+	private Map<String, Integer> successfulCount = new HashMap<>();
+	private Map<String, Integer> failedCount = new HashMap<>();
+
+	private void countBackupTasks() {
+		for (BackupProject project : projects) {
+			long projectId = project.getProjectId();
+
+			for (BackupTask task : project.getBackupTasks()) {
+				long taskId = task.getBackupTaskId();
+				String projectIdTaskName = projectId + "_" + taskId;
+
+				String logFilePath = new Config().getConfigLog(projectId, taskId);
+
+				if (logFilePath == null || logFilePath.isEmpty()) {
+					continue;
+				}
+
+				try (BufferedReader reader = new BufferedReader(new FileReader(logFilePath))) {
+					String line;
+					while ((line = reader.readLine()) != null) {
+						if (line.contains("[END] [BACKUPLOCAL]")) {
+							backupLocalCount.put(projectIdTaskName + "_BACKUPLOCAL",
+									backupLocalCount.getOrDefault(projectIdTaskName + "_BACKUPLOCAL", 0) + 1);
+
+							String nextLine = reader.readLine();
+							if (nextLine != null && nextLine.contains("[FAILED] [BACKUPLOCAL]")) {
+								failedCount.put(projectIdTaskName, failedCount.getOrDefault(projectIdTaskName, 0) + 1);
+							} else {
+								successfulCount.put(projectIdTaskName,
+										successfulCount.getOrDefault(projectIdTaskName, 0) + 1);
+							}
+						} else if (line.contains("[END] [BACKUPREMOTE]")) {
+							backupRemoteCount.put(projectIdTaskName + "_BACKUPREMOTE",
+									backupRemoteCount.getOrDefault(projectIdTaskName + "_BACKUPREMOTE", 0) + 1);
+
+							String nextLine = reader.readLine();
+							if (nextLine != null && nextLine.contains("[FAILED] [BACKUPREMOTE]")) {
+								failedCount.put(projectIdTaskName, failedCount.getOrDefault(projectIdTaskName, 0) + 1);
+							} else {
+								successfulCount.put(projectIdTaskName,
+										successfulCount.getOrDefault(projectIdTaskName, 0) + 1);
+							}
+						}
+					}
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
 	}
 
 }

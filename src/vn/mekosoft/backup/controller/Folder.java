@@ -21,9 +21,7 @@ public class Folder implements Initializable {
 
 	@FXML
 	private Button button_delete;
-
-	// @FXML
-	// private TextField get_FolderId;
+ 
 
 	@FXML
 	private TextField get_FolderPath;
@@ -52,24 +50,25 @@ public class Folder implements Initializable {
 
 	}
 
-    public void delete_action(ActionEvent event) {
-        if (folder == null) {
-            AlertMaker.errorAlert("Error", "Folder object is null, unable to delete.");
-            return;
-        }
+	public void delete_action() {
+		if (folder == null) {
+			AlertMaker.errorAlert("Error", "Folder object is null, unable to delete.");
+			return;
+		}
 
-        Optional<ButtonType> result = AlertMaker.showConfirmDelete("Confirm", "Are you sure you want to delete this folder?");
-        if (result.isPresent() && result.get() == ButtonType.OK) {
-            try {
-                folderService.deleteBackupFolder(detailsTaskController.getProjectId(),
-                        detailsTaskController.getTaskId(), folder.getBackupFolderId());
-                refresh();
-            } catch (Exception e) {
-              
-                AlertMaker.errorAlert("Error", "Failed to delete Folder!");
-            }
-        }
-    }
+		Optional<ButtonType> result = AlertMaker.showConfirmDelete("Confirm",
+				"Are you sure you want to delete this folder?");
+		if (result.isPresent() && result.get() == ButtonType.OK) {
+			try {
+				folderService.deleteBackupFolder(detailsTaskController.getProjectId(),
+						detailsTaskController.getTaskId(), folder.getBackupFolderId());
+				refresh();
+			} catch (Exception e) {
+
+				AlertMaker.errorAlert("Error", "Failed to delete Folder!");
+			}
+		}
+	}
 
 	public void refresh() {
 		System.out.println("Đang gọi refresh");
@@ -83,9 +82,9 @@ public class Folder implements Initializable {
 
 			}
 		} else {
-			System.out.println("detailsTaskController không được khởi tạo.");
 		}
 	}
+ 
 
 	public void edit_action() {
 		if (folder != null) {

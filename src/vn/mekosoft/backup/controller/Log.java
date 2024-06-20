@@ -6,6 +6,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.AnchorPane;
 import vn.mekosoft.backup.action.AlertMaker;
 import vn.mekosoft.backup.config.Config;
@@ -43,9 +44,12 @@ public class Log implements Initializable {
 		configLogFile = new Config();
 
 		startUpdateThread();
-		content_log.addEventFilter(MouseEvent.MOUSE_ENTERED, event -> stopUpdating());
-		content_log.addEventFilter(MouseEvent.MOUSE_CLICKED, event -> startUpdateThread());
-	}
+		 content_log.addEventFilter(ScrollEvent.SCROLL, event -> stopUpdating());
+		 content_log.addEventFilter(MouseEvent.MOUSE_CLICKED, event -> {
+	        if (event.getClickCount() == 1	) {
+	            startUpdateThread();
+	        }
+	    });	}
 
 	private void startUpdateThread() {
 		running = true;

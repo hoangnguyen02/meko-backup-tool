@@ -2,13 +2,96 @@
   "backupProjects": [
     {
       "projectId": 1,
-      "projectName": "1",
+      "projectName": "project 1",
       "description": "1",
-      "hostname": "1",
-      "username": "1",
-      "password": "1",
+      "hostname": "pvebackup",
+      "username": "pve1",
+      "password": "admin",
       "backupProjectStatus": 1,
-      "backupTasks": []
+      "backupTasks": [
+        {
+          "backupTaskId": 1,
+          "projectId": 1,
+          "name": "backup task 1 project 1",
+          "localSchedular": "/ 2 * * * * *",
+          "localPath": "/home/ubuntu/sftp_v2",
+          "localRetention": 2,
+          "remoteSchedular": "/3 * * * * * ",
+          "remotePath": "/onedrive",
+          "remoteRetention": 3,
+          "backupTaskStatus": 1,
+          "backupFolders": [
+            {
+              "backupFolderId": 1,
+              "folderPath": "folder 1",
+              "backupTaskId": 1
+            },
+            {
+              "backupFolderId": 2,
+              "folderPath": "folder 2",
+              "backupTaskId": 1
+            },
+            {
+              "backupFolderId": 3,
+              "folderPath": "1",
+              "backupTaskId": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "projectId": 2,
+      "projectName": "2",
+      "description": "2",
+      "hostname": "2",
+      "username": "2",
+      "password": "2",
+      "backupProjectStatus": 1,
+      "backupTasks": [
+        {
+          "backupTaskId": 3,
+          "projectId": 2,
+          "name": "ưe",
+          "localSchedular": "1",
+          "localPath": "1",
+          "localRetention": 1,
+          "remoteSchedular": "1",
+          "remotePath": "1",
+          "remoteRetention": 1,
+          "backupTaskStatus": 1,
+          "backupFolders": [
+            {
+              "backupFolderId": 7,
+              "folderPath": "3",
+              "backupTaskId": 3
+            },
+            {
+              "backupFolderId": 8,
+              "folderPath": "3",
+              "backupTaskId": 3
+            },
+            {
+              "backupFolderId": 9,
+              "folderPath": "ư",
+              "backupTaskId": 3
+            }
+          ]
+        },
+        {
+          "backupTaskId": 4,
+          "projectId": 2,
+          "name": "fá",
+          "localSchedular": "1",
+          "localPath": "1213",
+          "localRetention": 1,
+          "remoteSchedular": "11",
+          "remotePath": "1",
+          "remoteRetention": 1,
+          "backupTaskStatus": 1,
+          "backupFolders": []
+        }
+      ]
     }
   ]
 }

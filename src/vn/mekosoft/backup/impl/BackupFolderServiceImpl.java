@@ -124,7 +124,7 @@ public class BackupFolderServiceImpl implements BackupFolderService {
             jsonObject.add("backupProjects", projectsArray);
             gson.toJson(jsonObject, writer);
         } catch (IOException e) {
-            e.printStackTrace(); // Handle file writing exceptions here
+            e.printStackTrace(); 
         }
     }
 }
