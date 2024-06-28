@@ -10,19 +10,24 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="659.0" prefWidth="1032.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vn.mekosoft.backup.controller.DetailsTableInfor">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="767.0" prefWidth="1075.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vn.mekosoft.backup.controller.DetailsTableInfor">
    <children>
-      <AnchorPane fx:id="title" layoutX="14.0" layoutY="14.0" prefHeight="42.0" prefWidth="996.0" styleClass="border-main" stylesheets="@../application/application.css">
+      <AnchorPane fx:id="title" layoutX="14.0" layoutY="14.0" prefHeight="42.0" prefWidth="1043.0" styleClass="border-main" stylesheets="@../application/application.css">
          <children>
             <Label layoutX="56.0" layoutY="11.0" text="Details Backup Task" textAlignment="CENTER">
                <font>
                   <Font size="14.0" />
                </font>
+            </Label>
+            <Label fx:id="countBackup" layoutX="834.0" layoutY="11.0" text="label">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
             </Label>	
          </children></AnchorPane>
-      <AnchorPane layoutX="18.0" layoutY="69.0" prefHeight="550.0" prefWidth="996.0" stylesheets="@../application/application.css">
+      <AnchorPane layoutX="14.0" layoutY="69.0" prefHeight="694.0" prefWidth="1060.0" stylesheets="@../application/application.css">
          <children>
-            <AnchorPane layoutY="14.0" prefHeight="240.0" prefWidth="599.0" styleClass="border-main" stylesheets="@../application/application.css">
+            <AnchorPane layoutY="204.0" prefHeight="240.0" prefWidth="599.0" styleClass="border-main" stylesheets="@../application/application.css">
                <children>
                   <TextField fx:id="task_name" editable="false" layoutX="117.0" layoutY="63.0" prefHeight="34.0" prefWidth="459.0" />
                   <AnchorPane layoutX="13.0" layoutY="186.0" prefHeight="33.0" prefWidth="73.0" style="-fx-background-color: #e1d2e6;" styleClass="border-add-task" stylesheets="@../application/application.css">
@@ -85,22 +90,194 @@
                   </AnchorPane>
                </children>
             </AnchorPane>
-            <AnchorPane layoutX="620.0" layoutY="14.0" prefHeight="240.0" prefWidth="333.0" styleClass="border-main" stylesheets="@../application/application.css">
+            <AnchorPane layoutX="614.0" layoutY="203.0" prefHeight="242.0" prefWidth="427.0" styleClass="border-main" stylesheets="@../application/application.css">
                <children>
-                  <ScrollPane layoutX="2.0" layoutY="4.0" prefHeight="232.0" prefWidth="326.0">
+                  <ScrollPane layoutX="2.0" layoutY="4.0" prefHeight="232.0" prefWidth="359.0" style="-fx-background-color: transparent;">
                      <content>
-                        <VBox fx:id="vbox_folderList" prefHeight="194.0" prefWidth="274.0" spacing="2.0" />
+                        <VBox fx:id="vbox_folderList" prefHeight="222.0" prefWidth="354.0" spacing="2.0" style="-fx-background-color: transparent;" />
                      </content>
                   </ScrollPane>
                </children>
             </AnchorPane>
-            <TableView fx:id="tableDetails" layoutX="6.0" layoutY="285.0" prefHeight="256.0" prefWidth="960.0">
+            <TableView fx:id="tableDetails" layoutY="455.0" prefHeight="223.0" prefWidth="1043.0">
               <columns>
-                <TableColumn fx:id="dateTime_col" prefWidth="283.99998474121094" text="Date/ Time" />
-                <TableColumn fx:id="action_col" minWidth="6.4000244140625" prefWidth="445.60003662109375" text="Event" />
-                  <TableColumn fx:id="result_col" prefWidth="212.79986572265625" text="Status" />
+                <TableColumn fx:id="dateTime_col" prefWidth="267.19999408721924" text="Date/ Time" />
+                <TableColumn fx:id="action_col" minWidth="6.4000244140625" prefWidth="370.39996337890625" text="Event" />
+                  <TableColumn fx:id="result_col" prefWidth="404.8000366210938" text="Status" />
               </columns>
             </TableView>
+            <AnchorPane layoutY="103.0" prefHeight="90.0" prefWidth="510.0" styleClass="border-main" stylesheets="@../application/application.css">
+               <children>
+                  <Label layoutX="23.0" layoutY="14.0" text="Backup Local">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="23.0" layoutY="56.0" text="Backup Remote">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="104.0" layoutY="14.0" text=" Successful" textFill="#135e04">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="187.0" layoutY="14.0" text="/Failed :" textFill="#c70707" AnchorPane.rightAnchor="244.2">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="120.0" layoutY="56.0" text=" Successful" textFill="#135e04">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="200.0" layoutY="56.0" text="/Failed :" textFill="#c70707">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="backupRemote_success" editable="false" layoutX="274.0" layoutY="51.0" prefHeight="30.0" prefWidth="85.0">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </TextField>
+                  <TextField fx:id="backupLocal_success" editable="false" layoutX="274.0" layoutY="9.0" prefHeight="30.0" prefWidth="85.0" styleClass="text-field" stylesheets="@../application/application.css">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </TextField>
+                  <TextField fx:id="backupLocal_failed" editable="false" layoutX="380.0" layoutY="9.0" prefHeight="30.0" prefWidth="85.0">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </TextField>
+                  <TextField fx:id="backupRemote_failed" editable="false" layoutX="380.0" layoutY="51.0" prefHeight="30.0" prefWidth="85.0">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </TextField>
+                  <Text layoutX="364.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="/">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="364.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0" text="/">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Text>
+               </children>
+            </AnchorPane>
+            <AnchorPane prefHeight="90.0" prefWidth="1043.0" styleClass="border-main" stylesheets="@../application/application.css">
+               <children>
+                  <Label layoutX="23.0" layoutY="18.0" text="Backup Local:">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="23.0" layoutY="54.0" text="Backup Remote:">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="280.0" layoutY="19.0" text="Cleanup Local:">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="280.0" layoutY="55.0" text="Cleanup Remote:">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="backupRemote" editable="false" layoutX="140.0" layoutY="47.0" prefHeight="30.0" prefWidth="85.0">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </TextField>
+                  <TextField fx:id="backupLocal" editable="false" layoutX="140.0" layoutY="12.0" prefHeight="30.0" prefWidth="85.0">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </TextField>
+                  <TextField fx:id="cleanupLocal" editable="false" layoutX="402.0" layoutY="14.0" prefHeight="30.0" prefWidth="85.0">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </TextField>
+                  <TextField fx:id="cleanupRemote" editable="false" layoutX="402.0" layoutY="49.0" prefHeight="30.0" prefWidth="85.0">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </TextField>
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="530.0" layoutY="103.0" prefHeight="90.0" prefWidth="510.0" styleClass="border-main" stylesheets="@../application/application.css">
+               <children>
+                  <Label layoutX="23.0" layoutY="14.0" text="Cleanup Local">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="23.0" layoutY="56.0" text="Cleanup Remote">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="137.0" layoutY="14.0" text=" Successful" textFill="#135e04">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="231.0" layoutY="14.0" text="/Failed :" textFill="#c70707">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="149.0" layoutY="56.0" text=" Successful" textFill="#135e04">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="231.0" layoutY="56.0" text="/Failed :" textFill="#c70707">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="cleanupRemote_success" editable="false" layoutX="292.0" layoutY="51.0" prefHeight="30.0" prefWidth="85.0">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </TextField>
+                  <TextField fx:id="cleanupLocal_success" editable="false" layoutX="292.0" layoutY="9.0" prefHeight="30.0" prefWidth="85.0">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </TextField>
+                  <TextField fx:id="cleanupLocal_failed" editable="false" layoutX="410.0" layoutY="9.0" prefHeight="30.0" prefWidth="85.0">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </TextField>
+                  <TextField fx:id="cleanupRemote_failed" editable="false" layoutX="410.0" layoutY="49.0" prefHeight="30.0" prefWidth="85.0">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </TextField>
+                  <Text layoutX="393.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="/">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="393.0" layoutY="74.0" strokeType="OUTSIDE" strokeWidth="0.0" text="/" wrappingWidth="9.3515625">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Text>
+               </children>
+            </AnchorPane>
          </children></AnchorPane>
    </children>
 </AnchorPane>

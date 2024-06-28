@@ -1,5 +1,6 @@
 package vn.mekosoft.backup.controller;
 
+import java.awt.Toolkit;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Optional;
@@ -14,6 +15,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
@@ -60,41 +62,37 @@ public class ManagementProject implements Initializable {
 		this.dashboardController = dashboardController;
 	}
 
-
-
 	public void deleteProject_action(ActionEvent event) {
 		Optional<ButtonType> response = AlertMaker.showConfirmAlert("Delete Project",
 				"Are you sure you want to delete this project?");
 		if (response.isPresent() && response.get() == ButtonType.OK) {
 			BackupProjectService projectService = new BackupProjectServiceImpl();
 			projectService.deleteProject(project.getProjectId());
-			AlertMaker.successfulAlert("Success", "Project deleted successfully!");
 			dashboardController.rf();
 			dashboardController.refresh_action();
 		}
 	}
 
+	public void editProject_action(ActionEvent event) {
+		try {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/vn/mekosoft/backup/view/editProject.fxml"));
+			Parent root = loader.load();
 
-    public void editProject_action(ActionEvent event) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/vn/mekosoft/backup/view/editProject.fxml"));
-            Parent root = loader.load();
+			EditProject editProjectController = loader.getController();
+			editProjectController.setProject(project);
 
-            EditProject editProjectController = loader.getController();
-            editProjectController.setProject(project);
+			Stage stage = new Stage();
+			stage.setScene(new Scene(root));
+			stage.setTitle("Edit Project");
+			stage.getIcons().add(new Image("/vn/mekosoft/backup/view/img/company_logo.png"));
+			stage.showAndWait();
 
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root));
-            stage.initModality(Modality.APPLICATION_MODAL); 
-            stage.showAndWait(); 
+			projectData(project);
 
-            projectData(project); 
-    		
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 
 	public void addTask_action(ActionEvent event) throws IOException {
 		BackupTask task = new BackupTask();
@@ -109,13 +107,18 @@ public class ManagementProject implements Initializable {
 		controller.hideFolderPane();
 		Stage stage = new Stage();
 		stage.setScene(new Scene(root));
+		stage.setTitle("Add New Task");
+		stage.getIcons().add(new Image("/vn/mekosoft/backup/view/img/company_logo.png"));
+
+		// Đặt vị trí cửa sổ ở trung tâm
+		stage.setWidth(1040); // Chiều rộng của cửa sổ
+		stage.setHeight(400);
 		stage.show();
 
-		
-	    stage.setOnHidden(e -> {
-	        dashboardController.rf();
-	        dashboardController.refresh_action();
-	    });
+		stage.setOnHidden(e -> {
+			dashboardController.rf();
+			dashboardController.refresh_action();
+		});
 	}
 
 	@Override

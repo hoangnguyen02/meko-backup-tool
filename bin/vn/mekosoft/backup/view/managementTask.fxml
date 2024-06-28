@@ -35,14 +35,14 @@
                               </Label>
                            </children>
                         </Pane>
-                        <MenuButton alignment="CENTER" contentDisplay="CENTER" layoutX="818.0" layoutY="16.0" lineSpacing="10.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="133.0" stylesheets="@../application/application.css" text="Action" textAlignment="CENTER">
+                        <MenuButton fx:id="menu_action" alignment="CENTER" contentDisplay="CENTER" layoutX="818.0" layoutY="16.0" lineSpacing="10.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="133.0" stylesheets="@../application/application.css" text="Action" textAlignment="CENTER">
                           <items>
                             <MenuItem mnemonicParsing="false">
                                  <graphic>
                                     <Button fx:id="button_log" mnemonicParsing="false" onAction="#log_action" prefHeight="34.0" prefWidth="120.0" text="Log" />
                                  </graphic>
                               </MenuItem>
-                              <MenuItem mnemonicParsing="false">
+                              <MenuItem fx:id="menuItem_delete" mnemonicParsing="false">
                                  <graphic>
                                     <Button fx:id="button_delete" mnemonicParsing="false" onAction="#delete_action" prefHeight="34.0" prefWidth="120.0" text="Delete" />
                                  </graphic>

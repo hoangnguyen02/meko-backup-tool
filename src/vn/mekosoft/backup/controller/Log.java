@@ -9,7 +9,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.AnchorPane;
 import vn.mekosoft.backup.action.AlertMaker;
-import vn.mekosoft.backup.config.Config;
+import vn.mekosoft.backup.config.ConfigReader;
 import vn.mekosoft.backup.impl.BackupServiceImpl;
 import vn.mekosoft.backup.model.BackupProject;
 import vn.mekosoft.backup.model.BackupTask;
@@ -34,19 +34,19 @@ public class Log implements Initializable {
 	private Label infor_log;
 
 	private volatile boolean running = true;
-	private Config configLogFile;
+	private ConfigReader configLogFile;
 	private BackupProject currentProject;
 	private BackupTask currentTask;
 
 	@Override
 	public void initialize(URL url, ResourceBundle resources) {
 		new BackupServiceImpl();
-		configLogFile = new Config();
+		configLogFile = new ConfigReader();
 
 		startUpdateThread();
 		 content_log.addEventFilter(ScrollEvent.SCROLL, event -> stopUpdating());
 		 content_log.addEventFilter(MouseEvent.MOUSE_CLICKED, event -> {
-	        if (event.getClickCount() == 1	) {
+	        if (event.getClickCount() == 2	) {
 	            startUpdateThread();
 	        }
 	    });	}
@@ -96,7 +96,11 @@ public class Log implements Initializable {
 				try (BufferedReader reader = new BufferedReader(new FileReader(logFilePath))) {
 					StringBuilder content = new StringBuilder();
 					String line;
+					 int maxWidth = 80;
 					while ((line = reader.readLine()) != null) {
+						if (line.length() > maxWidth) {
+	                        line = line.substring(0, maxWidth) + "...";
+	                    }
 						content.append(line).append("\n");
 					}
 					Platform.runLater(() -> {

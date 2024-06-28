@@ -14,13 +14,16 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuButton;
+import javafx.scene.control.MenuItem;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import vn.mekosoft.backup.action.AlertMaker;
-import vn.mekosoft.backup.config.Config;
+import vn.mekosoft.backup.config.ConfigReader;
 import vn.mekosoft.backup.impl.BackupTaskServiceImpl;
 import vn.mekosoft.backup.model.BackupProject;
 import vn.mekosoft.backup.model.BackupTask;
@@ -39,7 +42,7 @@ public class ManagementTask implements Initializable {
 	@FXML
 	private Label task_status;
 	@FXML
-	private Button button_log;
+	private Button button_log, button_delete;
 	@FXML
 	private Button button_run;
 	@FXML
@@ -55,7 +58,12 @@ public class ManagementTask implements Initializable {
 	private BackupTaskServiceImpl backupTaskService;
 	private boolean isSchedulerRunning = false;
 	private BackupProject project;
-
+    @FXML
+    private MenuItem menuItem_delete;
+    @FXML
+    private MenuButton menu_action;
+    
+    
 	public void clearPane() {
 		infor_task.getChildren().clear();
 	}
@@ -68,7 +76,7 @@ public class ManagementTask implements Initializable {
 		this.project = project;
 	}
 
-	public void refreshView() { 
+	public void refreshView() {
 		vbox_taskList.getChildren().clear();
 		if (currentTask != null && currentProject != null) {
 			taskData(currentTask, currentProject);
@@ -82,6 +90,11 @@ public class ManagementTask implements Initializable {
 	@Override
 	public void initialize(URL url, ResourceBundle resources) {
 		backupTaskService = new BackupTaskServiceImpl();
+		 if (menu_action != null) {
+		        checkMenuItemState();
+		    } else {
+		        System.out.println("Menu action is null.");
+		    }
 	}
 
 	public void details_action(ActionEvent event) throws IOException {
@@ -94,6 +107,8 @@ public class ManagementTask implements Initializable {
 		Stage stage = new Stage();
 		stage.setScene(new Scene(root));
 		stage.show();
+		stage.setTitle("Edit Task");
+		stage.getIcons().add(new Image("/vn/mekosoft/backup/view/img/company_logo.png"));
 		if (currentTask != null) {
 			currentTask.setBackupTaskStatus(BackupTaskStatus.DANG_BIEN_SOAN.getId());
 			backupTaskService.updateBackupTask(currentProject.getProjectId(), currentTask.getBackupTaskId(),
@@ -105,7 +120,7 @@ public class ManagementTask implements Initializable {
 	}
 
 	public void log_action(ActionEvent event) throws IOException {
-		Config config = new Config();
+		ConfigReader config = new ConfigReader();
 		String logFilePath = config.getConfigLog(currentProject.getProjectId(), currentTask.getBackupTaskId());
 		if (logFilePath != null && !logFilePath.isEmpty()) {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/vn/mekosoft/backup/view/showlog.fxml"));
@@ -114,6 +129,8 @@ public class ManagementTask implements Initializable {
 			logController.setTask(currentProject, currentTask);
 			Stage stage = new Stage();
 			stage.setScene(new Scene(root));
+			stage.setTitle("Logs");
+			stage.getIcons().add(new Image("/vn/mekosoft/backup/view/img/company_logo.png"));
 			stage.show();
 		} else {
 			AlertMaker.errorAlert("Error", "Log file does not exist!");
@@ -214,14 +231,18 @@ public class ManagementTask implements Initializable {
 			stop_action(this::updateUIForStoppedTask);
 		}
 	}
-
+	private void checkMenuItemState() {
+    }
 	private void updateUIForRunningTask() {
 		button_run.setVisible(false);
 		button_stop.setVisible(true);
+		button_delete.setVisible(false);
+		 menuItem_delete.setDisable(true);;
 		task_status.setText(getStatusActive());
 		cricle_task_status.setFill(Color.web(BackupTaskStatus.DA_DAT_LICH.getColorTask()));
 		saveTaskStatus(BackupTaskStatus.DA_DAT_LICH);
 		button_details.setVisible(false);
+		  menuItem_delete.setVisible(menuItem_delete.isVisible() && !menuItem_delete.isDisable());
 	}
 
 	private void updateUIForStoppedTask() {
@@ -254,7 +275,6 @@ public class ManagementTask implements Initializable {
 			int remoteExitCode = remoteProcess.waitFor();
 
 			if (localExitCode == 0 && remoteExitCode == 0) {
-				AlertMaker.successfulAlert("Successful", "Task started successfully");
 			} else {
 				AlertMaker.errorAlert("Error", "Failed to start task. Please check the logs for more details.");
 			}
@@ -295,7 +315,6 @@ public class ManagementTask implements Initializable {
 						int remoteExitCode = remoteProcess.waitFor();
 
 						if (localExitCode == 0 && remoteExitCode == 0) {
-							AlertMaker.successfulAlert("Successful", "Task stopped successfully");
 							if (callback != null) {
 								callback.run();
 							}

@@ -1,5 +1,7 @@
 package vn.mekosoft.backup.model;
 
+import vn.mekosoft.backup.controller.Dashboard;
+
 public enum BackupTaskStatus {
 	DANG_BIEN_SOAN(1, "Đang biên soạn", "#ffff00"),
 	HOAT_DONG(2, "Hoạt động", "#00ff00"),
@@ -59,4 +61,6 @@ public enum BackupTaskStatus {
 	        }
 	        return null;
 	    }
+
+
 }

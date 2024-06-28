@@ -27,13 +27,14 @@
     -fx-border-width: 2.0px 2.0px 2.0px 2.0px;
 }
 .button-menu {
-    -fx-border-radius: 10.0px;
-    -fx-background-color: #ebebeb;
-    -fx-border-color: #babbbb;
-    -fx-background-radius: 10.0px;
+    -fx-background-color: transparent;
+    -fx-alignment: CENTER_LEFT;
+    -fx-text-fill:#838389;
 }
-.button-1:hover {
-    -fx-background-color: #ebf0f5;
+
+.button-menu:selected {
+    -fx-background-color: #212349;
+        -fx-text-fill: #FFFFFF;
     -fx-font-weight: bold;
 }
 .button-2 {
@@ -69,8 +70,110 @@
     -fx-alignment: top-left;
 }
 
-.main_pane {
+#backupLocal_success,#backupRemote_success, #cleanupLocal_success,#cleanupRemote_success {
+    -fx-text-fill: green;
     
 }
 
-/* Responsive CSS */
+#backupLocal_failed, #backupRemote_failed, #cleanupLocal_failed, #cleanupRemote_failed{
+	-fx-text-fill: red;
+	
+}
+
+#totalTask {
+    -fx-background-color: #fff4de;
+    	 -fx-background-radius:  2.0em;
+    
+}
+
+#runningTask{
+	 -fx-background-color: #dcfce7;
+	 -fx-background-radius:  2.0em;
+}
+#stopTask{
+		-fx-background-color:#ffe2e6;
+			 -fx-background-radius:  2.0em;
+		
+}
+
+.whiteRadius{
+	-fx-background-color: #FFFFFF;
+	-fx-background-radius: 1.0em;
+	
+}
+.shadow{
+    -fx-effect: dropshadow(three-pass-box, rgba(0.0,0.0,0.0,0.0), 10.0,0.0,0.0,0.0);
+}
+
+.range{
+    -fx-effect: dropshadow(three-pass-box, rgba(0.0,0.0,0.0,0.2), 10.0,0.0,0.0,0.0);
+
+}
+/* Khi button được nhấn */
+.button-menu :pressed {
+    -fx-background-color: #154e78;
+}
+
+/* Khi button được chọn */
+.button.selected {
+    -fx-background-color: #154e78; 
+}
+.bar-chart .chart-content .chart-plot-background {
+    -fx-background-color: transparent;
+}
+
+/* styles.css */
+
+.chart1 .default-color0.chart-bar {
+    -fx-bar-fill: #4b9aff; 
+}
+
+.chart1 .default-color1.chart-bar {
+    -fx-bar-fill: #ffb46e; 
+}
+
+.chart1 .default-color2.chart-bar {
+    -fx-bar-fill: #ff605f; 
+}
+
+.chart1 .default-color3.chart-bar {
+    -fx-bar-fill: #4fd39f; 
+}
+
+.chart2 .default-color0.chart-bar {
+    -fx-bar-fill: #01e097; 
+}
+
+.chart2 .default-color1.chart-bar {
+    -fx-bar-fill: #4b9aff; 
+}
+
+.chart2 .default-color2.chart-bar {
+    -fx-bar-fill: #dcfce7; 
+}
+
+.chart2 .default-color3.chart-bar {
+    -fx-bar-fill: #ffe2e5; 
+}
+
+
+/* styles.css */
+/* styles.css */
+
+.chart-pie-data:nth-child(1) .chart-pie {
+    -fx-pie-color: #3498db; /* Màu xanh lam */
+}
+
+.chart-pie-data:nth-child(2) .chart-pie {
+    -fx-pie-color: #e74c3c; /* Màu đỏ */
+}
+
+.chart-pie-data:nth-child(3) .chart-pie {
+    -fx-pie-color: #2ecc71; /* Màu xanh lá */
+}
+
+.chart-pie-data:nth-child(4) .chart-pie {
+    -fx-pie-color: #f39c12; /* Màu cam */
+}
+
+

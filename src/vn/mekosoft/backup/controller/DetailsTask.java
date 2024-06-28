@@ -1,11 +1,15 @@
 package vn.mekosoft.backup.controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.scene.Node;
+import javafx.stage.DirectoryChooser;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import javafx.event.ActionEvent;
@@ -15,6 +19,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import vn.mekosoft.backup.action.AlertMaker;
@@ -143,18 +148,29 @@ public class DetailsTask implements Initializable {
 	}
 
 	public void refreshFolder() {
-	    List<BackupFolder> newFolders = folderService.loadFolderData(project.getProjectId(), task.getBackupTaskId());
-	    
-	    newFolders.removeIf(f -> task.getBackupFolders().stream()
-	        .noneMatch(existingFolder -> existingFolder.getBackupFolderId() == f.getBackupFolderId()));
-	    
-	    task.setBackupFolders(newFolders);
-	    vbox_folder.getChildren().clear();
-	    for (BackupFolder folder : newFolders) {
-	        addFolderLayout(folder);
-	    }
-	}
+		List<BackupFolder> newFolders = folderService.loadFolderData(project.getProjectId(), task.getBackupTaskId());
+		List<BackupFolder> filteredFolders = new ArrayList<>();
 
+		for (BackupFolder newFolder : newFolders) {
+			boolean exists = false;
+			for (BackupFolder existingFolder : task.getBackupFolders()) {
+				if (existingFolder.getBackupFolderId() == newFolder.getBackupFolderId()) {
+					exists = true;
+					break;
+				}
+			}
+			if (exists) {
+				filteredFolders.add(newFolder);
+			}
+		}
+
+		task.setBackupFolders(filteredFolders);
+		vbox_folder.getChildren().clear();
+
+		for (BackupFolder folder : filteredFolders) {
+			addFolderLayout(folder);
+		}
+	}
 
 	public long getProjectId() {
 		return project.getProjectId();
@@ -163,7 +179,11 @@ public class DetailsTask implements Initializable {
 	public long getTaskId() {
 		return task.getBackupTaskId();
 	}
+	   private TableDashboard tableDashboardController;
 
+	    public void setTableDashboardController(TableDashboard controller) {
+	        this.tableDashboardController = controller;
+	    }
 	public void saveFolder_action() {
 		try {
 			if (task != null) {
@@ -207,6 +227,10 @@ public class DetailsTask implements Initializable {
 				}
 
 				refreshView();
+				 if (tableDashboardController != null) {
+		                tableDashboardController.loadDataTable();
+		                System.out.print("Gọi table" + tableDashboardController);
+		            }
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -214,85 +238,194 @@ public class DetailsTask implements Initializable {
 		}
 	}
 
+	@FXML
+	private void browseFolderPath(MouseEvent event) {
+		DirectoryChooser directoryChooser = new DirectoryChooser();
+		directoryChooser.setTitle("Select Folder");
+		directoryChooser.setInitialDirectory(new File(System.getProperty("user.home")));
+
+		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+		File selectedDirectory = directoryChooser.showDialog(stage);
+		if (selectedDirectory != null) {
+			folder_path.setText(selectedDirectory.getAbsolutePath());
+		}
+	}
+
 	public void hideFolderPane() {
 		folder_pane.setVisible(false);
 
 	}
-
 	public void saveInforTask_action(ActionEvent event) {
-		try {
-			BackupTaskServiceImpl backupTaskService = new BackupTaskServiceImpl();
-			List<BackupProject> backupProjects = backupTaskService.loadProjectData();
+	    try {
+	        BackupTaskServiceImpl backupTaskService = new BackupTaskServiceImpl();
+	        List<BackupProject> backupProjects = backupTaskService.loadProjectData();
 
-			if (task.getBackupTaskId() != 0) {
-				updateTaskInformation(backupTaskService, backupProjects);
-			} else {
-				createNewTask(backupTaskService, backupProjects);
-				Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-				currentStage.close();
-			}
+	        // Cập nhật đối tượng task với thông tin mới
+	        task.setName(task_name.getText());
+	        task.setLocalSchedular(local_cronTab.getText());
+	        task.setRemoteSchedular(remote_cronTab.getText());
+	        task.setLocalPath(local_path.getText());
+	        task.setRemotePath(remote_path.getText());
+	        task.setLocalRetention(Long.parseLong(local_retention.getText()));
+	        task.setRemoteRetention(Long.parseLong(remote_retention.getText()));
 
-		} catch (Exception e) {
-			e.printStackTrace();
-			AlertMaker.errorAlert("Error", "Failed to save Task!");
-		}
-		refreshView();
+	        // Thực hiện xác thực
+	        if (!validateTaskInformation(backupProjects)) {
+	            AlertMaker.errorAlert("Validation Error", "All fields must be filled out and the task must be unique.");
+	            return;
+	        }
+
+	        // Tiếp tục lưu task
+	        if (task.getBackupTaskId() != 0) {
+	            updateTaskInformation(backupTaskService, backupProjects);
+	        } else {
+	            createNewTask(backupTaskService, backupProjects);
+	            Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+	            currentStage.close();
+	        }
+
+	        verifyLocalPath();
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        AlertMaker.errorAlert("Error", "Failed to save Task!");
+	    }
+	    refreshView();
 	}
+
+
 
 	private void updateTaskInformation(BackupTaskServiceImpl backupTaskService, List<BackupProject> backupProjects) {
-		task.setName(task_name.getText());
-		task.setLocalSchedular(local_cronTab.getText());
-		task.setRemoteSchedular(remote_cronTab.getText());
-		task.setLocalPath(local_path.getText());
-		task.setRemotePath(remote_path.getText());
-		task.setLocalRetention(Long.parseLong(local_retention.getText()));
-		task.setRemoteRetention(Long.parseLong(remote_retention.getText()));
+	    try {
+	        for (BackupProject proj : backupProjects) {
+	            if (proj.getProjectId() == project.getProjectId()) {
+	                List<BackupTask> tasks = proj.getBackupTasks();
+	                for (int i = 0; i < tasks.size(); i++) {
+	                    if (tasks.get(i).getBackupTaskId() == task.getBackupTaskId()) {
+	                        tasks.set(i, task);
+	                        break;
+	                    }
+	                }
+	                break;
+	            }
+	        }
 
-		for (BackupProject proj : backupProjects) {
-			if (proj.getProjectId() == project.getProjectId()) {
-				List<BackupTask> tasks = proj.getBackupTasks();
-				for (int i = 0; i < tasks.size(); i++) {
-					if (tasks.get(i).getBackupTaskId() == task.getBackupTaskId()) {
-						tasks.set(i, task);
-						break;
-					}
-				}
-				break;
-			}
-		}
-
-		backupTaskService.saveProjectsToFile(backupProjects);
+	        backupTaskService.saveProjectsToFile(backupProjects);
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        AlertMaker.errorAlert("Error", "Failed to update Task!");
+	    }
 	}
+
 
 	private void createNewTask(BackupTaskServiceImpl backupTaskService, List<BackupProject> backupProjects) {
-		long maxTaskId = backupProjects.stream().flatMap(proj -> proj.getBackupTasks().stream())
-				.mapToLong(BackupTask::getBackupTaskId).max().orElse(0) + 1;
+	    try {
+	        long maxTaskId = 0;
+	        for (BackupProject proj : backupProjects) {
+	            List<BackupTask> tasks = proj.getBackupTasks();
+	            if (tasks != null) {
+	                for (BackupTask task : tasks) {
+	                    if (task.getBackupTaskId() > maxTaskId) {
+	                        maxTaskId = task.getBackupTaskId();
+	                    }
+	                }
+	            }
+	        }
+	        maxTaskId++; 
+	        BackupTask newTask = new BackupTask();
+	        newTask.setBackupTaskId(maxTaskId);
+	        newTask.setProjectId(project.getProjectId());
+	        newTask.setName(task_name.getText());
+	        newTask.setLocalSchedular(local_cronTab.getText());
+	        newTask.setRemoteSchedular(remote_cronTab.getText());
+	        newTask.setLocalPath(local_path.getText());
+	        newTask.setRemotePath(remote_path.getText());
+	        newTask.setLocalRetention(Long.parseLong(local_retention.getText()));
+	        newTask.setRemoteRetention(Long.parseLong(remote_retention.getText()));
+	        newTask.setBackupTaskStatus(BackupTaskStatus.DANG_BIEN_SOAN.getId());
+	        newTask.setBackupFolders(new ArrayList<>());
 
-		task.setBackupTaskId(maxTaskId);
-		task.setProjectId(project.getProjectId());
-		task.setName(task_name.getText());
-		task.setLocalSchedular(local_cronTab.getText());
-		task.setRemoteSchedular(remote_cronTab.getText());
-		task.setLocalPath(local_path.getText());
-		task.setRemotePath(remote_path.getText());
-		task.setLocalRetention(Long.parseLong(local_retention.getText()));
-		task.setRemoteRetention(Long.parseLong(remote_retention.getText()));
-		task.setBackupTaskStatus(BackupTaskStatus.DANG_BIEN_SOAN.getId());
-		task.setBackupFolders(new ArrayList<>());
-		for (BackupProject proj : backupProjects) {
-			if (proj.getProjectId() == project.getProjectId()) {
-				List<BackupTask> tasks = proj.getBackupTasks();
-				if (tasks == null) {
-					tasks = new ArrayList<>();
-					proj.setBackupTasks(tasks);
-				}
-				tasks.add(task);
-				break;
-			}
-		}
-		backupTaskService.saveProjectsToFile(backupProjects);
+	        // Thêm task mới vào danh sách tasks của dự án
+	        for (BackupProject proj : backupProjects) {
+	            if (proj.getProjectId() == project.getProjectId()) {
+	                List<BackupTask> tasks = proj.getBackupTasks();
+	                if (tasks == null) {
+	                    tasks = new ArrayList<>();
+	                    proj.setBackupTasks(tasks);
+	                }
+	                tasks.add(newTask);
+	                break;
+	            }
+	        }
+
+	        // Lưu danh sách dự án sau khi thêm task mới
+	        backupTaskService.saveProjectsToFile(backupProjects);
+	        task = newTask; // Cập nhật task hiện tại thành task mới
+
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        AlertMaker.errorAlert("Error", "Failed to save Task!");
+	    }
 	}
 
+
+
+	private boolean validateTaskInformation(List<BackupProject> backupProjects) {
+	    if (task.getName().isEmpty() || task.getLocalSchedular().isEmpty() || task.getRemoteSchedular().isEmpty() ||
+	            task.getLocalPath().isEmpty() || task.getRemotePath().isEmpty() ||
+	            String.valueOf(task.getLocalRetention()).isEmpty() || String.valueOf(task.getRemoteRetention()).isEmpty()) {
+	        return false;
+	    }
+
+	    return true;
+	}
+
+
+
+
+	@FXML
+	private void browseLocalPath(MouseEvent event) {
+		if(event.getClickCount() == 10) {
+			DirectoryChooser directoryChooser = new DirectoryChooser();
+			directoryChooser.setTitle("Select Directory");
+
+			String userHome = System.getProperty("user.home");
+			directoryChooser.setInitialDirectory(new File(userHome));
+
+			Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+			File selectedDirectory = directoryChooser.showDialog(stage);
+			if (selectedDirectory != null) {
+				String path = Paths.get(selectedDirectory.getAbsolutePath()).toString();
+				local_path.setText(path);
+				  saveLocalPath(path);
+			}
+		}
+	}
+
+	// Phương thức để lưu đường dẫn
+	private void saveLocalPath(String path) {
+		// Chuyển đổi đường dẫn thành định dạng độc lập với hệ điều hành trước khi lưu
+		String normalizedPath = Paths.get(path).toString();
+		task.setLocalPath(normalizedPath);
+	}
+
+	// Khi cần sử dụng đường dẫn
+	private File getLocalPathFile() {
+		String localPath = task.getLocalPath();
+		return Paths.get(localPath).toFile();
+	}
+	public void verifyLocalPath() {
+	    File localPathFile = getLocalPathFile();
+	    if (!localPathFile.exists()) {
+	      //  AlertMaker.showConfirmAlert("Warning", "Local backup path does not exist!");
+	    } else if (!localPathFile.isDirectory()) {
+	       // AlertMaker.showConfirmAlert("Warning", "Local backup path is not a directory!");
+	    } else {
+	      //  AlertMaker.showConfirmAlert("Information", "Local backup path is valid.");
+	    }
+	}
+	
 	public void taskDetails(BackupTask task) {
 		this.task = task;
 
@@ -319,11 +452,13 @@ public class DetailsTask implements Initializable {
 		task_id.setText(String.valueOf(++currentMaxTaskId));
 		folder_id.setText(String.valueOf(++currentMaxFolderId));
 		inforClear();
+		local_path.setOnMouseClicked(event -> browseLocalPath(event));
+		folder_path.setOnMouseClicked(event -> browseFolderPath(event));
 	}
 
 	public void addFolderLayout(BackupFolder folder) {
 		try {
- 
+
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/vn/mekosoft/backup/view/folder.fxml"));
 			content_folder = loader.load();
 			Folder folderController = loader.getController();

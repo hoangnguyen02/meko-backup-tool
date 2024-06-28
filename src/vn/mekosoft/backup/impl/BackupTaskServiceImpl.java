@@ -1,7 +1,7 @@
 package vn.mekosoft.backup.impl;
 
 import com.google.gson.*;
-import vn.mekosoft.backup.config.Config;
+import vn.mekosoft.backup.config.ConfigReader;
 import vn.mekosoft.backup.model.BackupFolder;
 import vn.mekosoft.backup.model.BackupTask;
 import vn.mekosoft.backup.model.BackupProject; // Thêm import BackupProject
@@ -15,7 +15,7 @@ import java.util.List;
 
 public class BackupTaskServiceImpl implements BackupTaskService {
 
-    private final Config config = new Config();
+    private final ConfigReader config = new ConfigReader();
     private final String CONFIG_FOLDER_PATH = config.getConfigFolderPath();
     private final Gson gson = new GsonBuilder().setPrettyPrinting().create();
 

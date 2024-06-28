@@ -49,4 +49,5 @@ public class LogEntry {
     public void setResult(String result) {
         this.result.set(result);
     }
+
 }

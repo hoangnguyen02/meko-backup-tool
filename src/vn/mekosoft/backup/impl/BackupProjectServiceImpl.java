@@ -12,12 +12,12 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
-import vn.mekosoft.backup.config.Config;
+import vn.mekosoft.backup.config.ConfigReader;
 import vn.mekosoft.backup.model.BackupProject;
 import vn.mekosoft.backup.service.BackupProjectService;
 
 public class BackupProjectServiceImpl implements BackupProjectService {
-    private Config config = new Config();
+    private ConfigReader config = new ConfigReader();
     private String CONFIG_FOLDER_PATH = config.getConfigFolderPath();
 
     @Override

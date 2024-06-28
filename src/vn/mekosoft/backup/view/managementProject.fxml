@@ -11,9 +11,9 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="infor_project" prefHeight="118.0" prefWidth="1130.0" style="-fx-background-color: #fbfcfe;" stylesheets="@../application/application.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vn.mekosoft.backup.controller.ManagementProject">
+<AnchorPane fx:id="infor_project" style="-fx-background-color: #fbfcfe;" stylesheets="@../application/application.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vn.mekosoft.backup.controller.ManagementProject">
    <children>
-      <HBox prefHeight="118.0" prefWidth="1154.0" style="-fx-background-color: #fbfcfe;">
+      <HBox prefHeight="118.0" prefWidth="1138.0" style="-fx-background-color: #fbfcfe;">
          <children>
             <VBox prefHeight="98.0" prefWidth="1137.0" style="-fx-background-color: white;">
                <children>

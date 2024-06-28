@@ -13,7 +13,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
-import vn.mekosoft.backup.config.Config;
+import vn.mekosoft.backup.config.ConfigReader;
 import vn.mekosoft.backup.model.BackupFolder;
 import vn.mekosoft.backup.model.BackupProject;
 import vn.mekosoft.backup.model.BackupTask;
@@ -21,7 +21,7 @@ import vn.mekosoft.backup.service.BackupService;
 
 public class BackupServiceImpl implements BackupService {
 
-    private Config config = new Config();
+    private ConfigReader config = new ConfigReader();
     private String CONFIG_FOLDER_PATH = config.getConfigFolderPath();
 
     @Override

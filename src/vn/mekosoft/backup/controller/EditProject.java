@@ -12,6 +12,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import vn.mekosoft.backup.action.AlertMaker;
 import vn.mekosoft.backup.impl.BackupProjectServiceImpl;
 import vn.mekosoft.backup.model.BackupProject;
 import vn.mekosoft.backup.model.BackupProjectStatus;
@@ -75,7 +76,11 @@ public class EditProject implements Initializable {
 		String username = create_username_textField.getText();
 		String password = create_password_textField.getText();
 		BackupProjectStatus status = create_status_backupProject.getValue();
-
+		if (projectName.isEmpty() || description.isEmpty() || hostname.isEmpty() || username.isEmpty()
+				|| password.isEmpty() ) {
+			AlertMaker.errorAlert("Error", "All fields must be filled out.");
+			return;
+		}
 		if (project != null) {
 			project.setProjectName(projectName);
 			project.setDescription(description);

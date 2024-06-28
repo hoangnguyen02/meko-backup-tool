@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ProgressIndicator?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+
+<GridPane prefHeight="750.0" prefWidth="1373.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vn.mekosoft.backup.controller.Dashboard">
+   <columnConstraints>
+      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+   </columnConstraints>
+   <rowConstraints>
+      <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+   </rowConstraints>
+   <children>
+      <AnchorPane fx:id="main_pane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1371.0">
+         <children>
+            <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="98.0" prefWidth="1371.0" style="-fx-background-color: #FFFFFF;" stylesheets="@../application/application.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <Label layoutX="80.0" layoutY="19.0" prefHeight="46.0" prefWidth="170.0" text="MekoBackupTool" textFill="#154e78">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Label>
+                  <ImageView fx:id="logo" fitHeight="39.0" fitWidth="45.0" layoutX="34.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@img/company_logo.png" />
+                     </image>
+                  </ImageView>
+                  <ProgressIndicator fx:id="circle_Load" layoutX="34.0" layoutY="16.0" prefHeight="39.0" prefWidth="45.0" visible="false" />
+                  <Label fx:id="title" layoutX="350.0" layoutY="28.0" text="Label" textFill="#154e78">
+                     <font>
+                        <Font name="System Bold" size="19.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="list_menu" layoutY="99.2" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="649.0" prefWidth="250.0" style="-fx-background-color: #FFFFFF;" stylesheets="@../application/application.css" AnchorPane.bottomAnchor="2.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="1121.0" AnchorPane.topAnchor="99.0">
+               <children>
+                  <Button fx:id="button_dashboard" alignment="CENTER_RIGHT" layoutX="21.0" layoutY="29.0" mnemonicParsing="false" onAction="#switch_form" prefHeight="54.0" prefWidth="203.0" styleClass="button-menu" stylesheets="@../application/application.css" text="            Dashboard" textFill="#212349">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="button_backupProject" alignment="CENTER" contentDisplay="CENTER" layoutX="21.0" layoutY="97.0" mnemonicParsing="false" onAction="#switch_form" prefHeight="54.0" prefWidth="203.0" styleClass="button-menu" stylesheets="@../application/application.css" text="            Backup Project" textFill="#212349">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="button_backupTask" layoutX="52.0" layoutY="544.0" mnemonicParsing="false" onAction="#switch_form" prefHeight="53.0" prefWidth="162.0" styleClass="button-1" stylesheets="@../application/application.css" text="Backup Task" visible="false">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="button_scheduler" layoutX="50.0" layoutY="604.0" mnemonicParsing="false" onAction="#switch_form" prefHeight="53.0" prefWidth="162.0" styleClass="button-1" stylesheets="@../application/application.css" text="Scheduler" visible="false">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="button_config" layoutX="21.0" layoutY="172.0" mnemonicParsing="false" onAction="#switch_form" prefHeight="54.0" prefWidth="203.0" styleClass="button-menu" stylesheets="@../application/application.css" text="            Config" textFill="#212349">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Button>
+                  <ImageView fx:id="icon_config_1" fitHeight="33.0" fitWidth="29.0" layoutX="38.0" layoutY="185.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@img/folder%20(1).png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="icon_backup_1" fitHeight="34.0" fitWidth="29.0" layoutX="38.0" layoutY="110.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@img/file.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="icon_dashboard_1" fitHeight="33.0" fitWidth="29.0" layoutX="36.0" layoutY="42.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@img/dashboard.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="icon_dashboard_2" fitHeight="33.0" fitWidth="29.0" layoutX="36.0" layoutY="42.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                     <image>
+                        <Image url="@img/dashboard-1.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="icon_backup_2" fitHeight="34.0" fitWidth="29.0" layoutX="38.0" layoutY="110.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                     <image>
+                        <Image url="@img/file-1.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="icon_config_2" fitHeight="33.0" fitWidth="29.0" layoutX="38.0" layoutY="185.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                     <image>
+                        <Image url="@img/folder%20-1.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="content_view" layoutX="250.0" layoutY="98.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="642.0" prefWidth="1001.0" style="-fx-background-color: #FFFFFF;">
+               <children>
+                  <AnchorPane fx:id="backupProject_view" layoutX="14.0" layoutY="14.0" prefHeight="454.0" prefWidth="730.0" style="-fx-background-color: #fbfcfe; -fx-background-radius: 1em;" stylesheets="@../application/application.css" visible="false">
+                     <children>
+                        <Label layoutX="170.0" layoutY="99.0" />
+                        <Button fx:id="button_addProject" layoutX="64.0" layoutY="14.0" mnemonicParsing="false" onAction="#addProject_action" prefHeight="33.0" prefWidth="105.0" styleClass="add-folder-button" stylesheets="@../application/application.css" text="+ Project" textFill="WHITE">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="button_generate" layoutX="456.0" layoutY="14.0" mnemonicParsing="false" onAction="#generate_action" prefHeight="33.0" prefWidth="149.0" text="Generate" visible="false" />
+                        <AnchorPane fx:id="list_backupProject" layoutX="14.0" layoutY="67.0" prefHeight="330.0" prefWidth="825.0" style="-fx-background-color: transparent;" stylesheets="@../application/application.css">
+                           <children>
+                              <ScrollPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="334.0" prefWidth="1210.0" style="-fx-background-color: #fbfcfe; -fx-background-radius: 1em;" styleClass="whiteRadius" stylesheets="@../application/application.css" AnchorPane.bottomAnchor="252.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <content>
+                                    <AnchorPane fx:id="content_layout" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #fbfcfe; -fx-background-radius: 1em;" styleClass="whiteRadius" stylesheets="@../application/application.css">
+                                       <children>
+                                          <VBox fx:id="vbox_container" layoutX="25.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #fbfcfe;" stylesheets="@../application/application.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="2.2737367544323206E-13" AnchorPane.rightAnchor="0.6000000000001364" AnchorPane.topAnchor="0.0">
+                                             <padding>
+                                                <Insets right="10.0" />
+                                             </padding>
+                                          </VBox>
+                                       </children>
+                                    </AnchorPane>
+                                 </content>
+                              </ScrollPane>
+                           </children>
+                           <styleClass>
+                              <String fx:value="whiteRadius" />
+                              <String fx:value="shadow" />
+                           </styleClass>
+                        </AnchorPane>
+                        <Button fx:id="button_start" layoutX="201.0" layoutY="13.0" mnemonicParsing="false" onAction="#startBackupTool_action" prefHeight="34.0" prefWidth="139.0" styleClass="add-folder-button" stylesheets="@../application/application.css" text="Instant Backup">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Button>
+                     </children>
+                     <styleClass>
+                        <String fx:value="whiteRadius" />
+                        <String fx:value="shadow" />
+                     </styleClass>
+                     <padding>
+                        <Insets left="30.0" />
+                     </padding>
+                  </AnchorPane>
+                  <AnchorPane fx:id="config_view" prefHeight="606.0" prefWidth="1116.0" visible="false">
+                     <children>
+                        <TextField fx:id="log_textField" layoutX="242.0" layoutY="88.0" prefHeight="35.0" prefWidth="543.0" />
+                        <Label layoutX="96.0" layoutY="96.0" text="Log Folder Path:">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="96.0" layoutY="213.0" text="Config Folder Path:">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="config_textField" layoutX="242.0" layoutY="200.0" prefHeight="35.0" prefWidth="543.0" />
+                        <Button fx:id="save_config" layoutX="785.0" layoutY="520.0" mnemonicParsing="false" onAction="#saveConfig_action" prefHeight="46.0" prefWidth="66.0" text="Save" />
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane fx:id="dashboard_view" layoutY="-4.8" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="641.0" prefWidth="1116.0" style="-fx-background-color: #f9fafb;" AnchorPane.bottomAnchor="6.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-5.0">
+                     <children>
+                        <ScrollPane fitToHeight="true" fitToWidth="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="716.0" prefWidth="1316.0" style="-fx-background-color: transparent;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="-2.0" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="0.0">
+                           <content>
+                              <VBox fx:id="vbox_Dashboard" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="637.0" prefWidth="994.0" spacing="30.0" style="-fx-background-color: #f9fafb;">
+                                 <padding>
+                                    <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+                                 </padding>
+                                 <children>
+                                    <HBox fx:id="date_range" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="20.0" style="-fx-background-color: white;" stylesheets="@../application/application.css">
+                                       <children>
+                                          <MenuButton fx:id="menuDataRanges" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Date Ranges">
+                                             <items>
+                                                <MenuItem mnemonicParsing="false">
+                                                   <graphic>
+                                                      <VBox prefWidth="500.0" spacing="10.0">
+                                                         <children>
+                                                            <HBox prefHeight="15.0" prefWidth="500.0" spacing="10.0" style="-fx-background-color: transparent;">
+                                                               <children>
+                                                                  <DatePicker fx:id="startRange_date" prefWidth="300.0" promptText="Start Date" />
+                                                                  <DatePicker fx:id="endRange_date" prefWidth="300.0" promptText="End Date" />
+                                                                  <Button fx:id="button_apply" mnemonicParsing="false" onAction="#applyDateRange_action" prefWidth="200.0" text="Apply" />
+                                                               </children>
+                                                            </HBox>
+                                                         </children>
+                                                      </VBox>
+                                                   </graphic>
+                                                </MenuItem>
+                                             </items>
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </MenuButton>
+                                          <MenuButton maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Refresh Every">
+                                             <items>
+                                                <MenuItem mnemonicParsing="false">
+                                                   <graphic>
+                                                      <HBox prefWidth="400.0" spacing="10.0">
+                                                         <children>
+                                                            <TextField fx:id="refreshEvery_textField" />
+                                                            <ComboBox fx:id="comboBox_RefreshEvery" prefWidth="150.0" promptText="Second" />
+                                                            <Button fx:id="button_StartRefreshEvery" mnemonicParsing="false" prefWidth="100.0" text="Start" />
+                                                         </children>
+                                                      </HBox>
+                                                   </graphic>
+                                                </MenuItem>
+                                             </items>
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </MenuButton>
+                                       </children>
+                                       <padding>
+                                          <Insets bottom="20.0" left="30.0" top="20.0" />
+                                       </padding>
+                                       <styleClass>
+                                          <String fx:value="whiteRadius" />
+                                          <String fx:value="shadow" />
+                                       </styleClass>
+                                       <VBox.margin>
+                                          <Insets bottom="20.0" top="10.0" />
+                                       </VBox.margin>
+                                    </HBox>
+                                 </children>
+                              </VBox>
+                           </content>
+                        </ScrollPane>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane fx:id="createProject_view" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="1021.0" visible="false">
+                     <children>
+                        <AnchorPane fx:id="addProject_view" layoutX="1.0" prefHeight="649.0" prefWidth="985.0">
+                           <children>
+                              <AnchorPane layoutX="14.0" layoutY="14.0" prefHeight="39.0" prefWidth="991.0" style="-fx-background-color: #9ebcc6;" styleClass="border-main" stylesheets="@../application/application.css">
+                                 <children>
+                                    <Label alignment="TOP_LEFT" layoutX="26.0" layoutY="6.0" text="Create New Backup Project">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane layoutX="14.0" layoutY="74.0" prefHeight="522.0" prefWidth="991.0" styleClass="border-main" stylesheets="@../application/application.css">
+                                 <children>
+                                    <TextField fx:id="create_backupProjectId_textField" layoutX="683.0" layoutY="228.0" prefHeight="33.0" prefWidth="194.0" promptText="Backup Project ID" visible="false" />
+                                    <TextField fx:id="create_projectName_TextField" layoutX="147.0" layoutY="40.0" prefHeight="39.0" prefWidth="194.0" promptText="Name" AnchorPane.leftAnchor="147.0" />
+                                    <TextField fx:id="create_description_textField" layoutX="148.0" layoutY="112.0" prefHeight="39.0" prefWidth="194.0" promptText="Description" AnchorPane.leftAnchor="147.0" />
+                                    <TextField fx:id="create_username_textField" layoutX="147.0" layoutY="262.0" prefHeight="39.0" prefWidth="194.0" promptText="Username" AnchorPane.leftAnchor="147.0" />
+                                    <ComboBox fx:id="create_status_backupProject" layoutX="148.0" layoutY="423.0" prefHeight="27.0" prefWidth="194.0" AnchorPane.leftAnchor="147.0" />
+                                    <TextField fx:id="create_password_textField" layoutX="148.0" layoutY="340.0" prefHeight="39.0" prefWidth="194.0" promptText="Password" AnchorPane.leftAnchor="147.0" />
+                                    <TextField fx:id="create_hostname_textField" layoutX="147.0" layoutY="186.0" prefHeight="39.0" prefWidth="194.0" promptText="Hostname" AnchorPane.leftAnchor="147.0" />
+                                    <Label layoutX="702.0" layoutY="196.0" text="Project Id:" visible="false">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="30.0" layoutY="50.0" text="Project Name:" AnchorPane.leftAnchor="30.0">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="40.0" layoutY="122.0" text="Description:" AnchorPane.leftAnchor="30.0">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="42.0" layoutY="196.0" text="Hostname:" AnchorPane.leftAnchor="30.0">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="42.0" layoutY="272.0" text="Username:" AnchorPane.leftAnchor="30.0">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="44.0" layoutY="350.0" text="Password:" AnchorPane.leftAnchor="30.0">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="44.0" layoutY="427.0" text="Status:" AnchorPane.leftAnchor="30.0">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </AnchorPane>
+                              <Button fx:id="button_save_addProject" layoutX="907.0" layoutY="614.0" mnemonicParsing="false" onAction="#addProject_save_action" prefHeight="34.0" prefWidth="94.0" text="Add" />
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </AnchorPane>
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+   </children>
+</GridPane>
