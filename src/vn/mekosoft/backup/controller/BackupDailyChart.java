@@ -55,9 +55,9 @@ public class BackupDailyChart implements Initializable {
 	public void initialize(URL url, ResourceBundle resourceBundle) {
 		// dataChartDaily();
 		barChartDaily.getStyleClass().add("chart1");
-		barChartDaily.setCategoryGap(50);
-		barChartDaily.setBarGap(1);
-		barChartDaily.setMaxSize(1000, 500);
+		barChartDaily.setCategoryGap(0);
+		barChartDaily.setBarGap(10);
+		//barChartDaily.setMaxSize(1000, 500);
 		updateChart();
 
 	}
@@ -113,7 +113,7 @@ public class BackupDailyChart implements Initializable {
 	                    series1.getData().add(data);
 	                    data.nodeProperty().addListener((obs, oldNode, newNode) -> {
 	                        if (newNode != null) {
-	                            displayLabelForData(data, series1);
+	                           // displayLabelForData(data, series1);
 	                        }
 	                    });
 	                });
@@ -129,7 +129,7 @@ public class BackupDailyChart implements Initializable {
 	                    series2.getData().add(data);
 	                    data.nodeProperty().addListener((obs, oldNode, newNode) -> {
 	                        if (newNode != null) {
-	                            displayLabelForData(data, series2);
+	                           // displayLabelForData(data, series2);
 	                        }
 	                    });
 	                });
@@ -144,8 +144,10 @@ public class BackupDailyChart implements Initializable {
 	                    XYChart.Data<String, Integer> data = new XYChart.Data<>(formattedDate, entry.getValue());
 	                    series3.getData().add(data);
 	                    data.nodeProperty().addListener((obs, oldNode, newNode) -> {
+	                    //	 newNode.setStyle("-fx-bar-fill: #dcfce7;"); 
 	                        if (newNode != null) {
-	                            displayLabelForData(data, series3);
+	                        	
+	                         //   displayLabelForData(data, series3);
 	                        }
 	                    });
 	                });
@@ -161,7 +163,7 @@ public class BackupDailyChart implements Initializable {
 	                    series4.getData().add(data);
 	                    data.nodeProperty().addListener((obs, oldNode, newNode) -> {
 	                        if (newNode != null) {
-	                            displayLabelForData(data, series4);
+	                          //  displayLabelForData(data, series4);
 	                        }
 	                    });
 	                });
@@ -226,15 +228,21 @@ public class BackupDailyChart implements Initializable {
 //		String info = formatInformation(chartData);
 //		// detail_barChart.setText(info);
 //	}
-	private void displayLabelForData(XYChart.Data<String, Integer> data, XYChart.Series<String, Integer> series) {
-	    Node node = data.getNode();
-	    if (node != null) {
-	        StackPane stackPane = (StackPane) node;
-	        Label label = new Label(String.valueOf(data.getYValue()));
-	        stackPane.getChildren().add(label);
-	        StackPane.setAlignment(label, Pos.BASELINE_CENTER);
-	    }
-	}
+	
+	
+	
+//	private void displayLabelForData(XYChart.Data<String, Integer> data, XYChart.Series<String, Integer> series) {
+//	    Node node = data.getNode();
+//	    if (node != null) {
+//	        StackPane stackPane = (StackPane) node;
+//	        Label label = new Label(String.valueOf(data.getYValue()));
+//	        stackPane.getChildren().add(label);
+//	        StackPane.setAlignment(label, Pos.TOP_CENTER);
+//	    }
+//	}
+	
+	
+	
 //	private void updateBarChart(Map<String, Integer> backupLocalCount, Map<String, Integer> cleanupLocalCount,
 //	        Map<String, Integer> backupRemoteCount, Map<String, Integer> cleanupRemoteCount) {
 //	    Platform.runLater(() -> {

@@ -139,7 +139,7 @@ public class BackupTaskStatusChart implements Initializable {
 	        Label label = new Label(String.valueOf(data.getYValue()));
 	        label.getStyleClass().add("bar-label");
 	        stackPane.getChildren().add(label);
-	        StackPane.setAlignment(label, Pos.BASELINE_CENTER);
+	        StackPane.setAlignment(label, Pos.TOP_CENTER);
 	    }
 	}
     private Map<LocalDate, Integer> filterDataByDateRange(Map<String, Integer> logData) {

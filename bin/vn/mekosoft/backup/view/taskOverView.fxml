@@ -9,66 +9,72 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="271.0" prefWidth="1000.0" stylesheets="@../application/application.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vn.mekosoft.backup.controller.TaskOverView">
+<AnchorPane prefHeight="205.0" prefWidth="1146.0" stylesheets="@../application/application.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vn.mekosoft.backup.controller.TaskOverView">
    <children>
-      <Label layoutX="74.0" layoutY="21.0" text="Task Overview" textFill="#154e78">
+      <Label layoutX="51.0" layoutY="14.0" text="Task Overview" textFill="#154e78">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <HBox layoutY="6.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="65.59999999999991" AnchorPane.topAnchor="6.0">
+      <HBox layoutX="6.0" layoutY="54.0" prefHeight="151.0" prefWidth="1135.0" spacing="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="6.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="54.0">
          <children>
-            <AnchorPane fx:id="totalTask" prefHeight="203.0" prefWidth="203.0" stylesheets="@../application/application.css">
+            <AnchorPane fx:id="totalTask" prefHeight="105.0" prefWidth="289.0" stylesheets="@../application/application.css">
                <children>
-                  <Label layoutX="22.0" layoutY="130.0" text="Total Task">
+                  <Label layoutX="74.0" layoutY="40.0" text="Total Task">
                      <font>
                         <Font size="16.0" />
                      </font>
                   </Label>
-                  <Label fx:id="numberOfTotal" layoutX="25.0" layoutY="88.0" text="Label" textFill="#212349">
+                  <Label fx:id="numberOfTotal" layoutX="181.0" layoutY="35.0" text="Label" textFill="#212349">
                      <font>
                         <Font name="System Bold" size="24.0" />
                      </font>
                   </Label>
-                  <ImageView fx:id="image_total" fitHeight="66.0" fitWidth="50.0" layoutX="23.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="139.0" AnchorPane.leftAnchor="23.0" AnchorPane.rightAnchor="130.0" AnchorPane.topAnchor="14.0">
+                  <ImageView fx:id="image_total" fitHeight="45.0" fitWidth="45.0" layoutX="14.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@img/list.png" />
                      </image>
                   </ImageView>
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="runningTask" prefHeight="203.0" prefWidth="203.0" stylesheets="@../application/application.css">
+            <AnchorPane fx:id="runningTask" prefHeight="105.0" prefWidth="289.0" stylesheets="@../application/application.css">
                <children>
-                  <Label layoutX="28.0" layoutY="131.0" text="Running">
+                  <Label layoutX="78.0" layoutY="38.0" text="Running">
                      <font>
                         <Font size="16.0" />
                      </font>
                   </Label>
-                  <Label fx:id="numberOfRunning" layoutX="28.0" layoutY="88.0" text="Label" textFill="#212349">
+                  <Label fx:id="numberOfRunning" layoutX="188.0" layoutY="33.0" text="Label" textFill="#212349">
                      <font>
                         <Font name="System Bold" size="24.0" />
                      </font>
                   </Label>
-                  <ImageView fx:id="image_running" fitHeight="66.0" fitWidth="45.0" layoutX="20.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="144.0" AnchorPane.leftAnchor="23.0" AnchorPane.rightAnchor="138.0" AnchorPane.topAnchor="14.0">
+                  <ImageView fx:id="image_running" fitHeight="66.0" fitWidth="45.0" layoutX="21.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@img/done.png" />
                      </image>
                   </ImageView>
                </children>
+               <padding>
+                  <Insets bottom="30.0" />
+               </padding>
             </AnchorPane>
-            <AnchorPane fx:id="stopTask" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="203.0" prefWidth="203.0" stylesheets="@../application/application.css">
+            <AnchorPane fx:id="stopTask" prefHeight="97.0" prefWidth="289.0" stylesheets="@../application/application.css">
+               <padding>
+                  <Insets bottom="30.0" />
+               </padding>
                <children>
-                  <Label layoutX="23.0" layoutY="131.0" text="Stop">
+                  <Label layoutX="77.0" layoutY="40.0" text="Stop">
                      <font>
                         <Font size="16.0" />
                      </font>
                   </Label>
-                  <Label fx:id="numberOfStop" layoutX="23.0" layoutY="88.0" text="Label" textFill="#212349">
+                  <Label fx:id="numberOfStop" layoutX="169.0" layoutY="35.0" text="Label" textFill="#212349">
                      <font>
                         <Font name="System Bold" size="24.0" />
                      </font>
                   </Label>
-                  <ImageView fx:id="image_stop" fitHeight="50.0" fitWidth="45.0" layoutX="26.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="144.0" AnchorPane.leftAnchor="23.0" AnchorPane.rightAnchor="132.0" AnchorPane.topAnchor="14.0">
+                  <ImageView fx:id="image_stop" fitHeight="50.0" fitWidth="45.0" layoutX="14.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@img/task-management.png" />
                      </image>
@@ -77,15 +83,18 @@
             </AnchorPane>
          </children>
          <padding>
-            <Insets left="60.0" top="100.0" />
+            <Insets left="30.0" right="30.0" />
          </padding>
       </HBox>
    </children>
    <styleClass>
-      <String fx:value="whiteRadius" />
       <String fx:value="shadow" />
+      <String fx:value="whiteRadius" />
    </styleClass>
+   <opaqueInsets>
+      <Insets />
+   </opaqueInsets>
    <padding>
-      <Insets bottom="20.0" />
+      <Insets bottom="10.0" />
    </padding>
 </AnchorPane>

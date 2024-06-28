@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
+import java.security.PublicKey;
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
@@ -19,6 +20,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -62,6 +64,7 @@ public class TableDashboard implements Initializable {
 	@Override
 	public void initialize(URL url, ResourceBundle resourceBundle) {
 		tableDashboard();
+		
 	}
 
 	private BackupTask convertToBackupTask(TableModel selectedTask, BackupProject selectedProject) {
@@ -196,6 +199,30 @@ public class TableDashboard implements Initializable {
 		failed_col.setCellValueFactory(new PropertyValueFactory<>("failed"));
 
 		table_dashboard.setItems(data);
+		
+		status_col.setCellFactory(column -> {
+			return new TableCell<TableModel, String>() {
+				@Override
+				protected void updateItem(String item, boolean empty) {
+					super.updateItem(item, empty);
+					if (item == null || empty) {
+						setText(null);
+						setStyle("");
+					} else {
+						setText(item);
+						if ("Running".equals(item)) {
+							setStyle("-fx-text-fill: green;");
+						} else if ("Stop".equals(item)) {
+							setStyle("-fx-text-fill: red;");
+						} else {
+							setStyle("");
+						}
+					}
+				}
+			};
+		});
+	
+
 	}
 
 	private void countBackupTasks() {

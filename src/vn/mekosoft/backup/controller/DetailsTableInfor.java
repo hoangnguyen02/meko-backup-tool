@@ -128,39 +128,43 @@ public class DetailsTableInfor implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        dateTime_col.setCellValueFactory(cellData -> cellData.getValue().dateTimeProperty());
-        action_col.setCellValueFactory(cellData -> cellData.getValue().actionProperty());
-        result_col.setCellValueFactory(cellData -> cellData.getValue().resultProperty());
-        tableDetails.setItems(logEntries);
-        
-        result_col.setCellValueFactory(cellData -> cellData.getValue().resultProperty());
-        result_col.setCellFactory(new Callback<TableColumn<LogEntry, String>, TableCell<LogEntry, String>>() {
-            @Override
-            public TableCell<LogEntry, String> call(TableColumn<LogEntry, String> param) {
-                return new TableCell<LogEntry, String>() {
-                    @Override
-                    protected void updateItem(String result, boolean empty) {
-                        super.updateItem(result, empty);
-                        if (empty || result == null) {
-                            setText(null);
-                            setStyle("");
-                        } else {
-                            if (result.equals("Completed")) {
-                                setStyle("-fx-text-fill: #3cd856;-fx-background-color: #01e097");
-                                setText(result);
-                            } else if (result.equals("Failed")) {
-                                setStyle("-fx-text-fill: #fa557a; -fx-background-color: #ffe2e5");
-                                setText(result);
-                            } else {
-                                setText(result);
-                                setStyle("");
-                            }
-                        }
-                    }
-                };
-            }
-        });
+    	table();
     }
+    
+    public void table() {
+    	  dateTime_col.setCellValueFactory(cellData -> cellData.getValue().dateTimeProperty());
+          action_col.setCellValueFactory(cellData -> cellData.getValue().actionProperty());
+          result_col.setCellValueFactory(cellData -> cellData.getValue().resultProperty());
+          tableDetails.setItems(logEntries);
+          
+          result_col.setCellValueFactory(cellData -> cellData.getValue().resultProperty());
+          result_col.setCellFactory(new Callback<TableColumn<LogEntry, String>, TableCell<LogEntry, String>>() {
+              @Override
+              public TableCell<LogEntry, String> call(TableColumn<LogEntry, String> param) {
+                  return new TableCell<LogEntry, String>() {
+                      @Override
+                      protected void updateItem(String result, boolean empty) {
+                          super.updateItem(result, empty);
+                          if (empty || result == null) {
+                              setText(null);
+                              setStyle("");
+                          } else {
+                              if (result.equals("Completed")) {
+                                  setStyle("-fx-text-fill: #3cd856;");
+                                  setText(result);
+                              } else if (result.equals("Failed")) {
+                                  setStyle("-fx-text-fill: #fa557a");
+                                  setText(result);
+                              } else {
+                                  setText(result);
+                                  setStyle("");
+                              }
+                          }
+                      }
+                  };
+              }
+          });
+	}
     public void filterDataByDateRange(LocalDate startDate, LocalDate endDate) {
         this.startDate = startDate;
         this.endDate = endDate;

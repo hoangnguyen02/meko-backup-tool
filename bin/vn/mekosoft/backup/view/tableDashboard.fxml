@@ -16,7 +16,7 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <HBox layoutX="7.0" layoutY="49.0" prefHeight="347.0" prefWidth="1209.0" AnchorPane.bottomAnchor="49.39999999999998" AnchorPane.leftAnchor="7.0" AnchorPane.rightAnchor="7.400000000000091" AnchorPane.topAnchor="49.0">
+      <HBox layoutY="49.0" prefHeight="351.0" prefWidth="1197.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="49.0">
          <children>
             <TableView fx:id="table_dashboard" editable="true" focusTraversable="false" onMouseClicked="#action_table" prefHeight="347.0" prefWidth="1178.0" stylesheets="@../application/application.css">
                <columns>
@@ -24,11 +24,11 @@
                   <TableColumn fx:id="projectName_col" prefWidth="150.0" text="Project Name" />
                   <TableColumn fx:id="folder_col" minWidth="8.0" prefWidth="100.0" text="Folder" />
                   <TableColumn fx:id="countBackup_col" minWidth="0.0" prefWidth="121.0" text="Count Backup" />
-                  <TableColumn fx:id="successful_col" prefWidth="100.0" text="Success" />
-                  <TableColumn fx:id="failed_col" maxWidth="4900.0" prefWidth="104.0" text="Fail" />
-                  <TableColumn fx:id="crontabLocal_col" prefWidth="147.0" text="Crontab Local" />
-                  <TableColumn fx:id="crontabRemote_col" prefWidth="111.2000732421875" text="Crontab Remote" />
-                  <TableColumn fx:id="status_col" prefWidth="140.800048828125" text="Status" />
+                  <TableColumn fx:id="successful_col" prefWidth="82.4000244140625" text="Success" />
+                  <TableColumn fx:id="failed_col" maxWidth="4900.0" prefWidth="87.99993896484375" text="Fail" />
+                  <TableColumn fx:id="crontabLocal_col" prefWidth="156.800048828125" text="Crontab Local" />
+                  <TableColumn fx:id="crontabRemote_col" prefWidth="140.0" text="Crontab Remote" />
+                  <TableColumn fx:id="status_col" prefWidth="132.800048828125" text="Status" />
                </columns>
                <styleClass>
                   <String fx:value="table-column" />
@@ -36,7 +36,7 @@
                   <String fx:value="whiteRadius" />
                </styleClass>
                <HBox.margin>
-                  <Insets left="20.0" />
+                  <Insets left="10.0" right="10.0" />
                </HBox.margin>
             </TableView>
          </children>

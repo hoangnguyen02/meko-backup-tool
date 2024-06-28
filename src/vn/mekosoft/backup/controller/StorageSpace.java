@@ -37,8 +37,7 @@ public class StorageSpace implements Initializable {
 	public void initialize(URL url, ResourceBundle resourceBundle) {
 		localPie();
 		remotePie();
-		localPieChart.getStylesheets().add(getClass().getResource("/vn/mekosoft/backup/application/application.css").toExternalForm());
-		remotePieChart.getStylesheets().add(getClass().getResource("/vn/mekosoft/backup/application/application.css").toExternalForm());
+		
 	}
 
 //	private String getRemoteStorageInfo() throws IOException, InterruptedException {

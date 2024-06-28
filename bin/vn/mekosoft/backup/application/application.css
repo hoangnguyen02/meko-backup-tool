@@ -1,9 +1,5 @@
 /* JavaFX CSS - Leave this comment until you have at least created one rule which uses -fx-Property */
-.root {
-    -fx-border-width: 0.0;
-    -fx-border-color: transparent;
-    -fx-background-color: transparent;
-}
+
 
 .border {
     -fx-border-color: #babbbb;
@@ -119,37 +115,46 @@
     -fx-background-color: #154e78; 
 }
 .bar-chart .chart-content .chart-plot-background {
-    -fx-background-color: transparent;
+ -fx-bar-fill: #dcfce7; /* Màu bạn muốn đặt cho cột */
+    -fx-background-color: #FFFFFF;
+    	-fx-effect: none;
+    
 }
 
 /* styles.css */
 
+
+
 .chart1 .default-color0.chart-bar {
-    -fx-bar-fill: #4b9aff; 
+    -fx-bar-fill: #0095FF; 
+     -fx-border-color: red; 
+     -fx-border-width:0.0px;
+     
 }
 
 .chart1 .default-color1.chart-bar {
-    -fx-bar-fill: #ffb46e; 
+    -fx-bar-fill: #CDE7FF; 
 }
 
 .chart1 .default-color2.chart-bar {
-    -fx-bar-fill: #ff605f; 
+    -fx-bar-fill: #00E096; 
 }
 
 .chart1 .default-color3.chart-bar {
-    -fx-bar-fill: #4fd39f; 
+	-fx-effect: none;
+    -fx-bar-fill: #dcfce6; 
 }
 
 .chart2 .default-color0.chart-bar {
-    -fx-bar-fill: #01e097; 
+    -fx-bar-fill:#0095FF; 
 }
 
 .chart2 .default-color1.chart-bar {
-    -fx-bar-fill: #4b9aff; 
+    -fx-bar-fill: #f65b7e; 
 }
 
 .chart2 .default-color2.chart-bar {
-    -fx-bar-fill: #dcfce7; 
+    -fx-bar-fill:  #00E096; 
 }
 
 .chart2 .default-color3.chart-bar {
@@ -160,19 +165,19 @@
 /* styles.css */
 /* styles.css */
 
-.chart-pie-data:nth-child(1) .chart-pie {
+.chart-pie-data:nth-child(1.0) .chart-pie {
     -fx-pie-color: #3498db; /* Màu xanh lam */
 }
 
-.chart-pie-data:nth-child(2) .chart-pie {
+.chart-pie-data:nth-child(2.0) .chart-pie {
     -fx-pie-color: #e74c3c; /* Màu đỏ */
 }
 
-.chart-pie-data:nth-child(3) .chart-pie {
+.chart-pie-data:nth-child(3.0) .chart-pie {
     -fx-pie-color: #2ecc71; /* Màu xanh lá */
 }
 
-.chart-pie-data:nth-child(4) .chart-pie {
+.chart-pie-data:nth-child(4.0) .chart-pie {
     -fx-pie-color: #f39c12; /* Màu cam */
 }
 

@@ -71,7 +71,7 @@ public class Dashboard implements Initializable {
 	@FXML
 	private Button button_addProject, button_back_addProject, button_backupProject, button_backupTask, button_dashboard,
 			button_generate, button_save_addProject, button_scheduler, button_config, button_sumary,
-			button_dataProtection, save_config, button_start, button_refresh, button_apply, button_StartRefreshEvery;
+			button_dataProtection, save_config, button_start, button_refresh, button_apply, button_StartRefreshEvery,button_stopRefreshEvery;
 	@FXML
 	private TextField create_backupProjectId_textField, create_description_textField, create_hostname_textField,
 			create_projectName_TextField, create_password_textField, create_username_textField, folder_path,
@@ -184,7 +184,6 @@ public class Dashboard implements Initializable {
 		    updateDateRange1Visibility();
 		    button_apply.setOnAction(event -> {
 		        date_range1.setVisible(true);
-		        // Thêm logic xử lý khi Apply được nhấn ở đây
 		    });
 	}
 	private void updateDateRange1Visibility() {
