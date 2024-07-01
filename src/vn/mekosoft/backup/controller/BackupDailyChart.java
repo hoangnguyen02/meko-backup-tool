@@ -55,9 +55,9 @@ public class BackupDailyChart implements Initializable {
 	public void initialize(URL url, ResourceBundle resourceBundle) {
 		// dataChartDaily();
 		barChartDaily.getStyleClass().add("chart1");
-		barChartDaily.setCategoryGap(0);
-		barChartDaily.setBarGap(10);
-		//barChartDaily.setMaxSize(1000, 500);
+		barChartDaily.setCategoryGap(50);
+		barChartDaily.setBarGap(1);
+		barChartDaily.setMaxSize(1000, 500);
 		updateChart();
 
 	}
@@ -113,7 +113,7 @@ public class BackupDailyChart implements Initializable {
 	                    series1.getData().add(data);
 	                    data.nodeProperty().addListener((obs, oldNode, newNode) -> {
 	                        if (newNode != null) {
-	                           // displayLabelForData(data, series1);
+	                           displayLabelForData(data, series1);
 	                        }
 	                    });
 	                });
@@ -129,7 +129,7 @@ public class BackupDailyChart implements Initializable {
 	                    series2.getData().add(data);
 	                    data.nodeProperty().addListener((obs, oldNode, newNode) -> {
 	                        if (newNode != null) {
-	                           // displayLabelForData(data, series2);
+	                           displayLabelForData(data, series2);
 	                        }
 	                    });
 	                });
@@ -147,7 +147,7 @@ public class BackupDailyChart implements Initializable {
 	                    //	 newNode.setStyle("-fx-bar-fill: #dcfce7;"); 
 	                        if (newNode != null) {
 	                        	
-	                         //   displayLabelForData(data, series3);
+	                         displayLabelForData(data, series3);
 	                        }
 	                    });
 	                });
@@ -163,7 +163,7 @@ public class BackupDailyChart implements Initializable {
 	                    series4.getData().add(data);
 	                    data.nodeProperty().addListener((obs, oldNode, newNode) -> {
 	                        if (newNode != null) {
-	                          //  displayLabelForData(data, series4);
+	                          displayLabelForData(data, series4);
 	                        }
 	                    });
 	                });
@@ -194,52 +194,19 @@ public class BackupDailyChart implements Initializable {
 		}
 	}
 
-//	private void displayLabelForData(Object data) {
-////		if (data instanceof XYChart.Data) {
-////			XYChart.Data<String, Integer> chartData = (XYChart.Data<String, Integer>) data;
-////			final Node node = chartData.getNode();
-////
-////			if (node != null) {
-////				node.parentProperty().addListener((obs, oldParent, newParent) -> {
-////					if (newParent != null) {
-////						updateLabel(chartData);
-////
-////						node.boundsInParentProperty().addListener((ChangeListener<Bounds>) (ov, oldBounds, bounds) -> {
-////							if (detail_barChart.isVisible()) {
-////							}
-////						});
-////
-////						node.addEventHandler(MouseEvent.MOUSE_ENTERED, event -> {
-////							String info = formatInformation(chartData);
-////							detail_barChart.setText(info);
-////							detail_barChart.setVisible(true);
-////						});
-////
-////						node.addEventHandler(MouseEvent.MOUSE_EXITED, event -> {
-////							detail_barChart.setVisible(false);
-////						});
-////					}
-////				});
-////			}
-////		}
-//	}
-//
-//	private void updateLabel(XYChart.Data<String, Integer> chartData) {
-//		String info = formatInformation(chartData);
-//		// detail_barChart.setText(info);
-//	}
 	
 	
 	
-//	private void displayLabelForData(XYChart.Data<String, Integer> data, XYChart.Series<String, Integer> series) {
-//	    Node node = data.getNode();
-//	    if (node != null) {
-//	        StackPane stackPane = (StackPane) node;
-//	        Label label = new Label(String.valueOf(data.getYValue()));
-//	        stackPane.getChildren().add(label);
-//	        StackPane.setAlignment(label, Pos.TOP_CENTER);
-//	    }
-//	}
+	private void displayLabelForData(XYChart.Data<String, Integer> data, XYChart.Series<String, Integer> series) {
+	    Node node = data.getNode();
+	    if (node != null) {
+	        StackPane stackPane = (StackPane) node;
+	        Label label = new Label(String.valueOf(data.getYValue()));
+	        label.setStyle("-fx-font: 10 arial;");
+	        stackPane.getChildren().add(label);
+	        StackPane.setAlignment(label, Pos.BASELINE_CENTER);
+	    }
+	}
 	
 	
 	

@@ -391,7 +391,7 @@ public class DetailsTableInfor implements Initializable {
                     } else if (line.contains("[END] [CLEANUPREMOTE]")) {
                         String result = "Completed";
                         String nextLine = reader.readLine();
-
+ 
                         if (nextLine != null && nextLine.contains("[FAILED]")) {
                             result = "Failed";
                             cleanupRemoteFailedCount[0]++;
@@ -403,20 +403,20 @@ public class DetailsTableInfor implements Initializable {
                     }
                 }
                 Platform.runLater(() -> {
-                    backupLocal.setText(String.valueOf(backupLocalCount[0] + " times"));
-                    backupRemote.setText(String.valueOf(backupRemoteCount[0] + " times"));
-                    cleanupLocal.setText(String.valueOf(cleanupLocalCount[0] + " times"));
-                    cleanupRemote.setText(String.valueOf(cleanupRemoteCount[0] + " times"));
+                    backupLocal.setText(String.valueOf("Total: " + backupLocalCount[0]));
+                    backupRemote.setText(String.valueOf("Total: " +backupRemoteCount[0]));
+                    cleanupLocal.setText(String.valueOf("Total: " +cleanupLocalCount[0]));
+                    cleanupRemote.setText(String.valueOf("Total: " +cleanupRemoteCount[0]));
 
-                    backupLocal_success.setText(String.valueOf(backupLocalSuccessCount[0] + " times"));
-                    backupRemote_success.setText(String.valueOf(backupRemoteSuccessCount[0] + " times"));
-                    cleanupLocal_success.setText(String.valueOf(cleanupLocalSuccessCount[0] + " times"));
-                    cleanupRemote_success.setText(String.valueOf(cleanupRemoteSuccessCount[0] + " times"));
+                    backupLocal_success.setText(String.valueOf("Success: " + backupLocalSuccessCount[0] ));
+                    backupRemote_success.setText(String.valueOf("Success: " +backupRemoteSuccessCount[0]));
+                    cleanupLocal_success.setText(String.valueOf("Success: " +cleanupLocalSuccessCount[0] ));
+                    cleanupRemote_success.setText(String.valueOf("Success: " +cleanupRemoteSuccessCount[0]));
 
-                    backupLocal_failed.setText(String.valueOf(backupLocalFailedCount[0] + " times"));
-                    backupRemote_failed.setText(String.valueOf(backupRemoteFailedCount[0] + " times"));
-                    cleanupLocal_failed.setText(String.valueOf(cleanupLocalFailedCount[0] + " times"));
-                    cleanupRemote_failed.setText(String.valueOf(cleanupRemoteFailedCount[0] + " times"));
+                    backupLocal_failed.setText(String.valueOf("Failed: " + backupLocalFailedCount[0]));
+                    backupRemote_failed.setText(String.valueOf("Failed: " + backupRemoteFailedCount[0]));
+                    cleanupLocal_failed.setText(String.valueOf("Failed: " + cleanupLocalFailedCount[0]));
+                    cleanupRemote_failed.setText(String.valueOf("Failed: " +cleanupRemoteFailedCount[0]));
 
                     int totalBackupCount = backupLocalCount[0] + backupRemoteCount[0];
                     countBackup.setText("Count Backup: " + totalBackupCount + "times");

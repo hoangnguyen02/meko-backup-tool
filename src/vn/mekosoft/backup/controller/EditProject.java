@@ -8,7 +8,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -48,15 +50,32 @@ public class EditProject implements Initializable {
 
 	@FXML
 	private TextField create_username_textField;
-
+    @FXML
+    private PasswordField password_edit;
+    @FXML
+    private CheckBox showPass;
+    
 	private BackupProject project;
 	private BackupProjectService backupProjectService = new BackupProjectServiceImpl();
 
+	
 	@Override
 	public void initialize(URL url, ResourceBundle resourceBundle) {
 		create_status_backupProject.getItems().setAll(BackupProjectStatus.values());
 	}
 
+	public void showPassword_action() {
+		if (showPass.isSelected()) {
+			create_password_textField.setText(password_edit.getText());
+			password_edit.setVisible(false);
+			create_password_textField.setVisible(true);
+
+		} else {
+			password_edit.setText(create_password_textField.getText());
+			password_edit.setVisible(true);
+			create_password_textField.setVisible(false);
+		}
+	}
 	public void setProject(BackupProject project) {
 		this.project = project;
 		create_backupProjectId_textField.setText(String.valueOf(project.getProjectId()));
@@ -64,7 +83,7 @@ public class EditProject implements Initializable {
 		create_description_textField.setText(project.getDescription());
 		create_hostname_textField.setText(project.getHostname());
 		create_username_textField.setText(project.getUsername());
-		create_password_textField.setText(project.getPassword());
+		password_edit.setText(project.getPassword());
 		create_status_backupProject.setValue(BackupProjectStatus.fromId(project.getBackupProjectStatus()));
 	}
 
@@ -76,7 +95,7 @@ public class EditProject implements Initializable {
 		String username = create_username_textField.getText();
 		String password = create_password_textField.getText();
 		BackupProjectStatus status = create_status_backupProject.getValue();
-		if (projectName.isEmpty() || description.isEmpty() || hostname.isEmpty() || username.isEmpty()
+		if (projectName.isEmpty() || hostname.isEmpty() || username.isEmpty()
 				|| password.isEmpty() ) {
 			AlertMaker.errorAlert("Error", "All fields must be filled out.");
 			return;

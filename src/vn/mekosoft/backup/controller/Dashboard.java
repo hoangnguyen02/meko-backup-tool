@@ -35,10 +35,12 @@ import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -59,6 +61,7 @@ import vn.mekosoft.backup.model.BackupFolder;
 import vn.mekosoft.backup.model.BackupProject;
 import vn.mekosoft.backup.model.BackupProjectStatus;
 import vn.mekosoft.backup.model.BackupTask;
+import vn.mekosoft.backup.model.BackupTaskStatus;
 import vn.mekosoft.backup.model.TableModel;
 import vn.mekosoft.backup.model.Time;
 import vn.mekosoft.backup.service.BackupProjectService;
@@ -71,7 +74,8 @@ public class Dashboard implements Initializable {
 	@FXML
 	private Button button_addProject, button_back_addProject, button_backupProject, button_backupTask, button_dashboard,
 			button_generate, button_save_addProject, button_scheduler, button_config, button_sumary,
-			button_dataProtection, save_config, button_start, button_refresh, button_apply, button_StartRefreshEvery,button_stopRefreshEvery;
+			button_dataProtection, save_config, button_start, button_refresh, button_StartRefreshEvery,
+			button_stopRefreshEvery, clearPicker_action;
 	@FXML
 	private TextField create_backupProjectId_textField, create_description_textField, create_hostname_textField,
 			create_projectName_TextField, create_password_textField, create_username_textField, folder_path,
@@ -97,6 +101,9 @@ public class Dashboard implements Initializable {
 
 	@FXML
 	private ProgressIndicator circle_Load;
+
+	@FXML
+	private CheckBox showPassword;
 	@FXML
 
 	private Label totalLocal, detail_barChart, numberOfTotal, numberOfStop, numberOfRunning, totalRemote, title;
@@ -114,12 +121,16 @@ public class Dashboard implements Initializable {
 	private LocalDate endDate;
 
 	private final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-    @FXML
-    private HBox date_range,date_range1,ranges;
+	@FXML
+	private HBox date_range, range_afterPick, ranges;
 	private ScheduledExecutorService scheduler;
+	@FXML
+	private PasswordField password_create;
 
 	@FXML
 	private ImageView icon_dashboard_1, icon_dashboard_2, icon_config_1, icon_config_2, icon_backup_1, icon_backup_2;
+
+	private ManagementTask managementTaskController;
 
 	@Override
 	public void initialize(URL url, ResourceBundle resources) {
@@ -146,13 +157,44 @@ public class Dashboard implements Initializable {
 		comboBox_RefreshEvery.setItems(FXCollections.observableArrayList(Time.values()));
 
 		button_StartRefreshEvery.setOnAction(event -> startRefreshEvery());
-		//button_apply.setOnAction(event -> applyDateRange_action());
 		setupDatePickers();
+	}
+
+	public void showPass_action() {
+		if (showPassword.isSelected()) {
+			create_password_textField.setText(password_create.getText());
+			password_create.setVisible(false);
+			create_password_textField.setVisible(true);
+
+		} else {
+			password_create.setText(create_password_textField.getText());
+			password_create.setVisible(true);
+			create_password_textField.setVisible(false);
+		}
+	}
+
+	public void startBackupTool_action(ActionEvent event) {
+		
+		if (!isBackupStarted) {
+			isBackupStarted = true;
+			CoreScriptService coreScriptService = new CoreScriptServiceImpl();
+AlertMaker.showConfirmAlert("Bạn chắc chưa?", "Có thật là muốn chạy hết không bạn?");
+			try {
+				String command = "/home/ubuntu/sftp_ver2/backup.sh --execute_all";
+				coreScriptService.executeAll(command);
+//				ManagementTask managementTask = new ManagementTask();
+//				managementTask.updateTaskStatusToScheduled();
+			} catch (IOException | InterruptedException e) {
+			}
+			AlertMaker.successfulAlert("Success", "Instant Backup Successful");
+
+		}
+
 	}
 
 	private void setupDatePickers() {
 		StringConverter<LocalDate> converter = new StringConverter<LocalDate>() {
-			
+
 			@Override
 			public String toString(LocalDate date) {
 				return (date != null) ? dateFormatter.format(date) : "";
@@ -165,31 +207,29 @@ public class Dashboard implements Initializable {
 		};
 		startRange_date.setConverter(converter);
 		endRange_date.setConverter(converter);
-		
-		  startRange_date.valueProperty().addListener((observable, oldValue, newValue) -> {
-		        if (newValue != null) {
-		            startPicker.setText(dateFormatter.format(newValue));
-		        } else {
-		            startPicker.setText("");
-		        }
-		    });
-		    
-		    endRange_date.valueProperty().addListener((observable, oldValue, newValue) -> {
-		        if (newValue != null) {
-		            endPicker.setText(dateFormatter.format(newValue));
-		        } else {
-		            endPicker.setText("");
-		        }
-		    });
-		    updateDateRange1Visibility();
-		    button_apply.setOnAction(event -> {
-		        date_range1.setVisible(true);
-		    });
+
+		startRange_date.valueProperty().addListener((observable, oldValue, newValue) -> {
+			if (newValue != null) {
+				startPicker.setText(dateFormatter.format(newValue));
+				applyDateRange_action();
+			}
+		});
+
+		endRange_date.valueProperty().addListener((observable, oldValue, newValue) -> {
+			if (newValue != null) {
+				endPicker.setText(dateFormatter.format(newValue));
+			}
+		});
+		updateDateRange1Visibility();
+		range_afterPick.setVisible(true);
+
 	}
+
 	private void updateDateRange1Visibility() {
-	    boolean bothDatesSelected = startRange_date.getValue() != null && endRange_date.getValue() != null;
-	    date_range1.setVisible(bothDatesSelected);
+		boolean bothDatesSelected = startRange_date.getValue() != null && endRange_date.getValue() != null;
+		range_afterPick.setVisible(bothDatesSelected);
 	}
+
 	private void startRefreshEvery() {
 		Time selectedTimeUnit = comboBox_RefreshEvery.getValue();
 		String intervalText = refreshEvery_textField.getText();
@@ -200,7 +240,10 @@ public class Dashboard implements Initializable {
 			AlertMaker.errorAlert("Error", "Please enter a valid number for the interval.");
 			return;
 		}
-
+		if (interval <= 0) {
+			AlertMaker.errorAlert("Error", "Please enter a positive number for the interval.");
+			return;
+		}
 		int intervalInSeconds = interval * selectedTimeUnit.toSeconds();
 		stopAutoRefresh();
 		setupAutoRefresh(intervalInSeconds, TimeUnit.SECONDS);
@@ -220,7 +263,18 @@ public class Dashboard implements Initializable {
 		}
 	}
 
+	public void clearPicker_action() {
+		startPicker.clear();
+		endPicker.clear();
+		startRange_date.setValue(null);
+		endRange_date.setValue(null);
 
+		range_afterPick.setVisible(false);
+		startDate = null;
+		endDate = null;
+		loadDashboard();
+
+	}
 
 	private void loadDashboard() {
 		Platform.runLater(() -> {
@@ -241,42 +295,42 @@ public class Dashboard implements Initializable {
 		if (backupDailyChartController != null) {
 			backupDailyChartController.updateChart();
 		}
-//	    if (backupTaskStatusChartController != null) {
-//	        backupTaskStatusChartController.updateChart();
-//	    }
-//	    if (storageSpaceController != null) {
-//	        storageSpaceController.updateData();
-//	    }
-//	    if (tableDashboardController != null) {
-//	        tableDashboardController.updateData();
-//	    }
+		if (backupTaskStatusChartController != null) {
+			backupTaskStatusChartController.updateChart();
+		}
+		if (storageSpaceController != null) {
+			storageSpaceController.updateData();
+		}
+		if (tableDashboardController != null) {
+			tableDashboardController.updateData();
+		}
 	}
 
 	private void setupAutoRefresh(int interval, TimeUnit unit) {
-	    scheduler = Executors.newScheduledThreadPool(1);
-	    scheduler.scheduleAtFixedRate(() -> {
-	        toggleComponents();
-	        try {
-	            Thread.sleep(1000);
-	        } catch (InterruptedException e) {
-	            Thread.currentThread().interrupt();
-	        }
-	        toggleComponents();
-	    }, 0, interval, unit);
+		scheduler = Executors.newScheduledThreadPool(1);
+		scheduler.scheduleAtFixedRate(() -> {
+			toggleComponents();
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				Thread.currentThread().interrupt();
+			}
+			toggleComponents();
+			updateAllData();
+		}, 0, interval, unit);
 	}
 
-    private void toggleComponents() {
-        Platform.runLater(() -> {
-            if (logo.isVisible()) {
-                logo.setVisible(false);
-                circle_Load.setVisible(true);
-            } else {
-                circle_Load.setVisible(false);
-                logo.setVisible(true);
-            }
-        });
-    }
-
+	private void toggleComponents() {
+		Platform.runLater(() -> {
+			if (logo.isVisible()) {
+				logo.setVisible(false);
+				circle_Load.setVisible(true);
+			} else {
+				circle_Load.setVisible(false);
+				logo.setVisible(true);
+			}
+		});
+	}
 
 	public void showAddProjectView() {
 		addProject_view.setVisible(true);
@@ -303,12 +357,18 @@ public class Dashboard implements Initializable {
 	}
 
 	private boolean isBackupStarted = false;
+	@FXML
+	private Dashboard dashboardController;
+
+	public void setDashboardController(Dashboard controller) {
+		this.dashboardController = controller;
+	}
 
 	public void switch_form(ActionEvent event) {
 		dashboard_view.setVisible(false);
 		backupProject_view.setVisible(false);
-	//	backupTask_view.setVisible(false);
-	//	scheduler_view.setVisible(false);
+		// backupTask_view.setVisible(false);
+		// scheduler_view.setVisible(false);
 		config_view.setVisible(false);
 		createProject_view.setVisible(false);
 
@@ -373,20 +433,6 @@ public class Dashboard implements Initializable {
 		}
 	}
 
-	public void startBackupTool_action(ActionEvent event) {
-		if (!isBackupStarted) {
-			isBackupStarted = true;
-			CoreScriptService coreScriptService = new CoreScriptServiceImpl();
-
-			try {
-				String command = "/home/ubuntu/sftp_ver2/backup.sh --execute_all";
-				coreScriptService.executeAll(command);
-			} catch (IOException | InterruptedException e) {
-			}
-			AlertMaker.successfulAlert("Success", "Instant Backup Successful");
-		}
-	}
-
 	public void clear() {
 		create_backupProjectId_textField.clear();
 		create_projectName_TextField.clear();
@@ -401,10 +447,8 @@ public class Dashboard implements Initializable {
 		ConfigReader config = new ConfigReader();
 		String CONFIG_FOLDER_PATH = config.getConfigFolderPath();
 
-		// Load existing projects
 		List<BackupProject> backupProjects = new BackupServiceImpl().loadData();
 
-		// Find the current max project ID
 		long currentMaxProjectId = 0;
 		for (BackupProject project : backupProjects) {
 			if (project.getProjectId() > currentMaxProjectId) {
@@ -413,19 +457,17 @@ public class Dashboard implements Initializable {
 		}
 		long projectId = currentMaxProjectId + 1;
 
-		// Read values from text fields and combo box
 		String projectName = create_projectName_TextField.getText();
 		String description = create_description_textField.getText();
 		String hostname = create_hostname_textField.getText();
 		String username = create_username_textField.getText();
 		String password = create_password_textField.getText();
 		BackupProjectStatus projectStatus = create_status_backupProject.getValue();
-		if (projectName.isEmpty() || description.isEmpty() || hostname.isEmpty() || username.isEmpty()
-				|| password.isEmpty() || projectStatus == null) {
+		if (projectName.isEmpty() || hostname.isEmpty() || username.isEmpty() || password.isEmpty()
+				|| projectStatus == null) {
 			AlertMaker.errorAlert("Error", "All fields must be filled out.");
 			return;
 		}
-		// Create a new BackupProject object
 		BackupProject newProject = new BackupProject();
 		newProject.setProjectId(projectId);
 		newProject.setProjectName(projectName);
@@ -436,10 +478,8 @@ public class Dashboard implements Initializable {
 		newProject.setBackupProjectStatusFromEnum(projectStatus);
 		newProject.setBackupTasks(new ArrayList<>());
 
-		// Add the new project to the list
 		backupProjects.add(newProject);
 
-		// Write the updated list of projects to the config file
 		try (FileWriter writer = new FileWriter(CONFIG_FOLDER_PATH)) {
 			JsonArray backupProjectsArray = new JsonArray();
 			for (BackupProject project : backupProjects) {
@@ -488,7 +528,6 @@ public class Dashboard implements Initializable {
 			gson.toJson(jsonObject, writer);
 		} catch (IOException e) {
 			e.printStackTrace();
-			AlertMaker.errorAlert("Error", "Failed to add project.");
 		}
 
 		loadData();
@@ -496,6 +535,10 @@ public class Dashboard implements Initializable {
 		backupProject_view.setVisible(true);
 		refresh_action();
 		clear();
+	}
+
+	public void connection() {
+
 	}
 
 	public void addTask_Layout(BackupTask task, BackupProject project) {
@@ -675,10 +718,16 @@ public class Dashboard implements Initializable {
 
 		if (startDate != null && endDate != null) {
 			if (endDate.isBefore(startDate)) {
+				AlertMaker.errorAlert("Invalid Date Range", "End date cannot be before start date.");
 				return;
 			}
 
 			filterDataByDateRange(startDate, endDate);
+			range_afterPick.setVisible(true);
+			startPicker.setText(dateFormatter.format(startDate));
+			endPicker.setText(dateFormatter.format(endDate));
+		} else {
+			range_afterPick.setVisible(false);
 		}
 	}
 

@@ -76,6 +76,10 @@
 	
 }
 
+#backupLocal, #cleanupLocal, #backupRemote, #cleanupRemote{
+	-fx-text-fill :#E6663E;
+}
+
 #totalTask {
     -fx-background-color: #fff4de;
     	 -fx-background-radius:  2.0em;
@@ -115,7 +119,7 @@
     -fx-background-color: #154e78; 
 }
 .bar-chart .chart-content .chart-plot-background {
- -fx-bar-fill: #dcfce7; /* Màu bạn muốn đặt cho cột */
+ -fx-bar-fill: #dcfce7; 
     -fx-background-color: #FFFFFF;
     	-fx-effect: none;
     
@@ -165,20 +169,11 @@
 /* styles.css */
 /* styles.css */
 
-.chart-pie-data:nth-child(1.0) .chart-pie {
-    -fx-pie-color: #3498db; /* Màu xanh lam */
-}
+.default-color0.chart-pie { -fx-pie-color:   #0095FF; }
+.default-color1.chart-pie { -fx-pie-color: #00E096; }
+.default-color2.chart-pie { -fx-pie-color: #f65a7e; }
 
-.chart-pie-data:nth-child(2.0) .chart-pie {
-    -fx-pie-color: #e74c3c; /* Màu đỏ */
+.scroll-pane {
+   -fx-background: #FFFFFF;
 }
-
-.chart-pie-data:nth-child(3.0) .chart-pie {
-    -fx-pie-color: #2ecc71; /* Màu xanh lá */
-}
-
-.chart-pie-data:nth-child(4.0) .chart-pie {
-    -fx-pie-color: #f39c12; /* Màu cam */
-}
-
 

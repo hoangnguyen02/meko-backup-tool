@@ -1,0 +1,1834 @@
+2024/06/24 20:08:31 [INFO] : Set crontab for local storage with backupProjectId=1 and backupTaskId=2
+2024/06/24 20:08:31 [INFO] : Set crontab for remote storage with backupProjectId=1 and backupTaskId=2
+
+2024/06/24 20:09:01 [START] [BACKUPLOCAL] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:09:02 [SFTP] [SUCCESS] [SFTP connect to host pve1 successful.]
+2024/06/24 20:09:02 [INFO] : Begin backup folder /folder3 to Local Storage
+2024/06/24 20:09:02 [SFTPFOLDERDIR] [SUCCESS]: Created local backup directory /home/ubuntu/sftp_ver2/pve1/folder3/2024-06-24_20:09:02
+2024/06/24 20:09:02 [SFTPCHECKSUMFOLDER] [SUCCESS]: Created remote checksum directory /home/ubuntu/sftp_ver2/checksums/sftpserver/projectId_1_taskId_2
+2024/06/24 20:09:02 [SFTPCHECKSUMFILE] [SUCCESS]: Generated remote checksum file for /folder3
+Connected to pve1.
+sftp> get -R /folder3 /home/ubuntu/sftp_ver2/pve1/folder3/2024-06-24_20:09:02
+Fetching /folder3/ to /home/ubuntu/sftp_ver2/pve1/folder3/2024-06-24_20:09:02/folder3
+Retrieving /folder3
+sftp> bye
+2024/06/24 20:09:03 [LOCALCHECKSUMFILE] [SUCCESS]: Generated local checksum file for /folder3
+2024/06/24 20:09:03 [CHECKSUM] [SUCCESS]: Susscessful to download file - All checksums match
+2024/06/24 20:09:03 [INFO] : End backup folder /folder3 to Local Storage
+2024/06/24 20:09:03 [END] [BACKUPLOCAL] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:09:03 [SUCCESSFUL] [BACKUPLOCAL] [ProjectId_1_BackupTaskId_2]
+
+
+2024/06/24 20:09:03 [START] [CLEANUPLOCAL] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:09:03 [INFO] : Begin cleanup directory /home/ubuntu/sftp_ver2/pve1/folder3 with 2 retention
+2024/06/24 20:09:03 [INFO] : There are no folders in folder3 to delete
+2024/06/24 20:09:03 [INFO] : End cleanup directory /home/ubuntu/sftp_ver2/pve1/folder3 with 2 retention
+2024/06/24 20:09:03 [END] [CLEANUPLOCAL] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:09:03 [SUCCESS] [CLEANUPLOCAL] [ProjectId_1_BackupTaskId_2]
+
+
+2024/06/24 20:10:01 [START] [BACKUPLOCAL] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:10:01 [SFTP] [SUCCESS] [SFTP connect to host pve1 successful.]
+2024/06/24 20:10:02 [INFO] : Begin backup folder /folder3 to Local Storage
+2024/06/24 20:10:02 [SFTPFOLDERDIR] [SUCCESS]: Created local backup directory /home/ubuntu/sftp_ver2/pve1/folder3/2024-06-24_20:10:02
+2024/06/24 20:10:02 [SFTPCHECKSUMFOLDER] [SUCCESS]: Created remote checksum directory /home/ubuntu/sftp_ver2/checksums/sftpserver/projectId_1_taskId_2
+2024/06/24 20:10:02 [SFTPCHECKSUMFILE] [SUCCESS]: Generated remote checksum file for /folder3
+Connected to pve1.
+sftp> get -R /folder3 /home/ubuntu/sftp_ver2/pve1/folder3/2024-06-24_20:10:02
+Fetching /folder3/ to /home/ubuntu/sftp_ver2/pve1/folder3/2024-06-24_20:10:02/folder3
+Retrieving /folder3
+sftp> bye
+2024/06/24 20:10:02 [LOCALCHECKSUMFILE] [SUCCESS]: Generated local checksum file for /folder3
+2024/06/24 20:10:02 [CHECKSUM] [SUCCESS]: Susscessful to download file - All checksums match
+2024/06/24 20:10:02 [INFO] : End backup folder /folder3 to Local Storage
+2024/06/24 20:10:02 [END] [BACKUPLOCAL] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:10:02 [SUCCESSFUL] [BACKUPLOCAL] [ProjectId_1_BackupTaskId_2]
+
+
+2024/06/24 20:10:02 [START] [CLEANUPLOCAL] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:10:02 [INFO] : Begin cleanup directory /home/ubuntu/sftp_ver2/pve1/folder3 with 2 retention
+2024/06/24 20:10:02 [INFO] : There are no folders in folder3 to delete
+2024/06/24 20:10:02 [INFO] : End cleanup directory /home/ubuntu/sftp_ver2/pve1/folder3 with 2 retention
+2024/06/24 20:10:02 [END] [CLEANUPLOCAL] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:10:02 [SUCCESS] [CLEANUPLOCAL] [ProjectId_1_BackupTaskId_2]
+
+
+2024/06/24 20:10:11 [START] [BACKUPREMOTE] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:10:11 [INFO] : Begin backup folder folder1 to Remote Storage
+2024/06/24 20:10:14 INFO  : There was nothing to transfer
+2024/06/24 20:10:14 INFO  : 
+Transferred:   	         0 / 0 Bytes, -, 0 Bytes/s, ETA -
+Checks:                 4 / 4, 100%
+Elapsed time:         2.6s
+
+Directories match. No differences found.
+2024/06/24 20:10:16 [INFO] : End backup folder folder1  to Remote Storage
+2024/06/24 20:10:16 [INFO] : Begin backup folder folder1 to Remote Storage
+2024/06/24 20:10:19 INFO  : There was nothing to transfer
+2024/06/24 20:10:19 INFO  : 
+Transferred:   	         0 / 0 Bytes, -, 0 Bytes/s, ETA -
+Checks:                 4 / 4, 100%
+Elapsed time:         3.1s
+
+Directories match. No differences found.
+2024/06/24 20:10:23 [INFO] : End backup folder folder1  to Remote Storage
+2024/06/24 20:10:23 [INFO] : Begin backup folder folder2 to Remote Storage
+2024/06/24 20:10:25 INFO  : There was nothing to transfer
+2024/06/24 20:10:25 INFO  : 
+Transferred:   	         0 / 0 Bytes, -, 0 Bytes/s, ETA -
+Checks:                 1 / 1, 100%
+Elapsed time:         2.3s
+
+Directories match. No differences found.
+2024/06/24 20:10:28 [INFO] : End backup folder folder2  to Remote Storage
+2024/06/24 20:10:28 [INFO] : Begin backup folder folder2 to Remote Storage
+2024/06/24 20:10:31 INFO  : There was nothing to transfer
+2024/06/24 20:10:31 INFO  : 
+Transferred:   	         0 / 0 Bytes, -, 0 Bytes/s, ETA -
+Checks:                 1 / 1, 100%
+Elapsed time:         2.8s
+
+Directories match. No differences found.
+2024/06/24 20:10:34 [INFO] : End backup folder folder2  to Remote Storage
+2024/06/24 20:10:34 [INFO] : Begin backup folder folder3 to Remote Storage
+2024/06/24 20:10:41 INFO  : folder3/file1: Copied (new)
+2024/06/24 20:10:41 INFO  : folder3/file2: Copied (new)
+2024/06/24 20:10:41 INFO  : folder3/file3: Copied (new)
+2024/06/24 20:10:41 INFO  : 
+Transferred:   	         0 / 0 Bytes, -, 0 Bytes/s, ETA -
+Transferred:            3 / 3, 100%
+Elapsed time:         7.2s
+
+Directories match. No differences found.
+2024/06/24 20:10:44 [INFO] : End backup folder folder3  to Remote Storage
+2024/06/24 20:10:44 [INFO] : Begin backup folder folder3 to Remote Storage
+2024/06/24 20:10:50 INFO  : folder3/file3: Copied (new)
+2024/06/24 20:10:50 INFO  : folder3/file2: Copied (new)
+2024/06/24 20:10:51 INFO  : folder3/file1: Copied (new)
+2024/06/24 20:10:51 INFO  : 
+Transferred:   	         0 / 0 Bytes, -, 0 Bytes/s, ETA -
+Transferred:            3 / 3, 100%
+Elapsed time:         6.6s
+
+Directories match. No differences found.
+2024/06/24 20:10:54 [INFO] : End backup folder folder3  to Remote Storage
+2024/06/24 20:10:54 [END] [BACKUPREMOTE] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:10:54 [SUCCESS] [BACKUPREMOTE] [ProjectId_1_BackupTaskId_2]
+
+
+2024/06/24 20:10:54 [START] [CLEANUPREMOTE] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:10:56 [INFO] : Begin cleanup directory onedrive:backup/pve1/folder3 with 3 retention
+2024/06/24 20:10:56 [INFO] : There are 2 folders need to delete
+2024/06/24 20:10:56 [INFO] : Deleting folder: 2024-06-21_09:00:03
+2024/06/24 20:10:58 [DELETE] [SUCCESS]: Deleted folder: 2024-06-21_09:00:03
+2024/06/24 20:10:58 [INFO] : Deleting folder: 2024-06-21_08:00:03
+2024/06/24 20:11:01 [DELETE] [SUCCESS]: Deleted folder: 2024-06-21_08:00:03
+2024/06/24 20:11:01 [INFO] : End cleanup directory onedrive:backup/pve1/folder3 with 3 retention
+2024/06/24 20:11:01 [END] [CLEANUPREMOTE] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:11:01 [SUCCESS] [CLEANUPREMOTE] [ProjectId_1_BackupTaskId_2]
+
+
+2024/06/24 20:11:01 [START] [BACKUPLOCAL] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:11:01 [SFTP] [SUCCESS] [SFTP connect to host pve1 successful.]
+2024/06/24 20:11:02 [INFO] : Begin backup folder /folder3 to Local Storage
+2024/06/24 20:11:02 [SFTPFOLDERDIR] [SUCCESS]: Created local backup directory /home/ubuntu/sftp_ver2/pve1/folder3/2024-06-24_20:11:02
+2024/06/24 20:11:02 [SFTPCHECKSUMFOLDER] [SUCCESS]: Created remote checksum directory /home/ubuntu/sftp_ver2/checksums/sftpserver/projectId_1_taskId_2
+2024/06/24 20:11:02 [SFTPCHECKSUMFILE] [SUCCESS]: Generated remote checksum file for /folder3
+Connected to pve1.
+sftp> get -R /folder3 /home/ubuntu/sftp_ver2/pve1/folder3/2024-06-24_20:11:02
+Fetching /folder3/ to /home/ubuntu/sftp_ver2/pve1/folder3/2024-06-24_20:11:02/folder3
+Retrieving /folder3
+sftp> bye
+2024/06/24 20:11:02 [LOCALCHECKSUMFILE] [SUCCESS]: Generated local checksum file for /folder3
+2024/06/24 20:11:02 [CHECKSUM] [SUCCESS]: Susscessful to download file - All checksums match
+2024/06/24 20:11:02 [INFO] : End backup folder /folder3 to Local Storage
+2024/06/24 20:11:02 [END] [BACKUPLOCAL] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:11:02 [SUCCESSFUL] [BACKUPLOCAL] [ProjectId_1_BackupTaskId_2]
+
+
+2024/06/24 20:11:02 [START] [CLEANUPLOCAL] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:11:02 [INFO] : Begin cleanup directory /home/ubuntu/sftp_ver2/pve1/folder3 with 2 retention
+2024/06/24 20:11:02 [INFO] : There are 1 folders need to be deleted
+/home/ubuntu/sftp_ver2/pve1/folder3/2024-06-24_20:09:02/
+2024/06/24 20:11:02 [DELETE] [SUCCESS]: Deletion successful
+2024/06/24 20:11:02 [INFO] : End cleanup directory /home/ubuntu/sftp_ver2/pve1/folder3 with 2 retention
+2024/06/24 20:11:02 [END] [CLEANUPLOCAL] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:11:02 [SUCCESS] [CLEANUPLOCAL] [ProjectId_1_BackupTaskId_2]
+
+
+2024/06/24 20:12:01 [START] [BACKUPLOCAL] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:12:02 [SFTP] [SUCCESS] [SFTP connect to host pve1 successful.]
+2024/06/24 20:12:02 [INFO] : Begin backup folder /folder3 to Local Storage
+2024/06/24 20:12:02 [SFTPFOLDERDIR] [SUCCESS]: Created local backup directory /home/ubuntu/sftp_ver2/pve1/folder3/2024-06-24_20:12:02
+2024/06/24 20:12:02 [SFTPCHECKSUMFOLDER] [SUCCESS]: Created remote checksum directory /home/ubuntu/sftp_ver2/checksums/sftpserver/projectId_1_taskId_2
+2024/06/24 20:12:02 [SFTPCHECKSUMFILE] [SUCCESS]: Generated remote checksum file for /folder3
+Connected to pve1.
+sftp> get -R /folder3 /home/ubuntu/sftp_ver2/pve1/folder3/2024-06-24_20:12:02
+Fetching /folder3/ to /home/ubuntu/sftp_ver2/pve1/folder3/2024-06-24_20:12:02/folder3
+Retrieving /folder3
+sftp> bye
+2024/06/24 20:12:03 [LOCALCHECKSUMFILE] [SUCCESS]: Generated local checksum file for /folder3
+2024/06/24 20:12:03 [CHECKSUM] [SUCCESS]: Susscessful to download file - All checksums match
+2024/06/24 20:12:03 [INFO] : End backup folder /folder3 to Local Storage
+2024/06/24 20:12:03 [END] [BACKUPLOCAL] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:12:03 [SUCCESSFUL] [BACKUPLOCAL] [ProjectId_1_BackupTaskId_2]
+
+
+2024/06/24 20:12:03 [START] [CLEANUPLOCAL] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:12:03 [INFO] : Begin cleanup directory /home/ubuntu/sftp_ver2/pve1/folder3 with 2 retention
+2024/06/24 20:12:03 [INFO] : There are 1 folders need to be deleted
+/home/ubuntu/sftp_ver2/pve1/folder3/2024-06-24_20:10:02/
+2024/06/24 20:12:03 [DELETE] [SUCCESS]: Deletion successful
+2024/06/24 20:12:03 [INFO] : End cleanup directory /home/ubuntu/sftp_ver2/pve1/folder3 with 2 retention
+2024/06/24 20:12:03 [END] [CLEANUPLOCAL] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:12:03 [SUCCESS] [CLEANUPLOCAL] [ProjectId_1_BackupTaskId_2]
+
+
+2024/06/24 20:12:11 [START] [BACKUPREMOTE] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:12:11 [INFO] : Begin backup folder folder1 to Remote Storage
+2024/06/24 20:12:15 INFO  : There was nothing to transfer
+2024/06/24 20:12:15 INFO  : 
+Transferred:   	         0 / 0 Bytes, -, 0 Bytes/s, ETA -
+Checks:                 4 / 4, 100%
+Elapsed time:         3.1s
+
+Directories match. No differences found.
+2024/06/24 20:12:18 [INFO] : End backup folder folder1  to Remote Storage
+2024/06/24 20:12:18 [INFO] : Begin backup folder folder1 to Remote Storage
+2024/06/24 20:12:21 INFO  : There was nothing to transfer
+2024/06/24 20:12:21 INFO  : 
+Transferred:   	         0 / 0 Bytes, -, 0 Bytes/s, ETA -
+Checks:                 4 / 4, 100%
+Elapsed time:         2.6s
+
+Directories match. No differences found.
+2024/06/24 20:12:24 [INFO] : End backup folder folder1  to Remote Storage
+2024/06/24 20:12:24 [INFO] : Begin backup folder folder2 to Remote Storage
+2024/06/24 20:12:27 INFO  : There was nothing to transfer
+2024/06/24 20:12:27 INFO  : 
+Transferred:   	         0 / 0 Bytes, -, 0 Bytes/s, ETA -
+Checks:                 1 / 1, 100%
+Elapsed time:         3.0s
+
+Directories match. No differences found.
+2024/06/24 20:12:29 [INFO] : End backup folder folder2  to Remote Storage
+2024/06/24 20:12:29 [INFO] : Begin backup folder folder2 to Remote Storage
+2024/06/24 20:12:32 INFO  : There was nothing to transfer
+2024/06/24 20:12:32 INFO  : 
+Transferred:   	         0 / 0 Bytes, -, 0 Bytes/s, ETA -
+Checks:                 1 / 1, 100%
+Elapsed time:         2.5s
+
+Directories match. No differences found.
+2024/06/24 20:12:35 [INFO] : End backup folder folder2  to Remote Storage
+2024/06/24 20:12:35 [INFO] : Begin backup folder folder3 to Remote Storage
+2024/06/24 20:12:42 INFO  : folder3/file2: Copied (new)
+2024/06/24 20:12:42 INFO  : folder3/file1: Copied (new)
+2024/06/24 20:12:42 INFO  : folder3/file3: Copied (new)
+2024/06/24 20:12:42 INFO  : 
+Transferred:   	         0 / 0 Bytes, -, 0 Bytes/s, ETA -
+Transferred:            3 / 3, 100%
+Elapsed time:         6.7s
+
+Directories match. No differences found.
+2024/06/24 20:12:45 [INFO] : End backup folder folder3  to Remote Storage
+2024/06/24 20:12:45 [INFO] : Begin backup folder folder3 to Remote Storage
+2024/06/24 20:12:52 INFO  : folder3/file1: Copied (new)
+2024/06/24 20:12:52 INFO  : folder3/file3: Copied (new)
+2024/06/24 20:12:52 INFO  : folder3/file2: Copied (new)
+2024/06/24 20:12:52 INFO  : 
+Transferred:   	         0 / 0 Bytes, -, 0 Bytes/s, ETA -
+Transferred:            3 / 3, 100%
+Elapsed time:         7.2s
+
+Directories match. No differences found.
+2024/06/24 20:12:55 [INFO] : End backup folder folder3  to Remote Storage
+2024/06/24 20:12:55 [END] [BACKUPREMOTE] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:12:55 [SUCCESS] [BACKUPREMOTE] [ProjectId_1_BackupTaskId_2]
+
+
+2024/06/24 20:12:55 [START] [CLEANUPREMOTE] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:12:58 [INFO] : Begin cleanup directory onedrive:backup/pve1/folder3 with 3 retention
+2024/06/24 20:12:58 [INFO] : There are 2 folders need to delete
+2024/06/24 20:12:58 [INFO] : Deleting folder: 2024-06-24_20:09:02
+2024/06/24 20:13:00 [DELETE] [SUCCESS]: Deleted folder: 2024-06-24_20:09:02
+2024/06/24 20:13:00 [INFO] : Deleting folder: 2024-06-21_10:00:04
+
+2024/06/24 20:13:01 [START] [BACKUPLOCAL] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:13:01 [SFTP] [SUCCESS] [SFTP connect to host pve1 successful.]
+2024/06/24 20:13:02 [INFO] : Begin backup folder /folder3 to Local Storage
+2024/06/24 20:13:02 [SFTPFOLDERDIR] [SUCCESS]: Created local backup directory /home/ubuntu/sftp_ver2/pve1/folder3/2024-06-24_20:13:02
+2024/06/24 20:13:02 [SFTPCHECKSUMFOLDER] [SUCCESS]: Created remote checksum directory /home/ubuntu/sftp_ver2/checksums/sftpserver/projectId_1_taskId_2
+2024/06/24 20:13:02 [SFTPCHECKSUMFILE] [SUCCESS]: Generated remote checksum file for /folder3
+Connected to pve1.
+sftp> get -R /folder3 /home/ubuntu/sftp_ver2/pve1/folder3/2024-06-24_20:13:02
+Fetching /folder3/ to /home/ubuntu/sftp_ver2/pve1/folder3/2024-06-24_20:13:02/folder3
+Retrieving /folder3
+sftp> bye
+2024/06/24 20:13:02 [LOCALCHECKSUMFILE] [SUCCESS]: Generated local checksum file for /folder3
+2024/06/24 20:13:02 [CHECKSUM] [SUCCESS]: Susscessful to download file - All checksums match
+2024/06/24 20:13:02 [INFO] : End backup folder /folder3 to Local Storage
+2024/06/24 20:13:02 [END] [BACKUPLOCAL] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:13:02 [SUCCESSFUL] [BACKUPLOCAL] [ProjectId_1_BackupTaskId_2]
+
+
+2024/06/24 20:13:02 [START] [CLEANUPLOCAL] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:13:02 [INFO] : Begin cleanup directory /home/ubuntu/sftp_ver2/pve1/folder3 with 2 retention
+2024/06/24 20:13:02 [INFO] : There are 1 folders need to be deleted
+/home/ubuntu/sftp_ver2/pve1/folder3/2024-06-24_20:11:02/
+2024/06/24 20:13:02 [DELETE] [SUCCESS]: Deletion successful
+2024/06/24 20:13:02 [INFO] : End cleanup directory /home/ubuntu/sftp_ver2/pve1/folder3 with 2 retention
+2024/06/24 20:13:02 [END] [CLEANUPLOCAL] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:13:02 [SUCCESS] [CLEANUPLOCAL] [ProjectId_1_BackupTaskId_2]
+
+2024/06/24 20:13:03 [DELETE] [SUCCESS]: Deleted folder: 2024-06-21_10:00:04
+2024/06/24 20:13:03 [INFO] : End cleanup directory onedrive:backup/pve1/folder3 with 3 retention
+2024/06/24 20:13:03 [END] [CLEANUPREMOTE] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:13:03 [SUCCESS] [CLEANUPREMOTE] [ProjectId_1_BackupTaskId_2]
+
+
+2024/06/24 20:14:01 [START] [BACKUPLOCAL] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:14:02 [SFTP] [SUCCESS] [SFTP connect to host pve1 successful.]
+2024/06/24 20:14:02 [INFO] : Begin backup folder /folder3 to Local Storage
+2024/06/24 20:14:02 [SFTPFOLDERDIR] [SUCCESS]: Created local backup directory /home/ubuntu/sftp_ver2/pve1/folder3/2024-06-24_20:14:02
+2024/06/24 20:14:02 [SFTPCHECKSUMFOLDER] [SUCCESS]: Created remote checksum directory /home/ubuntu/sftp_ver2/checksums/sftpserver/projectId_1_taskId_2
+2024/06/24 20:14:02 [SFTPCHECKSUMFILE] [SUCCESS]: Generated remote checksum file for /folder3
+Connected to pve1.
+sftp> get -R /folder3 /home/ubuntu/sftp_ver2/pve1/folder3/2024-06-24_20:14:02
+Fetching /folder3/ to /home/ubuntu/sftp_ver2/pve1/folder3/2024-06-24_20:14:02/folder3
+Retrieving /folder3
+sftp> bye
+2024/06/24 20:14:03 [LOCALCHECKSUMFILE] [SUCCESS]: Generated local checksum file for /folder3
+2024/06/24 20:14:03 [CHECKSUM] [SUCCESS]: Susscessful to download file - All checksums match
+2024/06/24 20:14:03 [INFO] : End backup folder /folder3 to Local Storage
+2024/06/24 20:14:03 [END] [BACKUPLOCAL] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:14:03 [SUCCESSFUL] [BACKUPLOCAL] [ProjectId_1_BackupTaskId_2]
+
+
+2024/06/24 20:14:03 [START] [CLEANUPLOCAL] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:14:03 [INFO] : Begin cleanup directory /home/ubuntu/sftp_ver2/pve1/folder3 with 2 retention
+2024/06/24 20:14:03 [INFO] : There are 1 folders need to be deleted
+/home/ubuntu/sftp_ver2/pve1/folder3/2024-06-24_20:12:02/
+2024/06/24 20:14:03 [DELETE] [SUCCESS]: Deletion successful
+2024/06/24 20:14:03 [INFO] : End cleanup directory /home/ubuntu/sftp_ver2/pve1/folder3 with 2 retention
+2024/06/24 20:14:03 [END] [CLEANUPLOCAL] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:14:03 [SUCCESS] [CLEANUPLOCAL] [ProjectId_1_BackupTaskId_2]
+
+
+2024/06/24 20:14:11 [START] [BACKUPREMOTE] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:14:11 [INFO] : Begin backup folder folder1 to Remote Storage
+2024/06/24 20:14:14 INFO  : There was nothing to transfer
+2024/06/24 20:14:14 INFO  : 
+Transferred:   	         0 / 0 Bytes, -, 0 Bytes/s, ETA -
+Checks:                 4 / 4, 100%
+Elapsed time:         3.0s
+
+Directories match. No differences found.
+2024/06/24 20:14:17 [INFO] : End backup folder folder1  to Remote Storage
+2024/06/24 20:14:17 [INFO] : Begin backup folder folder1 to Remote Storage
+2024/06/24 20:14:20 INFO  : There was nothing to transfer
+2024/06/24 20:14:20 INFO  : 
+Transferred:   	         0 / 0 Bytes, -, 0 Bytes/s, ETA -
+Checks:                 4 / 4, 100%
+Elapsed time:         3.1s
+
+Directories match. No differences found.
+2024/06/24 20:14:23 [INFO] : End backup folder folder1  to Remote Storage
+2024/06/24 20:14:23 [INFO] : Begin backup folder folder2 to Remote Storage
+2024/06/24 20:14:26 INFO  : There was nothing to transfer
+2024/06/24 20:14:26 INFO  : 
+Transferred:   	         0 / 0 Bytes, -, 0 Bytes/s, ETA -
+Checks:                 1 / 1, 100%
+Elapsed time:         2.8s
+
+Directories match. No differences found.
+2024/06/24 20:14:29 [INFO] : End backup folder folder2  to Remote Storage
+2024/06/24 20:14:29 [INFO] : Begin backup folder folder2 to Remote Storage
+2024/06/24 20:14:32 INFO  : There was nothing to transfer
+2024/06/24 20:14:32 INFO  : 
+Transferred:   	         0 / 0 Bytes, -, 0 Bytes/s, ETA -
+Checks:                 1 / 1, 100%
+Elapsed time:         3.0s
+
+Directories match. No differences found.
+2024/06/24 20:14:36 [INFO] : End backup folder folder2  to Remote Storage
+2024/06/24 20:14:36 [INFO] : Begin backup folder folder3 to Remote Storage
+2024/06/24 20:14:43 INFO  : folder3/file1: Copied (new)
+2024/06/24 20:14:43 INFO  : folder3/file2: Copied (new)
+2024/06/24 20:14:44 INFO  : folder3/file3: Copied (new)
+2024/06/24 20:14:44 INFO  : 
+Transferred:   	         0 / 0 Bytes, -, 0 Bytes/s, ETA -
+Transferred:            3 / 3, 100%
+Elapsed time:         7.8s
+
+Directories match. No differences found.
+2024/06/24 20:14:47 [INFO] : End backup folder folder3  to Remote Storage
+2024/06/24 20:14:47 [INFO] : Begin backup folder folder3 to Remote Storage
+2024/06/24 20:14:53 INFO  : folder3/file3: Copied (new)
+2024/06/24 20:14:53 INFO  : folder3/file2: Copied (new)
+2024/06/24 20:14:53 INFO  : folder3/file1: Copied (new)
+2024/06/24 20:14:53 INFO  : 
+Transferred:   	         0 / 0 Bytes, -, 0 Bytes/s, ETA -
+Transferred:            3 / 3, 100%
+Elapsed time:         6.6s
+
+Directories match. No differences found.
+2024/06/24 20:14:57 [INFO] : End backup folder folder3  to Remote Storage
+2024/06/24 20:14:57 [END] [BACKUPREMOTE] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:14:57 [SUCCESS] [BACKUPREMOTE] [ProjectId_1_BackupTaskId_2]
+
+
+2024/06/24 20:14:57 [START] [CLEANUPREMOTE] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:14:59 [INFO] : Begin cleanup directory onedrive:backup/pve1/folder3 with 3 retention
+2024/06/24 20:14:59 [INFO] : There are 2 folders need to delete
+2024/06/24 20:14:59 [INFO] : Deleting folder: 2024-06-24_20:11:02
+
+2024/06/24 20:15:01 [START] [BACKUPLOCAL] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:15:01 [SFTP] [SUCCESS] [SFTP connect to host pve1 successful.]
+2024/06/24 20:15:02 [INFO] : Begin backup folder /folder3 to Local Storage
+2024/06/24 20:15:02 [SFTPFOLDERDIR] [SUCCESS]: Created local backup directory /home/ubuntu/sftp_ver2/pve1/folder3/2024-06-24_20:15:02
+2024/06/24 20:15:02 [SFTPCHECKSUMFOLDER] [SUCCESS]: Created remote checksum directory /home/ubuntu/sftp_ver2/checksums/sftpserver/projectId_1_taskId_2
+2024/06/24 20:15:02 [DELETE] [SUCCESS]: Deleted folder: 2024-06-24_20:11:02
+2024/06/24 20:15:02 [INFO] : Deleting folder: 2024-06-24_20:10:02
+2024/06/24 20:15:02 [SFTPCHECKSUMFILE] [SUCCESS]: Generated remote checksum file for /folder3
+Connected to pve1.
+sftp> get -R /folder3 /home/ubuntu/sftp_ver2/pve1/folder3/2024-06-24_20:15:02
+Fetching /folder3/ to /home/ubuntu/sftp_ver2/pve1/folder3/2024-06-24_20:15:02/folder3
+Retrieving /folder3
+sftp> bye
+2024/06/24 20:15:02 [LOCALCHECKSUMFILE] [SUCCESS]: Generated local checksum file for /folder3
+2024/06/24 20:15:02 [CHECKSUM] [SUCCESS]: Susscessful to download file - All checksums match
+2024/06/24 20:15:02 [INFO] : End backup folder /folder3 to Local Storage
+2024/06/24 20:15:02 [END] [BACKUPLOCAL] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:15:02 [SUCCESSFUL] [BACKUPLOCAL] [ProjectId_1_BackupTaskId_2]
+
+
+2024/06/24 20:15:02 [START] [CLEANUPLOCAL] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:15:02 [INFO] : Begin cleanup directory /home/ubuntu/sftp_ver2/pve1/folder3 with 2 retention
+2024/06/24 20:15:02 [INFO] : There are 1 folders need to be deleted
+/home/ubuntu/sftp_ver2/pve1/folder3/2024-06-24_20:13:02/
+2024/06/24 20:15:02 [DELETE] [SUCCESS]: Deletion successful
+2024/06/24 20:15:02 [INFO] : End cleanup directory /home/ubuntu/sftp_ver2/pve1/folder3 with 2 retention
+2024/06/24 20:15:02 [END] [CLEANUPLOCAL] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:15:02 [SUCCESS] [CLEANUPLOCAL] [ProjectId_1_BackupTaskId_2]
+
+2024/06/24 20:15:05 [DELETE] [SUCCESS]: Deleted folder: 2024-06-24_20:10:02
+2024/06/24 20:15:05 [INFO] : End cleanup directory onedrive:backup/pve1/folder3 with 3 retention
+2024/06/24 20:15:05 [END] [CLEANUPREMOTE] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:15:05 [SUCCESS] [CLEANUPREMOTE] [ProjectId_1_BackupTaskId_2]
+
+
+2024/06/24 20:16:01 [START] [BACKUPLOCAL] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:16:02 [SFTP] [SUCCESS] [SFTP connect to host pve1 successful.]
+2024/06/24 20:16:02 [INFO] : Begin backup folder /folder3 to Local Storage
+2024/06/24 20:16:02 [SFTPFOLDERDIR] [SUCCESS]: Created local backup directory /home/ubuntu/sftp_ver2/pve1/folder3/2024-06-24_20:16:02
+2024/06/24 20:16:02 [SFTPCHECKSUMFOLDER] [SUCCESS]: Created remote checksum directory /home/ubuntu/sftp_ver2/checksums/sftpserver/projectId_1_taskId_2
+2024/06/24 20:16:02 [SFTPCHECKSUMFILE] [SUCCESS]: Generated remote checksum file for /folder3
+Connected to pve1.
+sftp> get -R /folder3 /home/ubuntu/sftp_ver2/pve1/folder3/2024-06-24_20:16:02
+Fetching /folder3/ to /home/ubuntu/sftp_ver2/pve1/folder3/2024-06-24_20:16:02/folder3
+Retrieving /folder3
+sftp> bye
+2024/06/24 20:16:02 [LOCALCHECKSUMFILE] [SUCCESS]: Generated local checksum file for /folder3
+2024/06/24 20:16:02 [CHECKSUM] [SUCCESS]: Susscessful to download file - All checksums match
+2024/06/24 20:16:02 [INFO] : End backup folder /folder3 to Local Storage
+2024/06/24 20:16:02 [END] [BACKUPLOCAL] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:16:02 [SUCCESSFUL] [BACKUPLOCAL] [ProjectId_1_BackupTaskId_2]
+
+
+2024/06/24 20:16:02 [START] [CLEANUPLOCAL] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:16:02 [INFO] : Begin cleanup directory /home/ubuntu/sftp_ver2/pve1/folder3 with 2 retention
+2024/06/24 20:16:02 [INFO] : There are 1 folders need to be deleted
+/home/ubuntu/sftp_ver2/pve1/folder3/2024-06-24_20:14:02/
+2024/06/24 20:16:03 [DELETE] [SUCCESS]: Deletion successful
+2024/06/24 20:16:03 [INFO] : End cleanup directory /home/ubuntu/sftp_ver2/pve1/folder3 with 2 retention
+2024/06/24 20:16:03 [END] [CLEANUPLOCAL] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:16:03 [SUCCESS] [CLEANUPLOCAL] [ProjectId_1_BackupTaskId_2]
+
+
+2024/06/24 20:16:11 [START] [BACKUPREMOTE] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:16:11 [INFO] : Begin backup folder folder1 to Remote Storage
+2024/06/24 20:16:14 INFO  : There was nothing to transfer
+2024/06/24 20:16:14 INFO  : 
+Transferred:   	         0 / 0 Bytes, -, 0 Bytes/s, ETA -
+Checks:                 4 / 4, 100%
+Elapsed time:         2.5s
+
+Directories match. No differences found.
+2024/06/24 20:16:17 [INFO] : End backup folder folder1  to Remote Storage
+2024/06/24 20:16:17 [INFO] : Begin backup folder folder1 to Remote Storage
+2024/06/24 20:16:20 INFO  : There was nothing to transfer
+2024/06/24 20:16:20 INFO  : 
+Transferred:   	         0 / 0 Bytes, -, 0 Bytes/s, ETA -
+Checks:                 4 / 4, 100%
+Elapsed time:         3.0s
+
+Directories match. No differences found.
+2024/06/24 20:16:23 [INFO] : End backup folder folder1  to Remote Storage
+2024/06/24 20:16:23 [INFO] : Begin backup folder folder2 to Remote Storage
+2024/06/24 20:16:26 INFO  : There was nothing to transfer
+2024/06/24 20:16:26 INFO  : 
+Transferred:   	         0 / 0 Bytes, -, 0 Bytes/s, ETA -
+Checks:                 1 / 1, 100%
+Elapsed time:         3.1s
+
+Directories match. No differences found.
+2024/06/24 20:16:29 [INFO] : End backup folder folder2  to Remote Storage
+2024/06/24 20:16:29 [INFO] : Begin backup folder folder2 to Remote Storage
+2024/06/24 20:16:33 INFO  : There was nothing to transfer
+2024/06/24 20:16:33 INFO  : 
+Transferred:   	         0 / 0 Bytes, -, 0 Bytes/s, ETA -
+Checks:                 1 / 1, 100%
+Elapsed time:         3.4s
+
+Directories match. No differences found.
+2024/06/24 20:16:36 [INFO] : End backup folder folder2  to Remote Storage
+2024/06/24 20:16:36 [INFO] : Begin backup folder folder3 to Remote Storage
+2024/06/24 20:16:43 INFO  : folder3/file2: Copied (new)
+2024/06/24 20:16:43 INFO  : folder3/file1: Copied (new)
+2024/06/24 20:16:43 INFO  : folder3/file3: Copied (new)
+2024/06/24 20:16:43 INFO  : 
+Transferred:   	         0 / 0 Bytes, -, 0 Bytes/s, ETA -
+Transferred:            3 / 3, 100%
+Elapsed time:         7.2s
+
+Directories match. No differences found.
+2024/06/24 20:16:46 [INFO] : End backup folder folder3  to Remote Storage
+2024/06/24 20:16:46 [INFO] : Begin backup folder folder3 to Remote Storage
+2024/06/24 20:16:55 INFO  : folder3/file1: Copied (new)
+2024/06/24 20:16:55 INFO  : folder3/file2: Copied (new)
+2024/06/24 20:16:55 INFO  : folder3/file3: Copied (new)
+2024/06/24 20:16:55 INFO  : 
+Transferred:   	         0 / 0 Bytes, -, 0 Bytes/s, ETA -
+Transferred:            3 / 3, 100%
+Elapsed time:         8.2s
+
+Directories match. No differences found.
+2024/06/24 20:16:58 [INFO] : End backup folder folder3  to Remote Storage
+2024/06/24 20:16:58 [END] [BACKUPREMOTE] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:16:58 [SUCCESS] [BACKUPREMOTE] [ProjectId_1_BackupTaskId_2]
+
+
+2024/06/24 20:16:58 [START] [CLEANUPREMOTE] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:17:00 [INFO] : Begin cleanup directory onedrive:backup/pve1/folder3 with 3 retention
+2024/06/24 20:17:00 [INFO] : There are 2 folders need to delete
+2024/06/24 20:17:00 [INFO] : Deleting folder: 2024-06-24_20:13:02
+
+2024/06/24 20:17:01 [START] [BACKUPLOCAL] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:17:01 [SFTP] [SUCCESS] [SFTP connect to host pve1 successful.]
+2024/06/24 20:17:01 [INFO] : Begin backup folder /folder3 to Local Storage
+2024/06/24 20:17:01 [SFTPFOLDERDIR] [SUCCESS]: Created local backup directory /home/ubuntu/sftp_ver2/pve1/folder3/2024-06-24_20:17:01
+2024/06/24 20:17:01 [SFTPCHECKSUMFOLDER] [SUCCESS]: Created remote checksum directory /home/ubuntu/sftp_ver2/checksums/sftpserver/projectId_1_taskId_2
+2024/06/24 20:17:02 [SFTPCHECKSUMFILE] [SUCCESS]: Generated remote checksum file for /folder3
+Connected to pve1.
+sftp> get -R /folder3 /home/ubuntu/sftp_ver2/pve1/folder3/2024-06-24_20:17:01
+Fetching /folder3/ to /home/ubuntu/sftp_ver2/pve1/folder3/2024-06-24_20:17:01/folder3
+Retrieving /folder3
+sftp> bye
+2024/06/24 20:17:02 [LOCALCHECKSUMFILE] [SUCCESS]: Generated local checksum file for /folder3
+2024/06/24 20:17:02 [CHECKSUM] [SUCCESS]: Susscessful to download file - All checksums match
+2024/06/24 20:17:02 [INFO] : End backup folder /folder3 to Local Storage
+2024/06/24 20:17:02 [END] [BACKUPLOCAL] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:17:02 [SUCCESSFUL] [BACKUPLOCAL] [ProjectId_1_BackupTaskId_2]
+
+
+2024/06/24 20:17:02 [START] [CLEANUPLOCAL] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:17:02 [INFO] : Begin cleanup directory /home/ubuntu/sftp_ver2/pve1/folder3 with 2 retention
+2024/06/24 20:17:02 [INFO] : There are 1 folders need to be deleted
+/home/ubuntu/sftp_ver2/pve1/folder3/2024-06-24_20:15:02/
+2024/06/24 20:17:02 [DELETE] [SUCCESS]: Deletion successful
+2024/06/24 20:17:02 [INFO] : End cleanup directory /home/ubuntu/sftp_ver2/pve1/folder3 with 2 retention
+2024/06/24 20:17:02 [END] [CLEANUPLOCAL] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:17:02 [SUCCESS] [CLEANUPLOCAL] [ProjectId_1_BackupTaskId_2]
+
+2024/06/24 20:17:03 [DELETE] [SUCCESS]: Deleted folder: 2024-06-24_20:13:02
+2024/06/24 20:17:03 [INFO] : Deleting folder: 2024-06-24_20:12:02
+2024/06/24 20:17:05 [DELETE] [SUCCESS]: Deleted folder: 2024-06-24_20:12:02
+2024/06/24 20:17:05 [INFO] : End cleanup directory onedrive:backup/pve1/folder3 with 3 retention
+2024/06/24 20:17:05 [END] [CLEANUPREMOTE] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:17:05 [SUCCESS] [CLEANUPREMOTE] [ProjectId_1_BackupTaskId_2]
+
+
+2024/06/24 20:18:02 [START] [BACKUPLOCAL] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:18:02 [SFTP] [SUCCESS] [SFTP connect to host pve1 successful.]
+2024/06/24 20:18:02 [INFO] : Begin backup folder /folder3 to Local Storage
+2024/06/24 20:18:02 [SFTPFOLDERDIR] [SUCCESS]: Created local backup directory /home/ubuntu/sftp_ver2/pve1/folder3/2024-06-24_20:18:02
+2024/06/24 20:18:02 [SFTPCHECKSUMFOLDER] [SUCCESS]: Created remote checksum directory /home/ubuntu/sftp_ver2/checksums/sftpserver/projectId_1_taskId_2
+2024/06/24 20:18:02 [SFTPCHECKSUMFILE] [SUCCESS]: Generated remote checksum file for /folder3
+Connected to pve1.
+sftp> get -R /folder3 /home/ubuntu/sftp_ver2/pve1/folder3/2024-06-24_20:18:02
+Fetching /folder3/ to /home/ubuntu/sftp_ver2/pve1/folder3/2024-06-24_20:18:02/folder3
+Retrieving /folder3
+sftp> bye
+2024/06/24 20:18:03 [LOCALCHECKSUMFILE] [SUCCESS]: Generated local checksum file for /folder3
+2024/06/24 20:18:03 [CHECKSUM] [SUCCESS]: Susscessful to download file - All checksums match
+2024/06/24 20:18:03 [INFO] : End backup folder /folder3 to Local Storage
+2024/06/24 20:18:03 [END] [BACKUPLOCAL] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:18:03 [SUCCESSFUL] [BACKUPLOCAL] [ProjectId_1_BackupTaskId_2]
+
+
+2024/06/24 20:18:03 [START] [CLEANUPLOCAL] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:18:03 [INFO] : Begin cleanup directory /home/ubuntu/sftp_ver2/pve1/folder3 with 2 retention
+2024/06/24 20:18:03 [INFO] : There are 1 folders need to be deleted
+/home/ubuntu/sftp_ver2/pve1/folder3/2024-06-24_20:16:02/
+2024/06/24 20:18:03 [DELETE] [SUCCESS]: Deletion successful
+2024/06/24 20:18:03 [INFO] : End cleanup directory /home/ubuntu/sftp_ver2/pve1/folder3 with 2 retention
+2024/06/24 20:18:03 [END] [CLEANUPLOCAL] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:18:03 [SUCCESS] [CLEANUPLOCAL] [ProjectId_1_BackupTaskId_2]
+
+
+2024/06/24 20:18:12 [START] [BACKUPREMOTE] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:18:12 [INFO] : Begin backup folder folder1 to Remote Storage
+2024/06/24 20:18:15 INFO  : There was nothing to transfer
+2024/06/24 20:18:15 INFO  : 
+Transferred:   	         0 / 0 Bytes, -, 0 Bytes/s, ETA -
+Checks:                 4 / 4, 100%
+Elapsed time:         3.1s
+
+Directories match. No differences found.
+2024/06/24 20:18:18 [INFO] : End backup folder folder1  to Remote Storage
+2024/06/24 20:18:18 [INFO] : Begin backup folder folder1 to Remote Storage
+2024/06/24 20:18:21 INFO  : There was nothing to transfer
+2024/06/24 20:18:21 INFO  : 
+Transferred:   	         0 / 0 Bytes, -, 0 Bytes/s, ETA -
+Checks:                 4 / 4, 100%
+Elapsed time:         3.0s
+
+Directories match. No differences found.
+2024/06/24 20:18:24 [INFO] : End backup folder folder1  to Remote Storage
+2024/06/24 20:18:24 [INFO] : Begin backup folder folder2 to Remote Storage
+2024/06/24 20:18:27 INFO  : There was nothing to transfer
+2024/06/24 20:18:27 INFO  : 
+Transferred:   	         0 / 0 Bytes, -, 0 Bytes/s, ETA -
+Checks:                 1 / 1, 100%
+Elapsed time:         2.8s
+
+Directories match. No differences found.
+2024/06/24 20:18:30 [INFO] : End backup folder folder2  to Remote Storage
+2024/06/24 20:18:31 [INFO] : Begin backup folder folder2 to Remote Storage
+2024/06/24 20:18:34 INFO  : There was nothing to transfer
+2024/06/24 20:18:34 INFO  : 
+Transferred:   	         0 / 0 Bytes, -, 0 Bytes/s, ETA -
+Checks:                 1 / 1, 100%
+Elapsed time:         3.5s
+
+Directories match. No differences found.
+2024/06/24 20:18:37 [INFO] : End backup folder folder2  to Remote Storage
+2024/06/24 20:18:37 [INFO] : Begin backup folder folder3 to Remote Storage
+2024/06/24 20:18:44 INFO  : folder3/file1: Copied (new)
+2024/06/24 20:18:44 INFO  : folder3/file2: Copied (new)
+2024/06/24 20:18:44 INFO  : folder3/file3: Copied (new)
+2024/06/24 20:18:44 INFO  : 
+Transferred:   	         0 / 0 Bytes, -, 0 Bytes/s, ETA -
+Transferred:            3 / 3, 100%
+Elapsed time:         6.8s
+
+Directories match. No differences found.
+2024/06/24 20:18:47 [INFO] : End backup folder folder3  to Remote Storage
+2024/06/24 20:18:47 [INFO] : Begin backup folder folder3 to Remote Storage
+2024/06/24 20:18:54 INFO  : folder3/file3: Copied (new)
+2024/06/24 20:18:54 INFO  : folder3/file1: Copied (new)
+2024/06/24 20:18:54 INFO  : folder3/file2: Copied (new)
+2024/06/24 20:18:54 INFO  : 
+Transferred:   	         0 / 0 Bytes, -, 0 Bytes/s, ETA -
+Transferred:            3 / 3, 100%
+Elapsed time:         7.2s
+
+Directories match. No differences found.
+2024/06/24 20:18:57 [INFO] : End backup folder folder3  to Remote Storage
+2024/06/24 20:18:57 [END] [BACKUPREMOTE] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:18:57 [SUCCESS] [BACKUPREMOTE] [ProjectId_1_BackupTaskId_2]
+
+
+2024/06/24 20:18:57 [START] [CLEANUPREMOTE] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:19:00 [INFO] : Begin cleanup directory onedrive:backup/pve1/folder3 with 3 retention
+2024/06/24 20:19:00 [INFO] : There are 2 folders need to delete
+2024/06/24 20:19:00 [INFO] : Deleting folder: 2024-06-24_20:15:02
+
+2024/06/24 20:19:01 [START] [BACKUPLOCAL] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:19:01 [SFTP] [SUCCESS] [SFTP connect to host pve1 successful.]
+2024/06/24 20:19:02 [INFO] : Begin backup folder /folder3 to Local Storage
+2024/06/24 20:19:02 [SFTPFOLDERDIR] [SUCCESS]: Created local backup directory /home/ubuntu/sftp_ver2/pve1/folder3/2024-06-24_20:19:02
+2024/06/24 20:19:02 [SFTPCHECKSUMFOLDER] [SUCCESS]: Created remote checksum directory /home/ubuntu/sftp_ver2/checksums/sftpserver/projectId_1_taskId_2
+2024/06/24 20:19:02 [SFTPCHECKSUMFILE] [SUCCESS]: Generated remote checksum file for /folder3
+Connected to pve1.
+sftp> get -R /folder3 /home/ubuntu/sftp_ver2/pve1/folder3/2024-06-24_20:19:02
+Fetching /folder3/ to /home/ubuntu/sftp_ver2/pve1/folder3/2024-06-24_20:19:02/folder3
+Retrieving /folder3
+sftp> bye
+2024/06/24 20:19:02 [LOCALCHECKSUMFILE] [SUCCESS]: Generated local checksum file for /folder3
+2024/06/24 20:19:02 [CHECKSUM] [SUCCESS]: Susscessful to download file - All checksums match
+2024/06/24 20:19:02 [INFO] : End backup folder /folder3 to Local Storage
+2024/06/24 20:19:02 [END] [BACKUPLOCAL] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:19:02 [SUCCESSFUL] [BACKUPLOCAL] [ProjectId_1_BackupTaskId_2]
+
+2024/06/24 20:19:02 [DELETE] [SUCCESS]: Deleted folder: 2024-06-24_20:15:02
+2024/06/24 20:19:02 [INFO] : Deleting folder: 2024-06-24_20:14:02
+
+2024/06/24 20:19:02 [START] [CLEANUPLOCAL] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:19:02 [INFO] : Begin cleanup directory /home/ubuntu/sftp_ver2/pve1/folder3 with 2 retention
+2024/06/24 20:19:02 [INFO] : There are 1 folders need to be deleted
+/home/ubuntu/sftp_ver2/pve1/folder3/2024-06-24_20:17:01/
+2024/06/24 20:19:02 [DELETE] [SUCCESS]: Deletion successful
+2024/06/24 20:19:02 [INFO] : End cleanup directory /home/ubuntu/sftp_ver2/pve1/folder3 with 2 retention
+2024/06/24 20:19:02 [END] [CLEANUPLOCAL] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:19:02 [SUCCESS] [CLEANUPLOCAL] [ProjectId_1_BackupTaskId_2]
+
+2024/06/24 20:19:05 [DELETE] [SUCCESS]: Deleted folder: 2024-06-24_20:14:02
+2024/06/24 20:19:05 [INFO] : End cleanup directory onedrive:backup/pve1/folder3 with 3 retention
+2024/06/24 20:19:05 [END] [CLEANUPREMOTE] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:19:05 [SUCCESS] [CLEANUPREMOTE] [ProjectId_1_BackupTaskId_2]
+
+
+2024/06/24 20:20:02 [START] [BACKUPLOCAL] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:20:02 [SFTP] [SUCCESS] [SFTP connect to host pve1 successful.]
+2024/06/24 20:20:02 [INFO] : Begin backup folder /folder3 to Local Storage
+2024/06/24 20:20:02 [SFTPFOLDERDIR] [SUCCESS]: Created local backup directory /home/ubuntu/sftp_ver2/pve1/folder3/2024-06-24_20:20:02
+2024/06/24 20:20:02 [SFTPCHECKSUMFOLDER] [SUCCESS]: Created remote checksum directory /home/ubuntu/sftp_ver2/checksums/sftpserver/projectId_1_taskId_2
+2024/06/24 20:20:02 [SFTPCHECKSUMFILE] [SUCCESS]: Generated remote checksum file for /folder3
+Connected to pve1.
+sftp> get -R /folder3 /home/ubuntu/sftp_ver2/pve1/folder3/2024-06-24_20:20:02
+Fetching /folder3/ to /home/ubuntu/sftp_ver2/pve1/folder3/2024-06-24_20:20:02/folder3
+Retrieving /folder3
+sftp> bye
+2024/06/24 20:20:03 [LOCALCHECKSUMFILE] [SUCCESS]: Generated local checksum file for /folder3
+2024/06/24 20:20:03 [CHECKSUM] [SUCCESS]: Susscessful to download file - All checksums match
+2024/06/24 20:20:03 [INFO] : End backup folder /folder3 to Local Storage
+2024/06/24 20:20:03 [END] [BACKUPLOCAL] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:20:03 [SUCCESSFUL] [BACKUPLOCAL] [ProjectId_1_BackupTaskId_2]
+
+
+2024/06/24 20:20:03 [START] [CLEANUPLOCAL] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:20:03 [INFO] : Begin cleanup directory /home/ubuntu/sftp_ver2/pve1/folder3 with 2 retention
+2024/06/24 20:20:03 [INFO] : There are 1 folders need to be deleted
+/home/ubuntu/sftp_ver2/pve1/folder3/2024-06-24_20:18:02/
+2024/06/24 20:20:03 [DELETE] [SUCCESS]: Deletion successful
+2024/06/24 20:20:03 [INFO] : End cleanup directory /home/ubuntu/sftp_ver2/pve1/folder3 with 2 retention
+2024/06/24 20:20:03 [END] [CLEANUPLOCAL] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:20:03 [SUCCESS] [CLEANUPLOCAL] [ProjectId_1_BackupTaskId_2]
+
+
+2024/06/24 20:20:12 [START] [BACKUPREMOTE] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:20:12 [INFO] : Begin backup folder folder1 to Remote Storage
+2024/06/24 20:20:15 INFO  : There was nothing to transfer
+2024/06/24 20:20:15 INFO  : 
+Transferred:   	         0 / 0 Bytes, -, 0 Bytes/s, ETA -
+Checks:                 4 / 4, 100%
+Elapsed time:         3.0s
+
+Directories match. No differences found.
+2024/06/24 20:20:18 [INFO] : End backup folder folder1  to Remote Storage
+2024/06/24 20:20:18 [INFO] : Begin backup folder folder1 to Remote Storage
+2024/06/24 20:20:21 INFO  : There was nothing to transfer
+2024/06/24 20:20:21 INFO  : 
+Transferred:   	         0 / 0 Bytes, -, 0 Bytes/s, ETA -
+Checks:                 4 / 4, 100%
+Elapsed time:         2.7s
+
+Directories match. No differences found.
+2024/06/24 20:20:24 [INFO] : End backup folder folder1  to Remote Storage
+2024/06/24 20:20:24 [INFO] : Begin backup folder folder2 to Remote Storage
+2024/06/24 20:20:27 INFO  : There was nothing to transfer
+2024/06/24 20:20:27 INFO  : 
+Transferred:   	         0 / 0 Bytes, -, 0 Bytes/s, ETA -
+Checks:                 1 / 1, 100%
+Elapsed time:         3.1s
+
+Directories match. No differences found.
+2024/06/24 20:20:30 [INFO] : End backup folder folder2  to Remote Storage
+2024/06/24 20:20:30 [INFO] : Begin backup folder folder2 to Remote Storage
+2024/06/24 20:20:33 INFO  : There was nothing to transfer
+2024/06/24 20:20:33 INFO  : 
+Transferred:   	         0 / 0 Bytes, -, 0 Bytes/s, ETA -
+Checks:                 1 / 1, 100%
+Elapsed time:         3.1s
+
+Directories match. No differences found.
+2024/06/24 20:20:37 [INFO] : End backup folder folder2  to Remote Storage
+2024/06/24 20:20:37 [INFO] : Begin backup folder folder3 to Remote Storage
+2024/06/24 20:20:44 INFO  : folder3/file2: Copied (new)
+2024/06/24 20:20:44 INFO  : folder3/file1: Copied (new)
+2024/06/24 20:20:44 INFO  : folder3/file3: Copied (new)
+2024/06/24 20:20:44 INFO  : 
+Transferred:   	         0 / 0 Bytes, -, 0 Bytes/s, ETA -
+Transferred:            3 / 3, 100%
+Elapsed time:         7.6s
+
+Directories match. No differences found.
+2024/06/24 20:20:47 [INFO] : End backup folder folder3  to Remote Storage
+2024/06/24 20:20:47 [INFO] : Begin backup folder folder3 to Remote Storage
+2024/06/24 20:20:55 INFO  : folder3/file1: Copied (new)
+2024/06/24 20:20:55 INFO  : folder3/file3: Copied (new)
+2024/06/24 20:20:55 INFO  : folder3/file2: Copied (new)
+2024/06/24 20:20:55 INFO  : 
+Transferred:   	         0 / 0 Bytes, -, 0 Bytes/s, ETA -
+Transferred:            3 / 3, 100%
+Elapsed time:         7.2s
+
+Directories match. No differences found.
+2024/06/24 20:20:58 [INFO] : End backup folder folder3  to Remote Storage
+2024/06/24 20:20:58 [END] [BACKUPREMOTE] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:20:58 [SUCCESS] [BACKUPREMOTE] [ProjectId_1_BackupTaskId_2]
+
+
+2024/06/24 20:20:58 [START] [CLEANUPREMOTE] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:21:01 [INFO] : Begin cleanup directory onedrive:backup/pve1/folder3 with 3 retention
+2024/06/24 20:21:01 [INFO] : There are 2 folders need to delete
+2024/06/24 20:21:01 [INFO] : Deleting folder: 2024-06-24_20:17:01
+
+2024/06/24 20:21:01 [START] [BACKUPLOCAL] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:21:01 [SFTP] [SUCCESS] [SFTP connect to host pve1 successful.]
+2024/06/24 20:21:02 [INFO] : Begin backup folder /folder3 to Local Storage
+2024/06/24 20:21:02 [SFTPFOLDERDIR] [SUCCESS]: Created local backup directory /home/ubuntu/sftp_ver2/pve1/folder3/2024-06-24_20:21:02
+2024/06/24 20:21:02 [SFTPCHECKSUMFOLDER] [SUCCESS]: Created remote checksum directory /home/ubuntu/sftp_ver2/checksums/sftpserver/projectId_1_taskId_2
+2024/06/24 20:21:02 [SFTPCHECKSUMFILE] [SUCCESS]: Generated remote checksum file for /folder3
+Connected to pve1.
+sftp> get -R /folder3 /home/ubuntu/sftp_ver2/pve1/folder3/2024-06-24_20:21:02
+Fetching /folder3/ to /home/ubuntu/sftp_ver2/pve1/folder3/2024-06-24_20:21:02/folder3
+Retrieving /folder3
+sftp> bye
+2024/06/24 20:21:02 [LOCALCHECKSUMFILE] [SUCCESS]: Generated local checksum file for /folder3
+2024/06/24 20:21:02 [CHECKSUM] [SUCCESS]: Susscessful to download file - All checksums match
+2024/06/24 20:21:02 [INFO] : End backup folder /folder3 to Local Storage
+2024/06/24 20:21:02 [END] [BACKUPLOCAL] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:21:02 [SUCCESSFUL] [BACKUPLOCAL] [ProjectId_1_BackupTaskId_2]
+
+
+2024/06/24 20:21:02 [START] [CLEANUPLOCAL] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:21:02 [INFO] : Begin cleanup directory /home/ubuntu/sftp_ver2/pve1/folder3 with 2 retention
+2024/06/24 20:21:02 [INFO] : There are 1 folders need to be deleted
+/home/ubuntu/sftp_ver2/pve1/folder3/2024-06-24_20:19:02/
+2024/06/24 20:21:03 [DELETE] [SUCCESS]: Deletion successful
+2024/06/24 20:21:03 [INFO] : End cleanup directory /home/ubuntu/sftp_ver2/pve1/folder3 with 2 retention
+2024/06/24 20:21:03 [END] [CLEANUPLOCAL] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:21:03 [SUCCESS] [CLEANUPLOCAL] [ProjectId_1_BackupTaskId_2]
+
+2024/06/24 20:21:04 [DELETE] [SUCCESS]: Deleted folder: 2024-06-24_20:17:01
+2024/06/24 20:21:04 [INFO] : Deleting folder: 2024-06-24_20:16:02
+2024/06/24 20:21:06 [DELETE] [SUCCESS]: Deleted folder: 2024-06-24_20:16:02
+2024/06/24 20:21:06 [INFO] : End cleanup directory onedrive:backup/pve1/folder3 with 3 retention
+2024/06/24 20:21:06 [END] [CLEANUPREMOTE] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:21:06 [SUCCESS] [CLEANUPREMOTE] [ProjectId_1_BackupTaskId_2]
+
+
+2024/06/24 20:22:02 [START] [BACKUPLOCAL] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:22:02 [SFTP] [SUCCESS] [SFTP connect to host pve1 successful.]
+2024/06/24 20:22:02 [INFO] : Begin backup folder /folder3 to Local Storage
+2024/06/24 20:22:02 [SFTPFOLDERDIR] [SUCCESS]: Created local backup directory /home/ubuntu/sftp_ver2/pve1/folder3/2024-06-24_20:22:02
+2024/06/24 20:22:02 [SFTPCHECKSUMFOLDER] [SUCCESS]: Created remote checksum directory /home/ubuntu/sftp_ver2/checksums/sftpserver/projectId_1_taskId_2
+2024/06/24 20:22:03 [SFTPCHECKSUMFILE] [SUCCESS]: Generated remote checksum file for /folder3
+Connected to pve1.
+sftp> get -R /folder3 /home/ubuntu/sftp_ver2/pve1/folder3/2024-06-24_20:22:02
+Fetching /folder3/ to /home/ubuntu/sftp_ver2/pve1/folder3/2024-06-24_20:22:02/folder3
+Retrieving /folder3
+sftp> bye
+2024/06/24 20:22:03 [LOCALCHECKSUMFILE] [SUCCESS]: Generated local checksum file for /folder3
+2024/06/24 20:22:03 [CHECKSUM] [SUCCESS]: Susscessful to download file - All checksums match
+2024/06/24 20:22:03 [INFO] : End backup folder /folder3 to Local Storage
+2024/06/24 20:22:03 [END] [BACKUPLOCAL] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:22:03 [SUCCESSFUL] [BACKUPLOCAL] [ProjectId_1_BackupTaskId_2]
+
+
+2024/06/24 20:22:03 [START] [CLEANUPLOCAL] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:22:03 [INFO] : Begin cleanup directory /home/ubuntu/sftp_ver2/pve1/folder3 with 2 retention
+2024/06/24 20:22:03 [INFO] : There are 1 folders need to be deleted
+/home/ubuntu/sftp_ver2/pve1/folder3/2024-06-24_20:20:02/
+2024/06/24 20:22:03 [DELETE] [SUCCESS]: Deletion successful
+2024/06/24 20:22:03 [INFO] : End cleanup directory /home/ubuntu/sftp_ver2/pve1/folder3 with 2 retention
+2024/06/24 20:22:03 [END] [CLEANUPLOCAL] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:22:03 [SUCCESS] [CLEANUPLOCAL] [ProjectId_1_BackupTaskId_2]
+
+
+2024/06/24 20:22:12 [START] [BACKUPREMOTE] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:22:12 [INFO] : Begin backup folder folder1 to Remote Storage
+2024/06/24 20:22:15 INFO  : There was nothing to transfer
+2024/06/24 20:22:15 INFO  : 
+Transferred:   	         0 / 0 Bytes, -, 0 Bytes/s, ETA -
+Checks:                 4 / 4, 100%
+Elapsed time:         3.1s
+
+Directories match. No differences found.
+2024/06/24 20:22:18 [INFO] : End backup folder folder1  to Remote Storage
+2024/06/24 20:22:18 [INFO] : Begin backup folder folder1 to Remote Storage
+2024/06/24 20:22:21 INFO  : There was nothing to transfer
+2024/06/24 20:22:21 INFO  : 
+Transferred:   	         0 / 0 Bytes, -, 0 Bytes/s, ETA -
+Checks:                 4 / 4, 100%
+Elapsed time:         3.1s
+
+Directories match. No differences found.
+2024/06/24 20:22:24 [INFO] : End backup folder folder1  to Remote Storage
+2024/06/24 20:22:24 [INFO] : Begin backup folder folder2 to Remote Storage
+2024/06/24 20:22:27 INFO  : There was nothing to transfer
+2024/06/24 20:22:27 INFO  : 
+Transferred:   	         0 / 0 Bytes, -, 0 Bytes/s, ETA -
+Checks:                 1 / 1, 100%
+Elapsed time:         2.8s
+
+Directories match. No differences found.
+2024/06/24 20:22:30 [INFO] : End backup folder folder2  to Remote Storage
+2024/06/24 20:22:30 [INFO] : Begin backup folder folder2 to Remote Storage
+2024/06/24 20:22:34 INFO  : There was nothing to transfer
+2024/06/24 20:22:34 INFO  : 
+Transferred:   	         0 / 0 Bytes, -, 0 Bytes/s, ETA -
+Checks:                 1 / 1, 100%
+Elapsed time:         3.3s
+
+Directories match. No differences found.
+2024/06/24 20:22:37 [INFO] : End backup folder folder2  to Remote Storage
+2024/06/24 20:22:37 [INFO] : Begin backup folder folder3 to Remote Storage
+2024/06/24 20:22:43 INFO  : folder3/file3: Copied (new)
+2024/06/24 20:22:43 INFO  : folder3/file2: Copied (new)
+2024/06/24 20:22:43 INFO  : folder3/file1: Copied (new)
+2024/06/24 20:22:43 INFO  : 
+Transferred:   	         0 / 0 Bytes, -, 0 Bytes/s, ETA -
+Transferred:            3 / 3, 100%
+Elapsed time:         6.5s
+
+Directories match. No differences found.
+2024/06/24 20:22:46 [INFO] : End backup folder folder3  to Remote Storage
+2024/06/24 20:22:46 [INFO] : Begin backup folder folder3 to Remote Storage
+2024/06/24 20:22:53 INFO  : folder3/file2: Copied (new)
+2024/06/24 20:22:53 INFO  : folder3/file1: Copied (new)
+2024/06/24 20:22:53 INFO  : folder3/file3: Copied (new)
+2024/06/24 20:22:53 INFO  : 
+Transferred:   	         0 / 0 Bytes, -, 0 Bytes/s, ETA -
+Transferred:            3 / 3, 100%
+Elapsed time:         6.1s
+
+Directories match. No differences found.
+2024/06/24 20:22:56 [INFO] : End backup folder folder3  to Remote Storage
+2024/06/24 20:22:56 [END] [BACKUPREMOTE] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:22:56 [SUCCESS] [BACKUPREMOTE] [ProjectId_1_BackupTaskId_2]
+
+
+2024/06/24 20:22:56 [START] [CLEANUPREMOTE] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:22:58 [INFO] : Begin cleanup directory onedrive:backup/pve1/folder3 with 3 retention
+2024/06/24 20:22:58 [INFO] : There are 2 folders need to delete
+2024/06/24 20:22:58 [INFO] : Deleting folder: 2024-06-24_20:19:02
+2024/06/24 20:23:01 [DELETE] [SUCCESS]: Deleted folder: 2024-06-24_20:19:02
+2024/06/24 20:23:01 [INFO] : Deleting folder: 2024-06-24_20:18:02
+
+2024/06/24 20:23:01 [START] [BACKUPLOCAL] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:23:02 [SFTP] [SUCCESS] [SFTP connect to host pve1 successful.]
+2024/06/24 20:23:02 [INFO] : Begin backup folder /folder3 to Local Storage
+2024/06/24 20:23:02 [SFTPFOLDERDIR] [SUCCESS]: Created local backup directory /home/ubuntu/sftp_ver2/pve1/folder3/2024-06-24_20:23:02
+2024/06/24 20:23:02 [SFTPCHECKSUMFOLDER] [SUCCESS]: Created remote checksum directory /home/ubuntu/sftp_ver2/checksums/sftpserver/projectId_1_taskId_2
+2024/06/24 20:23:02 [SFTPCHECKSUMFILE] [SUCCESS]: Generated remote checksum file for /folder3
+Connected to pve1.
+sftp> get -R /folder3 /home/ubuntu/sftp_ver2/pve1/folder3/2024-06-24_20:23:02
+Fetching /folder3/ to /home/ubuntu/sftp_ver2/pve1/folder3/2024-06-24_20:23:02/folder3
+Retrieving /folder3
+sftp> bye
+2024/06/24 20:23:02 [LOCALCHECKSUMFILE] [SUCCESS]: Generated local checksum file for /folder3
+2024/06/24 20:23:02 [CHECKSUM] [SUCCESS]: Susscessful to download file - All checksums match
+2024/06/24 20:23:02 [INFO] : End backup folder /folder3 to Local Storage
+2024/06/24 20:23:02 [END] [BACKUPLOCAL] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:23:02 [SUCCESSFUL] [BACKUPLOCAL] [ProjectId_1_BackupTaskId_2]
+
+
+2024/06/24 20:23:03 [START] [CLEANUPLOCAL] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:23:03 [INFO] : Begin cleanup directory /home/ubuntu/sftp_ver2/pve1/folder3 with 2 retention
+2024/06/24 20:23:03 [INFO] : There are 1 folders need to be deleted
+/home/ubuntu/sftp_ver2/pve1/folder3/2024-06-24_20:21:02/
+2024/06/24 20:23:03 [DELETE] [SUCCESS]: Deletion successful
+2024/06/24 20:23:03 [INFO] : End cleanup directory /home/ubuntu/sftp_ver2/pve1/folder3 with 2 retention
+2024/06/24 20:23:03 [END] [CLEANUPLOCAL] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:23:03 [SUCCESS] [CLEANUPLOCAL] [ProjectId_1_BackupTaskId_2]
+
+2024/06/24 20:23:03 [DELETE] [SUCCESS]: Deleted folder: 2024-06-24_20:18:02
+2024/06/24 20:23:03 [INFO] : End cleanup directory onedrive:backup/pve1/folder3 with 3 retention
+2024/06/24 20:23:03 [END] [CLEANUPREMOTE] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:23:03 [SUCCESS] [CLEANUPREMOTE] [ProjectId_1_BackupTaskId_2]
+
+
+2024/06/24 20:24:01 [START] [BACKUPLOCAL] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:24:01 [SFTP] [SUCCESS] [SFTP connect to host pve1 successful.]
+2024/06/24 20:24:02 [INFO] : Begin backup folder /folder3 to Local Storage
+2024/06/24 20:24:02 [SFTPFOLDERDIR] [SUCCESS]: Created local backup directory /home/ubuntu/sftp_ver2/pve1/folder3/2024-06-24_20:24:02
+2024/06/24 20:24:02 [SFTPCHECKSUMFOLDER] [SUCCESS]: Created remote checksum directory /home/ubuntu/sftp_ver2/checksums/sftpserver/projectId_1_taskId_2
+2024/06/24 20:24:02 [SFTPCHECKSUMFILE] [SUCCESS]: Generated remote checksum file for /folder3
+Connected to pve1.
+sftp> get -R /folder3 /home/ubuntu/sftp_ver2/pve1/folder3/2024-06-24_20:24:02
+Fetching /folder3/ to /home/ubuntu/sftp_ver2/pve1/folder3/2024-06-24_20:24:02/folder3
+Retrieving /folder3
+sftp> bye
+2024/06/24 20:24:02 [LOCALCHECKSUMFILE] [SUCCESS]: Generated local checksum file for /folder3
+2024/06/24 20:24:02 [CHECKSUM] [SUCCESS]: Susscessful to download file - All checksums match
+2024/06/24 20:24:02 [INFO] : End backup folder /folder3 to Local Storage
+2024/06/24 20:24:02 [END] [BACKUPLOCAL] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:24:02 [SUCCESSFUL] [BACKUPLOCAL] [ProjectId_1_BackupTaskId_2]
+
+
+2024/06/24 20:24:02 [START] [CLEANUPLOCAL] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:24:02 [INFO] : Begin cleanup directory /home/ubuntu/sftp_ver2/pve1/folder3 with 2 retention
+2024/06/24 20:24:02 [INFO] : There are 1 folders need to be deleted
+/home/ubuntu/sftp_ver2/pve1/folder3/2024-06-24_20:22:02/
+2024/06/24 20:24:02 [DELETE] [SUCCESS]: Deletion successful
+2024/06/24 20:24:02 [INFO] : End cleanup directory /home/ubuntu/sftp_ver2/pve1/folder3 with 2 retention
+2024/06/24 20:24:02 [END] [CLEANUPLOCAL] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:24:02 [SUCCESS] [CLEANUPLOCAL] [ProjectId_1_BackupTaskId_2]
+
+
+2024/06/24 20:24:11 [START] [BACKUPREMOTE] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:24:11 [INFO] : Begin backup folder folder1 to Remote Storage
+2024/06/24 20:24:14 INFO  : There was nothing to transfer
+2024/06/24 20:24:14 INFO  : 
+Transferred:   	         0 / 0 Bytes, -, 0 Bytes/s, ETA -
+Checks:                 4 / 4, 100%
+Elapsed time:         3.0s
+
+Directories match. No differences found.
+2024/06/24 20:24:17 [INFO] : End backup folder folder1  to Remote Storage
+2024/06/24 20:24:17 [INFO] : Begin backup folder folder1 to Remote Storage
+2024/06/24 20:24:20 INFO  : There was nothing to transfer
+2024/06/24 20:24:20 INFO  : 
+Transferred:   	         0 / 0 Bytes, -, 0 Bytes/s, ETA -
+Checks:                 4 / 4, 100%
+Elapsed time:         2.9s
+
+Directories match. No differences found.
+2024/06/24 20:24:23 [INFO] : End backup folder folder1  to Remote Storage
+2024/06/24 20:24:23 [INFO] : Begin backup folder folder2 to Remote Storage
+2024/06/24 20:24:26 INFO  : There was nothing to transfer
+2024/06/24 20:24:26 INFO  : 
+Transferred:   	         0 / 0 Bytes, -, 0 Bytes/s, ETA -
+Checks:                 1 / 1, 100%
+Elapsed time:         2.9s
+
+Directories match. No differences found.
+2024/06/24 20:24:29 [INFO] : End backup folder folder2  to Remote Storage
+2024/06/24 20:24:29 [INFO] : Begin backup folder folder2 to Remote Storage
+2024/06/24 20:24:32 INFO  : There was nothing to transfer
+2024/06/24 20:24:32 INFO  : 
+Transferred:   	         0 / 0 Bytes, -, 0 Bytes/s, ETA -
+Checks:                 1 / 1, 100%
+Elapsed time:         2.5s
+
+Directories match. No differences found.
+2024/06/24 20:24:35 [INFO] : End backup folder folder2  to Remote Storage
+2024/06/24 20:24:35 [INFO] : Begin backup folder folder3 to Remote Storage
+2024/06/24 20:24:42 INFO  : folder3/file3: Copied (new)
+2024/06/24 20:24:42 INFO  : folder3/file1: Copied (new)
+2024/06/24 20:24:42 INFO  : folder3/file2: Copied (new)
+2024/06/24 20:24:42 INFO  : 
+Transferred:   	         0 / 0 Bytes, -, 0 Bytes/s, ETA -
+Transferred:            3 / 3, 100%
+Elapsed time:         7.1s
+
+Directories match. No differences found.
+2024/06/24 20:24:45 [INFO] : End backup folder folder3  to Remote Storage
+2024/06/24 20:24:45 [INFO] : Begin backup folder folder3 to Remote Storage
+2024/06/24 20:24:51 INFO  : folder3/file2: Copied (new)
+2024/06/24 20:24:51 INFO  : folder3/file3: Copied (new)
+2024/06/24 20:24:51 INFO  : folder3/file1: Copied (new)
+2024/06/24 20:24:51 INFO  : 
+Transferred:   	         0 / 0 Bytes, -, 0 Bytes/s, ETA -
+Transferred:            3 / 3, 100%
+Elapsed time:         6.2s
+
+Directories match. No differences found.
+2024/06/24 20:24:54 [INFO] : End backup folder folder3  to Remote Storage
+2024/06/24 20:24:54 [END] [BACKUPREMOTE] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:24:54 [SUCCESS] [BACKUPREMOTE] [ProjectId_1_BackupTaskId_2]
+
+
+2024/06/24 20:24:54 [START] [CLEANUPREMOTE] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:24:56 [INFO] : Begin cleanup directory onedrive:backup/pve1/folder3 with 3 retention
+2024/06/24 20:24:56 [INFO] : There are 2 folders need to delete
+2024/06/24 20:24:56 [INFO] : Deleting folder: 2024-06-24_20:21:02
+2024/06/24 20:24:59 [DELETE] [SUCCESS]: Deleted folder: 2024-06-24_20:21:02
+2024/06/24 20:24:59 [INFO] : Deleting folder: 2024-06-24_20:20:02
+
+2024/06/24 20:25:02 [START] [BACKUPLOCAL] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:25:02 [DELETE] [SUCCESS]: Deleted folder: 2024-06-24_20:20:02
+2024/06/24 20:25:02 [INFO] : End cleanup directory onedrive:backup/pve1/folder3 with 3 retention
+2024/06/24 20:25:02 [END] [CLEANUPREMOTE] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:25:02 [SUCCESS] [CLEANUPREMOTE] [ProjectId_1_BackupTaskId_2]
+
+2024/06/24 20:25:02 [SFTP] [SUCCESS] [SFTP connect to host pve1 successful.]
+2024/06/24 20:25:02 [INFO] : Begin backup folder /folder3 to Local Storage
+2024/06/24 20:25:02 [SFTPFOLDERDIR] [SUCCESS]: Created local backup directory /home/ubuntu/sftp_ver2/pve1/folder3/2024-06-24_20:25:02
+2024/06/24 20:25:02 [SFTPCHECKSUMFOLDER] [SUCCESS]: Created remote checksum directory /home/ubuntu/sftp_ver2/checksums/sftpserver/projectId_1_taskId_2
+2024/06/24 20:25:03 [SFTPCHECKSUMFILE] [SUCCESS]: Generated remote checksum file for /folder3
+Connected to pve1.
+sftp> get -R /folder3 /home/ubuntu/sftp_ver2/pve1/folder3/2024-06-24_20:25:02
+Fetching /folder3/ to /home/ubuntu/sftp_ver2/pve1/folder3/2024-06-24_20:25:02/folder3
+Retrieving /folder3
+sftp> bye
+2024/06/24 20:25:03 [LOCALCHECKSUMFILE] [SUCCESS]: Generated local checksum file for /folder3
+2024/06/24 20:25:03 [CHECKSUM] [SUCCESS]: Susscessful to download file - All checksums match
+2024/06/24 20:25:03 [INFO] : End backup folder /folder3 to Local Storage
+2024/06/24 20:25:03 [END] [BACKUPLOCAL] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:25:03 [SUCCESSFUL] [BACKUPLOCAL] [ProjectId_1_BackupTaskId_2]
+
+
+2024/06/24 20:25:03 [START] [CLEANUPLOCAL] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:25:03 [INFO] : Begin cleanup directory /home/ubuntu/sftp_ver2/pve1/folder3 with 2 retention
+2024/06/24 20:25:03 [INFO] : There are 1 folders need to be deleted
+/home/ubuntu/sftp_ver2/pve1/folder3/2024-06-24_20:23:02/
+2024/06/24 20:25:03 [DELETE] [SUCCESS]: Deletion successful
+2024/06/24 20:25:03 [INFO] : End cleanup directory /home/ubuntu/sftp_ver2/pve1/folder3 with 2 retention
+2024/06/24 20:25:03 [END] [CLEANUPLOCAL] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:25:03 [SUCCESS] [CLEANUPLOCAL] [ProjectId_1_BackupTaskId_2]
+
+
+2024/06/24 20:26:01 [START] [BACKUPLOCAL] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:26:02 [SFTP] [SUCCESS] [SFTP connect to host pve1 successful.]
+2024/06/24 20:26:02 [INFO] : Begin backup folder /folder3 to Local Storage
+2024/06/24 20:26:02 [SFTPFOLDERDIR] [SUCCESS]: Created local backup directory /home/ubuntu/sftp_ver2/pve1/folder3/2024-06-24_20:26:02
+2024/06/24 20:26:02 [SFTPCHECKSUMFOLDER] [SUCCESS]: Created remote checksum directory /home/ubuntu/sftp_ver2/checksums/sftpserver/projectId_1_taskId_2
+2024/06/24 20:26:02 [SFTPCHECKSUMFILE] [SUCCESS]: Generated remote checksum file for /folder3
+Connected to pve1.
+sftp> get -R /folder3 /home/ubuntu/sftp_ver2/pve1/folder3/2024-06-24_20:26:02
+Fetching /folder3/ to /home/ubuntu/sftp_ver2/pve1/folder3/2024-06-24_20:26:02/folder3
+Retrieving /folder3
+sftp> bye
+2024/06/24 20:26:02 [LOCALCHECKSUMFILE] [SUCCESS]: Generated local checksum file for /folder3
+2024/06/24 20:26:02 [CHECKSUM] [SUCCESS]: Susscessful to download file - All checksums match
+2024/06/24 20:26:02 [INFO] : End backup folder /folder3 to Local Storage
+2024/06/24 20:26:02 [END] [BACKUPLOCAL] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:26:02 [SUCCESSFUL] [BACKUPLOCAL] [ProjectId_1_BackupTaskId_2]
+
+
+2024/06/24 20:26:02 [START] [CLEANUPLOCAL] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:26:02 [INFO] : Begin cleanup directory /home/ubuntu/sftp_ver2/pve1/folder3 with 2 retention
+2024/06/24 20:26:02 [INFO] : There are 1 folders need to be deleted
+/home/ubuntu/sftp_ver2/pve1/folder3/2024-06-24_20:24:02/
+2024/06/24 20:26:02 [DELETE] [SUCCESS]: Deletion successful
+2024/06/24 20:26:03 [INFO] : End cleanup directory /home/ubuntu/sftp_ver2/pve1/folder3 with 2 retention
+2024/06/24 20:26:03 [END] [CLEANUPLOCAL] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:26:03 [SUCCESS] [CLEANUPLOCAL] [ProjectId_1_BackupTaskId_2]
+
+
+2024/06/24 20:26:11 [START] [BACKUPREMOTE] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:26:11 [INFO] : Begin backup folder folder1 to Remote Storage
+2024/06/24 20:26:14 INFO  : There was nothing to transfer
+2024/06/24 20:26:14 INFO  : 
+Transferred:   	         0 / 0 Bytes, -, 0 Bytes/s, ETA -
+Checks:                 4 / 4, 100%
+Elapsed time:         3.1s
+
+Directories match. No differences found.
+2024/06/24 20:26:18 [INFO] : End backup folder folder1  to Remote Storage
+2024/06/24 20:26:18 [INFO] : Begin backup folder folder1 to Remote Storage
+2024/06/24 20:26:21 INFO  : There was nothing to transfer
+2024/06/24 20:26:21 INFO  : 
+Transferred:   	         0 / 0 Bytes, -, 0 Bytes/s, ETA -
+Checks:                 4 / 4, 100%
+Elapsed time:         3.1s
+
+Directories match. No differences found.
+2024/06/24 20:26:23 [INFO] : End backup folder folder1  to Remote Storage
+2024/06/24 20:26:23 [INFO] : Begin backup folder folder2 to Remote Storage
+2024/06/24 20:26:26 INFO  : There was nothing to transfer
+2024/06/24 20:26:26 INFO  : 
+Transferred:   	         0 / 0 Bytes, -, 0 Bytes/s, ETA -
+Checks:                 1 / 1, 100%
+Elapsed time:         2.8s
+
+Directories match. No differences found.
+2024/06/24 20:26:29 [INFO] : End backup folder folder2  to Remote Storage
+2024/06/24 20:26:29 [INFO] : Begin backup folder folder2 to Remote Storage
+2024/06/24 20:26:32 INFO  : There was nothing to transfer
+2024/06/24 20:26:32 INFO  : 
+Transferred:   	         0 / 0 Bytes, -, 0 Bytes/s, ETA -
+Checks:                 1 / 1, 100%
+Elapsed time:         2.7s
+
+Directories match. No differences found.
+2024/06/24 20:26:35 [INFO] : End backup folder folder2  to Remote Storage
+2024/06/24 20:26:35 [INFO] : Begin backup folder folder3 to Remote Storage
+2024/06/24 20:26:42 INFO  : folder3/file3: Copied (new)
+2024/06/24 20:26:42 INFO  : folder3/file2: Copied (new)
+2024/06/24 20:26:42 INFO  : folder3/file1: Copied (new)
+2024/06/24 20:26:42 INFO  : 
+Transferred:   	         0 / 0 Bytes, -, 0 Bytes/s, ETA -
+Transferred:            3 / 3, 100%
+Elapsed time:         6.8s
+
+Directories match. No differences found.
+2024/06/24 20:26:45 [INFO] : End backup folder folder3  to Remote Storage
+2024/06/24 20:26:45 [INFO] : Begin backup folder folder3 to Remote Storage
+2024/06/24 20:26:52 INFO  : folder3/file3: Copied (new)
+2024/06/24 20:26:52 INFO  : folder3/file1: Copied (new)
+2024/06/24 20:26:52 INFO  : folder3/file2: Copied (new)
+2024/06/24 20:26:52 INFO  : 
+Transferred:   	         0 / 0 Bytes, -, 0 Bytes/s, ETA -
+Transferred:            3 / 3, 100%
+Elapsed time:         6.9s
+
+Directories match. No differences found.
+2024/06/24 20:26:55 [INFO] : End backup folder folder3  to Remote Storage
+2024/06/24 20:26:55 [END] [BACKUPREMOTE] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:26:55 [SUCCESS] [BACKUPREMOTE] [ProjectId_1_BackupTaskId_2]
+
+
+2024/06/24 20:26:55 [START] [CLEANUPREMOTE] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:26:57 [INFO] : Begin cleanup directory onedrive:backup/pve1/folder3 with 3 retention
+2024/06/24 20:26:57 [INFO] : There are 2 folders need to delete
+2024/06/24 20:26:57 [INFO] : Deleting folder: 2024-06-24_20:23:02
+2024/06/24 20:27:00 [DELETE] [SUCCESS]: Deleted folder: 2024-06-24_20:23:02
+2024/06/24 20:27:00 [INFO] : Deleting folder: 2024-06-24_20:22:02
+
+2024/06/24 20:27:01 [START] [BACKUPLOCAL] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:27:01 [SFTP] [SUCCESS] [SFTP connect to host pve1 successful.]
+2024/06/24 20:27:01 [INFO] : Begin backup folder /folder3 to Local Storage
+2024/06/24 20:27:01 [SFTPFOLDERDIR] [SUCCESS]: Created local backup directory /home/ubuntu/sftp_ver2/pve1/folder3/2024-06-24_20:27:01
+2024/06/24 20:27:01 [SFTPCHECKSUMFOLDER] [SUCCESS]: Created remote checksum directory /home/ubuntu/sftp_ver2/checksums/sftpserver/projectId_1_taskId_2
+2024/06/24 20:27:02 [SFTPCHECKSUMFILE] [SUCCESS]: Generated remote checksum file for /folder3
+Connected to pve1.
+sftp> get -R /folder3 /home/ubuntu/sftp_ver2/pve1/folder3/2024-06-24_20:27:01
+Fetching /folder3/ to /home/ubuntu/sftp_ver2/pve1/folder3/2024-06-24_20:27:01/folder3
+Retrieving /folder3
+sftp> bye
+2024/06/24 20:27:02 [LOCALCHECKSUMFILE] [SUCCESS]: Generated local checksum file for /folder3
+2024/06/24 20:27:02 [CHECKSUM] [SUCCESS]: Susscessful to download file - All checksums match
+2024/06/24 20:27:02 [INFO] : End backup folder /folder3 to Local Storage
+2024/06/24 20:27:02 [END] [BACKUPLOCAL] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:27:02 [SUCCESSFUL] [BACKUPLOCAL] [ProjectId_1_BackupTaskId_2]
+
+
+2024/06/24 20:27:02 [START] [CLEANUPLOCAL] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:27:02 [INFO] : Begin cleanup directory /home/ubuntu/sftp_ver2/pve1/folder3 with 2 retention
+2024/06/24 20:27:02 [INFO] : There are 1 folders need to be deleted
+/home/ubuntu/sftp_ver2/pve1/folder3/2024-06-24_20:25:02/
+2024/06/24 20:27:02 [DELETE] [SUCCESS]: Deletion successful
+2024/06/24 20:27:02 [INFO] : End cleanup directory /home/ubuntu/sftp_ver2/pve1/folder3 with 2 retention
+2024/06/24 20:27:02 [END] [CLEANUPLOCAL] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:27:02 [SUCCESS] [CLEANUPLOCAL] [ProjectId_1_BackupTaskId_2]
+
+2024/06/24 20:27:03 [DELETE] [SUCCESS]: Deleted folder: 2024-06-24_20:22:02
+2024/06/24 20:27:03 [INFO] : End cleanup directory onedrive:backup/pve1/folder3 with 3 retention
+2024/06/24 20:27:03 [END] [CLEANUPREMOTE] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:27:03 [SUCCESS] [CLEANUPREMOTE] [ProjectId_1_BackupTaskId_2]
+
+
+2024/06/24 20:28:01 [START] [BACKUPLOCAL] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:28:01 [SFTP] [SUCCESS] [SFTP connect to host pve1 successful.]
+2024/06/24 20:28:01 [INFO] : Begin backup folder /folder3 to Local Storage
+2024/06/24 20:28:01 [SFTPFOLDERDIR] [SUCCESS]: Created local backup directory /home/ubuntu/sftp_ver2/pve1/folder3/2024-06-24_20:28:01
+2024/06/24 20:28:01 [SFTPCHECKSUMFOLDER] [SUCCESS]: Created remote checksum directory /home/ubuntu/sftp_ver2/checksums/sftpserver/projectId_1_taskId_2
+2024/06/24 20:28:02 [SFTPCHECKSUMFILE] [SUCCESS]: Generated remote checksum file for /folder3
+Connected to pve1.
+sftp> get -R /folder3 /home/ubuntu/sftp_ver2/pve1/folder3/2024-06-24_20:28:01
+Fetching /folder3/ to /home/ubuntu/sftp_ver2/pve1/folder3/2024-06-24_20:28:01/folder3
+Retrieving /folder3
+sftp> bye
+2024/06/24 20:28:02 [LOCALCHECKSUMFILE] [SUCCESS]: Generated local checksum file for /folder3
+2024/06/24 20:28:02 [CHECKSUM] [SUCCESS]: Susscessful to download file - All checksums match
+2024/06/24 20:28:02 [INFO] : End backup folder /folder3 to Local Storage
+2024/06/24 20:28:02 [END] [BACKUPLOCAL] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:28:02 [SUCCESSFUL] [BACKUPLOCAL] [ProjectId_1_BackupTaskId_2]
+
+
+2024/06/24 20:28:02 [START] [CLEANUPLOCAL] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:28:02 [INFO] : Begin cleanup directory /home/ubuntu/sftp_ver2/pve1/folder3 with 2 retention
+2024/06/24 20:28:02 [INFO] : There are 1 folders need to be deleted
+/home/ubuntu/sftp_ver2/pve1/folder3/2024-06-24_20:26:02/
+2024/06/24 20:28:02 [DELETE] [SUCCESS]: Deletion successful
+2024/06/24 20:28:02 [INFO] : End cleanup directory /home/ubuntu/sftp_ver2/pve1/folder3 with 2 retention
+2024/06/24 20:28:02 [END] [CLEANUPLOCAL] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:28:02 [SUCCESS] [CLEANUPLOCAL] [ProjectId_1_BackupTaskId_2]
+
+
+2024/06/24 20:28:11 [START] [BACKUPREMOTE] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:28:11 [INFO] : Begin backup folder folder1 to Remote Storage
+2024/06/24 20:28:13 INFO  : There was nothing to transfer
+2024/06/24 20:28:13 INFO  : 
+Transferred:   	         0 / 0 Bytes, -, 0 Bytes/s, ETA -
+Checks:                 4 / 4, 100%
+Elapsed time:         2.7s
+
+Directories match. No differences found.
+2024/06/24 20:28:17 [INFO] : End backup folder folder1  to Remote Storage
+2024/06/24 20:28:17 [INFO] : Begin backup folder folder1 to Remote Storage
+2024/06/24 20:28:19 INFO  : There was nothing to transfer
+2024/06/24 20:28:19 INFO  : 
+Transferred:   	         0 / 0 Bytes, -, 0 Bytes/s, ETA -
+Checks:                 4 / 4, 100%
+Elapsed time:         2.8s
+
+Directories match. No differences found.
+2024/06/24 20:28:23 [INFO] : End backup folder folder1  to Remote Storage
+2024/06/24 20:28:23 [INFO] : Begin backup folder folder2 to Remote Storage
+2024/06/24 20:28:25 INFO  : There was nothing to transfer
+2024/06/24 20:28:25 INFO  : 
+Transferred:   	         0 / 0 Bytes, -, 0 Bytes/s, ETA -
+Checks:                 1 / 1, 100%
+Elapsed time:         2.8s
+
+Directories match. No differences found.
+2024/06/24 20:28:29 [INFO] : End backup folder folder2  to Remote Storage
+2024/06/24 20:28:29 [INFO] : Begin backup folder folder2 to Remote Storage
+2024/06/24 20:28:32 INFO  : There was nothing to transfer
+2024/06/24 20:28:32 INFO  : 
+Transferred:   	         0 / 0 Bytes, -, 0 Bytes/s, ETA -
+Checks:                 1 / 1, 100%
+Elapsed time:         3.2s
+
+Directories match. No differences found.
+2024/06/24 20:28:35 [INFO] : End backup folder folder2  to Remote Storage
+2024/06/24 20:28:35 [INFO] : Begin backup folder folder3 to Remote Storage
+2024/06/24 20:28:41 INFO  : folder3/file2: Copied (new)
+2024/06/24 20:28:41 INFO  : folder3/file1: Copied (new)
+2024/06/24 20:28:41 INFO  : folder3/file3: Copied (new)
+2024/06/24 20:28:41 INFO  : 
+Transferred:   	         0 / 0 Bytes, -, 0 Bytes/s, ETA -
+Transferred:            3 / 3, 100%
+Elapsed time:         6.1s
+
+Directories match. No differences found.
+2024/06/24 20:28:44 [INFO] : End backup folder folder3  to Remote Storage
+2024/06/24 20:28:44 [INFO] : Begin backup folder folder3 to Remote Storage
+2024/06/24 20:28:50 INFO  : folder3/file1: Copied (new)
+2024/06/24 20:28:50 INFO  : folder3/file2: Copied (new)
+2024/06/24 20:28:50 INFO  : folder3/file3: Copied (new)
+2024/06/24 20:28:50 INFO  : 
+Transferred:   	         0 / 0 Bytes, -, 0 Bytes/s, ETA -
+Transferred:            3 / 3, 100%
+Elapsed time:         5.9s
+
+Directories match. No differences found.
+2024/06/24 20:28:53 [INFO] : End backup folder folder3  to Remote Storage
+2024/06/24 20:28:53 [END] [BACKUPREMOTE] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:28:53 [SUCCESS] [BACKUPREMOTE] [ProjectId_1_BackupTaskId_2]
+
+
+2024/06/24 20:28:53 [START] [CLEANUPREMOTE] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:28:55 [INFO] : Begin cleanup directory onedrive:backup/pve1/folder3 with 3 retention
+2024/06/24 20:28:55 [INFO] : There are 2 folders need to delete
+2024/06/24 20:28:55 [INFO] : Deleting folder: 2024-06-24_20:25:02
+2024/06/24 20:28:57 [DELETE] [SUCCESS]: Deleted folder: 2024-06-24_20:25:02
+2024/06/24 20:28:57 [INFO] : Deleting folder: 2024-06-24_20:24:02
+2024/06/24 20:29:00 [DELETE] [SUCCESS]: Deleted folder: 2024-06-24_20:24:02
+2024/06/24 20:29:00 [INFO] : End cleanup directory onedrive:backup/pve1/folder3 with 3 retention
+2024/06/24 20:29:00 [END] [CLEANUPREMOTE] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:29:00 [SUCCESS] [CLEANUPREMOTE] [ProjectId_1_BackupTaskId_2]
+
+
+2024/06/24 20:29:00 [START] [BACKUPLOCAL] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:29:01 [SFTP] [SUCCESS] [SFTP connect to host pve1 successful.]
+2024/06/24 20:29:01 [INFO] : Begin backup folder /folder3 to Local Storage
+2024/06/24 20:29:01 [SFTPFOLDERDIR] [SUCCESS]: Created local backup directory /home/ubuntu/sftp_ver2/pve1/folder3/2024-06-24_20:29:01
+2024/06/24 20:29:01 [SFTPCHECKSUMFOLDER] [SUCCESS]: Created remote checksum directory /home/ubuntu/sftp_ver2/checksums/sftpserver/projectId_1_taskId_2
+2024/06/24 20:29:01 [SFTPCHECKSUMFILE] [SUCCESS]: Generated remote checksum file for /folder3
+Connected to pve1.
+sftp> get -R /folder3 /home/ubuntu/sftp_ver2/pve1/folder3/2024-06-24_20:29:01
+Fetching /folder3/ to /home/ubuntu/sftp_ver2/pve1/folder3/2024-06-24_20:29:01/folder3
+Retrieving /folder3
+sftp> bye
+2024/06/24 20:29:01 [LOCALCHECKSUMFILE] [SUCCESS]: Generated local checksum file for /folder3
+2024/06/24 20:29:01 [CHECKSUM] [SUCCESS]: Susscessful to download file - All checksums match
+2024/06/24 20:29:01 [INFO] : End backup folder /folder3 to Local Storage
+2024/06/24 20:29:01 [END] [BACKUPLOCAL] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:29:01 [SUCCESSFUL] [BACKUPLOCAL] [ProjectId_1_BackupTaskId_2]
+
+
+2024/06/24 20:29:02 [START] [CLEANUPLOCAL] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:29:02 [INFO] : Begin cleanup directory /home/ubuntu/sftp_ver2/pve1/folder3 with 2 retention
+2024/06/24 20:29:02 [INFO] : There are 1 folders need to be deleted
+/home/ubuntu/sftp_ver2/pve1/folder3/2024-06-24_20:27:01/
+2024/06/24 20:29:02 [DELETE] [SUCCESS]: Deletion successful
+2024/06/24 20:29:02 [INFO] : End cleanup directory /home/ubuntu/sftp_ver2/pve1/folder3 with 2 retention
+2024/06/24 20:29:02 [END] [CLEANUPLOCAL] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:29:02 [SUCCESS] [CLEANUPLOCAL] [ProjectId_1_BackupTaskId_2]
+
+
+2024/06/24 20:30:01 [START] [BACKUPLOCAL] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:30:01 [SFTP] [SUCCESS] [SFTP connect to host pve1 successful.]
+2024/06/24 20:30:01 [INFO] : Begin backup folder /folder3 to Local Storage
+2024/06/24 20:30:01 [SFTPFOLDERDIR] [SUCCESS]: Created local backup directory /home/ubuntu/sftp_ver2/pve1/folder3/2024-06-24_20:30:01
+2024/06/24 20:30:01 [SFTPCHECKSUMFOLDER] [SUCCESS]: Created remote checksum directory /home/ubuntu/sftp_ver2/checksums/sftpserver/projectId_1_taskId_2
+2024/06/24 20:30:02 [SFTPCHECKSUMFILE] [SUCCESS]: Generated remote checksum file for /folder3
+Connected to pve1.
+sftp> get -R /folder3 /home/ubuntu/sftp_ver2/pve1/folder3/2024-06-24_20:30:01
+Fetching /folder3/ to /home/ubuntu/sftp_ver2/pve1/folder3/2024-06-24_20:30:01/folder3
+Retrieving /folder3
+sftp> bye
+2024/06/24 20:30:02 [LOCALCHECKSUMFILE] [SUCCESS]: Generated local checksum file for /folder3
+2024/06/24 20:30:02 [CHECKSUM] [SUCCESS]: Susscessful to download file - All checksums match
+2024/06/24 20:30:02 [INFO] : End backup folder /folder3 to Local Storage
+2024/06/24 20:30:02 [END] [BACKUPLOCAL] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:30:02 [SUCCESSFUL] [BACKUPLOCAL] [ProjectId_1_BackupTaskId_2]
+
+
+2024/06/24 20:30:02 [START] [CLEANUPLOCAL] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:30:02 [INFO] : Begin cleanup directory /home/ubuntu/sftp_ver2/pve1/folder3 with 2 retention
+2024/06/24 20:30:02 [INFO] : There are 1 folders need to be deleted
+/home/ubuntu/sftp_ver2/pve1/folder3/2024-06-24_20:28:01/
+2024/06/24 20:30:02 [DELETE] [SUCCESS]: Deletion successful
+2024/06/24 20:30:02 [INFO] : End cleanup directory /home/ubuntu/sftp_ver2/pve1/folder3 with 2 retention
+2024/06/24 20:30:02 [END] [CLEANUPLOCAL] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:30:02 [SUCCESS] [CLEANUPLOCAL] [ProjectId_1_BackupTaskId_2]
+
+
+2024/06/24 20:30:11 [START] [BACKUPREMOTE] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:30:11 [INFO] : Begin backup folder folder1 to Remote Storage
+2024/06/24 20:30:14 INFO  : There was nothing to transfer
+2024/06/24 20:30:14 INFO  : 
+Transferred:   	         0 / 0 Bytes, -, 0 Bytes/s, ETA -
+Checks:                 4 / 4, 100%
+Elapsed time:         2.8s
+
+Directories match. No differences found.
+2024/06/24 20:30:17 [INFO] : End backup folder folder1  to Remote Storage
+2024/06/24 20:30:17 [INFO] : Begin backup folder folder1 to Remote Storage
+2024/06/24 20:30:19 INFO  : There was nothing to transfer
+2024/06/24 20:30:19 INFO  : 
+Transferred:   	         0 / 0 Bytes, -, 0 Bytes/s, ETA -
+Checks:                 4 / 4, 100%
+Elapsed time:         2.7s
+
+Directories match. No differences found.
+2024/06/24 20:30:23 [INFO] : End backup folder folder1  to Remote Storage
+2024/06/24 20:30:23 [INFO] : Begin backup folder folder2 to Remote Storage
+2024/06/24 20:30:26 INFO  : There was nothing to transfer
+2024/06/24 20:30:26 INFO  : 
+Transferred:   	         0 / 0 Bytes, -, 0 Bytes/s, ETA -
+Checks:                 1 / 1, 100%
+Elapsed time:         2.8s
+
+Directories match. No differences found.
+2024/06/24 20:30:30 [INFO] : End backup folder folder2  to Remote Storage
+2024/06/24 20:30:30 [INFO] : Begin backup folder folder2 to Remote Storage
+2024/06/24 20:30:34 INFO  : There was nothing to transfer
+2024/06/24 20:30:34 INFO  : 
+Transferred:   	         0 / 0 Bytes, -, 0 Bytes/s, ETA -
+Checks:                 1 / 1, 100%
+Elapsed time:         4.5s
+
+Directories match. No differences found.
+2024/06/24 20:30:37 [INFO] : End backup folder folder2  to Remote Storage
+2024/06/24 20:30:37 [INFO] : Begin backup folder folder3 to Remote Storage
+2024/06/24 20:30:44 INFO  : folder3/file3: Copied (new)
+2024/06/24 20:30:44 INFO  : folder3/file2: Copied (new)
+2024/06/24 20:30:44 INFO  : folder3/file1: Copied (new)
+2024/06/24 20:30:44 INFO  : 
+Transferred:   	         0 / 0 Bytes, -, 0 Bytes/s, ETA -
+Transferred:            3 / 3, 100%
+Elapsed time:         7.1s
+
+Directories match. No differences found.
+2024/06/24 20:30:48 [INFO] : End backup folder folder3  to Remote Storage
+2024/06/24 20:30:48 [INFO] : Begin backup folder folder3 to Remote Storage
+2024/06/24 20:30:55 INFO  : folder3/file1: Copied (new)
+2024/06/24 20:30:55 INFO  : folder3/file3: Copied (new)
+2024/06/24 20:30:55 INFO  : folder3/file2: Copied (new)
+2024/06/24 20:30:55 INFO  : 
+Transferred:   	         0 / 0 Bytes, -, 0 Bytes/s, ETA -
+Transferred:            3 / 3, 100%
+Elapsed time:         6.9s
+
+Directories match. No differences found.
+2024/06/24 20:30:59 [INFO] : End backup folder folder3  to Remote Storage
+2024/06/24 20:30:59 [END] [BACKUPREMOTE] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:30:59 [SUCCESS] [BACKUPREMOTE] [ProjectId_1_BackupTaskId_2]
+
+
+2024/06/24 20:30:59 [START] [CLEANUPREMOTE] [ProjectId_1_BackupTaskId_2]
+
+2024/06/24 20:31:01 [START] [BACKUPLOCAL] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:31:01 [INFO] : Begin cleanup directory onedrive:backup/pve1/folder3 with 3 retention
+2024/06/24 20:31:01 [INFO] : There are 2 folders need to delete
+2024/06/24 20:31:01 [INFO] : Deleting folder: 2024-06-24_20:27:01
+2024/06/24 20:31:02 [SFTP] [SUCCESS] [SFTP connect to host pve1 successful.]
+2024/06/24 20:31:02 [INFO] : Begin backup folder /folder3 to Local Storage
+2024/06/24 20:31:02 [SFTPFOLDERDIR] [SUCCESS]: Created local backup directory /home/ubuntu/sftp_ver2/pve1/folder3/2024-06-24_20:31:02
+2024/06/24 20:31:02 [SFTPCHECKSUMFOLDER] [SUCCESS]: Created remote checksum directory /home/ubuntu/sftp_ver2/checksums/sftpserver/projectId_1_taskId_2
+2024/06/24 20:31:02 [SFTPCHECKSUMFILE] [SUCCESS]: Generated remote checksum file for /folder3
+Connected to pve1.
+sftp> get -R /folder3 /home/ubuntu/sftp_ver2/pve1/folder3/2024-06-24_20:31:02
+Fetching /folder3/ to /home/ubuntu/sftp_ver2/pve1/folder3/2024-06-24_20:31:02/folder3
+Retrieving /folder3
+sftp> bye
+2024/06/24 20:31:02 [LOCALCHECKSUMFILE] [SUCCESS]: Generated local checksum file for /folder3
+2024/06/24 20:31:02 [CHECKSUM] [SUCCESS]: Susscessful to download file - All checksums match
+2024/06/24 20:31:02 [INFO] : End backup folder /folder3 to Local Storage
+2024/06/24 20:31:02 [END] [BACKUPLOCAL] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:31:02 [SUCCESSFUL] [BACKUPLOCAL] [ProjectId_1_BackupTaskId_2]
+
+
+2024/06/24 20:31:03 [START] [CLEANUPLOCAL] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:31:03 [INFO] : Begin cleanup directory /home/ubuntu/sftp_ver2/pve1/folder3 with 2 retention
+2024/06/24 20:31:03 [INFO] : There are 1 folders need to be deleted
+/home/ubuntu/sftp_ver2/pve1/folder3/2024-06-24_20:29:01/
+2024/06/24 20:31:03 [DELETE] [SUCCESS]: Deletion successful
+2024/06/24 20:31:03 [INFO] : End cleanup directory /home/ubuntu/sftp_ver2/pve1/folder3 with 2 retention
+2024/06/24 20:31:03 [END] [CLEANUPLOCAL] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:31:03 [SUCCESS] [CLEANUPLOCAL] [ProjectId_1_BackupTaskId_2]
+
+2024/06/24 20:31:05 [DELETE] [SUCCESS]: Deleted folder: 2024-06-24_20:27:01
+2024/06/24 20:31:05 [INFO] : Deleting folder: 2024-06-24_20:26:02
+2024/06/24 20:31:08 [DELETE] [SUCCESS]: Deleted folder: 2024-06-24_20:26:02
+2024/06/24 20:31:08 [INFO] : End cleanup directory onedrive:backup/pve1/folder3 with 3 retention
+2024/06/24 20:31:08 [END] [CLEANUPREMOTE] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:31:08 [SUCCESS] [CLEANUPREMOTE] [ProjectId_1_BackupTaskId_2]
+
+
+2024/06/24 20:32:01 [START] [BACKUPLOCAL] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:32:01 [SFTP] [SUCCESS] [SFTP connect to host pve1 successful.]
+2024/06/24 20:32:01 [INFO] : Begin backup folder /folder3 to Local Storage
+2024/06/24 20:32:02 [SFTPFOLDERDIR] [SUCCESS]: Created local backup directory /home/ubuntu/sftp_ver2/pve1/folder3/2024-06-24_20:32:01
+2024/06/24 20:32:02 [SFTPCHECKSUMFOLDER] [SUCCESS]: Created remote checksum directory /home/ubuntu/sftp_ver2/checksums/sftpserver/projectId_1_taskId_2
+2024/06/24 20:32:02 [SFTPCHECKSUMFILE] [SUCCESS]: Generated remote checksum file for /folder3
+Connected to pve1.
+sftp> get -R /folder3 /home/ubuntu/sftp_ver2/pve1/folder3/2024-06-24_20:32:01
+Fetching /folder3/ to /home/ubuntu/sftp_ver2/pve1/folder3/2024-06-24_20:32:01/folder3
+Retrieving /folder3
+sftp> bye
+2024/06/24 20:32:02 [LOCALCHECKSUMFILE] [SUCCESS]: Generated local checksum file for /folder3
+2024/06/24 20:32:02 [CHECKSUM] [SUCCESS]: Susscessful to download file - All checksums match
+2024/06/24 20:32:02 [INFO] : End backup folder /folder3 to Local Storage
+2024/06/24 20:32:02 [END] [BACKUPLOCAL] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:32:02 [SUCCESSFUL] [BACKUPLOCAL] [ProjectId_1_BackupTaskId_2]
+
+
+2024/06/24 20:32:02 [START] [CLEANUPLOCAL] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:32:02 [INFO] : Begin cleanup directory /home/ubuntu/sftp_ver2/pve1/folder3 with 2 retention
+2024/06/24 20:32:02 [INFO] : There are 1 folders need to be deleted
+/home/ubuntu/sftp_ver2/pve1/folder3/2024-06-24_20:30:01/
+2024/06/24 20:32:02 [DELETE] [SUCCESS]: Deletion successful
+2024/06/24 20:32:02 [INFO] : End cleanup directory /home/ubuntu/sftp_ver2/pve1/folder3 with 2 retention
+2024/06/24 20:32:02 [END] [CLEANUPLOCAL] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:32:02 [SUCCESS] [CLEANUPLOCAL] [ProjectId_1_BackupTaskId_2]
+
+
+2024/06/24 20:32:11 [START] [BACKUPREMOTE] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:32:11 [INFO] : Begin backup folder folder1 to Remote Storage
+2024/06/24 20:32:15 INFO  : There was nothing to transfer
+2024/06/24 20:32:15 INFO  : 
+Transferred:   	         0 / 0 Bytes, -, 0 Bytes/s, ETA -
+Checks:                 4 / 4, 100%
+Elapsed time:         3.7s
+
+Directories match. No differences found.
+2024/06/24 20:32:18 [INFO] : End backup folder folder1  to Remote Storage
+2024/06/24 20:32:18 [INFO] : Begin backup folder folder1 to Remote Storage
+2024/06/24 20:32:21 INFO  : There was nothing to transfer
+2024/06/24 20:32:21 INFO  : 
+Transferred:   	         0 / 0 Bytes, -, 0 Bytes/s, ETA -
+Checks:                 4 / 4, 100%
+Elapsed time:         2.7s
+
+Directories match. No differences found.
+2024/06/24 20:32:24 [INFO] : End backup folder folder1  to Remote Storage
+2024/06/24 20:32:24 [INFO] : Begin backup folder folder2 to Remote Storage
+2024/06/24 20:32:27 INFO  : There was nothing to transfer
+2024/06/24 20:32:27 INFO  : 
+Transferred:   	         0 / 0 Bytes, -, 0 Bytes/s, ETA -
+Checks:                 1 / 1, 100%
+Elapsed time:         3.3s
+
+Directories match. No differences found.
+2024/06/24 20:32:30 [INFO] : End backup folder folder2  to Remote Storage
+2024/06/24 20:32:30 [INFO] : Begin backup folder folder2 to Remote Storage
+2024/06/24 20:32:33 INFO  : There was nothing to transfer
+2024/06/24 20:32:33 INFO  : 
+Transferred:   	         0 / 0 Bytes, -, 0 Bytes/s, ETA -
+Checks:                 1 / 1, 100%
+Elapsed time:         3.3s
+
+Directories match. No differences found.
+2024/06/24 20:32:37 [INFO] : End backup folder folder2  to Remote Storage
+2024/06/24 20:32:37 [INFO] : Begin backup folder folder3 to Remote Storage
+2024/06/24 20:32:45 INFO  : folder3/file2: Copied (new)
+2024/06/24 20:32:45 INFO  : folder3/file3: Copied (new)
+2024/06/24 20:32:45 INFO  : folder3/file1: Copied (new)
+2024/06/24 20:32:45 INFO  : 
+Transferred:   	         0 / 0 Bytes, -, 0 Bytes/s, ETA -
+Transferred:            3 / 3, 100%
+Elapsed time:         7.8s
+
+Directories match. No differences found.
+2024/06/24 20:32:48 [INFO] : End backup folder folder3  to Remote Storage
+2024/06/24 20:32:48 [INFO] : Begin backup folder folder3 to Remote Storage
+2024/06/24 20:32:55 INFO  : folder3/file2: Copied (new)
+2024/06/24 20:32:55 INFO  : folder3/file1: Copied (new)
+2024/06/24 20:32:55 INFO  : folder3/file3: Copied (new)
+2024/06/24 20:32:55 INFO  : 
+Transferred:   	         0 / 0 Bytes, -, 0 Bytes/s, ETA -
+Transferred:            3 / 3, 100%
+Elapsed time:         6.9s
+
+Directories match. No differences found.
+2024/06/24 20:32:58 [INFO] : End backup folder folder3  to Remote Storage
+2024/06/24 20:32:58 [END] [BACKUPREMOTE] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:32:58 [SUCCESS] [BACKUPREMOTE] [ProjectId_1_BackupTaskId_2]
+
+
+2024/06/24 20:32:58 [START] [CLEANUPREMOTE] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:33:00 [INFO] : Begin cleanup directory onedrive:backup/pve1/folder3 with 3 retention
+2024/06/24 20:33:00 [INFO] : There are 2 folders need to delete
+2024/06/24 20:33:00 [INFO] : Deleting folder: 2024-06-24_20:29:01
+
+2024/06/24 20:33:01 [START] [BACKUPLOCAL] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:33:02 [SFTP] [SUCCESS] [SFTP connect to host pve1 successful.]
+2024/06/24 20:33:02 [INFO] : Begin backup folder /folder3 to Local Storage
+2024/06/24 20:33:02 [SFTPFOLDERDIR] [SUCCESS]: Created local backup directory /home/ubuntu/sftp_ver2/pve1/folder3/2024-06-24_20:33:02
+2024/06/24 20:33:02 [SFTPCHECKSUMFOLDER] [SUCCESS]: Created remote checksum directory /home/ubuntu/sftp_ver2/checksums/sftpserver/projectId_1_taskId_2
+2024/06/24 20:33:02 [SFTPCHECKSUMFILE] [SUCCESS]: Generated remote checksum file for /folder3
+2024/06/24 20:33:02 [DELETE] [SUCCESS]: Deleted folder: 2024-06-24_20:29:01
+2024/06/24 20:33:02 [INFO] : Deleting folder: 2024-06-24_20:28:01
+Connected to pve1.
+sftp> get -R /folder3 /home/ubuntu/sftp_ver2/pve1/folder3/2024-06-24_20:33:02
+Fetching /folder3/ to /home/ubuntu/sftp_ver2/pve1/folder3/2024-06-24_20:33:02/folder3
+Retrieving /folder3
+sftp> bye
+2024/06/24 20:33:03 [LOCALCHECKSUMFILE] [SUCCESS]: Generated local checksum file for /folder3
+2024/06/24 20:33:03 [CHECKSUM] [SUCCESS]: Susscessful to download file - All checksums match
+2024/06/24 20:33:03 [INFO] : End backup folder /folder3 to Local Storage
+2024/06/24 20:33:03 [END] [BACKUPLOCAL] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:33:03 [SUCCESSFUL] [BACKUPLOCAL] [ProjectId_1_BackupTaskId_2]
+
+
+2024/06/24 20:33:03 [START] [CLEANUPLOCAL] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:33:03 [INFO] : Begin cleanup directory /home/ubuntu/sftp_ver2/pve1/folder3 with 2 retention
+2024/06/24 20:33:03 [INFO] : There are 1 folders need to be deleted
+/home/ubuntu/sftp_ver2/pve1/folder3/2024-06-24_20:31:02/
+2024/06/24 20:33:03 [DELETE] [SUCCESS]: Deletion successful
+2024/06/24 20:33:03 [INFO] : End cleanup directory /home/ubuntu/sftp_ver2/pve1/folder3 with 2 retention
+2024/06/24 20:33:03 [END] [CLEANUPLOCAL] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:33:03 [SUCCESS] [CLEANUPLOCAL] [ProjectId_1_BackupTaskId_2]
+
+2024/06/24 20:33:05 [DELETE] [SUCCESS]: Deleted folder: 2024-06-24_20:28:01
+2024/06/24 20:33:05 [INFO] : End cleanup directory onedrive:backup/pve1/folder3 with 3 retention
+2024/06/24 20:33:05 [END] [CLEANUPREMOTE] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:33:05 [SUCCESS] [CLEANUPREMOTE] [ProjectId_1_BackupTaskId_2]
+
+
+2024/06/24 20:34:01 [START] [BACKUPLOCAL] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:34:02 [SFTP] [SUCCESS] [SFTP connect to host pve1 successful.]
+2024/06/24 20:34:02 [INFO] : Begin backup folder /folder3 to Local Storage
+2024/06/24 20:34:02 [SFTPFOLDERDIR] [SUCCESS]: Created local backup directory /home/ubuntu/sftp_ver2/pve1/folder3/2024-06-24_20:34:02
+2024/06/24 20:34:02 [SFTPCHECKSUMFOLDER] [SUCCESS]: Created remote checksum directory /home/ubuntu/sftp_ver2/checksums/sftpserver/projectId_1_taskId_2
+2024/06/24 20:34:02 [SFTPCHECKSUMFILE] [SUCCESS]: Generated remote checksum file for /folder3
+Connected to pve1.
+sftp> get -R /folder3 /home/ubuntu/sftp_ver2/pve1/folder3/2024-06-24_20:34:02
+Fetching /folder3/ to /home/ubuntu/sftp_ver2/pve1/folder3/2024-06-24_20:34:02/folder3
+Retrieving /folder3
+sftp> bye
+2024/06/24 20:34:03 [LOCALCHECKSUMFILE] [SUCCESS]: Generated local checksum file for /folder3
+2024/06/24 20:34:03 [CHECKSUM] [SUCCESS]: Susscessful to download file - All checksums match
+2024/06/24 20:34:03 [INFO] : End backup folder /folder3 to Local Storage
+2024/06/24 20:34:03 [END] [BACKUPLOCAL] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:34:03 [SUCCESSFUL] [BACKUPLOCAL] [ProjectId_1_BackupTaskId_2]
+
+
+2024/06/24 20:34:03 [START] [CLEANUPLOCAL] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:34:03 [INFO] : Begin cleanup directory /home/ubuntu/sftp_ver2/pve1/folder3 with 2 retention
+2024/06/24 20:34:03 [INFO] : There are 1 folders need to be deleted
+/home/ubuntu/sftp_ver2/pve1/folder3/2024-06-24_20:32:01/
+2024/06/24 20:34:03 [DELETE] [SUCCESS]: Deletion successful
+2024/06/24 20:34:03 [INFO] : End cleanup directory /home/ubuntu/sftp_ver2/pve1/folder3 with 2 retention
+2024/06/24 20:34:03 [END] [CLEANUPLOCAL] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:34:03 [SUCCESS] [CLEANUPLOCAL] [ProjectId_1_BackupTaskId_2]
+
+
+2024/06/24 20:34:11 [START] [BACKUPREMOTE] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:34:11 [INFO] : Begin backup folder folder1 to Remote Storage
+2024/06/24 20:34:14 INFO  : There was nothing to transfer
+2024/06/24 20:34:14 INFO  : 
+Transferred:   	         0 / 0 Bytes, -, 0 Bytes/s, ETA -
+Checks:                 4 / 4, 100%
+Elapsed time:         3.0s
+
+Directories match. No differences found.
+2024/06/24 20:34:18 [INFO] : End backup folder folder1  to Remote Storage
+2024/06/24 20:34:18 [INFO] : Begin backup folder folder1 to Remote Storage
+2024/06/24 20:34:21 INFO  : There was nothing to transfer
+2024/06/24 20:34:21 INFO  : 
+Transferred:   	         0 / 0 Bytes, -, 0 Bytes/s, ETA -
+Checks:                 4 / 4, 100%
+Elapsed time:         3.1s
+
+Directories match. No differences found.
+2024/06/24 20:34:24 [INFO] : End backup folder folder1  to Remote Storage
+2024/06/24 20:34:24 [INFO] : Begin backup folder folder2 to Remote Storage
+2024/06/24 20:34:27 INFO  : There was nothing to transfer
+2024/06/24 20:34:27 INFO  : 
+Transferred:   	         0 / 0 Bytes, -, 0 Bytes/s, ETA -
+Checks:                 1 / 1, 100%
+Elapsed time:         3.1s
+
+Directories match. No differences found.
+2024/06/24 20:34:30 [INFO] : End backup folder folder2  to Remote Storage
+2024/06/24 20:34:30 [INFO] : Begin backup folder folder2 to Remote Storage
+2024/06/24 20:34:34 INFO  : There was nothing to transfer
+2024/06/24 20:34:34 INFO  : 
+Transferred:   	         0 / 0 Bytes, -, 0 Bytes/s, ETA -
+Checks:                 1 / 1, 100%
+Elapsed time:         4.2s
+
+Directories match. No differences found.
+2024/06/24 20:34:37 [INFO] : End backup folder folder2  to Remote Storage
+2024/06/24 20:34:37 [INFO] : Begin backup folder folder3 to Remote Storage
+2024/06/24 20:34:44 INFO  : folder3/file1: Copied (new)
+2024/06/24 20:34:44 INFO  : folder3/file3: Copied (new)
+2024/06/24 20:34:44 INFO  : folder3/file2: Copied (new)
+2024/06/24 20:34:44 INFO  : 
+Transferred:   	         0 / 0 Bytes, -, 0 Bytes/s, ETA -
+Transferred:            3 / 3, 100%
+Elapsed time:         6.5s
+
+Directories match. No differences found.
+2024/06/24 20:34:47 [INFO] : End backup folder folder3  to Remote Storage
+2024/06/24 20:34:47 [INFO] : Begin backup folder folder3 to Remote Storage
+2024/06/24 20:34:53 INFO  : folder3/file1: Copied (new)
+2024/06/24 20:34:53 INFO  : folder3/file2: Copied (new)
+2024/06/24 20:34:53 INFO  : folder3/file3: Copied (new)
+2024/06/24 20:34:53 INFO  : 
+Transferred:   	         0 / 0 Bytes, -, 0 Bytes/s, ETA -
+Transferred:            3 / 3, 100%
+Elapsed time:         6.1s
+
+Directories match. No differences found.
+2024/06/24 20:34:57 [INFO] : End backup folder folder3  to Remote Storage
+2024/06/24 20:34:57 [END] [BACKUPREMOTE] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:34:57 [SUCCESS] [BACKUPREMOTE] [ProjectId_1_BackupTaskId_2]
+
+
+2024/06/24 20:34:57 [START] [CLEANUPREMOTE] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:34:59 [INFO] : Begin cleanup directory onedrive:backup/pve1/folder3 with 3 retention
+2024/06/24 20:34:59 [INFO] : There are 2 folders need to delete
+2024/06/24 20:34:59 [INFO] : Deleting folder: 2024-06-24_20:31:02
+
+2024/06/24 20:35:01 [START] [BACKUPLOCAL] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:35:01 [SFTP] [SUCCESS] [SFTP connect to host pve1 successful.]
+2024/06/24 20:35:02 [DELETE] [SUCCESS]: Deleted folder: 2024-06-24_20:31:02
+2024/06/24 20:35:02 [INFO] : Deleting folder: 2024-06-24_20:30:01
+2024/06/24 20:35:02 [INFO] : Begin backup folder /folder3 to Local Storage
+2024/06/24 20:35:02 [SFTPFOLDERDIR] [SUCCESS]: Created local backup directory /home/ubuntu/sftp_ver2/pve1/folder3/2024-06-24_20:35:02
+2024/06/24 20:35:02 [SFTPCHECKSUMFOLDER] [SUCCESS]: Created remote checksum directory /home/ubuntu/sftp_ver2/checksums/sftpserver/projectId_1_taskId_2
+2024/06/24 20:35:02 [SFTPCHECKSUMFILE] [SUCCESS]: Generated remote checksum file for /folder3
+Connected to pve1.
+sftp> get -R /folder3 /home/ubuntu/sftp_ver2/pve1/folder3/2024-06-24_20:35:02
+Fetching /folder3/ to /home/ubuntu/sftp_ver2/pve1/folder3/2024-06-24_20:35:02/folder3
+Retrieving /folder3
+sftp> bye
+2024/06/24 20:35:02 [LOCALCHECKSUMFILE] [SUCCESS]: Generated local checksum file for /folder3
+2024/06/24 20:35:02 [CHECKSUM] [SUCCESS]: Susscessful to download file - All checksums match
+2024/06/24 20:35:02 [INFO] : End backup folder /folder3 to Local Storage
+2024/06/24 20:35:02 [END] [BACKUPLOCAL] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:35:02 [SUCCESSFUL] [BACKUPLOCAL] [ProjectId_1_BackupTaskId_2]
+
+
+2024/06/24 20:35:02 [START] [CLEANUPLOCAL] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:35:02 [INFO] : Begin cleanup directory /home/ubuntu/sftp_ver2/pve1/folder3 with 2 retention
+2024/06/24 20:35:02 [INFO] : There are 1 folders need to be deleted
+/home/ubuntu/sftp_ver2/pve1/folder3/2024-06-24_20:33:02/
+2024/06/24 20:35:02 [DELETE] [SUCCESS]: Deletion successful
+2024/06/24 20:35:02 [INFO] : End cleanup directory /home/ubuntu/sftp_ver2/pve1/folder3 with 2 retention
+2024/06/24 20:35:02 [END] [CLEANUPLOCAL] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:35:02 [SUCCESS] [CLEANUPLOCAL] [ProjectId_1_BackupTaskId_2]
+
+2024/06/24 20:35:04 [DELETE] [SUCCESS]: Deleted folder: 2024-06-24_20:30:01
+2024/06/24 20:35:04 [INFO] : End cleanup directory onedrive:backup/pve1/folder3 with 3 retention
+2024/06/24 20:35:04 [END] [CLEANUPREMOTE] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:35:04 [SUCCESS] [CLEANUPREMOTE] [ProjectId_1_BackupTaskId_2]
+
+
+2024/06/24 20:36:01 [START] [BACKUPLOCAL] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:36:01 [SFTP] [SUCCESS] [SFTP connect to host pve1 successful.]
+2024/06/24 20:36:02 [INFO] : Begin backup folder /folder3 to Local Storage
+2024/06/24 20:36:02 [SFTPFOLDERDIR] [SUCCESS]: Created local backup directory /home/ubuntu/sftp_ver2/pve1/folder3/2024-06-24_20:36:02
+2024/06/24 20:36:02 [SFTPCHECKSUMFOLDER] [SUCCESS]: Created remote checksum directory /home/ubuntu/sftp_ver2/checksums/sftpserver/projectId_1_taskId_2
+2024/06/24 20:36:02 [SFTPCHECKSUMFILE] [SUCCESS]: Generated remote checksum file for /folder3
+Connected to pve1.
+sftp> get -R /folder3 /home/ubuntu/sftp_ver2/pve1/folder3/2024-06-24_20:36:02
+Fetching /folder3/ to /home/ubuntu/sftp_ver2/pve1/folder3/2024-06-24_20:36:02/folder3
+Retrieving /folder3
+sftp> bye
+2024/06/24 20:36:02 [LOCALCHECKSUMFILE] [SUCCESS]: Generated local checksum file for /folder3
+2024/06/24 20:36:02 [CHECKSUM] [SUCCESS]: Susscessful to download file - All checksums match
+2024/06/24 20:36:02 [INFO] : End backup folder /folder3 to Local Storage
+2024/06/24 20:36:02 [END] [BACKUPLOCAL] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:36:02 [SUCCESSFUL] [BACKUPLOCAL] [ProjectId_1_BackupTaskId_2]
+
+
+2024/06/24 20:36:02 [START] [CLEANUPLOCAL] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:36:02 [INFO] : Begin cleanup directory /home/ubuntu/sftp_ver2/pve1/folder3 with 2 retention
+2024/06/24 20:36:02 [INFO] : There are 1 folders need to be deleted
+/home/ubuntu/sftp_ver2/pve1/folder3/2024-06-24_20:34:02/
+2024/06/24 20:36:02 [DELETE] [SUCCESS]: Deletion successful
+2024/06/24 20:36:02 [INFO] : End cleanup directory /home/ubuntu/sftp_ver2/pve1/folder3 with 2 retention
+2024/06/24 20:36:02 [END] [CLEANUPLOCAL] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:36:03 [SUCCESS] [CLEANUPLOCAL] [ProjectId_1_BackupTaskId_2]
+
+2024/06/24 20:36:04 [INFO] : Delete crontab for local storage with backupProjectId=1 and backupTaskId=2
+2024/06/24 20:36:04 [INFO] : Delete crontab for remote storage with backupProjectId=1 and backupTaskId=2
+
+2024/06/24 20:36:11 [START] [BACKUPREMOTE] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:36:11 [INFO] : Begin backup folder folder1 to Remote Storage
+2024/06/24 20:36:14 INFO  : There was nothing to transfer
+2024/06/24 20:36:14 INFO  : 
+Transferred:   	         0 / 0 Bytes, -, 0 Bytes/s, ETA -
+Checks:                 4 / 4, 100%
+Elapsed time:         3.3s
+
+Directories match. No differences found.
+2024/06/24 20:36:17 [INFO] : End backup folder folder1  to Remote Storage
+2024/06/24 20:36:17 [INFO] : Begin backup folder folder1 to Remote Storage
+2024/06/24 20:36:21 INFO  : There was nothing to transfer
+2024/06/24 20:36:21 INFO  : 
+Transferred:   	         0 / 0 Bytes, -, 0 Bytes/s, ETA -
+Checks:                 4 / 4, 100%
+Elapsed time:         3.4s
+
+Directories match. No differences found.
+2024/06/24 20:36:24 [INFO] : End backup folder folder1  to Remote Storage
+2024/06/24 20:36:24 [INFO] : Begin backup folder folder2 to Remote Storage
+2024/06/24 20:36:27 INFO  : There was nothing to transfer
+2024/06/24 20:36:27 INFO  : 
+Transferred:   	         0 / 0 Bytes, -, 0 Bytes/s, ETA -
+Checks:                 1 / 1, 100%
+Elapsed time:         3.5s
+
+Directories match. No differences found.
+2024/06/24 20:36:30 [INFO] : End backup folder folder2  to Remote Storage
+2024/06/24 20:36:30 [INFO] : Begin backup folder folder2 to Remote Storage
+2024/06/24 20:36:33 INFO  : There was nothing to transfer
+2024/06/24 20:36:33 INFO  : 
+Transferred:   	         0 / 0 Bytes, -, 0 Bytes/s, ETA -
+Checks:                 1 / 1, 100%
+Elapsed time:         2.7s
+
+Directories match. No differences found.
+2024/06/24 20:36:36 [INFO] : End backup folder folder2  to Remote Storage
+2024/06/24 20:36:36 [INFO] : Begin backup folder folder3 to Remote Storage
+2024/06/24 20:36:42 INFO  : folder3/file1: Copied (new)
+2024/06/24 20:36:43 INFO  : folder3/file3: Copied (new)
+2024/06/24 20:36:43 INFO  : folder3/file2: Copied (new)
+2024/06/24 20:36:43 INFO  : 
+Transferred:   	         0 / 0 Bytes, -, 0 Bytes/s, ETA -
+Transferred:            3 / 3, 100%
+Elapsed time:         6.7s
+
+Directories match. No differences found.
+2024/06/24 20:36:46 [INFO] : End backup folder folder3  to Remote Storage
+2024/06/24 20:36:46 [INFO] : Begin backup folder folder3 to Remote Storage
+2024/06/24 20:36:52 INFO  : folder3/file1: Copied (new)
+2024/06/24 20:36:52 INFO  : folder3/file2: Copied (new)
+2024/06/24 20:36:52 INFO  : folder3/file3: Copied (new)
+2024/06/24 20:36:52 INFO  : 
+Transferred:   	         0 / 0 Bytes, -, 0 Bytes/s, ETA -
+Transferred:            3 / 3, 100%
+Elapsed time:         6.4s
+
+Directories match. No differences found.
+2024/06/24 20:36:55 [INFO] : End backup folder folder3  to Remote Storage
+2024/06/24 20:36:55 [END] [BACKUPREMOTE] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:36:55 [SUCCESS] [BACKUPREMOTE] [ProjectId_1_BackupTaskId_2]
+
+
+2024/06/24 20:36:55 [START] [CLEANUPREMOTE] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:36:57 [INFO] : Begin cleanup directory onedrive:backup/pve1/folder3 with 3 retention
+2024/06/24 20:36:57 [INFO] : There are 2 folders need to delete
+2024/06/24 20:36:57 [INFO] : Deleting folder: 2024-06-24_20:33:02
+2024/06/24 20:36:59 [DELETE] [SUCCESS]: Deleted folder: 2024-06-24_20:33:02
+2024/06/24 20:36:59 [INFO] : Deleting folder: 2024-06-24_20:32:01
+2024/06/24 20:37:02 [DELETE] [SUCCESS]: Deleted folder: 2024-06-24_20:32:01
+2024/06/24 20:37:02 [INFO] : End cleanup directory onedrive:backup/pve1/folder3 with 3 retention
+2024/06/24 20:37:02 [END] [CLEANUPREMOTE] [ProjectId_1_BackupTaskId_2]
+2024/06/24 20:37:02 [SUCCESS] [CLEANUPREMOTE] [ProjectId_1_BackupTaskId_2]
+

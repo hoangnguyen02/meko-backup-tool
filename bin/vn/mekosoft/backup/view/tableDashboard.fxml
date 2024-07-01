@@ -9,16 +9,16 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" stylesheets="@../application/application.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vn.mekosoft.backup.controller.TableDashboard">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="409.0" prefWidth="1198.0" stylesheets="@../application/application.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vn.mekosoft.backup.controller.TableDashboard">
    <children>
-      <Label layoutX="57.0" layoutY="14.0" text="Table Information">
+      <Label layoutX="57.0" layoutY="14.0" text="Table Information" textFill="#154e78">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <HBox layoutY="49.0" prefHeight="351.0" prefWidth="1197.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="49.0">
+      <HBox layoutY="49.0" prefHeight="351.0" prefWidth="1197.0" AnchorPane.topAnchor="49.0">
          <children>
-            <TableView fx:id="table_dashboard" editable="true" focusTraversable="false" onMouseClicked="#action_table" prefHeight="347.0" prefWidth="1178.0" stylesheets="@../application/application.css">
+            <TableView fx:id="table_dashboard" editable="true" focusTraversable="false" onMouseClicked="#action_table" prefHeight="351.0" prefWidth="1198.0" stylesheets="@../application/application.css">
                <columns>
                   <TableColumn fx:id="taskName_col" minWidth="-1.0" prefWidth="200.0" text="Task Name" />
                   <TableColumn fx:id="projectName_col" prefWidth="150.0" text="Project Name" />
@@ -27,8 +27,8 @@
                   <TableColumn fx:id="successful_col" prefWidth="82.4000244140625" text="Success" />
                   <TableColumn fx:id="failed_col" maxWidth="4900.0" prefWidth="87.99993896484375" text="Fail" />
                   <TableColumn fx:id="crontabLocal_col" prefWidth="156.800048828125" text="Crontab Local" />
-                  <TableColumn fx:id="crontabRemote_col" prefWidth="140.0" text="Crontab Remote" />
-                  <TableColumn fx:id="status_col" prefWidth="132.800048828125" text="Status" />
+                  <TableColumn fx:id="crontabRemote_col" prefWidth="147.20001220703125" text="Crontab Remote" />
+                  <TableColumn fx:id="status_col" prefWidth="142.39990234375" text="Status" />
                </columns>
                <styleClass>
                   <String fx:value="table-column" />
@@ -36,7 +36,7 @@
                   <String fx:value="whiteRadius" />
                </styleClass>
                <HBox.margin>
-                  <Insets left="10.0" right="10.0" />
+                  <Insets />
                </HBox.margin>
             </TableView>
          </children>
@@ -46,4 +46,7 @@
       <String fx:value="whiteRadius" />
       <String fx:value="shadow" />
    </styleClass>
+   <padding>
+      <Insets top="5.0" />
+   </padding>
 </AnchorPane>

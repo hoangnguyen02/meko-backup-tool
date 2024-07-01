@@ -85,32 +85,50 @@ public class Folder implements Initializable {
 		}
 	}
  
+//
+//	public void edit_action() {
+//		  if (folder != null) {
+//	            DirectoryChooser directoryChooser = new DirectoryChooser();
+//	            directoryChooser.setTitle("Select New Folder");
+//	            directoryChooser.setInitialDirectory(new File(System.getProperty("user.home")));
+//	            
+//	            Stage stage = (Stage) get_FolderPath.getScene().getWindow();
+//	            
+//	            File selectedDirectory = directoryChooser.showDialog(stage);
+//	            if (selectedDirectory != null) {
+//	                String newPath = selectedDirectory.getAbsolutePath();
+//	                get_FolderPath.setText(newPath);
+//	                folder.setFolderPath(newPath);
+//	                
+//	                folderService.updateBackupFolder(detailsTaskController.getProjectId(),
+//	                        detailsTaskController.getTaskId(), folder.getBackupFolderId(), folder);
+//	                
+//	                refresh();
+//	            } else {
+//	            }
+//	        } else {
+//	            AlertMaker.errorAlert("Error!", "The directory has not been initialized");
+//	        }
+//	}
 
+	
 	public void edit_action() {
-		  if (folder != null) {
-	            DirectoryChooser directoryChooser = new DirectoryChooser();
-	            directoryChooser.setTitle("Select New Folder");
-	            directoryChooser.setInitialDirectory(new File(System.getProperty("user.home")));
-	            
-	            Stage stage = (Stage) get_FolderPath.getScene().getWindow();
-	            
-	            File selectedDirectory = directoryChooser.showDialog(stage);
-	            if (selectedDirectory != null) {
-	                String newPath = selectedDirectory.getAbsolutePath();
-	                get_FolderPath.setText(newPath);
-	                folder.setFolderPath(newPath);
-	                
-	                folderService.updateBackupFolder(detailsTaskController.getProjectId(),
-	                        detailsTaskController.getTaskId(), folder.getBackupFolderId(), folder);
-	                
-	                refresh();
-	            } else {
-	            }
-	        } else {
-	            AlertMaker.errorAlert("Error!", "The directory has not been initialized");
-	        }
-	}
+		if (folder != null) {
+			String newPath = get_FolderPath.getText().trim();
+			if (!newPath.isEmpty()) {
+				folder.setFolderPath(newPath);
 
+				folderService.updateBackupFolder(detailsTaskController.getProjectId(),
+						detailsTaskController.getTaskId(), folder.getBackupFolderId(), folder);
+
+				refresh();
+			} else {
+				AlertMaker.errorAlert("Error!", "Please enter a new path for the folder.");
+			}
+		} else {
+			AlertMaker.errorAlert("Error!", "The directory has not been initialized");
+		}
+	}
 	@Override
 	public void initialize(URL url, ResourceBundle resourceBundle) {
 

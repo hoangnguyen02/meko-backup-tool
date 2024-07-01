@@ -54,7 +54,7 @@ public class BackupTaskStatusChart implements Initializable {
         stackBarChartStatus.setCategoryGap(50);
         stackBarChartStatus.setBarGap(1);
         stackBarChartStatus.setMaxSize(1000, 500);
-        dataChartStatus();
+        updateChart();
 
     }
     public void hideBackupTaskStatus() {
@@ -137,9 +137,9 @@ public class BackupTaskStatusChart implements Initializable {
 	    if (node != null) {
 	        StackPane stackPane = (StackPane) node;
 	        Label label = new Label(String.valueOf(data.getYValue()));
-	        label.getStyleClass().add("bar-label");
+	        label.setStyle("-fx-font: 10 arial;");
 	        stackPane.getChildren().add(label);
-	        StackPane.setAlignment(label, Pos.TOP_CENTER);
+	        StackPane.setAlignment(label, Pos.BASELINE_CENTER);
 	    }
 	}
     private Map<LocalDate, Integer> filterDataByDateRange(Map<String, Integer> logData) {
@@ -223,6 +223,11 @@ public class BackupTaskStatusChart implements Initializable {
     private String extractDateFromLog(String line) {
         return line.substring(0, 10); // Assumes the date format is yyyy/MM/dd at the beginning of each line
     }
+
+	public void updateChart() {
+		dataChartStatus();
+		
+	}
 
 
 }

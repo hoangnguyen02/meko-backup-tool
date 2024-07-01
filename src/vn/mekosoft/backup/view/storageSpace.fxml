@@ -8,11 +8,11 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="340.0" prefWidth="1000.0" styleClass="shadow" stylesheets="@../application/application.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vn.mekosoft.backup.controller.StorageSpace">
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="340.0" prefWidth="1200.0" styleClass="shadow" stylesheets="@../application/application.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vn.mekosoft.backup.controller.StorageSpace">
    <children>
-      <HBox layoutX="-4.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="331.0" prefWidth="1000.0" spacing="20.0">
+      <HBox layoutX="-4.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="331.0" prefWidth="1200.0" spacing="20.0">
          <children>
-            <AnchorPane maxHeight="1.7976931348623157E308" prefHeight="331.0" prefWidth="500.0" stylesheets="@../application/application.css">
+            <AnchorPane maxHeight="1.7976931348623157E308" prefHeight="331.0" prefWidth="600.0" stylesheets="@../application/application.css">
                <HBox.margin>
                   <Insets />
                </HBox.margin>
@@ -30,7 +30,7 @@
                         <Insets right="30.0" />
                      </padding>
                   </Label>
-                  <Label layoutX="33.0" layoutY="14.0" prefHeight="26.0" prefWidth="176.0" text="Local Storage Space" textFill="#154e78">
+                  <Label layoutX="56.0" layoutY="14.0" prefHeight="26.0" prefWidth="176.0" text="Local Storage Space" textFill="#154e78">
                      <font>
                         <Font name="System Bold" size="16.0" />
                      </font>
@@ -40,7 +40,7 @@
                   </Label>
                </children>
             </AnchorPane>
-            <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="280.0" prefWidth="500.0" stylesheets="@../application/application.css">
+            <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="280.0" prefWidth="600.0" stylesheets="@../application/application.css">
                <HBox.margin>
                   <Insets left="10.0" />
                </HBox.margin>
@@ -50,7 +50,7 @@
                </styleClass>
                <children>
                   <PieChart fx:id="remotePieChart" layoutY="36.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="300.0" prefWidth="500.0" stylesheets="@../application/application.css" />
-                  <Label layoutY="13.0" prefHeight="26.0" prefWidth="218.0" text="Remote Storage Space" textFill="#154e78">
+                  <Label layoutX="40.0" layoutY="13.0" prefHeight="26.0" prefWidth="218.0" text="Remote Storage Space" textFill="#154e78">
                      <font>
                         <Font name="System Bold" size="16.0" />
                      </font>
@@ -69,9 +69,12 @@
                </children>
             </AnchorPane>
          </children>
+         <padding>
+            <Insets left="5.0" />
+         </padding>
       </HBox>
    </children>
    <padding>
-      <Insets bottom="20.0" />
+      <Insets bottom="20.0" right="20.0" />
    </padding>
 </AnchorPane>

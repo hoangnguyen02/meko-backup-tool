@@ -12,14 +12,14 @@
 
 <AnchorPane cacheShape="false" centerShape="false" pickOnBounds="false" prefHeight="389.0" prefWidth="1000.0" scaleShape="false" stylesheets="@../application/application.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vn.mekosoft.backup.controller.BackupDailyChart">
    <children>
-      <Label layoutX="80.0" layoutY="14.0" text="Backup Daily Task" textFill="#154e78">
+      <Label layoutX="60.0" layoutY="14.0" text="Backup Daily Task" textFill="#154e78">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>
       </Label>
-      <BarChart fx:id="barChartDaily" alternativeRowFillVisible="false" animated="false" cacheShape="false" centerShape="false" focusTraversable="true" horizontalGridLinesVisible="false" horizontalZeroLineVisible="false" layoutX="31.200000000000003" layoutY="39.2" maxHeight="1.7976931348623157E308" prefHeight="370.0" prefWidth="890.0" stylesheets="@../application/application.css" titleSide="RIGHT" AnchorPane.bottomAnchor="-4.0" AnchorPane.leftAnchor="21.0" AnchorPane.rightAnchor="89.0" AnchorPane.topAnchor="39.0">
+      <BarChart fx:id="barChartDaily" alternativeRowFillVisible="false" animated="false" cacheShape="false" centerShape="false" focusTraversable="true" horizontalGridLinesVisible="false" horizontalZeroLineVisible="false" layoutX="27.0" layoutY="59.0" maxHeight="1.7976931348623157E308" prefHeight="370.0" prefWidth="890.0" stylesheets="@../application/application.css" titleSide="RIGHT" AnchorPane.bottomAnchor="20.19999999999999" AnchorPane.leftAnchor="27.0" AnchorPane.rightAnchor="123.39999999999986" AnchorPane.topAnchor="59.0">
          <xAxis>
-            <CategoryAxis fx:id="category_axis" cacheShape="false" centerShape="false" label="Date" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" scaleShape="false" side="BOTTOM" style="-fx-tick-label-fill: green;" />
+            <CategoryAxis fx:id="category_axis" cacheShape="false" centerShape="false" label="Date" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" scaleShape="false" side="BOTTOM" />
          </xAxis>
          <yAxis>
             <NumberAxis fx:id="number_axis" label="Count" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" side="LEFT" />

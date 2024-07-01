@@ -2,20 +2,33 @@
   "backupProjects": [
     {
       "projectId": 1,
-      "projectName": "1231",
-      "description": "2",
-      "hostname": "qưeq",
-      "username": "ưeád",
-      "password": "ád",
+      "projectName": "2",
+      "description": "3",
+      "hostname": "2",
+      "username": "3",
+      "password": "23",
       "backupProjectStatus": 1,
       "backupTasks": [
         {
-          "backupTaskId": 1,
+          "backupTaskId": 5,
           "projectId": 1,
-          "name": "qưeqưe",
+          "name": "ưe",
+          "localSchedular": "qưe",
+          "localPath": "ưeqưeq",
+          "localRetention": -1,
+          "remoteSchedular": "qưe",
+          "remotePath": "qưeq",
+          "remoteRetention": -1,
+          "backupTaskStatus": 1,
+          "backupFolders": []
+        },
+        {
+          "backupTaskId": 6,
+          "projectId": 1,
+          "name": "sadf",
           "localSchedular": "1",
           "localPath": "1",
-          "localRetention": 1,
+          "localRetention": 123,
           "remoteSchedular": "1",
           "remotePath": "1",
           "remoteRetention": 1,
@@ -23,55 +36,32 @@
           "backupFolders": []
         },
         {
-          "backupTaskId": 2,
+          "backupTaskId": 8,
           "projectId": 1,
-          "name": "àd",
-          "localSchedular": "1",
+          "name": "ds",
+          "localSchedular": "0 0 12 * * ?",
+          "localPath": "a1",
+          "localRetention": 31,
+          "remoteSchedular": "0 0 12 * * ?",
+          "remotePath": "1",
+          "remoteRetention": 3,
+          "backupTaskStatus": 1,
+          "backupFolders": []
+        },
+        {
+          "backupTaskId": 9,
+          "projectId": 1,
+          "name": "ád",
+          "localSchedular": "*/50 * * * *",
           "localPath": "1",
           "localRetention": 1,
-          "remoteSchedular": "1",
+          "remoteSchedular": "*/50 * * * *",
           "remotePath": "1",
           "remoteRetention": 1,
           "backupTaskStatus": 1,
-          "backupFolders": [
-            {
-              "backupFolderId": 1,
-              "folderPath": "C:\\Users\\Hoang Nguyen\\.ssh",
-              "backupTaskId": 2
-            }
-          ]
+          "backupFolders": []
         }
       ]
-    },
-    {
-      "projectId": 2,
-      "projectName": "123",
-      "description": "1",
-      "hostname": "1",
-      "username": "1",
-      "password": "1",
-      "backupProjectStatus": 1,
-      "backupTasks": []
-    },
-    {
-      "projectId": 3,
-      "projectName": "12",
-      "description": "312",
-      "hostname": "312",
-      "username": "3123",
-      "password": "123",
-      "backupProjectStatus": 1,
-      "backupTasks": []
-    },
-    {
-      "projectId": 4,
-      "projectName": "1",
-      "description": "1",
-      "hostname": "1",
-      "username": "ád",
-      "password": "1",
-      "backupProjectStatus": 1,
-      "backupTasks": []
     }
   ]
 }

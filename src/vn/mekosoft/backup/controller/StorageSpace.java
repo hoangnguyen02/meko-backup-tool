@@ -35,8 +35,7 @@ public class StorageSpace implements Initializable {
 
 	@Override
 	public void initialize(URL url, ResourceBundle resourceBundle) {
-		localPie();
-		remotePie();
+	
 		
 	}
 
@@ -118,65 +117,129 @@ public class StorageSpace implements Initializable {
 		}
 	}
 
+//	public void localPie() {
+//		try {
+//			String[] localInfo = getLocalStorageInfo().split(" ");
+//			double totalValue = parseAndConvertValue(localInfo[0]);
+//			double usedValue = parseAndConvertValue(localInfo[1]);
+//			double availableValue = parseAndConvertValue(localInfo[2]);
+//
+//			String total = formatValueWithUnit(totalValue);
+//			String used = formatValueWithUnit(usedValue);
+//			String available = formatValueWithUnit(availableValue);
+//
+//			System.out.println("Local Info: Total - " + total + ", Used - " + used + ", Available - " + available);
+//
+//			ObservableList<PieChart.Data> pieChartLocal = FXCollections.observableArrayList(
+//					new PieChart.Data("Used: ", usedValue), new PieChart.Data("Available: ", availableValue));
+//
+//			pieChartLocal.forEach(data -> {
+//				String unitValue = formatValueWithUnit(data.getPieValue());
+//				data.nameProperty().bind(Bindings.concat(data.getName(), " ", unitValue));
+//			});
+//
+//			totalLocal.setText("Total: " + total);
+//			localPieChart.getData().addAll(pieChartLocal);
+//		} catch (IOException | InterruptedException e) {
+//			e.printStackTrace();
+//
+//		}
+//	}
+
+//	public void remotePie() {
+//		try {
+//			String[] remoteInfo = getRemoteStorageInfo().split(" ");
+//			double totalValue = parseAndConvertValue(remoteInfo[0]);
+//			double usedValue = parseAndConvertValue(remoteInfo[1]);
+//			double availableValue = parseAndConvertValue(remoteInfo[2]);
+//			double trashedValue = parseAndConvertValue(remoteInfo[3]);
+//
+//			String total = formatValueWithUnit(totalValue);
+//			String used = formatValueWithUnit(usedValue);
+//			String available = formatValueWithUnit(availableValue);
+//			String trashed = formatValueWithUnit(trashedValue);
+//
+//			System.out.println("Remote Info: Total - " + total + ", Used - " + used + ", Available - " + available
+//					+ ", Trashed - " + trashed);
+//
+//			ObservableList<PieChart.Data> pieChartRemote = FXCollections.observableArrayList(
+//					new PieChart.Data("Used: ", usedValue), new PieChart.Data("Available: ", availableValue),
+//					new PieChart.Data("Trashed: ", trashedValue));
+//
+//			pieChartRemote.forEach(data -> {
+//				String unitValue = formatValueWithUnit(data.getPieValue());
+//				data.nameProperty().bind(Bindings.concat(data.getName(), " ", unitValue));
+//			});
+//
+//			totalRemote.setText("Total: " + total);
+//			remotePieChart.getData().addAll(pieChartRemote);
+//		} catch (IOException | InterruptedException e) {
+//			e.printStackTrace();
+//
+//		}
+//	}
+	
 	public void localPie() {
-		try {
-			String[] localInfo = getLocalStorageInfo().split(" ");
-			double totalValue = parseAndConvertValue(localInfo[0]);
-			double usedValue = parseAndConvertValue(localInfo[1]);
-			double availableValue = parseAndConvertValue(localInfo[2]);
+	    try {
+	        double totalValue = parseAndConvertValue("500G");
+	        double usedValue = parseAndConvertValue("200G");
+	        double availableValue = parseAndConvertValue("300G");
 
-			String total = formatValueWithUnit(totalValue);
-			String used = formatValueWithUnit(usedValue);
-			String available = formatValueWithUnit(availableValue);
+	        String total = formatValueWithUnit(totalValue);
+	        String used = formatValueWithUnit(usedValue);
+	        String available = formatValueWithUnit(availableValue);
 
-			System.out.println("Local Info: Total - " + total + ", Used - " + used + ", Available - " + available);
+	        System.out.println("Local Info: Total - " + total + ", Used - " + used + ", Available - " + available);
 
-			ObservableList<PieChart.Data> pieChartLocal = FXCollections.observableArrayList(
-					new PieChart.Data("Used: ", usedValue), new PieChart.Data("Available: ", availableValue));
+	        ObservableList<PieChart.Data> pieChartLocal = FXCollections.observableArrayList(
+	                new PieChart.Data("Used: ", usedValue), new PieChart.Data("Available: ", availableValue));
 
-			pieChartLocal.forEach(data -> {
-				String unitValue = formatValueWithUnit(data.getPieValue());
-				data.nameProperty().bind(Bindings.concat(data.getName(), " ", unitValue));
-			});
+	        pieChartLocal.forEach(data -> {
+	            String unitValue = formatValueWithUnit(data.getPieValue());
+	            data.nameProperty().bind(Bindings.concat(data.getName(), " ", unitValue));
+	        });
 
-			totalLocal.setText("Total: " + total);
-			localPieChart.getData().addAll(pieChartLocal);
-		} catch (IOException | InterruptedException e) {
-			e.printStackTrace();
-
-		}
+	        totalLocal.setText("Total: " + total);
+	        localPieChart.getData().addAll(pieChartLocal);
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
 	}
-
 	public void remotePie() {
-		try {
-			String[] remoteInfo = getRemoteStorageInfo().split(" ");
-			double totalValue = parseAndConvertValue(remoteInfo[0]);
-			double usedValue = parseAndConvertValue(remoteInfo[1]);
-			double availableValue = parseAndConvertValue(remoteInfo[2]);
-			double trashedValue = parseAndConvertValue(remoteInfo[3]);
+	    try {
+	        double totalValue = parseAndConvertValue("1T");
+	        double usedValue = parseAndConvertValue("400G");
+	        double availableValue = parseAndConvertValue("600G");
+	        double trashedValue = parseAndConvertValue("50G");
 
-			String total = formatValueWithUnit(totalValue);
-			String used = formatValueWithUnit(usedValue);
-			String available = formatValueWithUnit(availableValue);
-			String trashed = formatValueWithUnit(trashedValue);
+	        String total = formatValueWithUnit(totalValue);
+	        String used = formatValueWithUnit(usedValue);
+	        String available = formatValueWithUnit(availableValue);
+	        String trashed = formatValueWithUnit(trashedValue);
 
-			System.out.println("Remote Info: Total - " + total + ", Used - " + used + ", Available - " + available
-					+ ", Trashed - " + trashed);
+	        System.out.println("Remote Info: Total - " + total + ", Used - " + used + ", Available - " + available
+	                + ", Trashed - " + trashed);
 
-			ObservableList<PieChart.Data> pieChartRemote = FXCollections.observableArrayList(
-					new PieChart.Data("Used: ", usedValue), new PieChart.Data("Available: ", availableValue),
-					new PieChart.Data("Trashed: ", trashedValue));
+	        ObservableList<PieChart.Data> pieChartRemote = FXCollections.observableArrayList(
+	                new PieChart.Data("Used: ", usedValue), new PieChart.Data("Available: ", availableValue),
+	                new PieChart.Data("Trashed: ", trashedValue));
 
-			pieChartRemote.forEach(data -> {
-				String unitValue = formatValueWithUnit(data.getPieValue());
-				data.nameProperty().bind(Bindings.concat(data.getName(), " ", unitValue));
-			});
+	        pieChartRemote.forEach(data -> {
+	            String unitValue = formatValueWithUnit(data.getPieValue());
+	            data.nameProperty().bind(Bindings.concat(data.getName(), " ", unitValue));
+	        });
 
-			totalRemote.setText("Total: " + total);
-			remotePieChart.getData().addAll(pieChartRemote);
-		} catch (IOException | InterruptedException e) {
-			e.printStackTrace();
-
-		}
+	        totalRemote.setText("Total: " + total);
+	        remotePieChart.getData().addAll(pieChartRemote);
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
 	}
+
+	public void updateData() {
+	localPie();
+	remotePie();
+		
+	}
+
 }

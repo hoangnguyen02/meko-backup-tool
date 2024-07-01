@@ -14,7 +14,7 @@
          </image>
       </ImageView>
       <TextField fx:id="get_FolderPath" layoutX="104.0" layoutY="14.0" prefHeight="34.0" prefWidth="521.0" />
-      <Button fx:id="button_edit" layoutX="643.0" layoutY="15.0" mnemonicParsing="false" onAction="#edit_action" prefHeight="32.0" prefWidth="100.0" text="Edit" />
+      <Button fx:id="button_edit" layoutX="643.0" layoutY="15.0" mnemonicParsing="false" onAction="#edit_action" prefHeight="32.0" prefWidth="100.0" text="Save" />
       <Button fx:id="button_delete" layoutX="755.0" layoutY="15.0" mnemonicParsing="false" onAction="#delete_action" prefHeight="32.0" prefWidth="100.0" text="Delete" />
    </children>
 </AnchorPane>

@@ -7,6 +7,11 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import org.quartz.CronExpression;
+
 import javafx.scene.Node;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
@@ -179,11 +184,13 @@ public class DetailsTask implements Initializable {
 	public long getTaskId() {
 		return task.getBackupTaskId();
 	}
-	   private TableDashboard tableDashboardController;
 
-	    public void setTableDashboardController(TableDashboard controller) {
-	        this.tableDashboardController = controller;
-	    }
+	private TableDashboard tableDashboardController;
+
+	public void setTableDashboardController(TableDashboard controller) {
+		this.tableDashboardController = controller;
+	}
+
 	public void saveFolder_action() {
 		try {
 			if (task != null) {
@@ -227,10 +234,10 @@ public class DetailsTask implements Initializable {
 				}
 
 				refreshView();
-				 if (tableDashboardController != null) {
-		                tableDashboardController.loadDataTable();
-		                System.out.print("Gọi table" + tableDashboardController);
-		            }
+				if (tableDashboardController != null) {
+					tableDashboardController.loadDataTable();
+					System.out.print("Gọi table" + tableDashboardController);
+				}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -238,194 +245,213 @@ public class DetailsTask implements Initializable {
 		}
 	}
 
-	@FXML
-	private void browseFolderPath(MouseEvent event) {
-		DirectoryChooser directoryChooser = new DirectoryChooser();
-		directoryChooser.setTitle("Select Folder");
-		directoryChooser.setInitialDirectory(new File(System.getProperty("user.home")));
+//	@FXML
+//	private void browseFolderPath(MouseEvent event) {
+//		DirectoryChooser directoryChooser = new DirectoryChooser();
+//		directoryChooser.setTitle("Select Folder");
+//		directoryChooser.setInitialDirectory(new File(System.getProperty("user.home")));
+//
+//		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+//
+//		File selectedDirectory = directoryChooser.showDialog(stage);
+//		if (selectedDirectory != null) {
+//			folder_path.setText(selectedDirectory.getAbsolutePath());
+//		}
+//	}
 
-		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-
-		File selectedDirectory = directoryChooser.showDialog(stage);
-		if (selectedDirectory != null) {
-			folder_path.setText(selectedDirectory.getAbsolutePath());
-		}
-	}
 
 	public void hideFolderPane() {
 		folder_pane.setVisible(false);
 
 	}
-	public void saveInforTask_action(ActionEvent event) {
-	    try {
-	        BackupTaskServiceImpl backupTaskService = new BackupTaskServiceImpl();
-	        List<BackupProject> backupProjects = backupTaskService.loadProjectData();
 
-	        // Cập nhật đối tượng task với thông tin mới
-	        task.setName(task_name.getText());
-	        task.setLocalSchedular(local_cronTab.getText());
-	        task.setRemoteSchedular(remote_cronTab.getText());
-	        task.setLocalPath(local_path.getText());
-	        task.setRemotePath(remote_path.getText());
-	        task.setLocalRetention(Long.parseLong(local_retention.getText()));
-	        task.setRemoteRetention(Long.parseLong(remote_retention.getText()));
-
-	        // Thực hiện xác thực
-	        if (!validateTaskInformation(backupProjects)) {
-	            AlertMaker.errorAlert("Validation Error", "All fields must be filled out and the task must be unique.");
-	            return;
-	        }
-
-	        // Tiếp tục lưu task
-	        if (task.getBackupTaskId() != 0) {
-	            updateTaskInformation(backupTaskService, backupProjects);
-	        } else {
-	            createNewTask(backupTaskService, backupProjects);
-	            Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-	            currentStage.close();
-	        }
-
-	        verifyLocalPath();
-	    } catch (Exception e) {
-	        e.printStackTrace();
-	        AlertMaker.errorAlert("Error", "Failed to save Task!");
-	    }
-	    refreshView();
+	public void buttonText() {
+		button_save_inforTask.setText("Add");
 	}
 
+	public void saveInforTask_action(ActionEvent event) {
+		try {
+			BackupTaskServiceImpl backupTaskService = new BackupTaskServiceImpl();
+			List<BackupProject> backupProjects = backupTaskService.loadProjectData();
 
+			// Cập nhật đối tượng task với thông tin mới
+			task.setName(task_name.getText());
+			task.setLocalSchedular(local_cronTab.getText());
+			task.setRemoteSchedular(remote_cronTab.getText());
+			task.setLocalPath(local_path.getText());
+			task.setRemotePath(remote_path.getText());
+			task.setLocalRetention(Long.parseLong(local_retention.getText()));
+			task.setRemoteRetention(Long.parseLong(remote_retention.getText()));
+
+			// Thực hiện xác thực
+			if (!validateTaskInformation(backupProjects)) {
+
+				return;
+			}
+
+			// Tiếp tục lưu task
+			if (task.getBackupTaskId() != 0) {
+				updateTaskInformation(backupTaskService, backupProjects);
+			} else {
+				createNewTask(backupTaskService, backupProjects);
+				Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+				currentStage.close();
+			}
+
+			// verifyLocalPath();
+		} catch (Exception e) {
+			e.printStackTrace();
+			AlertMaker.errorAlert("Error", "All fields must be filled out.");
+		}
+		refreshView();
+	}
 
 	private void updateTaskInformation(BackupTaskServiceImpl backupTaskService, List<BackupProject> backupProjects) {
-	    try {
-	        for (BackupProject proj : backupProjects) {
-	            if (proj.getProjectId() == project.getProjectId()) {
-	                List<BackupTask> tasks = proj.getBackupTasks();
-	                for (int i = 0; i < tasks.size(); i++) {
-	                    if (tasks.get(i).getBackupTaskId() == task.getBackupTaskId()) {
-	                        tasks.set(i, task);
-	                        break;
-	                    }
-	                }
-	                break;
-	            }
-	        }
+		try {
+			for (BackupProject proj : backupProjects) {
+				if (proj.getProjectId() == project.getProjectId()) {
+					List<BackupTask> tasks = proj.getBackupTasks();
+					for (int i = 0; i < tasks.size(); i++) {
+						if (tasks.get(i).getBackupTaskId() == task.getBackupTaskId()) {
+							tasks.set(i, task);
+							break;
+						}
+					}
+					break;
+				}
+			}
 
-	        backupTaskService.saveProjectsToFile(backupProjects);
-	    } catch (Exception e) {
-	        e.printStackTrace();
-	        AlertMaker.errorAlert("Error", "Failed to update Task!");
-	    }
+			backupTaskService.saveProjectsToFile(backupProjects);
+		} catch (Exception e) {
+			e.printStackTrace();
+			AlertMaker.errorAlert("Error", "Failed to update Task!");
+		}
 	}
-
 
 	private void createNewTask(BackupTaskServiceImpl backupTaskService, List<BackupProject> backupProjects) {
-	    try {
-	        long maxTaskId = 0;
-	        for (BackupProject proj : backupProjects) {
-	            List<BackupTask> tasks = proj.getBackupTasks();
-	            if (tasks != null) {
-	                for (BackupTask task : tasks) {
-	                    if (task.getBackupTaskId() > maxTaskId) {
-	                        maxTaskId = task.getBackupTaskId();
-	                    }
-	                }
-	            }
-	        }
-	        maxTaskId++; 
-	        BackupTask newTask = new BackupTask();
-	        newTask.setBackupTaskId(maxTaskId);
-	        newTask.setProjectId(project.getProjectId());
-	        newTask.setName(task_name.getText());
-	        newTask.setLocalSchedular(local_cronTab.getText());
-	        newTask.setRemoteSchedular(remote_cronTab.getText());
-	        newTask.setLocalPath(local_path.getText());
-	        newTask.setRemotePath(remote_path.getText());
-	        newTask.setLocalRetention(Long.parseLong(local_retention.getText()));
-	        newTask.setRemoteRetention(Long.parseLong(remote_retention.getText()));
-	        newTask.setBackupTaskStatus(BackupTaskStatus.DANG_BIEN_SOAN.getId());
-	        newTask.setBackupFolders(new ArrayList<>());
+		try {
+			long maxTaskId = 0;
+			for (BackupProject proj : backupProjects) {
+				List<BackupTask> tasks = proj.getBackupTasks();
+				if (tasks != null) {
+					for (BackupTask task : tasks) {
+						if (task.getBackupTaskId() > maxTaskId) {
+							maxTaskId = task.getBackupTaskId();
+						}
+					}
+				}
+			}
+			maxTaskId++;
+			BackupTask newTask = new BackupTask();
+			newTask.setBackupTaskId(maxTaskId);
+			newTask.setProjectId(project.getProjectId());
+			newTask.setName(task_name.getText());
+			newTask.setLocalSchedular(local_cronTab.getText());
+			newTask.setRemoteSchedular(remote_cronTab.getText());
+			newTask.setLocalPath(local_path.getText());
+			newTask.setRemotePath(remote_path.getText());
+			newTask.setLocalRetention(Long.parseLong(local_retention.getText()));
+			newTask.setRemoteRetention(Long.parseLong(remote_retention.getText()));
+			newTask.setBackupTaskStatus(BackupTaskStatus.DANG_BIEN_SOAN.getId());
+			newTask.setBackupFolders(new ArrayList<>());
 
-	        // Thêm task mới vào danh sách tasks của dự án
-	        for (BackupProject proj : backupProjects) {
-	            if (proj.getProjectId() == project.getProjectId()) {
-	                List<BackupTask> tasks = proj.getBackupTasks();
-	                if (tasks == null) {
-	                    tasks = new ArrayList<>();
-	                    proj.setBackupTasks(tasks);
-	                }
-	                tasks.add(newTask);
-	                break;
-	            }
-	        }
+			// Thêm task mới vào danh sách tasks của dự án
+			for (BackupProject proj : backupProjects) {
+				if (proj.getProjectId() == project.getProjectId()) {
+					List<BackupTask> tasks = proj.getBackupTasks();
+					if (tasks == null) {
+						tasks = new ArrayList<>();
+						proj.setBackupTasks(tasks);
+					}
+					tasks.add(newTask);
+					break;
+				}
+			}
 
-	        // Lưu danh sách dự án sau khi thêm task mới
-	        backupTaskService.saveProjectsToFile(backupProjects);
-	        task = newTask; // Cập nhật task hiện tại thành task mới
-
-	    } catch (Exception e) {
-	        e.printStackTrace();
-	        AlertMaker.errorAlert("Error", "Failed to save Task!");
-	    }
+			// Lưu danh sách dự án sau khi thêm task mới
+			backupTaskService.saveProjectsToFile(backupProjects);
+			task = newTask;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
-
-
 	private boolean validateTaskInformation(List<BackupProject> backupProjects) {
-	    if (task.getName().isEmpty() || task.getLocalSchedular().isEmpty() || task.getRemoteSchedular().isEmpty() ||
-	            task.getLocalPath().isEmpty() || task.getRemotePath().isEmpty() ||
-	            String.valueOf(task.getLocalRetention()).isEmpty() || String.valueOf(task.getRemoteRetention()).isEmpty()) {
+	    if (task.getName().isEmpty() || task.getLocalSchedular().isEmpty() || task.getRemoteSchedular().isEmpty()
+	            || task.getLocalPath().isEmpty() || task.getRemotePath().isEmpty()
+	            || String.valueOf(task.getLocalRetention()).isEmpty()
+	            || String.valueOf(task.getRemoteRetention()).isEmpty()) {
+	        AlertMaker.errorAlert("Error!", "All fields must be filled out.");
+	        return false;
+	    }
+
+	    if (task.getLocalRetention() <= 0 || task.getRemoteRetention() <= 0) {
+	        AlertMaker.errorAlert("Error!", "Please enter a positive number.");
+	        return false;
+	    }
+
+	    if (!isValidCronExpression(task.getLocalSchedular()) || !isValidCronExpression(task.getRemoteSchedular())) {
+	        AlertMaker.errorAlert("Error!", "Please enter a valid cron expression.");
 	        return false;
 	    }
 
 	    return true;
 	}
+	private boolean isValidCronExpression(String cronExpression) {
+	    String regex = "^(\\*|\\*/[1-5]?[0-9]|[0-5]?[0-9](-[0-5]?[0-9])?(,[0-5]?[0-9](-[0-5]?[0-9])?)*) " + // minutes
+                "(\\*|\\*/[1-2]?[0-9]|[0-1]?[0-9]|2[0-3](-[0-1]?[0-9]|2[0-3])?(,[0-1]?[0-9]|2[0-3](-[0-1]?[0-9]|2[0-3])?)*) " + // hours
+                "(\\*|\\*/[1-2]?[0-9]|[1-9]|[12][0-9]|3[01](-[1-9]|[12][0-9]|3[01])?(,[1-9]|[12][0-9]|3[01](-[1-9]|[12][0-9]|3[01])?)*) " + // days of month
+                "(\\*|\\*/[1-9]|[1-9]|1[0-2](-[1-9]|1[0-2])?(,[1-9]|1[0-2](-[1-9]|1[0-2])?)*) " + // months
+                "(\\*|\\*/[0-7]|[0-7](-[0-7])?(,[0-7](-[0-7])?)*)$"; // days of week
 
+ Pattern pattern = Pattern.compile(regex);
+	Matcher matcher = pattern.matcher(cronExpression);
+ 
+ return matcher.matches();
+}
+//	@FXML
+//	private void browseLocalPath(MouseEvent event) {
+//		if(event.getClickCount() == 10) {
+//			DirectoryChooser directoryChooser = new DirectoryChooser();
+//			directoryChooser.setTitle("Select Directory");
+//
+//			String userHome = System.getProperty("user.home");
+//			directoryChooser.setInitialDirectory(new File(userHome));
+//
+//			Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+//
+//			File selectedDirectory = directoryChooser.showDialog(stage);
+//			if (selectedDirectory != null) {
+//				String path = Paths.get(selectedDirectory.getAbsolutePath()).toString();
+//				local_path.setText(path);
+//				  saveLocalPath(path);
+//			}
+//		}
+//	}
 
+//	// Phương thức để lưu đường dẫn
+//	private void saveLocalPath(String path) {
+//		// Chuyển đổi đường dẫn thành định dạng độc lập với hệ điều hành trước khi lưu
+//		String normalizedPath = Paths.get(path).toString();
+//		task.setLocalPath(normalizedPath);
+//	}
+//
+//	// Khi cần sử dụng đường dẫn
+//	private File getLocalPathFile() {
+//		String localPath = task.getLocalPath();
+//		return Paths.get(localPath).toFile();
+//	}
+//	public void verifyLocalPath() {
+//	    File localPathFile = getLocalPathFile();
+//	    if (!localPathFile.exists()) {
+//	      //  AlertMaker.showConfirmAlert("Warning", "Local backup path does not exist!");
+//	    } else if (!localPathFile.isDirectory()) {
+//	       // AlertMaker.showConfirmAlert("Warning", "Local backup path is not a directory!");
+//	    } else {
+//	      //  AlertMaker.showConfirmAlert("Information", "Local backup path is valid.");
+//	    }
+//	}
 
-
-	@FXML
-	private void browseLocalPath(MouseEvent event) {
-		if(event.getClickCount() == 10) {
-			DirectoryChooser directoryChooser = new DirectoryChooser();
-			directoryChooser.setTitle("Select Directory");
-
-			String userHome = System.getProperty("user.home");
-			directoryChooser.setInitialDirectory(new File(userHome));
-
-			Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-
-			File selectedDirectory = directoryChooser.showDialog(stage);
-			if (selectedDirectory != null) {
-				String path = Paths.get(selectedDirectory.getAbsolutePath()).toString();
-				local_path.setText(path);
-				  saveLocalPath(path);
-			}
-		}
-	}
-
-	// Phương thức để lưu đường dẫn
-	private void saveLocalPath(String path) {
-		// Chuyển đổi đường dẫn thành định dạng độc lập với hệ điều hành trước khi lưu
-		String normalizedPath = Paths.get(path).toString();
-		task.setLocalPath(normalizedPath);
-	}
-
-	// Khi cần sử dụng đường dẫn
-	private File getLocalPathFile() {
-		String localPath = task.getLocalPath();
-		return Paths.get(localPath).toFile();
-	}
-	public void verifyLocalPath() {
-	    File localPathFile = getLocalPathFile();
-	    if (!localPathFile.exists()) {
-	      //  AlertMaker.showConfirmAlert("Warning", "Local backup path does not exist!");
-	    } else if (!localPathFile.isDirectory()) {
-	       // AlertMaker.showConfirmAlert("Warning", "Local backup path is not a directory!");
-	    } else {
-	      //  AlertMaker.showConfirmAlert("Information", "Local backup path is valid.");
-	    }
-	}
-	
 	public void taskDetails(BackupTask task) {
 		this.task = task;
 
@@ -452,8 +478,8 @@ public class DetailsTask implements Initializable {
 		task_id.setText(String.valueOf(++currentMaxTaskId));
 		folder_id.setText(String.valueOf(++currentMaxFolderId));
 		inforClear();
-		local_path.setOnMouseClicked(event -> browseLocalPath(event));
-		folder_path.setOnMouseClicked(event -> browseFolderPath(event));
+		// local_path.setOnMouseClicked(event -> browseLocalPath(event));
+		// folder_path.setOnMouseClicked(event -> browseFolderPath(event));
 	}
 
 	public void addFolderLayout(BackupFolder folder) {

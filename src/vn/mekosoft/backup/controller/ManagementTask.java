@@ -76,6 +76,8 @@ public class ManagementTask implements Initializable {
 		this.project = project;
 	}
 
+
+
 	public void refreshView() {
 		vbox_taskList.getChildren().clear();
 		if (currentTask != null && currentProject != null) {
@@ -117,6 +119,7 @@ public class ManagementTask implements Initializable {
 			task_status.setText(BackupTaskStatus.DANG_BIEN_SOAN.getDescription());
 			cricle_task_status.setFill(Color.web(BackupTaskStatus.DANG_BIEN_SOAN.getColorTask()));
 		}
+		button_details.setText("Save");
 	}
 
 	public void log_action(ActionEvent event) throws IOException {
@@ -227,6 +230,7 @@ public class ManagementTask implements Initializable {
 		if (event.getSource() == button_run) {
 			run_action();
 			updateUIForRunningTask();
+		
 		} else if (event.getSource() == button_stop) {
 			stop_action(this::updateUIForStoppedTask);
 		}
@@ -237,7 +241,7 @@ public class ManagementTask implements Initializable {
 		button_run.setVisible(false);
 		button_stop.setVisible(true);
 		button_delete.setVisible(false);
-		 menuItem_delete.setDisable(true);;
+		menuItem_delete.setDisable(true);;
 		task_status.setText(getStatusActive());
 		cricle_task_status.setFill(Color.web(BackupTaskStatus.DA_DAT_LICH.getColorTask()));
 		saveTaskStatus(BackupTaskStatus.DA_DAT_LICH);
@@ -333,5 +337,10 @@ public class ManagementTask implements Initializable {
 				}
 			}
 		});
+	}
+
+	public void updateData() {
+		// TODO Auto-generated method stub
+		
 	}
 }

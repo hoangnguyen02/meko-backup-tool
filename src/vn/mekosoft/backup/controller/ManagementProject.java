@@ -105,11 +105,11 @@ public class ManagementProject implements Initializable {
 		controller.taskDetails(task);
 		controller.inforClear();
 		controller.hideFolderPane();
+		controller.buttonText();
 		Stage stage = new Stage();
 		stage.setScene(new Scene(root));
 		stage.setTitle("Add New Task");
 		stage.getIcons().add(new Image("/vn/mekosoft/backup/view/img/company_logo.png"));
-
 		// Đặt vị trí cửa sổ ở trung tâm
 		stage.setWidth(1040); // Chiều rộng của cửa sổ
 		stage.setHeight(400);
@@ -119,6 +119,7 @@ public class ManagementProject implements Initializable {
 			dashboardController.rf();
 			dashboardController.refresh_action();
 		});
+		
 	}
 
 	@Override

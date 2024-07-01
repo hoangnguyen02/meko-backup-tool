@@ -63,7 +63,7 @@ public class TableDashboard implements Initializable {
 
 	@Override
 	public void initialize(URL url, ResourceBundle resourceBundle) {
-		tableDashboard();
+		updateData();
 		
 	}
 
@@ -282,6 +282,11 @@ public class TableDashboard implements Initializable {
 			}
 		}
 
+	}
+
+	public void updateData() {
+	tableDashboard();
+		
 	}
 
 
