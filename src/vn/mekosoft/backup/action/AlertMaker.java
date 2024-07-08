@@ -41,9 +41,7 @@ public class AlertMaker {
 		alert.setHeaderText(null);
 		alert.setContentText(content);
 		addIconToAlert(alert);
-//		ButtonType button = new ButtonType("Delete");
-//		alert.getButtonTypes().setAll(button);
-//		
+
 
 		return alert.showAndWait();
 

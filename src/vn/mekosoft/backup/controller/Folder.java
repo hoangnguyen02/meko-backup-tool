@@ -73,7 +73,6 @@ public class Folder implements Initializable {
 	}
 
 	public void refresh() {
-		System.out.println("Đang gọi refresh");
 		if (detailsTaskController != null) {
 			detailsTaskController.refreshFolder();
 

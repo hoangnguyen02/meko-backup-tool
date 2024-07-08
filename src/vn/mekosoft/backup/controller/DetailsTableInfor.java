@@ -153,7 +153,7 @@ public class DetailsTableInfor implements Initializable {
                                   setStyle("-fx-text-fill: #3cd856;");
                                   setText(result);
                               } else if (result.equals("Failed")) {
-                                  setStyle("-fx-text-fill: #fa557a");
+                                  setStyle("-fx-text-fill: #fa557a;");
                                   setText(result);
                               } else {
                                   setText(result);
@@ -266,7 +266,6 @@ public class DetailsTableInfor implements Initializable {
     private LocalDate parseDateStringToLocalDate(String dateTimeString) {
         try {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
-            System.out.print(formatter);
             LocalDateTime dateTime = LocalDateTime.parse(dateTimeString, formatter);
             return dateTime.toLocalDate();
         } catch (DateTimeParseException e) {

@@ -108,7 +108,6 @@ public class TableDashboard implements Initializable {
 		if (event.getClickCount() == 2) {
 			TableModel selectedTask = getSelectedTaskFromEvent(event);
 			BackupProject selectedProject = getSelectedProject(selectedTask);
-			System.out.println(selectedProject);
 			if (selectedTask != null && selectedProject != null) {
 				try {
 					FXMLLoader loader = new FXMLLoader(

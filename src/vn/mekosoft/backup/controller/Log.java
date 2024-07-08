@@ -92,15 +92,12 @@ public class Log implements Initializable {
 	public void readLogV2(String folderPath, long projectId, long taskId) {
 		try {
 			String logFilePath = configLogFile.getConfigLog(projectId, taskId);
-			if (logFilePath != null && !logFilePath.isEmpty()) {
+			if (!logFilePath.isEmpty()) {
 				try (BufferedReader reader = new BufferedReader(new FileReader(logFilePath))) {
 					StringBuilder content = new StringBuilder();
 					String line;
-					 int maxWidth = 80;
 					while ((line = reader.readLine()) != null) {
-						if (line.length() > maxWidth) {
-	                        line = line.substring(0, maxWidth) + "...";
-	                    }
+						
 						content.append(line).append("\n");
 					}
 					Platform.runLater(() -> {
@@ -109,12 +106,10 @@ public class Log implements Initializable {
 						content_log.setScrollTop(Double.MAX_VALUE);
 					});
 				} catch (IOException e) {
-					e.printStackTrace();
 
 				}
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
 
 		}
 	}

@@ -1,5 +1,6 @@
 package vn.mekosoft.backup.impl;
 
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -23,6 +24,19 @@ public class BackupProjectServiceImpl implements BackupProjectService {
     @Override
     public List<BackupProject> loadProjectData() {
         List<BackupProject> projects = new ArrayList<>();
+        File configFile = new File(CONFIG_FOLDER_PATH);
+
+        if (!configFile.exists()) {
+            try {
+                configFile.createNewFile();
+                initializeConfigFile(configFile);
+            } catch (IOException e) {
+                e.printStackTrace();
+                return projects; 
+            }
+        }
+
+        // Tiếp tục đọc dữ liệu từ file cấu hình như đã làm trước đó
         try (FileReader reader = new FileReader(CONFIG_FOLDER_PATH)) {
             JsonObject jsonObject = new Gson().fromJson(reader, JsonObject.class);
             JsonArray backupProjectsArray = jsonObject.getAsJsonArray("backupProjects");
@@ -37,7 +51,15 @@ public class BackupProjectServiceImpl implements BackupProjectService {
         }
         return projects;
     }
+    private void initializeConfigFile(File configFile) throws IOException {
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.add("backupProjects", new JsonArray());
 
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        try (FileWriter writer = new FileWriter(configFile)) {
+            gson.toJson(jsonObject, writer);
+        }
+    }
     @Override
     public void addProject(BackupProject backupProject) {
         List<BackupProject> projects = loadProjectData();
@@ -65,9 +87,16 @@ public class BackupProjectServiceImpl implements BackupProjectService {
     @Override
     public void deleteProject(long projectId) {
         List<BackupProject> projects = loadProjectData();
-        projects.removeIf(project -> project.getProjectId() == projectId);
+        for (int i = 0; i < projects.size(); i++) {
+            BackupProject project = projects.get(i);
+            if (project.getProjectId() == projectId) {
+                projects.remove(i);
+                break; // Sau khi xoá, thoát khỏi vòng lặp
+            }
+        }
         saveProjects(projects);
     }
+
 
     private void saveProjects(List<BackupProject> projects) {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();

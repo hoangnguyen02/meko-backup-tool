@@ -62,6 +62,7 @@
 *.table-view *.table-column {
     -fx-alignment: top-left;
 }
+
 .table-view .column-header .label {
     -fx-alignment: top-left;
 }
@@ -92,8 +93,15 @@
 }
 #stopTask{
 		-fx-background-color:#ffe2e6;
-			 -fx-background-radius:  2.0em;
-		
+			 -fx-background-radius:  2.0em;	
+}
+#button_run{
+	-fx-background-color: #d3e8d6;
+	-fx-text-fill: #379068;
+}
+#button_stop{
+	-fx-background-color: #f8cdcc;
+	-fx-text-fill:#aa1311;
 }
 
 .whiteRadius{
@@ -109,24 +117,13 @@
     -fx-effect: dropshadow(three-pass-box, rgba(0.0,0.0,0.0,0.2), 10.0,0.0,0.0,0.0);
 
 }
-/* Khi button được nhấn */
-.button-menu :pressed {
-    -fx-background-color: #154e78;
-}
 
-/* Khi button được chọn */
-.button.selected {
-    -fx-background-color: #154e78; 
-}
 .bar-chart .chart-content .chart-plot-background {
  -fx-bar-fill: #dcfce7; 
     -fx-background-color: #FFFFFF;
     	-fx-effect: none;
     
 }
-
-/* styles.css */
-
 
 
 .chart1 .default-color0.chart-bar {
@@ -175,5 +172,7 @@
 
 .scroll-pane {
    -fx-background: #FFFFFF;
+   -fx-border: transparent;
 }
+
 

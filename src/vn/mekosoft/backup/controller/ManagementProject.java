@@ -63,12 +63,11 @@ public class ManagementProject implements Initializable {
 	}
 
 	public void deleteProject_action(ActionEvent event) {
-		Optional<ButtonType> response = AlertMaker.showConfirmAlert("Delete Project",
+		Optional<ButtonType> response = AlertMaker.showConfirmDelete("Delete Project",
 				"Are you sure you want to delete this project?");
 		if (response.isPresent() && response.get() == ButtonType.OK) {
 			BackupProjectService projectService = new BackupProjectServiceImpl();
 			projectService.deleteProject(project.getProjectId());
-			dashboardController.rf();
 			dashboardController.refresh_action();
 		}
 	}
@@ -110,16 +109,13 @@ public class ManagementProject implements Initializable {
 		stage.setScene(new Scene(root));
 		stage.setTitle("Add New Task");
 		stage.getIcons().add(new Image("/vn/mekosoft/backup/view/img/company_logo.png"));
-		// Đặt vị trí cửa sổ ở trung tâm
-		stage.setWidth(1040); // Chiều rộng của cửa sổ
+		stage.setWidth(1040);
 		stage.setHeight(400);
 		stage.show();
 
-		stage.setOnHidden(e -> {
-			dashboardController.rf();
-			dashboardController.refresh_action();
-		});
-		
+		dashboardController.rf();
+		dashboardController.refresh_action();
+
 	}
 
 	@Override

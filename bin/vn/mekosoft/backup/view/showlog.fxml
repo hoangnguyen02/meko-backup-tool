@@ -19,7 +19,7 @@
             </Label>
          </children>
       </AnchorPane>
-      <TextArea fx:id="content_log" layoutX="36.0" layoutY="133.0" prefHeight="538.0" prefWidth="988.0" stylesheets="@../application/application.css">
+      <TextArea fx:id="content_log" editable="false" layoutX="36.0" layoutY="133.0" prefHeight="538.0" prefWidth="988.0" stylesheets="@../application/application.css">
          <styleClass>
             <String fx:value="root" />
             <String fx:value="border-less-up" />

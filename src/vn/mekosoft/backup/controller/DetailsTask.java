@@ -236,7 +236,6 @@ public class DetailsTask implements Initializable {
 				refreshView();
 				if (tableDashboardController != null) {
 					tableDashboardController.loadDataTable();
-					System.out.print("Gọi table" + tableDashboardController);
 				}
 			}
 		} catch (Exception e) {

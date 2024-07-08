@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane cacheShape="false" centerShape="false" pickOnBounds="false" prefHeight="389.0" prefWidth="1000.0" scaleShape="false" stylesheets="@../application/application.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vn.mekosoft.backup.controller.BackupTaskStatusChart">
+<AnchorPane fx:id="chartStatus" cacheShape="false" centerShape="false" pickOnBounds="false" prefHeight="389.0" prefWidth="1000.0" scaleShape="false" stylesheets="@../application/application.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vn.mekosoft.backup.controller.BackupTaskStatusChart">
    <children>
       <Label layoutX="58.0" layoutY="14.0" text="Backup Task Status" textFill="#154e78">
          <font>

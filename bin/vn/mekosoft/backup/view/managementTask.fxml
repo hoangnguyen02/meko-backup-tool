@@ -12,13 +12,13 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="infor_task" cache="true" depthTest="DISABLE" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="70.0" prefWidth="1137.0" style="-fx-background-color: #FFFFFF;" styleClass="border-less-up" stylesheets="@../application/application.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vn.mekosoft.backup.controller.ManagementTask">
+<AnchorPane fx:id="infor_task" cache="true" depthTest="DISABLE" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" style="-fx-background-color: #FFFFFF;" styleClass="border-less-up" stylesheets="@../application/application.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vn.mekosoft.backup.controller.ManagementTask">
    <children>
-      <HBox fx:id="hbox_task" layoutX="-4.0" prefHeight="70.0" prefWidth="1137.0">
+      <HBox fx:id="hbox_task" layoutX="-4.0" prefHeight="70.0" prefWidth="1074.0">
          <children>
-            <VBox fx:id="vbox_taskList" alignment="CENTER" prefHeight="70.0" prefWidth="1141.0">
+            <VBox fx:id="vbox_taskList" alignment="CENTER" prefHeight="70.0" prefWidth="1078.0">
                <children>
-                  <AnchorPane fx:id="infor_v2" prefHeight="71.0" prefWidth="1014.0" stylesheets="@../application/application.css">
+                  <AnchorPane fx:id="infor_v2" prefHeight="59.0" prefWidth="1054.0" stylesheets="@../application/application.css">
                      <children>
                         <Label fx:id="task_status" layoutX="536.0" layoutY="23.0" text="Label">
                            <font>
@@ -26,7 +26,7 @@
                            </font>
                         </Label>
                         <Circle fx:id="cricle_task_status" fill="#28cf81" layoutX="511.0" layoutY="33.0" radius="7.0" stroke="BLACK" strokeType="INSIDE" />
-                        <Pane layoutX="33.0" layoutY="12.0" prefHeight="47.0" prefWidth="434.0" styleClass="border-task" stylesheets="@../application/application.css">
+                        <Pane layoutX="24.0" layoutY="9.0" prefHeight="47.0" prefWidth="434.0" styleClass="border-task" stylesheets="@../application/application.css">
                            <children>
                               <Label fx:id="task_name" layoutX="25.0" layoutY="12.0" prefHeight="23.0" prefWidth="392.0" text="label">
                                  <font>
@@ -35,7 +35,7 @@
                               </Label>
                            </children>
                         </Pane>
-                        <MenuButton fx:id="menu_action" alignment="CENTER" contentDisplay="CENTER" layoutX="818.0" layoutY="16.0" lineSpacing="10.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="133.0" stylesheets="@../application/application.css" text="Action" textAlignment="CENTER">
+                        <MenuButton fx:id="menu_action" alignment="CENTER" contentDisplay="CENTER" layoutX="801.0" layoutY="16.0" lineSpacing="10.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="133.0" stylesheets="@../application/application.css" text="Action" textAlignment="CENTER">
                           <items>
                             <MenuItem mnemonicParsing="false">
                                  <graphic>
@@ -55,12 +55,15 @@
                               <Insets />
                            </opaqueInsets>
                         </MenuButton>
-                        <Button fx:id="button_stop" layoutX="981.0" layoutY="16.0" mnemonicParsing="false" onAction="#stop_action" prefHeight="34.0" prefWidth="120.0" text="Stop" />
-                        <Button fx:id="button_run" layoutX="981.0" layoutY="16.0" mnemonicParsing="false" onAction="#scheduler_action" prefHeight="34.0" prefWidth="120.0" text="Schedular">
+                        <Button fx:id="button_stop" layoutX="942.0" layoutY="15.0" mnemonicParsing="false" onAction="#stop_action" prefHeight="34.0" prefWidth="120.0" text="Stop">
                            <font>
                               <Font size="14.0" />
                            </font></Button>
-                        <Button fx:id="button_details" alignment="CENTER" contentDisplay="RIGHT" layoutX="683.0" layoutY="16.0" mnemonicParsing="false" onAction="#details_action" prefHeight="33.0" prefWidth="104.0" styleClass="add-folder-button" stylesheets="@../application/application.css" text="Edit Task">
+                        <Button fx:id="button_run" layoutX="942.0" layoutY="15.0" mnemonicParsing="false" onAction="#scheduler_action" prefHeight="34.0" prefWidth="120.0" text="Schedular">
+                           <font>
+                              <Font size="14.0" />
+                           </font></Button>
+                        <Button fx:id="button_details" alignment="CENTER" contentDisplay="RIGHT" layoutX="682.0" layoutY="16.0" mnemonicParsing="false" onAction="#details_action" prefHeight="33.0" prefWidth="104.0" styleClass="add-folder-button" stylesheets="@../application/application.css" text="Edit Task">
                            <font>
                               <Font size="14.0" />
                            </font>

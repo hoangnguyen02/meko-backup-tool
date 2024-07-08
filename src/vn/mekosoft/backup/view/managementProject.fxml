@@ -11,13 +11,13 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="infor_project" style="-fx-background-color: #fbfcfe;" stylesheets="@../application/application.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vn.mekosoft.backup.controller.ManagementProject">
+<AnchorPane fx:id="infor_project" style="-fx-background-color: #fbfcfe;" stylesheets="@../application/application.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vn.mekosoft.backup.controller.ManagementProject">
    <children>
-      <HBox prefHeight="118.0" prefWidth="1138.0" style="-fx-background-color: #fbfcfe;">
+      <HBox prefHeight="118.0" prefWidth="1074.0" style="-fx-background-color: #fbfcfe;">
          <children>
-            <VBox prefHeight="98.0" prefWidth="1137.0" style="-fx-background-color: white;">
+            <VBox prefHeight="98.0" prefWidth="1074.0" style="-fx-background-color: white;">
                <children>
-                  <AnchorPane prefHeight="98.0" prefWidth="1124.0" style="-fx-background-color: #FFFFFF;" styleClass="border-main" stylesheets="@../application/application.css">
+                  <AnchorPane prefHeight="98.0" prefWidth="1074.0" style="-fx-background-color: #FFFFFF;" styleClass="border-main" stylesheets="@../application/application.css">
                      <children>
                         <Circle fx:id="circle_project_status" fill="#3cdda0" layoutX="507.0" layoutY="39.0" radius="7.0" stroke="BLACK" strokeType="INSIDE" />
                         <Label fx:id="project_activity" layoutX="535.0" layoutY="29.0" text="Hoạt động">
@@ -37,7 +37,7 @@
                            <font>
                               <Font size="14.0" />
                            </font></Label>
-                        <MenuButton alignment="CENTER" layoutX="814.0" layoutY="26.0" mnemonicParsing="false" popupSide="RIGHT" prefHeight="34.0" prefWidth="133.0" text="Action">
+                        <MenuButton alignment="CENTER" layoutX="798.0" layoutY="26.0" mnemonicParsing="false" popupSide="RIGHT" prefHeight="34.0" prefWidth="133.0" text="Action">
                           <items>
                             <MenuItem mnemonicParsing="false">
                                  <graphic>
@@ -54,7 +54,7 @@
                               <Font size="14.0" />
                            </font>
                         </MenuButton>
-                        <Button fx:id="button_addTask" layoutX="680.0" layoutY="25.0" mnemonicParsing="false" onAction="#addTask_action" prefHeight="35.0" prefWidth="99.0" styleClass="button-2" stylesheets="@../application/application.css" text="+ Task" textFill="WHITE">
+                        <Button fx:id="button_addTask" layoutX="678.0" layoutY="25.0" mnemonicParsing="false" onAction="#addTask_action" prefHeight="35.0" prefWidth="99.0" styleClass="button-2" stylesheets="@../application/application.css" text="+ Task" textFill="WHITE">
                            <font>
                               <Font size="14.0" />
                            </font>

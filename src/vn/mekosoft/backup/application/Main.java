@@ -33,28 +33,7 @@ public class Main extends Application {
 		            Platform.exit();
 		            System.exit(0);
 		        });
-//			   Screen screen = Screen.getPrimary();
-//		        double screenWidth = screen.getBounds().getWidth();
-//		        double screenHeight = screen.getBounds().getHeight();
-//
-//		        // Thiết lập kích thước ban đầu cho cửa sổ
-//		        primaryStage.setWidth(screenWidth * 0.8);
-//		        primaryStage.setHeight(screenHeight * 0.8); 
-//
-//		        // Đặt title cho cửa sổ
-//
-//		        // Đăng ký sự kiện cho việc thay đổi kích thước cửa sổ
-//		        primaryStage.widthProperty().addListener((obs, oldVal, newVal) -> {
-//		            // Xử lý khi kích thước chiều rộng của cửa sổ thay đổi
-//		            System.out.println("Width changed: " + newVal);
-//		        });
-//
-//		        primaryStage.heightProperty().addListener((obs, oldVal, newVal) -> {
-//		            // Xử lý khi kích thước chiều cao của cửa sổ thay đổi
-//		            System.out.println("Height changed: " + newVal);
-//		        });
-
-		        // Hiển thị Stage
+System.out.println("Starting Backup Tool ...");
 			primaryStage.show();
 		} catch (Exception e) {
 			e.printStackTrace();

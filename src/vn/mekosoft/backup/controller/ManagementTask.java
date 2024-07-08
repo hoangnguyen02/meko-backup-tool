@@ -58,12 +58,11 @@ public class ManagementTask implements Initializable {
 	private BackupTaskServiceImpl backupTaskService;
 	private boolean isSchedulerRunning = false;
 	private BackupProject project;
-    @FXML
-    private MenuItem menuItem_delete;
-    @FXML
-    private MenuButton menu_action;
-    
-    
+	@FXML
+	private MenuItem menuItem_delete;
+	@FXML
+	private MenuButton menu_action;
+
 	public void clearPane() {
 		infor_task.getChildren().clear();
 	}
@@ -75,8 +74,6 @@ public class ManagementTask implements Initializable {
 	public void setProject(BackupProject project) {
 		this.project = project;
 	}
-
-
 
 	public void refreshView() {
 		vbox_taskList.getChildren().clear();
@@ -92,11 +89,11 @@ public class ManagementTask implements Initializable {
 	@Override
 	public void initialize(URL url, ResourceBundle resources) {
 		backupTaskService = new BackupTaskServiceImpl();
-		 if (menu_action != null) {
-		        checkMenuItemState();
-		    } else {
-		        System.out.println("Menu action is null.");
-		    }
+		if (menu_action != null) {
+			checkMenuItemState();
+		} else {
+			System.out.println("Menu action is null.");
+		}
 	}
 
 	public void details_action(ActionEvent event) throws IOException {
@@ -119,7 +116,6 @@ public class ManagementTask implements Initializable {
 			task_status.setText(BackupTaskStatus.DANG_BIEN_SOAN.getDescription());
 			cricle_task_status.setFill(Color.web(BackupTaskStatus.DANG_BIEN_SOAN.getColorTask()));
 		}
-		button_details.setText("Save");
 	}
 
 	public void log_action(ActionEvent event) throws IOException {
@@ -213,7 +209,7 @@ public class ManagementTask implements Initializable {
 
 	public void delete_action() {
 		if (currentTask != null && currentProject != null) {
-			Optional<ButtonType> result = AlertMaker.showConfirmAlert("Confirmation",
+			Optional<ButtonType> result = AlertMaker.showConfirmDelete("Confirmation",
 					"Are you sure you want to delete this task?");
 			result.ifPresent(buttonType -> {
 				if (buttonType == ButtonType.OK) {
@@ -230,44 +226,56 @@ public class ManagementTask implements Initializable {
 		if (event.getSource() == button_run) {
 			run_action();
 			updateUIForRunningTask();
-		
+			dashboardController.loadDashboard();
+
 		} else if (event.getSource() == button_stop) {
 			stop_action(this::updateUIForStoppedTask);
 		}
 	}
+
 	private void checkMenuItemState() {
-    }
+	}
+
 	private void updateUIForRunningTask() {
 		button_run.setVisible(false);
 		button_stop.setVisible(true);
 		button_delete.setVisible(false);
-		menuItem_delete.setDisable(true);;
+		menuItem_delete.setDisable(true);
+
 		task_status.setText(getStatusActive());
 		cricle_task_status.setFill(Color.web(BackupTaskStatus.DA_DAT_LICH.getColorTask()));
 		saveTaskStatus(BackupTaskStatus.DA_DAT_LICH);
 		button_details.setVisible(false);
-		  menuItem_delete.setVisible(menuItem_delete.isVisible() && !menuItem_delete.isDisable());
+		menuItem_delete.setVisible(false);
+
 	}
 
 	private void updateUIForStoppedTask() {
 		button_run.setVisible(true);
 		button_stop.setVisible(false);
+		button_delete.setVisible(true);
+		menuItem_delete.setDisable(false);
 		task_status.setText(getStatusStop());
 		cricle_task_status.setFill(Color.web(BackupTaskStatus.KHONG_HOAT_DONG.getColorTask()));
 		saveTaskStatus(BackupTaskStatus.KHONG_HOAT_DONG);
 		button_details.setVisible(true);
+		button_delete.setVisible(true);
+		dashboardController.loadDashboard();
+		menuItem_delete.setVisible(true);
+
 	}
+
+	String backupToolPath = System.getenv("BACKUPTOOL");
 
 	public void run_action() {
 		String projectId = String.valueOf(currentProject.getProjectId());
 		String taskId = String.valueOf(currentTask.getBackupTaskId());
+		String backupToolPath = System.getenv("BACKUPTOOL");
+		String localCommand = backupToolPath + "/backup.sh --local --project_id=" + projectId + " --task_id=" + taskId
+				+ " --set_time";
 
-		String localCommand = "/home/ubuntu/sftp_ver2/backup.sh --local --project_id=" + projectId + " --task_id="
-				+ taskId + " --set_time";
-		System.out.println(localCommand);
-		String remoteCommand = "/home/ubuntu/sftp_ver2/backup.sh --remote --project_id=" + projectId + " --task_id="
-				+ taskId + " --set_time";
-		System.out.println(remoteCommand);
+		String remoteCommand = backupToolPath + "/backup.sh --remote --project_id=" + projectId + " --task_id=" + taskId
+				+ " --set_time";
 
 		try {
 			ProcessBuilder localProcessBuilder = new ProcessBuilder("bash", "-c", localCommand);
@@ -301,13 +309,11 @@ public class ManagementTask implements Initializable {
 					String projectId_stop = String.valueOf(currentProject.getProjectId());
 					String taskId_stop = String.valueOf(currentTask.getBackupTaskId());
 
-					String stopLocal = "/home/ubuntu/sftp_ver2/backup.sh --local --project_id=" + projectId_stop
+					String stopLocal = backupToolPath + "/backup.sh --local --project_id=" + projectId_stop
 							+ " --task_id=" + taskId_stop + " --remove_time";
-					System.out.println(stopLocal);
 
-					String stopRemote = "/home/ubuntu/sftp_ver2/backup.sh --remote --project_id=" + projectId_stop
+					String stopRemote = backupToolPath + "/backup.sh --remote --project_id=" + projectId_stop
 							+ " --task_id=" + taskId_stop + " --remove_time";
-					System.out.println(stopRemote);
 
 					try {
 						ProcessBuilder localProcessBuilder = new ProcessBuilder("bash", "-c", stopLocal);
@@ -339,8 +345,4 @@ public class ManagementTask implements Initializable {
 		});
 	}
 
-	public void updateData() {
-		// TODO Auto-generated method stub
-		
-	}
 }

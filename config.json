@@ -1,63 +1,67 @@
 {
   "backupProjects": [
     {
-      "projectId": 1,
-      "projectName": "2",
-      "description": "3",
-      "hostname": "2",
-      "username": "3",
-      "password": "23",
+      "projectId": 2,
+      "projectName": "1",
+      "description": "",
+      "hostname": "qưe",
+      "username": "qưe",
+      "password": "ád",
       "backupProjectStatus": 1,
       "backupTasks": [
         {
           "backupTaskId": 5,
-          "projectId": 1,
-          "name": "ưe",
-          "localSchedular": "qưe",
-          "localPath": "ưeqưeq",
-          "localRetention": -1,
-          "remoteSchedular": "qưe",
-          "remotePath": "qưeq",
-          "remoteRetention": -1,
+          "projectId": 2,
+          "name": "123",
+          "localSchedular": "*/1 * * * *",
+          "localPath": "qưe",
+          "localRetention": 1,
+          "remoteSchedular": "*/1 * * * *",
+          "remotePath": "12",
+          "remoteRetention": 312,
           "backupTaskStatus": 1,
           "backupFolders": []
-        },
+        }
+      ]
+    },
+    {
+      "projectId": 3,
+      "projectName": "qưẻ",
+      "description": "",
+      "hostname": "qẻw",
+      "username": "qưẻ",
+      "password": "ádàds",
+      "backupProjectStatus": 1,
+      "backupTasks": [
         {
-          "backupTaskId": 6,
-          "projectId": 1,
-          "name": "sadf",
-          "localSchedular": "1",
-          "localPath": "1",
-          "localRetention": 123,
-          "remoteSchedular": "1",
-          "remotePath": "1",
-          "remoteRetention": 1,
-          "backupTaskStatus": 3,
-          "backupFolders": []
-        },
-        {
-          "backupTaskId": 8,
-          "projectId": 1,
-          "name": "ds",
-          "localSchedular": "0 0 12 * * ?",
-          "localPath": "a1",
-          "localRetention": 31,
-          "remoteSchedular": "0 0 12 * * ?",
-          "remotePath": "1",
+          "backupTaskId": 3,
+          "projectId": 3,
+          "name": "qưe",
+          "localSchedular": "*/20 * * * *",
+          "localPath": "123",
+          "localRetention": 2,
+          "remoteSchedular": "*/20 * * * *",
+          "remotePath": "123",
           "remoteRetention": 3,
-          "backupTaskStatus": 1,
-          "backupFolders": []
+          "backupTaskStatus": 3,
+          "backupFolders": [
+            {
+              "backupFolderId": 1,
+              "folderPath": "3",
+              "backupTaskId": 3
+            }
+          ]
         },
         {
-          "backupTaskId": 9,
-          "projectId": 1,
-          "name": "ád",
-          "localSchedular": "*/50 * * * *",
+          "backupTaskId": 4,
+          "projectId": 3,
+          "name": "132",
+          "localSchedular": "*/1 * * * *",
           "localPath": "1",
           "localRetention": 1,
-          "remoteSchedular": "*/50 * * * *",
-          "remotePath": "1",
-          "remoteRetention": 1,
+          "remoteSchedular": "*/1 * * * *",
+          "remotePath": "2",
+          "remoteRetention": 543,
           "backupTaskStatus": 1,
           "backupFolders": []
         }

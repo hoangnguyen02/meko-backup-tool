@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="createProject_view" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="693.0" prefWidth="1027.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vn.mekosoft.backup.controller.EditProject">
+<AnchorPane fx:id="createProject_view" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="693.0" prefWidth="1027.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vn.mekosoft.backup.controller.EditProject">
    <children>
       <AnchorPane fx:id="addProject_view" layoutX="1.0" prefHeight="693.0" prefWidth="1027.0">
          <children>
@@ -25,12 +25,12 @@
             <AnchorPane layoutX="14.0" layoutY="74.0" prefHeight="521.0" prefWidth="988.0" styleClass="border-main" stylesheets="@../application/application.css">
                <children>
                   <TextField fx:id="create_backupProjectId_textField" layoutX="683.0" layoutY="228.0" prefHeight="33.0" prefWidth="194.0" promptText="Backup Project ID" visible="false" />
-                  <TextField fx:id="create_projectName_TextField" layoutX="147.0" layoutY="40.0" prefHeight="39.0" prefWidth="194.0" promptText="Name" />
-                  <TextField fx:id="create_description_textField" layoutX="148.0" layoutY="112.0" prefHeight="39.0" prefWidth="194.0" promptText="Description" />
-                  <TextField fx:id="create_username_textField" layoutX="147.0" layoutY="262.0" prefHeight="39.0" prefWidth="194.0" promptText="username" />
-                  <ComboBox fx:id="create_status_backupProject" layoutX="148.0" layoutY="447.0" prefHeight="27.0" prefWidth="194.0" />
-                  <TextField fx:id="create_password_textField" layoutX="148.0" layoutY="340.0" prefHeight="39.0" prefWidth="194.0" visible="false" />
-                  <TextField fx:id="create_hostname_textField" layoutX="147.0" layoutY="186.0" prefHeight="39.0" prefWidth="194.0" promptText="Hostname" />
+                  <TextField fx:id="create_projectName_TextField" layoutX="175.0" layoutY="40.0" prefHeight="39.0" prefWidth="194.0" promptText="Name" />
+                  <TextField fx:id="create_description_textField" layoutX="175.0" layoutY="112.0" prefHeight="39.0" prefWidth="194.0" promptText="Description" />
+                  <TextField fx:id="create_username_textField" layoutX="175.0" layoutY="262.0" prefHeight="39.0" prefWidth="194.0" promptText="username" />
+                  <ComboBox fx:id="create_status_backupProject" layoutX="175.0" layoutY="447.0" prefHeight="27.0" prefWidth="194.0" />
+                  <TextField fx:id="create_password_textField" layoutX="175.0" layoutY="340.0" prefHeight="39.0" prefWidth="194.0" />
+                  <TextField fx:id="create_hostname_textField" layoutX="175.0" layoutY="186.0" prefHeight="39.0" prefWidth="194.0" promptText="Hostname" />
                   <Label layoutX="702.0" layoutY="196.0" text="Project Id:" visible="false">
                      <font>
                         <Font name="System Bold" size="14.0" />
@@ -66,27 +66,27 @@
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Label>
-                  <Label layoutX="350.0" layoutY="52.0" text="*" textFill="RED">
+                  <Label layoutX="138.0" layoutY="47.0" text="*" textFill="RED">
                      <font>
                         <Font size="16.0" />
                      </font>
                   </Label>
-                  <Label layoutX="349.0" layoutY="193.0" text="*" textFill="RED">
+                  <Label layoutX="122.0" layoutY="193.0" text="*" textFill="RED">
                      <font>
                         <Font size="16.0" />
                      </font>
                   </Label>
-                  <Label layoutX="349.0" layoutY="269.0" text="*" textFill="RED">
+                  <Label layoutX="125.0" layoutY="269.0" text="*" textFill="RED">
                      <font>
                         <Font size="16.0" />
                      </font>
                   </Label>
-                  <Label layoutX="350.0" layoutY="347.0" text="*" textFill="RED">
+                  <Label layoutX="125.0" layoutY="347.0" text="*" textFill="RED">
                      <font>
                         <Font size="16.0" />
                      </font>
                   </Label>
-                  <PasswordField fx:id="password_edit" layoutX="147.0" layoutY="340.0" prefHeight="39.0" prefWidth="194.0" promptText="Password" />
+                  <PasswordField fx:id="password_edit" layoutX="175.0" layoutY="340.0" prefHeight="39.0" prefWidth="194.0" promptText="Password" />
                   <CheckBox fx:id="showPass" layoutX="236.0" layoutY="393.0" mnemonicParsing="false" onAction="#showPassword_action" text="Show Password" />
                </children>
             </AnchorPane>

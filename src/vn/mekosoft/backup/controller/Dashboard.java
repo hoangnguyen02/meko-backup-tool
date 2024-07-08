@@ -1,17 +1,20 @@
 package vn.mekosoft.backup.controller;
 
-import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.Reader;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.ResourceBundle;
-import java.util.TreeMap;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -19,11 +22,13 @@ import java.util.concurrent.TimeUnit;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import com.google.gson.reflect.TypeToken;
 
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -33,8 +38,8 @@ import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.PieChart;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
@@ -42,6 +47,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.ProgressIndicator;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -52,10 +58,10 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.util.StringConverter;
 import vn.mekosoft.backup.action.AlertMaker;
-import vn.mekosoft.backup.action.BackupActionUtil;
 import vn.mekosoft.backup.config.ConfigReader;
 import vn.mekosoft.backup.impl.BackupProjectServiceImpl;
 import vn.mekosoft.backup.impl.BackupServiceImpl;
+import vn.mekosoft.backup.impl.BackupTaskServiceImpl;
 import vn.mekosoft.backup.impl.CoreScriptServiceImpl;
 import vn.mekosoft.backup.model.BackupFolder;
 import vn.mekosoft.backup.model.BackupProject;
@@ -66,6 +72,7 @@ import vn.mekosoft.backup.model.TableModel;
 import vn.mekosoft.backup.model.Time;
 import vn.mekosoft.backup.service.BackupProjectService;
 import vn.mekosoft.backup.service.CoreScriptService;
+import vn.mekosoft.backup.service.BackupTaskService;
 
 public class Dashboard implements Initializable {
 	@FXML
@@ -129,8 +136,13 @@ public class Dashboard implements Initializable {
 
 	@FXML
 	private ImageView icon_dashboard_1, icon_dashboard_2, icon_config_1, icon_config_2, icon_backup_1, icon_backup_2;
-
+	@FXML
+	private ScrollPane scroll_Dashboard;
 	private ManagementTask managementTaskController;
+
+	public void setManagementTaskController(ManagementTask managementTaskController) {
+		this.managementTaskController = managementTaskController;
+	}
 
 	@Override
 	public void initialize(URL url, ResourceBundle resources) {
@@ -139,16 +151,11 @@ public class Dashboard implements Initializable {
 				"-fx-background-color: #154e78; -fx-text-fill:#FFFFFF; -fx-background-radius:  1.0em; -fx-font-weight: bold; -fx-font-size: 16px;");
 		icon_dashboard_1.setVisible(false);
 		icon_dashboard_2.setVisible(true);
-
+		config_menu();
 		loadDashboard();
 		logo.setVisible(true);
 		loadData();
-		ConfigReader config = new ConfigReader();
-		log_textField.setText(config.getLogFolderPath());
-		log_textField.setEditable(false);
-		config_textField.setText(config.getConfigFolderPath());
-		config_textField.setEditable(false);
-		save_config.setVisible(false);
+
 		// setupAutoRefresh(2, TimeUnit.SECONDS);
 		create_status_backupProject.setValue(BackupProjectStatus.DANG_BIEN_SOAN);
 		create_status_backupProject.setItems(FXCollections.observableArrayList(BackupProjectStatus.values()));
@@ -157,7 +164,42 @@ public class Dashboard implements Initializable {
 		comboBox_RefreshEvery.setItems(FXCollections.observableArrayList(Time.values()));
 
 		button_StartRefreshEvery.setOnAction(event -> startRefreshEvery());
+		button_stopRefreshEvery.setOnAction(event -> stopAutoRefresh());
 		setupDatePickers();
+		range_afterPick.setVisible(false);
+
+
+	}
+
+	public void config_menu() {
+		ConfigReader config = new ConfigReader();
+		log_textField.setText(config.getLogFolderPath());
+		config_textField.setText(config.getConfigFolderPath());
+	}
+
+	public void saveConfig_action() {
+//	    String logPath = log_textField.getText();
+//	    String configPath = config_textField.getText();
+//
+//	    Map<String, String> paths = new HashMap<>();
+//	    paths.put("LOG_FOLDER_PATH", logPath);
+//	    paths.put("CONFIG_FOLDER_PATH", configPath);
+//
+//	    Gson gson = new GsonBuilder().setPrettyPrinting().create();
+//	    String json = gson.toJson(paths);
+//
+//	    String fileName = "path.json";
+//	    try (FileWriter writer = new FileWriter(fileName)) {
+//	        writer.write(json);
+//
+//	        ConfigReader config = new ConfigReader();
+//	        config.setLogFolderPath(logPath);
+//	        config.setConfigFolderPath(configPath);
+//
+//	        config_menu();
+//	    } catch (IOException e) {
+//	        e.printStackTrace();
+//	    }
 	}
 
 	public void showPass_action() {
@@ -173,24 +215,69 @@ public class Dashboard implements Initializable {
 		}
 	}
 
+	private boolean isBackupStarted = false;
+
 	public void startBackupTool_action(ActionEvent event) {
-		
 		if (!isBackupStarted) {
-			isBackupStarted = true;
-			CoreScriptService coreScriptService = new CoreScriptServiceImpl();
-AlertMaker.showConfirmAlert("Bạn chắc chưa?", "Có thật là muốn chạy hết không bạn?");
-			try {
-				String command = "/home/ubuntu/sftp_ver2/backup.sh --execute_all";
-				coreScriptService.executeAll(command);
-//				ManagementTask managementTask = new ManagementTask();
-//				managementTask.updateTaskStatusToScheduled();
-			} catch (IOException | InterruptedException e) {
+			Optional<ButtonType> result = AlertMaker.showConfirmAlert("Confirm",
+					"Are you sure you want to run all backup processes?");
+			if (result.isPresent() && result.get() == ButtonType.OK) {
+				isBackupStarted = true;
+				CoreScriptService coreScriptService = new CoreScriptServiceImpl();
+				try {
+					String backupToolPaString = System.getenv("BACKUPTOOL");
+					String command = backupToolPaString + "/backup.sh --execute_all";
+					coreScriptService.executeAll(command);
+
+					AlertMaker.successfulAlert("Success", "Instant Backup Successful and Tasks Updated");
+				} catch (IOException | InterruptedException e) {
+					e.printStackTrace();
+					AlertMaker.errorAlert("Error", "Failed to execute backup processes or update tasks");
+				} finally {
+					isBackupStarted = false;
+				}
 			}
-			AlertMaker.successfulAlert("Success", "Instant Backup Successful");
-
 		}
-
 	}
+//
+//	private void updateTaskStatusToScheduled() {
+//		String backupToolPath = System.getenv("BACKUPTOOL");
+//		String configFilePath = backupToolPath + "/config.json";
+//		Gson gson = new GsonBuilder().setPrettyPrinting().create();
+//
+//		try (FileReader reader = new FileReader(configFilePath)) {
+//			JsonElement jsonElement = JsonParser.parseReader(reader);
+//			JsonObject rootObject = jsonElement.getAsJsonObject();
+//			JsonArray projectsArray = rootObject.getAsJsonArray("backupProjects");
+//
+//			boolean hasChanges = false;
+//
+//			for (JsonElement projectElement : projectsArray) {
+//				JsonObject projectObject = projectElement.getAsJsonObject();
+//				JsonArray tasksArray = projectObject.getAsJsonArray("backupTasks");
+//
+//				for (JsonElement taskElement : tasksArray) {
+//					JsonObject taskObject = taskElement.getAsJsonObject();
+//					int currentStatus = taskObject.get("backupTaskStatus").getAsInt();
+//
+//					if (currentStatus != BackupTaskStatus.DA_DAT_LICH.getId()) {
+//						taskObject.addProperty("backupTaskStatus", BackupTaskStatus.DA_DAT_LICH.getId());
+//						hasChanges = true;
+//					}
+//				}
+//			}
+//
+//			if (hasChanges) {
+//				try (FileWriter writer = new FileWriter(configFilePath)) {
+//					gson.toJson(rootObject, writer);
+//				}
+//			} else {
+//			}
+//
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//	}
 
 	private void setupDatePickers() {
 		StringConverter<LocalDate> converter = new StringConverter<LocalDate>() {
@@ -218,6 +305,8 @@ AlertMaker.showConfirmAlert("Bạn chắc chưa?", "Có thật là muốn chạy
 		endRange_date.valueProperty().addListener((observable, oldValue, newValue) -> {
 			if (newValue != null) {
 				endPicker.setText(dateFormatter.format(newValue));
+				applyDateRange_action();
+
 			}
 		});
 		updateDateRange1Visibility();
@@ -225,12 +314,15 @@ AlertMaker.showConfirmAlert("Bạn chắc chưa?", "Có thật là muốn chạy
 
 	}
 
+	private boolean isAutoRefreshRunning = false;
+
 	private void updateDateRange1Visibility() {
 		boolean bothDatesSelected = startRange_date.getValue() != null && endRange_date.getValue() != null;
 		range_afterPick.setVisible(bothDatesSelected);
 	}
 
 	private void startRefreshEvery() {
+
 		Time selectedTimeUnit = comboBox_RefreshEvery.getValue();
 		String intervalText = refreshEvery_textField.getText();
 		int interval;
@@ -245,8 +337,11 @@ AlertMaker.showConfirmAlert("Bạn chắc chưa?", "Có thật là muốn chạy
 			return;
 		}
 		int intervalInSeconds = interval * selectedTimeUnit.toSeconds();
+		updateAllData();
 		stopAutoRefresh();
 		setupAutoRefresh(intervalInSeconds, TimeUnit.SECONDS);
+		button_StartRefreshEvery.setDisable(true);
+
 	}
 
 	public void stopAutoRefresh() {
@@ -261,32 +356,35 @@ AlertMaker.showConfirmAlert("Bạn chắc chưa?", "Có thật là muốn chạy
 				Thread.currentThread().interrupt();
 			}
 		}
+		isAutoRefreshRunning = false;
+		button_StartRefreshEvery.setDisable(isAutoRefreshRunning);
+	}
+
+	private void updateRefreshButtonStates() {
 	}
 
 	public void clearPicker_action() {
-		startPicker.clear();
-		endPicker.clear();
 		startRange_date.setValue(null);
 		endRange_date.setValue(null);
-
-		range_afterPick.setVisible(false);
+		startPicker.clear();
+		endPicker.clear();
 		startDate = null;
 		endDate = null;
 		loadDashboard();
-
+		range_afterPick.setVisible(false);
 	}
 
-	private void loadDashboard() {
-		Platform.runLater(() -> {
-			vbox_Dashboard.getChildren().clear();
-			taskOverView_layuout();
-			backupDailyChartDaily_layout();
-			backupTaskStatus_layout();
-			storageSpace_layout();
-			tableDashboard_layuout();
-			updateAllData();
-		});
+	public void loadDashboard() {
+		vbox_Dashboard.getChildren().clear();
+		taskOverView_layuout();
+		backupDailyChartDaily_layout();
+		backupTaskStatus_layout();
+
+		storageSpace_layout();
+		tableDashboard_layuout();
+		updateAllData();
 	}
+
 
 	private void updateAllData() {
 		if (taskOverViewController != null) {
@@ -336,10 +434,6 @@ AlertMaker.showConfirmAlert("Bạn chắc chưa?", "Có thật là muốn chạy
 		addProject_view.setVisible(true);
 	}
 
-	public AnchorPane getContentView() {
-		return content_view;
-	}
-
 	public void rf() {
 		vbox_container.getChildren().clear();
 	}
@@ -354,14 +448,6 @@ AlertMaker.showConfirmAlert("Bạn chắc chưa?", "Có thật là muốn chạy
 
 	public void showAddProject() {
 		addProject_view.setVisible(true);
-	}
-
-	private boolean isBackupStarted = false;
-	@FXML
-	private Dashboard dashboardController;
-
-	public void setDashboardController(Dashboard controller) {
-		this.dashboardController = controller;
 	}
 
 	public void switch_form(ActionEvent event) {
@@ -440,6 +526,7 @@ AlertMaker.showConfirmAlert("Bạn chắc chưa?", "Có thật là muốn chạy
 		create_hostname_textField.clear();
 		create_username_textField.clear();
 		create_password_textField.clear();
+		password_create.clear();
 		create_status_backupProject.setValue(BackupProjectStatus.DANG_BIEN_SOAN);
 	}
 
@@ -461,7 +548,7 @@ AlertMaker.showConfirmAlert("Bạn chắc chưa?", "Có thật là muốn chạy
 		String description = create_description_textField.getText();
 		String hostname = create_hostname_textField.getText();
 		String username = create_username_textField.getText();
-		String password = create_password_textField.getText();
+		String password = password_create.getText();
 		BackupProjectStatus projectStatus = create_status_backupProject.getValue();
 		if (projectName.isEmpty() || hostname.isEmpty() || username.isEmpty() || password.isEmpty()
 				|| projectStatus == null) {
@@ -591,6 +678,7 @@ AlertMaker.showConfirmAlert("Bạn chắc chưa?", "Có thật là muốn chạy
 			content_layout.setMaxHeight(Double.MAX_VALUE);
 			applyDateRange_action();
 		} catch (Exception e) {
+			e.printStackTrace();
 
 		}
 	}
@@ -657,7 +745,6 @@ AlertMaker.showConfirmAlert("Bạn chắc chưa?", "Có thật là muốn chạy
 
 			TableView<TableModel> tableView = (TableView<TableModel>) loader.getNamespace().get("table_dashboard");
 			if (tableView == null) {
-				System.out.println("TableView not found in FXML");
 				return;
 			}
 
@@ -668,14 +755,11 @@ AlertMaker.showConfirmAlert("Bạn chắc chưa?", "Có thật là muốn chạy
 				vbox_Dashboard.getChildren().add(root);
 				VBox.setVgrow(root, Priority.ALWAYS);
 			} else {
-				System.out.println("vbox_Dashboard is null");
 			}
 
-			System.out.println("TableView loaded successfully");
 			applyDateRange_action();
 
 		} catch (Exception e) {
-			System.out.println("Error loading TableView: " + e.getMessage());
 			e.printStackTrace();
 		}
 	}
@@ -705,9 +789,6 @@ AlertMaker.showConfirmAlert("Bạn chắc chưa?", "Có thật là muốn chạy
 
 	}
 
-	public void saveConfig_action() {
-	}
-
 	public void generate_action(ActionEvent event) {
 
 	}
@@ -726,6 +807,7 @@ AlertMaker.showConfirmAlert("Bạn chắc chưa?", "Có thật là muốn chạy
 			range_afterPick.setVisible(true);
 			startPicker.setText(dateFormatter.format(startDate));
 			endPicker.setText(dateFormatter.format(endDate));
+
 		} else {
 			range_afterPick.setVisible(false);
 		}
@@ -742,10 +824,7 @@ AlertMaker.showConfirmAlert("Bạn chắc chưa?", "Có thật là muốn chạy
 //			tableDashboardController.filterDataByDateRange(startDate, endDate);
 //		}
 
-		backupDailyChartController.filterDataByDateRange(startDate, endDate);
-		backupTaskStatusChartController.filterDataByDateRange(startDate, endDate);
 		// tableDashboardController.filterDataByDateRange(startDate, endDate);
 
 	}
-
 }

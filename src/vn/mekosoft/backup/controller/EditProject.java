@@ -93,7 +93,7 @@ public class EditProject implements Initializable {
 		String description = create_description_textField.getText();
 		String hostname = create_hostname_textField.getText();
 		String username = create_username_textField.getText();
-		String password = create_password_textField.getText();
+		String password = password_edit.getText();
 		BackupProjectStatus status = create_status_backupProject.getValue();
 		if (projectName.isEmpty() || hostname.isEmpty() || username.isEmpty()
 				|| password.isEmpty() ) {

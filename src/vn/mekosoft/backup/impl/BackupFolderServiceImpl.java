@@ -96,7 +96,7 @@ public class BackupFolderServiceImpl implements BackupFolderService {
                             List<BackupFolder> folders = new ArrayList<>();
                             for (JsonElement folderElement : taskElement.getAsJsonObject().getAsJsonArray("backupFolders")) {
                                 BackupFolder folder = gson.fromJson(folderElement, BackupFolder.class);
-                                folder.setBackupTaskId(task.getBackupTaskId()); // Gán lại backupTaskId từ task
+                                folder.setBackupTaskId(task.getBackupTaskId()); 
                                 folders.add(folder);
                             }
                             task.setBackupFolders(folders);

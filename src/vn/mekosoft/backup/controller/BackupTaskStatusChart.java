@@ -22,6 +22,7 @@ import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Label;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import vn.mekosoft.backup.config.ConfigReader;
 
@@ -38,6 +39,8 @@ public class BackupTaskStatusChart implements Initializable {
     private LocalDate startDate;
     private LocalDate endDate;
 
+    @FXML
+    private AnchorPane chartStatus;
     private final Map<String, Integer> successLocalCount = new HashMap<>();
     private final Map<String, Integer> failLocalCount = new HashMap<>();
     private final Map<String, Integer> successRemoteCount = new HashMap<>();
@@ -57,11 +60,15 @@ public class BackupTaskStatusChart implements Initializable {
         updateChart();
 
     }
-    public void hideBackupTaskStatus() {
-    	
-    	stackBarChartStatus.setVisible(false);
-    	setDashboardController(dashboardController);
-    }
+//    public void hideBackupTaskStatus() {
+//    	
+//    	chartStatus.setVisible(false);
+//    	   if (dashboardController != null) {
+//    	        dashboardController.loadData();
+//    	    } else {
+//    	        System.err.println("dashboardController is null");
+//    	    }
+//    }
     public void dataChartStatus() {
         parseLogs();
 
@@ -164,8 +171,12 @@ public class BackupTaskStatusChart implements Initializable {
     public void filterDataByDateRange(LocalDate startDate, LocalDate endDate) {
         this.startDate = startDate;
         this.endDate = endDate;
+       // System.out.println("startDate status: " + startDate + ", endDate: " + endDate);
+
         dataChartStatus(); // Update the chart with filtered data
     }
+
+
     private void parseLogs() {
         successLocalCount.clear();
         failLocalCount.clear();
@@ -186,6 +197,10 @@ public class BackupTaskStatusChart implements Initializable {
         if (logFiles == null || logFiles.length == 0) {
             return;
         }
+//        if(!hasLogFiles(logFiles)) {
+//        	hideBackupTaskStatus();
+//        	return;
+//        }
         LocalDate currentDate = LocalDate.now();
         if (startDate == null || endDate == null) {
             startDate = currentDate.minusDays(6);
@@ -221,13 +236,14 @@ public class BackupTaskStatusChart implements Initializable {
     }
 
     private String extractDateFromLog(String line) {
-        return line.substring(0, 10); // Assumes the date format is yyyy/MM/dd at the beginning of each line
+        return line.substring(0, 10); 
     }
 
 	public void updateChart() {
 		dataChartStatus();
 		
 	}
+
 
 
 }

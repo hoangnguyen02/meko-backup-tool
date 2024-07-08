@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane cacheShape="false" centerShape="false" pickOnBounds="false" prefHeight="389.0" prefWidth="1000.0" scaleShape="false" stylesheets="@../application/application.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vn.mekosoft.backup.controller.BackupDailyChart">
+<AnchorPane cacheShape="false" centerShape="false" pickOnBounds="false" prefHeight="389.0" prefWidth="1000.0" scaleShape="false" stylesheets="@../application/application.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vn.mekosoft.backup.controller.BackupDailyChart">
    <children>
       <Label layoutX="60.0" layoutY="14.0" text="Backup Daily Task" textFill="#154e78">
          <font>
@@ -37,7 +37,7 @@
       <Label fx:id="detail_barChart" layoutX="66.0" layoutY="368.0" text="Label" visible="false" />
    </children>
    <padding>
-      <Insets bottom="20.0" left="10.0" right="30.0" />
+      <Insets bottom="20.0" left="10.0" right="20.0" />
    </padding>
    <styleClass>
       <String fx:value="whiteRadius" />
